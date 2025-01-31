@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 
 /// <summary>
 /// The Room component holds references to adjacent rooms and 
 /// and ghost interactable objects within the specific room setpiece,
-/// organizing these references for the ghost to access and use easily
+/// organizing these references for the ghost to access and use easily.
 /// </summary>
 public class Room : MonoBehaviour
 {
