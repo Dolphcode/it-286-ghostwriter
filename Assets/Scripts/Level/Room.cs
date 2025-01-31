@@ -13,8 +13,10 @@ public class Room : MonoBehaviour
     /// <summary>
     /// A list of adjacent rooms. Is marked private to encapsulate
     /// direct references. Populating this list should be done via
-    /// the "appendAdjacentRoom" method.
+    /// the "appendAdjacentRoom" method. For static levels without
+    /// level generation this list can be populated in the editor.
     /// </summary>
+    [SerializeField]
     private List<Room> adjacentRooms;
 
     /// <summary>
