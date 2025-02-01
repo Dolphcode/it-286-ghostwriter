@@ -12,6 +12,12 @@ public class PremadeLevelEvaluator : LevelEvaluator
 {
     public override void InitializeInterior(GameObject g)
     {
+        if (initialized)
+        {
+            Debug.LogWarning("Attempted to initialize interior, but interior has already been initialized");
+            return;
+        }
+
         foreach (Room room in g.GetComponentsInChildren<Room>())
         {
             // Initialize the room list from the list of rooms in the interior
@@ -21,5 +27,7 @@ public class PremadeLevelEvaluator : LevelEvaluator
             // Build the navmesh
             room.GetNavMeshSurface().BuildNavMesh();
         }
+
+        initialized = true;
     }
 }

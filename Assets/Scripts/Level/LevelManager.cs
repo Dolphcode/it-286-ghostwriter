@@ -21,6 +21,11 @@ public class LevelManager : MonoBehaviour
     private GameObject interiorBase;
 
     // Accessors
+    /// <summary>
+    /// The Level Evaluator is an object that encapsulates the algorithms governing both 
+    /// level generation and room checking.
+    /// </summary>
+    /// <returns>A reference to the level's level evaluator</returns>
     public LevelEvaluator GetLevelEvaluator() { return levelEvaluator; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

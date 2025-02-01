@@ -16,6 +16,11 @@ public abstract class LevelEvaluator : ScriptableObject
     protected List<Room> rooms;
 
     /// <summary>
+    /// A boolean representing whether a level has been initialized or not
+    /// </summary>
+    protected bool initialized = false;
+
+    /// <summary>
     /// This method generates and initializes the interior structure of a
     /// level. Implement this level to customize a level type's procedural
     /// generation algorithm.
