@@ -18,6 +18,7 @@ public class PremadeLevelEvaluator : LevelEvaluator
             return;
         }
 
+        rooms = new List<Room>();
         foreach (Room room in g.GetComponentsInChildren<Room>())
         {
             // Initialize the room list from the list of rooms in the interior
