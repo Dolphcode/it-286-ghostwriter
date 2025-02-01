@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -9,19 +10,37 @@ using UnityEngine;
 public abstract class LevelEvaluator : ScriptableObject
 {
     /// <summary>
+    /// A list of room references in the evaluator, used primarily by
+    /// GetRoomFromPositions.
+    /// </summary>
+    protected List<Room> rooms;
+
+    /// <summary>
     /// This method generates and initializes the interior structure of a
     /// level. Implement this level to customize a level type's procedural
     /// generation algorithm.
     /// </summary>
     /// <param name="g">The root object of the interior in the scene 
     /// hierarchy.</param>
-    public abstract void GenerateInterior(GameObject g);
+    public abstract void InitializeInterior(GameObject g);
 
     /// <summary>
-    /// Takes a position and evaluates which room that point is in.
+    /// Takes a position and evaluates which room that point is in. By default
+    /// this function simply checks the list of room references for a room which
+    /// contains the argument.
     /// </summary>
     /// <param name="globalPosition"></param>
     /// <returns>NULL if globalPosition is out of bounds, a reference
     /// to the Room a point is in otherwise.</returns>
-    public abstract Room GetRoomFromPosition(Vector3 globalPosition);
+    public Room GetRoomFromPosition(Vector3 globalPosition)
+    {
+        foreach (Room room in rooms)
+        {
+            if (room.GetBoundingBox().Contains(globalPosition))
+            {
+                return room;
+            }
+        }
+        return null;
+    }
 }

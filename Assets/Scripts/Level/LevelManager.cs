@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
     /// determining which room a player is in.
     /// </summary>
     [SerializeField]
-    public LevelEvaluator levelEvaluator { get; private set; }
+    private LevelEvaluator levelEvaluator;
 
     /// <summary>
     /// The root object of the interior of the level in the scene hierarchy.
@@ -20,11 +20,14 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private GameObject interiorBase;
 
+    // Accessors
+    public LevelEvaluator GetLevelEvaluator() { return levelEvaluator; }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // This will run level generation/initialization
-        levelEvaluator.GenerateInterior(interiorBase);
+        levelEvaluator.InitializeInterior(interiorBase);
     }
 
     // Update is called once per frame

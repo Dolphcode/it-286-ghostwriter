@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,20 +21,43 @@ public class Room : MonoBehaviour
     private List<Room> adjacentRooms;
 
     /// <summary>
+    /// A reference to the component responsible for containing the navmesh
+    /// surface.
+    /// </summary>
+    [SerializeField]
+    private NavMeshSurface roomNavmeshSurface;
+
+    /// <summary>
+    /// The room's bounding box, representing the bounds of the room in code.
+    /// The bounding box is used to determine if the player or player's tools
+    /// are in the room.
+    /// </summary>
+    [SerializeField]
+    private Bounds boundingBox;
+
+    /// <summary>
     /// A list of interactables in the room, populated in the 
     /// Start function by searching for Ghost Interactables as children
     /// of the room object.
     /// Refer to this list to access all interactables in the room
     /// </summary>
-    public List<GhostInteractable> interactables { get; private set; }
+    [SerializeField]
+    public List<GhostInteractable> interactables;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    // Accessors
+    public Bounds GetBoundingBox() { return boundingBox; }
+    public NavMeshSurface GetNavMeshSurface() { return roomNavmeshSurface; }
+
+    // Awake is called even before Start
+    private void Awake()
     {
         // Assign a list of all GhostInteractable objects to this list
         // reference
         interactables = GetComponentsInChildren<GhostInteractable>()
-                            .ToList<GhostInteractable>();
+                            .ToList();
+
+        // Set the bounding box
+        boundingBox = GetComponent<BoxCollider>().bounds;
     }
 
     // Functions to be called by the ghost behavior manager
