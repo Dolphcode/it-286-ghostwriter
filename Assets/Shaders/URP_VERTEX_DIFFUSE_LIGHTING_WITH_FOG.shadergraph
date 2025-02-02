@@ -1686,7 +1686,7 @@
     "m_Title": "Diffuse Factor Calculation",
     "m_Position": {
         "x": -1114.0001220703125,
-        "y": -260.66668701171877
+        "y": -260.6666564941406
     }
 }
 
@@ -3720,7 +3720,7 @@
     "m_Title": "Fog Calculation",
     "m_Position": {
         "x": -1606.0001220703125,
-        "y": 886.6668701171875
+        "y": 886.6669311523438
     }
 }
 
@@ -3898,7 +3898,7 @@
     "m_ObjectId": "a81228f0ae8e4f05bcd38c092ee97e83",
     "m_Title": "Attenuation Computations",
     "m_Position": {
-        "x": -725.3333129882813,
+        "x": -725.333251953125,
         "y": -726.6666870117188
     }
 }
@@ -4391,13 +4391,13 @@
     "m_RefNameGeneratedByDisplayName": "World Space Light Position",
     "m_DefaultReferenceName": "_World_Space_Light_Position",
     "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
+    "m_GeneratePropertyBlock": false,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
     "m_DismissedVersion": 0,
     "m_Precision": 0,
     "overrideHLSLDeclaration": true,
-    "hlslDeclarationOverride": 2,
+    "hlslDeclarationOverride": 1,
     "m_Hidden": false,
     "m_Value": {
         "x": 0.0,
