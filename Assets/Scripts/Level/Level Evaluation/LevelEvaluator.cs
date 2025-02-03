@@ -14,6 +14,10 @@ public abstract class LevelEvaluator : ScriptableObject
     /// GetRoomFromPositions.
     /// </summary>
     protected List<Room> rooms;
+    public List<Room> GetAllRooms()
+    {
+        return rooms;
+    }
 
     /// <summary>
     /// A boolean representing whether a level has been initialized or not
