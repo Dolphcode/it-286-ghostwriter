@@ -1,10 +1,9 @@
 using UnityEngine;
-
 /// <summary>
 /// The base GhostInteractable interface which must be implemented by
 /// all objects that the ghost can interact with in the level.
 /// </summary>
-public interface GhostInteractable
+public abstract class GhostInteractable : MonoBehaviour
 {
     /// <summary>
     /// This property is used to keep track of whether the interactable
@@ -12,11 +11,11 @@ public interface GhostInteractable
     /// and will be modified by the specific implementation of 
     /// GhostInteraction.
     /// </summary>
-    bool interactable { get; }
+    public bool interactable { get; protected set; }
 
     /// <summary>
     /// Call this function to trigger the ghost's interaction with this
     /// object.
     /// </summary>
-    void interact();
+    public abstract void interact();
 }
