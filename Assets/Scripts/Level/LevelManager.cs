@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -26,7 +27,7 @@ public class LevelManager : MonoBehaviour
     /// level generation and room checking.
     /// </summary>
     /// <returns>A reference to the level's level evaluator</returns>
-    public LevelEvaluator GetLevelEvaluator() { return levelEvaluator; }
+    private LevelEvaluator GetLevelEvaluator() { return levelEvaluator; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -39,5 +40,35 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    /// <summary>
+    /// Pick a random room from the list of all rooms in a level
+    /// </summary>
+    /// <returns>A Room object corresponding to the correct room</returns>
+    public Room SelectRandomRoom()
+    {
+        List<Room> roomList = levelEvaluator.GetAllRooms();
+        int index = Random.Range(0, roomList.Count);
+        return roomList[index];
+    }
+
+    /// <summary>
+    /// Gives all of the rooms in a level
+    /// </summary>
+    /// <returns>A List of room objects</returns>
+    public List<Room> GetAllRooms()
+    {
+        return levelEvaluator.GetAllRooms();
+    }
+
+    /// <summary>
+    /// Determines which room a point is in. Essentially calls levelEvaluator.GetRoomFromPosition()
+    /// </summary>
+    /// <param name="position">Point position</param>
+    /// <returns>The corresponding Room object</returns>
+    public Room GetRoomFromPosition(Vector3 position)
+    {
+        return levelEvaluator.GetRoomFromPosition(position);
     }
 }
