@@ -103,8 +103,8 @@ Material:
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Attenuation_Const: 1
-    - _Attenuation_Exp: 0.05
-    - _Attenuation_Linear: 0.1
+    - _Attenuation_Exp: 0.3
+    - _Attenuation_Linear: 0.05
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _Blend: 0
@@ -114,11 +114,11 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: -0.13
-    - _Cutoff_Angle: 16.97
+    - _Cutoff_Angle: 27.2
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _Diffuse_Factor: 0.19
-    - _Diffuse_Intensity: 3.3
+    - _Diffuse_Intensity: 1.4
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -145,10 +145,10 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Base_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_Color: {r: 0.836478, g: 0.836478, b: 0.836478, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _LightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _LightColor: {r: 0.67295593, g: 0.67295593, b: 0.67295593, a: 1}
     - _Light_Color: {r: 1, g: 0, b: 0.13725519, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Spotlight_Direction: {r: -0.14, g: -2.73, b: -0.04, a: 0}
