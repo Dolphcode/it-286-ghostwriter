@@ -1563,8 +1563,8 @@
     "m_ObjectId": "0f05e0a71a94441fa69974f319d81316",
     "m_Title": "Light To Vertex",
     "m_Position": {
-        "x": -652.0,
-        "y": -460.6666564941406
+        "x": -651.9999389648438,
+        "y": -460.66668701171877
     }
 }
 
@@ -1598,8 +1598,8 @@
     "m_ObjectId": "1040d5e1a598457abffd5037680436bb",
     "m_Title": "Attenuation",
     "m_Position": {
-        "x": -123.3333740234375,
-        "y": -1390.666748046875
+        "x": -123.33331298828125,
+        "y": -1390.6666259765625
     }
 }
 
@@ -1730,8 +1730,8 @@
     "m_ObjectId": "1673572f58404f989c3b64fc11757a8c",
     "m_Title": "Texture/Color Sampling",
     "m_Position": {
-        "x": -1359.33349609375,
-        "y": 308.66656494140627
+        "x": -1359.3333740234375,
+        "y": 308.6666259765625
     }
 }
 
@@ -2834,7 +2834,7 @@
     "m_ObjectId": "3f644998815a43fe8a0e0e59ffd2d822",
     "m_Title": "Distance",
     "m_Position": {
-        "x": -354.0001220703125,
+        "x": -354.0000305175781,
         "y": -707.333251953125
     }
 }
@@ -3128,7 +3128,7 @@
     "m_ObjectId": "4927f38ee688433e8e9707a61e6393d1",
     "m_Title": "Branch",
     "m_Position": {
-        "x": 312.66650390625,
+        "x": 312.6666259765625,
         "y": -616.0
     }
 }
@@ -3583,8 +3583,8 @@
     "m_ObjectId": "56e52c7c0d2b4a8b9dc86dc4712664b5",
     "m_Title": "Light Direction",
     "m_Position": {
-        "x": -470.0001220703125,
-        "y": -167.3333282470703
+        "x": -470.0000305175781,
+        "y": -167.33331298828126
     }
 }
 
@@ -4979,8 +4979,8 @@
     "m_ObjectId": "8d52fa5c29f3435ca1d9fbe186e79752",
     "m_Title": "Cutoff",
     "m_Position": {
-        "x": -61.3333740234375,
-        "y": 39.999996185302737
+        "x": -61.33331298828125,
+        "y": 39.9998779296875
     }
 }
 
@@ -5432,8 +5432,8 @@
     "m_ObjectId": "9d13d6d524bb4d1c8258edf44a5d61bd",
     "m_Title": "Fog Calculation",
     "m_Position": {
-        "x": -1606.000244140625,
-        "y": 886.666748046875
+        "x": -1606.0001220703125,
+        "y": 886.6668701171875
     }
 }
 
@@ -6214,7 +6214,7 @@
     "m_ObjectId": "b11161ad70b44b579a5b360b15a65657",
     "m_Title": "Diffuse Factor",
     "m_Position": {
-        "x": 1040.666748046875,
+        "x": 1040.6666259765625,
         "y": -1217.33349609375
     }
 }
@@ -6452,8 +6452,8 @@
     "m_ObjectId": "b7c4790afa7b4098878917b67cf3dfc8",
     "m_Title": "Spot Factor",
     "m_Position": {
-        "x": 22.666627883911134,
-        "y": -419.3334045410156
+        "x": 22.66668701171875,
+        "y": -419.33343505859377
     }
 }
 
@@ -6732,13 +6732,13 @@
     "m_RefNameGeneratedByDisplayName": "World Space Light Position",
     "m_DefaultReferenceName": "_World_Space_Light_Position",
     "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
+    "m_GeneratePropertyBlock": false,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
     "m_DismissedVersion": 0,
     "m_Precision": 0,
     "overrideHLSLDeclaration": true,
-    "hlslDeclarationOverride": 2,
+    "hlslDeclarationOverride": 1,
     "m_Hidden": false,
     "m_Value": {
         "x": 0.0,
@@ -7852,13 +7852,13 @@
     "m_RefNameGeneratedByDisplayName": "Spotlight Direction",
     "m_DefaultReferenceName": "_Spotlight_Direction",
     "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
+    "m_GeneratePropertyBlock": false,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
     "m_DismissedVersion": 0,
     "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
+    "overrideHLSLDeclaration": true,
+    "hlslDeclarationOverride": 1,
     "m_Hidden": false,
     "m_Value": {
         "x": 0.0,
