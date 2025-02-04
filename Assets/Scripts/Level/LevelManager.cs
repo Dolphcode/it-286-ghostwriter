@@ -25,7 +25,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         // This will run level generation/initialization
-        levelEvaluator.InitializeInterior(interiorBase);
+        levelEvaluator.InitializeInterior(interiorBase, 1);
     }
 
     // Update is called once per frame
