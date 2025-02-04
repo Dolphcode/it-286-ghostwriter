@@ -21,18 +21,42 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private GameObject interiorBase;
 
+    /// <summary>
+    /// A reference to the player object. Must be assigned in editor
+    /// </summary>
+    [SerializeField]
+    private PlayerMovement player;
+    public PlayerMovement GetPlayerController() { return player; }
+
+    /// <summary>
+    /// A list of ghosts, is initialized on start
+    /// </summary>
+    [SerializeField]
+    private GameObject[] ghosts;
+    public GameObject[] GetGhostList() { return ghosts; }
+
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // This will run level generation/initialization
-        levelEvaluator.InitializeInterior(interiorBase);
+        levelEvaluator.InitializeInterior(interiorBase, 1);
+
+        // Instantiate and initialize the ghost objects
+
+        // TODO: Give the player a reference to this object
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //Debug.Log(IsPlayerInRoom(levelEvaluator.GetAllRooms()[0]));
     }
+
+    // -----------------------------------------------------------------------
+    //  Exposing information stored in the Level Evaluator
+    // -----------------------------------------------------------------------
 
     /// <summary>
     /// Pick a random room from the list of all rooms in a level
@@ -62,5 +86,65 @@ public class LevelManager : MonoBehaviour
     public Room GetRoomFromPosition(Vector3 position)
     {
         return levelEvaluator.GetRoomFromPosition(position);
+    }
+
+    // -----------------------------------------------------------------------
+    //  Functions relating to room checking
+    // -----------------------------------------------------------------------
+
+    /// <summary>
+    /// Checks if the ghost is in the same room as a given position. Calls GetRoomFromPosition
+    /// and returns true if any ghosts are currently haunting that room.
+    /// </summary>
+    /// <param name="position">Position to be tested</param>
+    /// <returns>True or False depending on if the ghost is in a given room</returns>
+    public bool IsGhostInRoom(Vector3 position)
+    {
+        Room posRoom = GetRoomFromPosition(position);
+        return IsGhostInRoom(posRoom);
+    }
+
+    /// <summary>
+    /// Checks if the ghost is in the same room as a given position. An overload that takes the
+    /// room object
+    /// </summary>
+    /// <param name="room">Room to be tested</param>
+    /// <returns>True or False depending on if the ghost is in a given room</returns>
+    public bool IsGhostInRoom(Room room)
+    {
+        // TODO: Once ghost is implemented actually check this
+        // For now returns true if the player is in room 0
+        return (room == levelEvaluator.GetAllRooms()[0]) ? true : false;
+    }
+
+    /// <summary>
+    /// Returns the number of ghosts in the same room as the room corresponding to a specified
+    /// position. Calls GetRoomFromPosition and iterates over all ghosts to check if their haunting 
+    /// room is this room.
+    /// </summary>
+    /// <param name="position">The position being tested</param>
+    /// <returns>The number of ghosts in the room</returns>
+    public int NumGhostsInRoom(Vector3 position)
+    {
+        Room posRoom = GetRoomFromPosition(position);
+        return NumGhostsInRoom(posRoom);
+    }
+
+    /// <summary>
+    /// Returns the number of ghosts in the same room as the room provided. An overload that
+    /// takes a room instead of a position
+    /// </summary>
+    /// <param name="room">The room object</param>
+    /// <returns>The number of ghosts in the room</returns>
+    public int NumGhostsInRoom(Room room)
+    {
+        // TODO: This needs implementing eventually
+        return (room == levelEvaluator.GetAllRooms()[0]) ? 1 : 0;
+    }
+
+    public bool IsPlayerInRoom(Room room)
+    {
+        Room playerRoom = GetRoomFromPosition(player.transform.position);
+        return room == playerRoom;
     }
 }
