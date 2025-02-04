@@ -38,7 +38,7 @@ public class Ghost : MonoBehaviour
     //<summary>
     //List of rooms that the ghost can access.
     //</summary>
-    public Room[] huntingZone;
+    public System.Collections.Generic.List<Room> huntingZone;
     //<summary>
     //New level manager.
     //</summary>
@@ -53,7 +53,7 @@ public class Ghost : MonoBehaviour
         // Sets aggression to 0.
         aggression = 0;
         // Sets Hunting Zone to all rooms.
-        huntingZone = levelManager1.levelEvaluator.GetAllRooms();
+        huntingZone = levelManager1.GetAllRooms();
         // Initailzes ghost in passive mode.
         huntingMode = false;
         agent = GetComponent<NavMeshAgent>();
@@ -154,4 +154,3 @@ public class Ghost : MonoBehaviour
             }
         }
     }
-}
