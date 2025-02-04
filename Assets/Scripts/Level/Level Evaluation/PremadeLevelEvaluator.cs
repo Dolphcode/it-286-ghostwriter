@@ -12,11 +12,13 @@ public class PremadeLevelEvaluator : LevelEvaluator
 {
     public override void InitializeInterior(GameObject g)
     {
-        if (initialized)
+        /*
+        if (base.initialized == true)
         {
             Debug.LogWarning("Attempted to initialize interior, but interior has already been initialized");
             return;
         }
+        */
 
         rooms = new List<Room>();
         foreach (Room room in g.GetComponentsInChildren<Room>())
