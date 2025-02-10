@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
         if (isOnGround)
             rb.linearDamping = groundDrag;
         else
-            rb.linearDamping = 0;
+            rb.linearDamping = 4f;
     }
     private void FixedUpdate()
     {
