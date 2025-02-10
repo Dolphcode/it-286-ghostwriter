@@ -39,5 +39,8 @@ public class CamControl : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+
+        Shader.SetGlobalVector("_World_Space_Light_Position", transform.position);
+        Shader.SetGlobalVector("_Spotlight_Direction", transform.rotation * Vector3.forward);
     }
 }

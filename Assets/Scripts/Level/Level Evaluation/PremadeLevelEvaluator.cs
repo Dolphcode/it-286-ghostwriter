@@ -10,14 +10,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Unnamed Level Evaluator", menuName = "Scriptable Objects/Premade Level Evaluator")]
 public class PremadeLevelEvaluator : LevelEvaluator
 {
-    public override void InitializeInterior(GameObject g)
+    public override List<Room>[] InitializeInterior(GameObject g, int zones)
     {
-        if (initialized)
-        {
-            Debug.LogWarning("Attempted to initialize interior, but interior has already been initialized");
-            return;
-        }
-
         rooms = new List<Room>();
         foreach (Room room in g.GetComponentsInChildren<Room>())
         {
@@ -29,6 +23,9 @@ public class PremadeLevelEvaluator : LevelEvaluator
             room.GetNavMeshSurface().BuildNavMesh();
         }
 
-        initialized = true;
+        // TODO: List<Room>[] zones = new List<Room>[zones];
+        List<Room>[] zoneArr = new List<Room>[1];
+        zoneArr[0] = rooms;
+        return zoneArr;
     }
 }
