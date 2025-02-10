@@ -20,18 +20,16 @@ public abstract class LevelEvaluator : ScriptableObject
     }
 
     /// <summary>
-    /// A boolean representing whether a level has been initialized or not
-    /// </summary>
-    protected bool initialized = false;
-
-    /// <summary>
     /// This method generates and initializes the interior structure of a
     /// level. Implement this level to customize a level type's procedural
-    /// generation algorithm.
+    /// generation algorithm. This will also partition an interior into zones
+    /// for multiple ghosts.
     /// </summary>
     /// <param name="g">The root object of the interior in the scene 
+    /// <param name="zones"></param>
     /// hierarchy.</param>
-    public abstract void InitializeInterior(GameObject g);
+    /// <returns>An array of "zones" for support for multiple ghosts</returns>
+    public abstract List<Room>[] InitializeInterior(GameObject g, int zones);
 
     /// <summary>
     /// Takes a position and evaluates which room that point is in. By default
