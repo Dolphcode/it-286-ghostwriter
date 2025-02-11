@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7f81e0eb233aa46429e3562375e954df, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -38
+      value: -39.87
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7f81e0eb233aa46429e3562375e954df, type: 3}
       propertyPath: m_LocalRotation.w
@@ -308,7 +308,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 74263e98ef91f40468cceb8a5ef20621, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 3765c3e03a2ae4743bb28943690d396b, type: 2}
+      objectReference: {fileID: 2100000, guid: b1841de457f33fc4c88554a60bd684b6, type: 2}
     - target: {fileID: 919132149155446097, guid: 74263e98ef91f40468cceb8a5ef20621, type: 3}
       propertyPath: m_Name
       value: demo_room_floor
@@ -337,6 +337,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2532468106701015394, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1408899007}
     - target: {fileID: 5884321451958075205, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -539,6 +543,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2150706c121a68c49bb99b2635655451, type: 3}
+--- !u!4 &1408899007 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6630907220244335935, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
+  m_PrefabInstance: {fileID: 237920315}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1526286096
 GameObject:
   m_ObjectHideFlags: 0

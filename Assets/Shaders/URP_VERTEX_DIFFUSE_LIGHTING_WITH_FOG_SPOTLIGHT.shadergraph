@@ -44,6 +44,9 @@
         },
         {
             "m_Id": "bf78690e9067429b906510a75082886a"
+        },
+        {
+            "m_Id": "96bb07429b0f41aabda306841929edd2"
         }
     ],
     "m_Keywords": [],
@@ -254,6 +257,9 @@
         },
         {
             "m_Id": "b28708ea0c0443f78c57ebe7d64f0b5f"
+        },
+        {
+            "m_Id": "af97318fa17546c79c442380a527bbc7"
         }
     ],
     "m_GroupDatas": [
@@ -1267,6 +1273,20 @@
 }
 
 {
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BooleanMaterialSlot",
+    "m_ObjectId": "02357b3970ea42d9826a1a8400685ab9",
+    "m_Id": 0,
+    "m_DisplayName": "Predicate",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Predicate",
+    "m_StageCapability": 3,
+    "m_Value": false,
+    "m_DefaultValue": false
+}
+
+{
     "m_SGVersion": 1,
     "m_Type": "UnityEditor.ShaderGraph.PositionNode",
     "m_ObjectId": "02971ab1c9fd4f10b2eb05856c4e5f78",
@@ -1473,10 +1493,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -728.0,
-            "y": 28.000001907348634,
-            "width": 203.33331298828126,
-            "height": 95.99999237060547
+            "x": -877.333251953125,
+            "y": 44.666656494140628,
+            "width": 203.333251953125,
+            "height": 96.0
         }
     },
     "m_Slots": [
@@ -1628,7 +1648,7 @@
     "m_ObjectId": "0f05e0a71a94441fa69974f319d81316",
     "m_Title": "Light To Vertex",
     "m_Position": {
-        "x": -651.9999389648438,
+        "x": -651.9998779296875,
         "y": -460.6666259765625
     }
 }
@@ -1663,8 +1683,8 @@
     "m_ObjectId": "1040d5e1a598457abffd5037680436bb",
     "m_Title": "Attenuation",
     "m_Position": {
-        "x": -123.33331298828125,
-        "y": -1390.6666259765625
+        "x": -123.33323669433594,
+        "y": -1390.66650390625
     }
 }
 
@@ -1795,8 +1815,8 @@
     "m_ObjectId": "1673572f58404f989c3b64fc11757a8c",
     "m_Title": "Texture/Color Sampling",
     "m_Position": {
-        "x": -1359.3333740234375,
-        "y": 308.66656494140627
+        "x": -1359.333251953125,
+        "y": 308.6666259765625
     }
 }
 
@@ -2899,8 +2919,8 @@
     "m_ObjectId": "3f644998815a43fe8a0e0e59ffd2d822",
     "m_Title": "Distance",
     "m_Position": {
-        "x": -354.0000305175781,
-        "y": -707.333251953125
+        "x": -354.0,
+        "y": -707.3331909179688
     }
 }
 
@@ -3193,8 +3213,8 @@
     "m_ObjectId": "4927f38ee688433e8e9707a61e6393d1",
     "m_Title": "Branch",
     "m_Position": {
-        "x": 312.6666259765625,
-        "y": -616.0
+        "x": 312.666748046875,
+        "y": -615.9999389648438
     }
 }
 
@@ -3672,7 +3692,7 @@
     "m_ObjectId": "56e52c7c0d2b4a8b9dc86dc4712664b5",
     "m_Title": "Light Direction",
     "m_Position": {
-        "x": -470.0000305175781,
+        "x": -469.9998779296875,
         "y": -167.33331298828126
     }
 }
@@ -4111,6 +4131,9 @@
     "m_Name": "Spotlight Config",
     "m_ChildObjectList": [
         {
+            "m_Id": "96bb07429b0f41aabda306841929edd2"
+        },
+        {
             "m_Id": "c58903b1df7844a98ad05d51ac7d28bc"
         },
         {
@@ -4209,6 +4232,30 @@
         "z": 0.0
     },
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "6c5c7960076d41d5a34ad620dd189fc5",
+    "m_Id": 2,
+    "m_DisplayName": "False",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "False",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
 }
 
 {
@@ -5010,6 +5057,30 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "8b5b1b83516846f997e27177cb60fe37",
+    "m_Id": 3,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "8b719a9227844c85b96e9b449145efd2",
     "m_Id": 6,
@@ -5092,8 +5163,8 @@
     "m_ObjectId": "8d52fa5c29f3435ca1d9fbe186e79752",
     "m_Title": "Cutoff",
     "m_Position": {
-        "x": -61.33331298828125,
-        "y": 39.99993896484375
+        "x": -61.333251953125,
+        "y": 40.00001907348633
     }
 }
 
@@ -5386,6 +5457,29 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.BooleanShaderProperty",
+    "m_ObjectId": "96bb07429b0f41aabda306841929edd2",
+    "m_Guid": {
+        "m_GuidSerialized": "716d3d12-88ec-4676-a8d8-50c33888f3ca"
+    },
+    "m_Name": "FlashlightOn",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "FlashlightOn",
+    "m_DefaultReferenceName": "_FlashlightOn",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": false
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
     "m_ObjectId": "97724ce480c542d18595a98727680ca0",
     "m_Id": 0,
@@ -5545,8 +5639,8 @@
     "m_ObjectId": "9d13d6d524bb4d1c8258edf44a5d61bd",
     "m_Title": "Fog Calculation",
     "m_Position": {
-        "x": -1606.0001220703125,
-        "y": 886.6669311523438
+        "x": -1606.0,
+        "y": 886.6666259765625
     }
 }
 
@@ -5618,6 +5712,30 @@
         "e31": 0.0,
         "e32": 0.0,
         "e33": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "a1317672dae042ef9d91fa1bfbe12ba1",
+    "m_Id": 1,
+    "m_DisplayName": "True",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "True",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0,
+        "w": 1.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
     }
 }
 
@@ -6231,6 +6349,52 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BranchNode",
+    "m_ObjectId": "af97318fa17546c79c442380a527bbc7",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Branch",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -587.77490234375,
+            "y": 263.7906494140625,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "02357b3970ea42d9826a1a8400685ab9"
+        },
+        {
+            "m_Id": "a1317672dae042ef9d91fa1bfbe12ba1"
+        },
+        {
+            "m_Id": "6c5c7960076d41d5a34ad620dd189fc5"
+        },
+        {
+            "m_Id": "8b5b1b83516846f997e27177cb60fe37"
+        }
+    ],
+    "synonyms": [
+        "switch",
+        "if",
+        "else"
+    ],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.SubtractNode",
     "m_ObjectId": "af9aad6256744413a65b7b6aced3f6a2",
     "m_Group": {
@@ -6327,8 +6491,8 @@
     "m_ObjectId": "b11161ad70b44b579a5b360b15a65657",
     "m_Title": "Diffuse Factor",
     "m_Position": {
-        "x": 1040.6666259765625,
-        "y": -1217.33349609375
+        "x": 1040.6663818359375,
+        "y": -1217.3333740234375
     }
 }
 
@@ -6609,8 +6773,8 @@
     "m_ObjectId": "b7c4790afa7b4098878917b67cf3dfc8",
     "m_Title": "Spot Factor",
     "m_Position": {
-        "x": 22.66668701171875,
-        "y": -419.33343505859377
+        "x": 22.6666259765625,
+        "y": -419.33331298828127
     }
 }
 

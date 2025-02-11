@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Spotlight Test Material w Ambient
+  m_Name: Spotlight Floor Material w Ambient
   m_Shader: {fileID: -6465566751694194690, guid: 3c7ac4d930f19154db0a7f9e4bd48753, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -42,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Base_Texture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 1d48f8ad4bb7c994c8ccc82e2e36bbb0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -114,25 +114,25 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: -0.13
-    - _Cutoff_Angle: 40.93
+    - _Cutoff_Angle: 27.2
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _Diffuse_Factor: 0.19
-    - _Diffuse_Intensity: 4.23
+    - _Diffuse_Intensity: 1.4
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FlashlightOn: 1
+    - _FlashlightOn: 0
     - _Flashlight_On: 1
-    - _Fog_Max: 20
-    - _Fog_Min: 5
+    - _Fog_Max: 12
+    - _Fog_Min: 2
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Light_On: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _Outer_Cutoff: 26.2
+    - _Outer_Cutoff: 10.35
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -143,17 +143,17 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _Use_Texture: 0
+    - _Use_Texture: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _Ambient_Color: {r: 0.09019608, g: 0.11372549, b: 0.23529412, a: 0}
+    - _Ambient_Color: {r: 0.08708114, g: 0.11135165, b: 0.23270428, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Base_Color: {r: 0.29559743, g: 0.29559743, b: 0.29559743, a: 1}
+    - _Base_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Fog_Color: {r: 0.033028696, g: 0.03925041, b: 0.06289297, a: 0}
-    - _LightColor: {r: 0.8045845, g: 1, b: 0.8018867, a: 1}
+    - _Fog_Color: {r: 0.03137255, g: 0.039215688, b: 0.0627451, a: 0}
+    - _LightColor: {r: 1, g: 0.93544614, b: 0.6194968, a: 1}
     - _Light_Color: {r: 1, g: 0, b: 0.13725519, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Spotlight_Direction: {r: -0.14, g: -2.73, b: -0.04, a: 0}
