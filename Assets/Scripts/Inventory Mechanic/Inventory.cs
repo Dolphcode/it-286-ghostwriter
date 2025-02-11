@@ -30,6 +30,7 @@ public class Inventory : MonoBehaviour
 
     public UnityAction<InventorySlot> OnInventorySlotChanged;       //Signal
 
+    // Used for initializing the inventory when player spawns.
     public Inventory(int size)
     {
         inventorySlots = new List<InventorySlot>(size);
@@ -39,4 +40,6 @@ public class Inventory : MonoBehaviour
             inventorySlots.Add(new InventorySlot());
         }
     }
+
+
 }

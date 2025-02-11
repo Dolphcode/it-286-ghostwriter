@@ -8,4 +8,5 @@ public class ItemData : ScriptableObject
     public int ID;
     public string Name;
     public Sprite Icon;
+    public GameObject Item;
 }
