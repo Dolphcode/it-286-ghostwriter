@@ -184,7 +184,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
     - target: {fileID: 6630907220244335935, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.95960414
@@ -204,11 +203,6 @@ PrefabInstance:
     - target: {fileID: 6630907220244335935, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -32.682
-=======
-    - target: {fileID: 8612933026094248211, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
-      propertyPath: m_Radius
-      value: 0.6
->>>>>>> Stashed changes
 =======
     - target: {fileID: 8612933026094248211, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
       propertyPath: m_Radius
@@ -2141,12 +2135,8 @@ SceneRoots:
   - {fileID: 688850097}
   - {fileID: 872801304}
 <<<<<<< Updated upstream
-<<<<<<< Updated upstream
   - {fileID: 858966705}
   - {fileID: 837244986}
-=======
-  - {fileID: 1475434454}
->>>>>>> Stashed changes
 =======
   - {fileID: 1475434454}
 >>>>>>> Stashed changes
