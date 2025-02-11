@@ -47,8 +47,10 @@ public class PickUpController : MonoBehaviour
         }
         if (inHand)
         {
-            transform.position = itemLocation.position;
-            transform.rotation = Quaternion.LookRotation(orientation.rotation * Vector3.forward);
+            //transform.position = itemLocation.position;
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.Euler(Vector3.zero);
+            //transform.rotation = Quaternion.LookRotation(orientation.rotation * Vector3.forward, orientation.rotation * Vector3.up);
         }
       }
     private void PickUp()
