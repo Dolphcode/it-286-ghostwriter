@@ -114,25 +114,25 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: -0.13
-    - _Cutoff_Angle: 27.2
+    - _Cutoff_Angle: 30
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _Diffuse_Factor: 0.19
-    - _Diffuse_Intensity: 1.4
+    - _Diffuse_Intensity: 4.23
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
     - _FlashlightOn: 0
     - _Flashlight_On: 1
-    - _Fog_Max: 12
-    - _Fog_Min: 2
+    - _Fog_Max: 20
+    - _Fog_Min: 5
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Light_On: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _Outer_Cutoff: 10.35
+    - _Outer_Cutoff: 25
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -153,7 +153,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Fog_Color: {r: 0.03137255, g: 0.039215688, b: 0.0627451, a: 0}
-    - _LightColor: {r: 1, g: 0.93544614, b: 0.6194968, a: 1}
+    - _LightColor: {r: 1, g: 1, b: 1, a: 1}
     - _Light_Color: {r: 1, g: 0, b: 0.13725519, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Spotlight_Direction: {r: -0.14, g: -2.73, b: -0.04, a: 0}
