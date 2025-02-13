@@ -123,13 +123,13 @@ Material:
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
     - _FlashlightOn: 0
-    - _Flashlight_On: 0
+    - _Flashlight_On: 1
     - _Fog_Max: 30
     - _Fog_Min: 20
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Light_On: 0
+    - _Light_On: 1
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Outer_Cutoff: 25
