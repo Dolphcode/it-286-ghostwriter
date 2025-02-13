@@ -2050,8 +2050,8 @@
     "m_ObjectId": "0f05e0a71a94441fa69974f319d81316",
     "m_Title": "Light To Vertex",
     "m_Position": {
-        "x": -842.0,
-        "y": -508.6666259765625
+        "x": -841.9999389648438,
+        "y": -508.6666564941406
     }
 }
 
@@ -2085,8 +2085,8 @@
     "m_ObjectId": "1040d5e1a598457abffd5037680436bb",
     "m_Title": "Attenuation",
     "m_Position": {
-        "x": -308.0,
-        "y": -1388.0001220703125
+        "x": -308.0000305175781,
+        "y": -1388.0
     }
 }
 
@@ -2217,8 +2217,8 @@
     "m_ObjectId": "1673572f58404f989c3b64fc11757a8c",
     "m_Title": "Texture/Color Sampling",
     "m_Position": {
-        "x": -1134.666748046875,
-        "y": 753.9999389648438
+        "x": -1134.6666259765625,
+        "y": 753.9998779296875
     }
 }
 
@@ -2640,7 +2640,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "Light On",
     "m_DefaultReferenceName": "_Light_On",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_Light_On_Interior",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -3333,8 +3333,8 @@
     "m_ObjectId": "3809f24182b54d41aa589fc68e284b1e",
     "m_Title": "Dither Filter",
     "m_Position": {
-        "x": 890.6666259765625,
-        "y": 782.6666259765625
+        "x": 890.666748046875,
+        "y": 782.6668701171875
     }
 }
 
@@ -3478,8 +3478,8 @@
     "m_ObjectId": "3bf1c48745d3404caf4362ec01e0da0b",
     "m_Title": "Interior Lighting Computation",
     "m_Position": {
-        "x": -701.3333740234375,
-        "y": 432.00006103515627
+        "x": -701.3333129882813,
+        "y": 432.0
     }
 }
 
@@ -3616,7 +3616,7 @@
     "m_ObjectId": "3f644998815a43fe8a0e0e59ffd2d822",
     "m_Title": "Distance",
     "m_Position": {
-        "x": -354.00006103515627,
+        "x": -354.0000305175781,
         "y": -707.333251953125
     }
 }
@@ -4477,8 +4477,8 @@
     "m_ObjectId": "56e52c7c0d2b4a8b9dc86dc4712664b5",
     "m_Title": "Light Direction",
     "m_Position": {
-        "x": -658.6665649414063,
-        "y": -185.3334503173828
+        "x": -658.6666870117188,
+        "y": -185.33331298828126
     }
 }
 
@@ -5959,8 +5959,8 @@
     "m_ObjectId": "89c8bb49026847a9b43e92f20532c84b",
     "m_Title": "Fog Color",
     "m_Position": {
-        "x": -107.33318328857422,
-        "y": 1313.333251953125
+        "x": -107.33331298828125,
+        "y": 1313.3333740234375
     }
 }
 
@@ -6255,8 +6255,8 @@
     "m_ObjectId": "8d52fa5c29f3435ca1d9fbe186e79752",
     "m_Title": "Cutoff",
     "m_Position": {
-        "x": -230.66676330566407,
-        "y": -191.33340454101563
+        "x": -230.66668701171876,
+        "y": -191.33331298828126
     }
 }
 
@@ -6776,8 +6776,8 @@
     "m_ObjectId": "9d13d6d524bb4d1c8258edf44a5d61bd",
     "m_Title": "Fog Calculation",
     "m_Position": {
-        "x": -1580.0,
-        "y": 1325.3331298828125
+        "x": -1580.0001220703125,
+        "y": 1325.3333740234375
     }
 }
 
@@ -7631,7 +7631,7 @@
     "m_Title": "Diffuse Factor",
     "m_Position": {
         "x": 726.0001220703125,
-        "y": -1231.9998779296875
+        "y": -1232.0
     }
 }
 
@@ -7834,7 +7834,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "Flashlight On",
     "m_DefaultReferenceName": "_Flashlight_On",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_Flashlight_On_Interior",
     "m_GeneratePropertyBlock": false,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -8074,7 +8074,7 @@
     "m_ObjectId": "b7c4790afa7b4098878917b67cf3dfc8",
     "m_Title": "Spot Factor",
     "m_Position": {
-        "x": 22.6666259765625,
+        "x": 22.66668701171875,
         "y": -419.3333740234375
     }
 }
@@ -8240,11 +8240,11 @@
     "m_Guid": {
         "m_GuidSerialized": "e86b1cb5-9a55-4e8e-b79f-f2330ab29a8a"
     },
-    "m_Name": "LightColor",
+    "m_Name": "Light Color",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "LightColor",
-    "m_DefaultReferenceName": "_LightColor",
-    "m_OverrideReferenceName": "",
+    "m_RefNameGeneratedByDisplayName": "Light Color",
+    "m_DefaultReferenceName": "_Light_Color",
+    "m_OverrideReferenceName": "_Light_Color_Interior",
     "m_GeneratePropertyBlock": false,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -8357,7 +8357,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "c04a6b3e8fae401cbb0b72941ea60d62",
     "m_Id": 0,
-    "m_DisplayName": "LightColor",
+    "m_DisplayName": "Light Color",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -8449,7 +8449,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "World Space Light Position",
     "m_DefaultReferenceName": "_World_Space_Light_Position",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_World_Space_Light_Position",
     "m_GeneratePropertyBlock": false,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
@@ -9999,7 +9999,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "Spotlight Direction",
     "m_DefaultReferenceName": "_Spotlight_Direction",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_Spotlight_Direction",
     "m_GeneratePropertyBlock": false,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
