@@ -36,6 +36,13 @@ public class Room : MonoBehaviour
     private Bounds boundingBox;
 
     /// <summary>
+    /// 
+    /// 
+    /// </summary>
+    [SerializeField]
+    private List<Transform> spawnPoints;
+
+    /// <summary>
     /// A list of interactables in the room, populated in the 
     /// Start function by searching for Ghost Interactables as children
     /// of the room object.
@@ -61,6 +68,16 @@ public class Room : MonoBehaviour
     }
 
     // Functions to be called by the ghost behavior manager
+
+    /// <summary>
+    /// Selects a random spawn point from the room's list of ghost spawn points
+    /// </summary>
+    /// <returns>A Transform object where the ghost can be spawned in the room</returns>
+    public Transform selectRandomSpawnPoint()
+    {
+        int idx = Random.Range(0, spawnPoints.Count);
+        return spawnPoints[idx];
+    }
 
     /// <summary>
     /// Use this to draw a random adjacent room from the list of adjacent
