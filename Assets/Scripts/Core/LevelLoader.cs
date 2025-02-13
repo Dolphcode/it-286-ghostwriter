@@ -13,7 +13,7 @@ public class LevelLoader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Time.time);
+
     }
 
     /// <summary>
@@ -33,10 +33,20 @@ public class LevelLoader : MonoBehaviour
     /// <returns>Coroutine</returns>
     public IEnumerator LoadScene(int index)
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(index);
+        float totalProgress = 0f;
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
 
         while (!asyncLoad.isDone) {
-            Debug.LogWarning(asyncLoad.progress.ToString());
+            Debug.LogWarning(asyncLoad.progress);
+            yield return null;
+        }
+        totalProgress += asyncLoad.progress;
+
+        AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(0);
+        while (!asyncUnload.isDone)
+        {
+            Debug.LogWarning(asyncUnload.isDone);
+            Debug.LogWarning(asyncUnload.progress + totalProgress);
             yield return null;
         }
     }
