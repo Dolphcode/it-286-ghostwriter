@@ -51,12 +51,6 @@ public class LightManager : MonoBehaviour
         flashlightDirection = dir;
     }
 
-    /// <summary>
-    /// This variable exists so that we don't have to modify the mesh variable
-    /// every frame, instead we check if currentState and storedState differ.
-    /// </summary>
-    private bool storedState = false;
-
     private void Awake()
     {
         // Initialize Flashlight
