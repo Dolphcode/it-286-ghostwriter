@@ -2042,7 +2042,7 @@
     "m_Title": "Light To Vertex",
     "m_Position": {
         "x": -651.9999389648438,
-        "y": -460.6666564941406
+        "y": -460.66668701171877
     }
 }
 
@@ -2209,7 +2209,7 @@
     "m_Title": "Texture/Color Sampling",
     "m_Position": {
         "x": -1359.3333740234375,
-        "y": 308.66656494140627
+        "y": 308.6666259765625
     }
 }
 
@@ -6214,7 +6214,7 @@
     "m_Title": "Cutoff",
     "m_Position": {
         "x": -61.33331298828125,
-        "y": 40.00006103515625
+        "y": 40.0
     }
 }
 
@@ -6735,7 +6735,7 @@
     "m_Title": "Fog Calculation",
     "m_Position": {
         "x": -2358.666748046875,
-        "y": 896.0000610351563
+        "y": 895.9998779296875
     }
 }
 
@@ -7793,13 +7793,13 @@
     "m_RefNameGeneratedByDisplayName": "Flashlight On",
     "m_DefaultReferenceName": "_Flashlight_On",
     "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
+    "m_GeneratePropertyBlock": false,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
     "m_DismissedVersion": 0,
     "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
+    "overrideHLSLDeclaration": true,
+    "hlslDeclarationOverride": 1,
     "m_Hidden": false,
     "m_Value": false
 }
@@ -8033,7 +8033,7 @@
     "m_Title": "Spot Factor",
     "m_Position": {
         "x": 22.66668701171875,
-        "y": -419.3333740234375
+        "y": -419.33343505859377
     }
 }
 
@@ -8203,13 +8203,13 @@
     "m_RefNameGeneratedByDisplayName": "LightColor",
     "m_DefaultReferenceName": "_LightColor",
     "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
+    "m_GeneratePropertyBlock": false,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
     "m_DismissedVersion": 0,
     "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
+    "overrideHLSLDeclaration": true,
+    "hlslDeclarationOverride": 1,
     "m_Hidden": false,
     "m_Value": {
         "r": 1.0,

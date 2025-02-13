@@ -16,6 +16,14 @@ public class LevelManager : MonoBehaviour
     private LevelEvaluator levelEvaluator;
 
     /// <summary>
+    /// The scene's Light manager, which can be used to make calls to change
+    /// the state of the flashlight. Also works in engine
+    /// </summary>
+    [SerializeField]
+    private LightManager lightManager;
+    public LightManager GetLightManager() { return lightManager; }
+
+    /// <summary>
     /// The root object of the interior of the level in the scene hierarchy.
     /// </summary>
     [SerializeField]
@@ -34,7 +42,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private GameObject[] ghosts;
     public GameObject[] GetGhostList() { return ghosts; }
-
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
