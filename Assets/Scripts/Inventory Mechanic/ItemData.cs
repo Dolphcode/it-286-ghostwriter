@@ -9,4 +9,8 @@ public class ItemData : ScriptableObject
     public string Name;
     public Sprite Icon;
     public GameObject Item;
+
+    public bool isEquiped;
+    public bool isOn;
+    public float durability; // flashlight and the pills but not emf
 }
