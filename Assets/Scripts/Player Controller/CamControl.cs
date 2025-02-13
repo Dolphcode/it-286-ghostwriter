@@ -13,6 +13,8 @@ public class CamControl : MonoBehaviour
     float xRotation;
     float yRotation;
 
+    public RaycastHit lookingAt;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,6 +30,8 @@ public class CamControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Physics.Raycast(orientation.transform.position, orientation.forward, 10f);
+
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
 
