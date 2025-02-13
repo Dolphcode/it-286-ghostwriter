@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Lobby.unity
     guid: 17b102c77f85e334b8d32fcd86b151cf
   - enabled: 1
-    path: Assets/Scenes/Levels/SampleLevel.unity
-    guid: 54f199f1f1c2be342a37930e94196cf1
+    path: Assets/Scenes/Prototyping/LightingTest.unity
+    guid: 1bd18f0ab1deed145b0d913c9042c01e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

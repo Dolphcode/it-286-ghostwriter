@@ -24,7 +24,7 @@ public class RoomLightInteractable : GhostInteractable
         foreach (var l in litMeshes)
         {
             l.material = Instantiate(l.material); // Make material unique to object
-            l.material.SetFloat("_Light_On", (storedState ? 1f : 0f));
+            l.material.SetFloat("_Light_On_Interior", (storedState ? 1f : 0f));
         }
     }
 
@@ -35,7 +35,7 @@ public class RoomLightInteractable : GhostInteractable
             storedState = currentState;
             foreach (var l in litMeshes)
             {
-                l.material.SetFloat("_Light_On", (storedState ? 1f : 0f));
+                l.material.SetFloat("_Light_On_Interior", (storedState ? 1f : 0f));
             }
         }
     }
