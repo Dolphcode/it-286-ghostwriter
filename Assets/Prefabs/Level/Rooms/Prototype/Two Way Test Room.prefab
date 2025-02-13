@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 3539227981734591199}
   - component: {fileID: 3808217760964738142}
   - component: {fileID: 3028691530102401594}
+  - component: {fileID: 3529758360917280132}
   m_Layer: 7
   m_Name: Two Way Test Room
   m_TagString: Untagged
@@ -258,7 +259,24 @@ MonoBehaviour:
   - {fileID: 1948637052135061498}
   - {fileID: 2857432634957145601}
   - {fileID: 7729409622833861580}
-  interactables: []
+  interactables:
+  - {fileID: 3529758360917280132}
+--- !u!114 &3529758360917280132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5840150343080833524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23d24c06320e0ed478f8c1d079ff5e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  litMeshes:
+  - {fileID: 1360168257375902707}
+  - {fileID: 8881842246525563274}
+  currentState: 1
 --- !u!1 &7378140004617672807
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +505,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1453043773871479701, guid: daa73cdb1c65d9144a7f7b7616e77e37, type: 3}
+--- !u!23 &1360168257375902707 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: daa73cdb1c65d9144a7f7b7616e77e37, type: 3}
+  m_PrefabInstance: {fileID: 369819030984689527}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7819148176552897806
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -585,5 +608,10 @@ MeshCollider:
 --- !u!4 &7712846108009515749 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5e2875c2dd940d745975f24158fb4df7, type: 3}
+  m_PrefabInstance: {fileID: 7819148176552897806}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8881842246525563274 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 5e2875c2dd940d745975f24158fb4df7, type: 3}
   m_PrefabInstance: {fileID: 7819148176552897806}
   m_PrefabAsset: {fileID: 0}
