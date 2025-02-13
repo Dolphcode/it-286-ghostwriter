@@ -33,6 +33,11 @@ public class Inventory : MonoBehaviour
     // Used for initializing the inventory when player spawns.
     public Inventory(int size)
     {
+        CreateInventory(size);
+    }
+
+    public void CreateInventory(int size)
+    {
         inventorySlots = new List<InventorySlot>(size);
 
         for (int i = 0; i < size; i++)

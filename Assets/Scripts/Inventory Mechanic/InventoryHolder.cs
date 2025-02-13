@@ -23,5 +23,6 @@ public class InventoryHolder : MonoBehaviour
     private void Awake()
     {
         inventorySystem = gameObject.AddComponent<Inventory>();
+        inventorySystem.CreateInventory(inventorySize);
     }
 }

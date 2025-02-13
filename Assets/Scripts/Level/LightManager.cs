@@ -54,8 +54,8 @@ public class LightManager : MonoBehaviour
     private void Awake()
     {
         // Initialize Flashlight
-        Shader.SetGlobalFloat("_Flashlight_On", flashlightEnabled ? 1.0f : 0.0f);
-        Shader.SetGlobalColor("_LightColor", flashlightColor);
+        Shader.SetGlobalFloat("_Flashlight_On_Interior", flashlightEnabled ? 1.0f : 0.0f);
+        Shader.SetGlobalColor("_Light_Color_Interior", flashlightColor);
         //Shader.SetGlobalVector("_World_Space_Light_Position", flashlightPosition);
         //Shader.SetGlobalVector("_Spotlight_Direction", flashlightDirection);
     }
@@ -63,8 +63,8 @@ public class LightManager : MonoBehaviour
     private void Update()
     {
         // Update every frame
-        Shader.SetGlobalFloat("_Flashlight_On", flashlightEnabled ? 1.0f : 0.0f);
-        Shader.SetGlobalColor("_LightColor", flashlightColor);
+        Shader.SetGlobalFloat("_Flashlight_On_Interior", flashlightEnabled ? 1.0f : 0.0f);
+        Shader.SetGlobalColor("_Light_Color_Interior", flashlightColor);
         //Shader.SetGlobalVector("_World_Space_Light_Position", flashlightPosition);
         //Shader.SetGlobalVector("_Spotlight_Direction", flashlightDirection);
     }
