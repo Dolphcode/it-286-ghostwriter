@@ -1,5 +1,7 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class Ghost : MonoBehaviour
 {
@@ -30,7 +32,7 @@ public class Ghost : MonoBehaviour
     //<summary>
     //Movement speed of ghost.
     //</summary>
-    public float moveSpeed = 5f;
+    public float moveSpeed = 1f;
     //<summary>
     //Indication of ghost being in Hunting Mode. 
     //</summary>
@@ -40,14 +42,15 @@ public class Ghost : MonoBehaviour
     //</summary>
     public System.Collections.Generic.List<Room> huntingZone;
     //<summary>
-    //New level manager.
+    //Get level manager.
     //</summary>
-    LevelManager levelManager1 = new LevelManager();
+    LevelManager levelManager1 = (LevelManager)FindAnyObjectByType(typeof(LevelManager));
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
     {
         // Sets the current room ghost is in to spawn room.
         currentRoom = levelManager1.SelectRandomRoom();
+        setGhostPosition(currentRoom);
         // Sets random aggressionThreshold
         aggressionThreshold = Random.Range(2, 5);
         // Sets aggression to 0.
@@ -65,16 +68,27 @@ public class Ghost : MonoBehaviour
             collider.isTrigger = true;
         }
     }
+    //<summary>
+    //Sets ghost position to room.
+    //</summary>
+    public void setGhostPosition(Room room)
+    {
+        transform.position = room.transform.position;
+    }
     // Update is called once per frame
     public void Update()
     {
         float distanceFromPlayer = Vector3.Distance(transform.position, player.transform.position);
-        // When player provokes ghost, aggression counter increases.
-        //if player provokes ghost
+        //Gets collider from Player Body
+        Collider col = null;
+        foreach (Transform child in player)
         {
-            aggression++;
+            if (child.name == "Player Body")
+            {
+                col = child.GetComponent<Collider>();
+            }
         }
-        // When player provokes ghost, aggression counter increases.
+        // When aggression increases enough, hunting mode turns on.
         if (aggression > aggressionThreshold)
         {
             huntingMode = true;
@@ -99,25 +113,30 @@ public class Ghost : MonoBehaviour
                     //Ghost will move towards player.
                     transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
                 }
-                else
-                {
-                    //check if collided with player here
-                }
             }
             else
             {
                 huntingMode = false;
             }
-
-            
-        }   
         }
-        //<summary>
-        //Ghost will switch locations rooms and randomly depending on aggression level.
-        //</summary>
-        void Roam()
+    }
+    private void OnTriggerEnter(Collider col)
+    {
+        if (!huntingMode)
         {
-            float interactTimer = 0f;
+            aggression++;
+        }
+        else
+        {
+            Debug.Log("GAME OVER :C");
+        }
+    }
+    //<summary>
+    //Ghost will switch locations rooms and randomly depending on aggression level.
+    //</summary>
+    void Roam()
+        {
+    float interactTimer = 0f;
             float teleportTimer = 0f;
             if (aggression > aggressionThreshold / 2)
             {
@@ -126,7 +145,8 @@ public class Ghost : MonoBehaviour
                 if (teleportTimer >= 120f)
                 {
                     currentRoom = levelManager1.SelectRandomRoom();
-                }
+                    setGhostPosition(currentRoom);
+            }
                 bool interactBool = Random.value > 0.75f;
                 if (interactTimer >= 20)
                 {
@@ -141,6 +161,7 @@ public class Ghost : MonoBehaviour
                 if (teleportTimer >= 180f)
                 {
                     currentRoom = levelManager1.SelectRandomRoom();
+                    setGhostPosition(currentRoom);
                 }
                 if (interactTimer >= 50f)
                 {
