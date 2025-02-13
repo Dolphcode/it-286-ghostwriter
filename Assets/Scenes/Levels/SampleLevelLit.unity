@@ -1656,6 +1656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelEvaluator: {fileID: 11400000, guid: 01e015f650a997f4db8029ebefae8a3c, type: 2}
+  lightManager: {fileID: 0}
   interiorBase: {fileID: 2043429585}
   player: {fileID: 4151787523715896907}
   ghosts: []
