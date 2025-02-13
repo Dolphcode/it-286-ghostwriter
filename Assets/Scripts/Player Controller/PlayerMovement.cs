@@ -41,11 +41,11 @@ public class PlayerMovement : MonoBehaviour
         isOnGround = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
         MyInput();
-
+        SpeedControl();
         if (isOnGround)
             rb.linearDamping = groundDrag;
         else
-            rb.linearDamping = 4f;
+            rb.linearDamping = 0;
     }
     private void FixedUpdate()
     {
@@ -76,7 +76,13 @@ public class PlayerMovement : MonoBehaviour
     }
     private void SpeedControl()
     {
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f,rb.linearVelocity.z);
         
+        if (flatVel.magnitude > moveSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            rb.linearVelocity = new Vector3(limitedVel.x,rb.linearVelocity.y, limitedVel.z);
+        }
     }
 
 }
