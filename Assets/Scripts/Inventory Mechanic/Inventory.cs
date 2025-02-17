@@ -109,7 +109,7 @@ public class Inventory : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Change the current item being held to the next selected slot.
     /// </summary>
     /// <param name="newItemHold"></param>
     public void ChangeHeldItem(int newItemHold, Transform itemHolder)
@@ -133,6 +133,12 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Add item to inventory if there is an available slot and equip it if the slot is the active slot. If not, don't pick the item up.
+    /// </summary>
+    /// <param name="item">The item's behavior</param>
+    /// <param name="itemHolder">The location to carry item</param>
+    /// <returns>Don't pick it up if there is no space in inventory, or pick up and either store item in inventory or hold it out.</returns>
     public void PickUpItem(ItemBehavior item, Transform itemHolder)
     {
         int emptySlot = CheckSlots();
@@ -153,5 +159,16 @@ public class Inventory : MonoBehaviour
             inventorySlots[emptySlot].ItemData.Behavior = null;
             Destroy(inventorySlots[emptySlot].ItemData.Behavior);
         }
+    }
+
+    /// <summary>
+    /// Delete item data from inventory when item is drop.
+    /// </summary>
+    public void DropItem()
+    {
+        int activeSlot = CheckSlots();
+
+        inventorySlots[activeSlot].ItemData.Behavior.Drop();
+        inventorySlots[activeSlot].ClearSlot();
     }
 }
