@@ -12,7 +12,7 @@ public class CamControl : MonoBehaviour
     public Transform player;
     float xRotation;
     float yRotation;
-
+    public Transform itemContainer;
     public RaycastHit lookingAt;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,7 +30,7 @@ public class CamControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Physics.Raycast(orientation.transform.position, orientation.forward, 10f);
+        
 
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
@@ -47,5 +47,33 @@ public class CamControl : MonoBehaviour
 
         Shader.SetGlobalVector("_World_Space_Light_Position", player.transform.position);
         Shader.SetGlobalVector("_Spotlight_Direction", player.transform.rotation * Vector3.forward);
+
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Physics.Raycast(transform.position, transform.forward, out lookingAt, 10f);
+            if (lookingAt.collider != null)
+            {
+                if (lookingAt.collider.GetComponent<ItemBehavior>() != null)
+                {
+                    lookingAt.collider.GetComponent<ItemBehavior>().PutInHand(itemContainer);
+                }
+            }
+            Debug.Log("looking At " + lookingAt.collider);
+
+
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                Physics.Raycast(transform.position, transform.forward, out lookingAt, 10f);
+                if (lookingAt.collider != null)
+                {
+                    if (lookingAt.collider.GetComponent<ItemBehavior>() != null)
+                    {
+                        lookingAt.collider.GetComponent<ItemBehavior>().Drop();
+                    }
+                }
+
+            }
+        }
     }
 }
