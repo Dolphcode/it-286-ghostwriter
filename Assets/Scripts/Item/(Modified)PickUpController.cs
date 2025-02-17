@@ -9,8 +9,6 @@ public class ModifiedPickUpController : MonoBehaviour
     public float pickUpRange;
     public float dropForwardForce;
     public Transform orientation;
-    public string itemName;
-    public int itemID;
 
     public bool equipped;
     public static bool inHand;
