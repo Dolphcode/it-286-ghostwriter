@@ -66,14 +66,14 @@ public class PickUpController : MonoBehaviour
 
         itemHeld = lookingAt.transform.gameObject;
 
-        camera.lookingAt.transform.SetParent(itemContainer);
-        camera.lookingAt.transform.localPosition = Vector3.zero;
-        camera.lookingAt.transform.localRotation = Quaternion.Euler(Vector3.zero);
+       transform.SetParent(itemContainer);
+       transform.localPosition = Vector3.zero;
+       transform.localRotation = Quaternion.Euler(Vector3.zero);
 
-        camera.lookingAt.transform.localScale = Vector3.one;
+       transform.localScale = Vector3.one;
         
-        camera.lookingAt.rigidbody.isKinematic = true;
-        camera.lookingAt.collider.isTrigger = true;
+       GetComponent<Rigidbody>().isKinematic = true;
+       GetComponent<Collider>().isTrigger = true;
 
         ///Enable script for Tool
         //ItemScript.enabled = true;
