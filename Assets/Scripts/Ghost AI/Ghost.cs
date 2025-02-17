@@ -6,92 +6,92 @@ using UnityEngine.UIElements;
 
 public class Ghost : MonoBehaviour
 {
-    // <summary>
-    //Amount of times a ghost can be provoked before entering Hunting Mode.
-    //</summary>
+    /// <summary>
+    ///Amount of times a ghost can be provoked before entering Hunting Mode.
+    ///</summary>
     [SerializeField]
     private int aggressionThreshold;
-    // <summary>
-    //Amount of times a ghost has been provoked.
-    //</summary>
+    ///<summary>
+    ///Amount of times a ghost has been provoked.
+    ///</summary>
     [SerializeField]
     private int aggression;
-    // <summary>
-    // Aggression multiplier of ghost. Lowers difficulty based on multiplier.
-    //</summary>
+    ///<summary>
+    ///Aggression multiplier of ghost. Lowers difficulty based on multiplier.
+    ///</summary>
     [SerializeField]
     private int aggressionMultiplier;
-    // <summary>
-    // Difficulty of ghost (lower level = higher aggression threshold, slower)
-    //</summary>
+    ///<summary>
+    ///Difficulty of ghost (lower level = higher aggression threshold, slower)
+    ///</summary>
     [SerializeField]
     private int difficultyLevel;
-    // <summary>
-    // Ghost type Psychological (more erratic behavior, speed changes, many interactions).
-    // EMF changes from 1,5;
-    // </summary>
+    ///<summary>
+    ///Ghost type Psychological (more erratic behavior, speed changes, many interactions).
+    ///EMF changes from 1,5;
+    ///</summary>
     [SerializeField]
     private bool psychologicalType;
-    // <summary>
-    // Ghost type Biological (died a natural death - not as fast, hard to aggro).
-    // EMF: 1
-    // </summary>
+    ///<summary>
+    ///Ghost type Biological (died a natural death - not as fast, hard to aggro).
+    ///EMF: 1
+    ///</summary>
     [SerializeField]
     private bool biologicalType;
-    // <summary>
-    // Ghost type Metaphysical (died but spiritually - aggression threshold lowers the more you aggro them. has a lot more interactions/tries to communicate with player more? maybe triggers a certain tool).
-    // EMF: 5
-    // </summary>
+    ///<summary>
+    ///Ghost type Metaphysical (died but spiritually - aggression threshold lowers the more you aggro them. has a lot more interactions/tries to communicate with player more? maybe triggers a certain tool).
+    ///EMF: 5
+    ///</summary>
     [SerializeField]
     private bool metaphysicalType;
-    // <summary>
-    // String containting name of ghost type.
-    // </summary>
+    ///<summary>
+    ///String containting name of ghost type.
+    ///</summary>
     [SerializeField]
     private string typeName;
-    // <summary>
-    // EMF variable.
-    // </summary>
+    ///<summary>
+    ///EMF variable.
+    ///</summary>
     [SerializeField]
     private int EMF;
-    //<summary>
-    //Target the ghost is chasing.
-    //</summary>
+    ///<summary>
+    ///Target the ghost is chasing.
+    ///</summary>
     [SerializeField]
     private Transform player;
-    //<summary>
-    // Hunting ghost prefab.
-    //</summary>
+    ///<summary>
+    ///Hunting ghost prefab.
+    ///</summary>
     [SerializeField]
     private GameObject huntingGhostPrefab;
-    //<summary>
-    //Room the ghost is currently in. Initialized during start to be random room.
-    //</summary>
+    ///<summary>
+    ///Room the ghost is currently in. Initialized during start to be random room.
+    ///</summary>
     [SerializeField]
     private Room currentRoom;
-    //<summary>
-    //NavMesh.
-    //</summary>
+    ///<summary>
+    ///NavMesh.
+    ///</summary>
     [SerializeField]
     private NavMeshAgent agent;
-    //<summary>
-    //Movement speed of ghost.
-    //</summary>
+    ///<summary>
+    ///Movement speed of ghost.
+    ///</summary>
     [SerializeField]
     private float moveSpeed = 1f;
-    //<summary>
-    //Indication of ghost being in Hunting Mode. 
-    //</summary>
+    ///<summary>
+    ///Indication of ghost being in Hunting Mode. 
+    ///</summary>
     [SerializeField]
     private bool huntingMode;
-    //<summary>
-    //List of rooms that the ghost can access.
-    //</summary>
+    ///<summary>
+    ///List of rooms that the ghost can access.
+    ///</summary>
     [SerializeField]
     private System.Collections.Generic.List<Room> huntingZone;
-    //<summary>
-    //Get level manager.
-    //</summary>
+    ///<summary>
+    ///Level manager.
+    ///</summary>
     [SerializeField]
     private LevelManager levelManager1;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -344,39 +344,41 @@ public class Ghost : MonoBehaviour
                 //other interactables
                 // currentRoom.filterInteractables<> returns list of interactables, if iteratables are true for ghost type then randomly pick
             }
-        }   
-    // <summary>
-    // Returns EMF
-    // </summary>
-    private int getEMF()
+        }
+    /// <summary>
+    /// Returns EMF 
+    /// </summary>
+    /// <returns>Integer</returns>
+    public int getEMF()
     {
         return EMF;
     }
-    // <summary>
-    // Returns type name as a string
-    // </summary>
-    private string getType()
+    /// <summary>
+    /// Returns type of ghost.
+    /// </summary>
+    /// <returns>Type name as string</returns>
+    public string getType()
     {
         return typeName;
     }
-    // <summary>
-    // Returns difficulty level as an integer (1-5)
-    // </summary>
-    private int getDifficulty()
+    /// <summary>
+    /// Returns difficulty level as an integer (1-5)
+    /// </summary>
+    public int getDifficulty()
     {
         return difficultyLevel;
     }
-    // <summary>
-    // Returns the room the ghost is currently in
-    // </summary>
-    private Room getGhostRoom()
+    /// <summary>
+    /// Returns the room the ghost is currently in.
+    /// </summary>
+    public Room getGhostRoom()
     {
         return currentRoom;
     }
-    // <summary>
-    // Returns position of ghost
-    // </summary>
-    private Vector3 getGhostLocation()
+    /// <summary>
+    /// Returns position of ghost
+    /// </summary>
+    public Vector3 getGhostLocation()
     {
         return transform.position;
     }
