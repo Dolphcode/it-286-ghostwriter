@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ItemData", menuName = "Inventory Item for Inventory system")]
@@ -9,6 +10,7 @@ public class ItemData : ScriptableObject
     public string Name;
     public Sprite Icon;
     public GameObject Item;
+    public ItemBehavior Behavior;
 
     public bool isEquiped;
     public bool isOn;

@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using JetBrains.Annotations;
 
 [System.Serializable]
 public class Inventory : MonoBehaviour
@@ -30,12 +31,19 @@ public class Inventory : MonoBehaviour
 
     public UnityAction<InventorySlot> OnInventorySlotChanged;       //Signal
 
-    // Used for initializing the inventory when player spawns.
+    /// <summary>
+    /// Used for initializing the inventory when player spawns.
+    /// </summary>
+    /// <param name="size">The amount of slots the inventory will have.</param>
     public Inventory(int size)
     {
         CreateInventory(size);
     }
 
+    /// <summary>
+    /// Used to create the inventory for the GameObject.
+    /// </summary>
+    /// <param name="size">The amount of slots the inventory will have.</param>
     public void CreateInventory(int size)
     {
         inventorySlots = new List<InventorySlot>(size);
@@ -46,5 +54,104 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Used for getting the next empty slot
+    /// </summary>
+    /// <returns>-1 if there are no empty slots, or the next empty slot available</returns>
+    public int CheckSlots()
+    {
+        for (int i = 0; i < inventorySlots.Count;i++)
+        {
+            if (inventorySlots[i] != null)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
 
+    /// <summary>
+    /// Used for placing the item into inventory.
+    /// Checks if there is a inventory slot aviable first and then adds the item data to the slot.
+    /// </summary>
+    /// <param name="itemData">The data the item uses.</param>
+    /// <returns>Debug log when there is no more aviable inventory slots, or adds new item in inventory slot otherwise.</returns>
+    public void PickUp(ItemBehavior itemData)
+    {
+        int slot = CheckSlots();
+
+        if (slot == -1)
+        {
+            Debug.Log("No more avaiables slots");
+            return;
+        }
+        else
+        {
+            inventorySlots[slot].AddItem(itemData.data);
+        }
+    }
+
+    /// <summary>
+    /// Finds the slot that is being equipped right now.
+    /// Used to see what item to hold in hands.
+    /// </summary>
+    /// <returns>-1 if there is no slots being equipped, or the slot being equipped otherwise.</returns>
+    public int CurrentHoldOut()
+    {
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            if (inventorySlots[i].holdOut)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="newItemHold"></param>
+    public void ChangeHeldItem(int newItemHold, Transform itemHolder)
+    {
+        int current = CurrentHoldOut();
+        inventorySlots[current].holdOut = false;
+        inventorySlots[newItemHold].holdOut = true;
+
+        // Destroy the item instance
+        inventorySlots[current].ItemData.Behavior.Unload();
+        inventorySlots[current].ItemData.Behavior = null;
+        Destroy(inventorySlots[current].ItemData.Behavior);
+
+        // Load the prefab for the new item being held out
+        if (inventorySlots[newItemHold].ItemData != null)
+        {
+            ItemBehavior item = Instantiate(inventorySlots[newItemHold].ItemData.Item).GetComponent<ItemBehavior>();
+            inventorySlots[newItemHold].ItemData.Behavior = item;
+            item.Load(inventorySlots[newItemHold].ItemData);
+            item.PutInHand(itemHolder);
+        }
+    }
+
+    public void PickUpItem(ItemBehavior item, Transform itemHolder)
+    {
+        int emptySlot = CheckSlots();
+
+        if (emptySlot == -1)
+        {
+            return;
+        }
+
+        inventorySlots[emptySlot].AddItem(item.data);
+
+        if (inventorySlots[emptySlot].holdOut)
+        {
+            item.PutInHand(itemHolder);
+        } else
+        {
+            inventorySlots[emptySlot].ItemData.Behavior.Unload();
+            inventorySlots[emptySlot].ItemData.Behavior = null;
+            Destroy(inventorySlots[emptySlot].ItemData.Behavior);
+        }
+    }
 }

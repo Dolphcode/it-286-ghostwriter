@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class ItemBehavior : MonoBehaviour
 {
-    ItemData data;
+    public ItemData data;
     Collider coll;
     Rigidbody rb;
     public abstract void Unload();

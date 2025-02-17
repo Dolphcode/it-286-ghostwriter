@@ -8,6 +8,7 @@ public class InventorySlot : MonoBehaviour
     [SerializeField] private ItemData itemData;
     
     public ItemData ItemData => itemData;
+    public bool holdOut = false;
 
     public InventorySlot(ItemData source)
     {
@@ -22,5 +23,10 @@ public class InventorySlot : MonoBehaviour
     public void ClearSlot()
     {
         itemData = null;
+    }
+
+    public void AddItem(ItemData data)
+    {
+        itemData = data;
     }
 }
