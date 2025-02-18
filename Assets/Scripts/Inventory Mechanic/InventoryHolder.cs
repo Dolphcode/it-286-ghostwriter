@@ -14,7 +14,12 @@ public class InventoryHolder : MonoBehaviour
 {
     [SerializeField] private int inventorySize;
     [SerializeField] protected Inventory inventorySystem;
+    [SerializeField] private GameObject inventorySlotPrefab;
 
+
+    public RaycastHit lookingAt;
+    public Transform itemContainer;
+    public Transform cameraHolder;
     public Inventory InventorySystem => inventorySystem;
 
     public static UnityAction<Inventory> InventoryDisplayRequest;
@@ -23,6 +28,33 @@ public class InventoryHolder : MonoBehaviour
     private void Awake()
     {
         inventorySystem = gameObject.AddComponent<Inventory>();
+        inventorySystem.inventorySlotPrefab = inventorySlotPrefab;
         inventorySystem.CreateInventory(inventorySize);
+        inventorySystem.InventorySlots[0].holdOut = true;
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Physics.Raycast(cameraHolder.position, cameraHolder.forward, out lookingAt, 5f);
+            if (lookingAt.collider != null)
+            {
+                if (lookingAt.collider.GetComponent<ItemBehavior>() != null)
+                {
+                    inventorySystem.PickUpItem(lookingAt.collider.GetComponent<ItemBehavior>(),itemContainer);
+                    Debug.Log("Pickiing up item");
+                }
+            }
+        }
+        //Debug.Log("looking At " + lookingAt.collider);
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            //itemContainer.GetChild(0).GetComponent<ItemBehavior>().Drop();
+            inventorySystem.DropItem();
+        }
+        //TODO: Add inventory slot changing using number keys using ChangeHeldItem() which is located in Inventory.cs
+
     }
 }

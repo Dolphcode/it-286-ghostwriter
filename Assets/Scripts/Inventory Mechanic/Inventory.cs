@@ -26,6 +26,7 @@ public class Inventory : MonoBehaviour
      */
     [SerializeField] private List<InventorySlot> inventorySlots;
 
+    public GameObject inventorySlotPrefab;
     public List<InventorySlot> InventorySlots => inventorySlots;    //The inventory
     public int InventorySize => InventorySlots.Count;               //Amount of inventory slots
 
@@ -50,7 +51,7 @@ public class Inventory : MonoBehaviour
 
         for (int i = 0; i < size; i++)
         {
-            inventorySlots.Add(new InventorySlot());
+            inventorySlots.Add(Instantiate(inventorySlotPrefab).GetComponent<InventorySlot>());
         }
     }
 
@@ -62,7 +63,7 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < inventorySlots.Count;i++)
         {
-            if (inventorySlots[i] != null)
+            if (inventorySlots[i].ItemData == null)
             {
                 return i;
             }
@@ -109,7 +110,7 @@ public class Inventory : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Change the current item being held to the next selected slot.
     /// </summary>
     /// <param name="newItemHold"></param>
     public void ChangeHeldItem(int newItemHold, Transform itemHolder)
@@ -120,8 +121,8 @@ public class Inventory : MonoBehaviour
 
         // Destroy the item instance
         inventorySlots[current].ItemData.Behavior.Unload();
+        Destroy(inventorySlots[current].ItemData.Behavior.gameObject);
         inventorySlots[current].ItemData.Behavior = null;
-        Destroy(inventorySlots[current].ItemData.Behavior);
 
         // Load the prefab for the new item being held out
         if (inventorySlots[newItemHold].ItemData != null)
@@ -133,6 +134,12 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Add item to inventory if there is an available slot and equip it if the slot is the active slot. If not, don't pick the item up.
+    /// </summary>
+    /// <param name="item">The item's behavior</param>
+    /// <param name="itemHolder">The location to carry item</param>
+    /// <returns>Don't pick it up if there is no space in inventory, or pick up and either store item in inventory or hold it out.</returns>
     public void PickUpItem(ItemBehavior item, Transform itemHolder)
     {
         int emptySlot = CheckSlots();
@@ -142,7 +149,11 @@ public class Inventory : MonoBehaviour
             return;
         }
 
+        // THIS LINE OF CODE IS TEMPORARY, WHEN SPAWNING ITEMS WE HAVE TO INSTANTIATE
+        item.data = Instantiate(item.data); // Make a copy of the current item.data instance
+
         inventorySlots[emptySlot].AddItem(item.data);
+        item.data.Behavior = item;
 
         if (inventorySlots[emptySlot].holdOut)
         {
@@ -150,8 +161,20 @@ public class Inventory : MonoBehaviour
         } else
         {
             inventorySlots[emptySlot].ItemData.Behavior.Unload();
+            Destroy(inventorySlots[emptySlot].ItemData.Behavior.gameObject);
             inventorySlots[emptySlot].ItemData.Behavior = null;
-            Destroy(inventorySlots[emptySlot].ItemData.Behavior);
+            
         }
+    }
+
+    /// <summary>
+    /// Delete item data from inventory when item is drop.
+    /// </summary>
+    public void DropItem()
+    {
+        int activeSlot = CurrentHoldOut();
+
+        inventorySlots[activeSlot].ItemData.Behavior.Drop();
+        inventorySlots[activeSlot].ClearSlot();
     }
 }

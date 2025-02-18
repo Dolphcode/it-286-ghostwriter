@@ -12,8 +12,8 @@ public class CamControl : MonoBehaviour
     public Transform player;
     float xRotation;
     float yRotation;
-    public Transform itemContainer;
-    public RaycastHit lookingAt;
+    
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,10 +24,10 @@ public class CamControl : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
+        
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         
@@ -37,9 +37,6 @@ public class CamControl : MonoBehaviour
 
         yRotation += mouseX;
         xRotation -= mouseY;
-        ///<summary>
-        ///Keeps the camera from going all the way around
-        /// </summary>
         xRotation = Mathf.Clamp(xRotation,-90f, 90f);
 
         player.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
@@ -48,32 +45,8 @@ public class CamControl : MonoBehaviour
         Shader.SetGlobalVector("_World_Space_Light_Position", player.transform.position);
         Shader.SetGlobalVector("_Spotlight_Direction", player.transform.rotation * Vector3.forward);
 
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Physics.Raycast(transform.position, transform.forward, out lookingAt, 10f);
-            if (lookingAt.collider != null)
-            {
-                if (lookingAt.collider.GetComponent<ItemBehavior>() != null)
-                {
-                    lookingAt.collider.GetComponent<ItemBehavior>().PutInHand(itemContainer);
-                }
-            }
-            Debug.Log("looking At " + lookingAt.collider);
-
-
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                Physics.Raycast(transform.position, transform.forward, out lookingAt, 10f);
-                if (lookingAt.collider != null)
-                {
-                    if (lookingAt.collider.GetComponent<ItemBehavior>() != null)
-                    {
-                        lookingAt.collider.GetComponent<ItemBehavior>().Drop();
-                    }
-                }
-
-            }
-        }
+        
+       
+        
     }
 }
