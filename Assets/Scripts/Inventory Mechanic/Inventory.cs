@@ -62,7 +62,7 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < inventorySlots.Count;i++)
         {
-            if (inventorySlots[i] != null)
+            if (inventorySlots[i].ItemData == null)
             {
                 return i;
             }

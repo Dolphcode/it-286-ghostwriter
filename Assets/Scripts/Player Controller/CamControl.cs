@@ -12,9 +12,8 @@ public class CamControl : MonoBehaviour
     public Transform player;
     float xRotation;
     float yRotation;
-    public Transform itemContainer;
-    public RaycastHit lookingAt;
-    bool isHolding;
+    
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,7 +25,6 @@ public class CamControl : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         
-        isHolding = false;
     }
 
     
@@ -48,26 +46,7 @@ public class CamControl : MonoBehaviour
         Shader.SetGlobalVector("_Spotlight_Direction", player.transform.rotation * Vector3.forward);
 
         
-        if (Input.GetKeyDown(KeyCode.E) && (isHolding == false))
-        {
-            Physics.Raycast(transform.position, transform.forward, out lookingAt, 5f);
-            if (lookingAt.collider != null)
-            {
-                if (lookingAt.collider.GetComponent<ItemBehavior>() != null)
-                {
-                    lookingAt.collider.GetComponent<ItemBehavior>().PutInHand(itemContainer);
-                    isHolding = true;
-                }
-            }
-        }
-            Debug.Log("looking At " + lookingAt.collider);
-
-        if (Input.GetKeyDown(KeyCode.G) && (isHolding == true))
-            {
-                itemContainer.GetChild(0).GetComponent<ItemBehavior>().Drop();
-                isHolding = false;
-
-            }
+       
         
     }
 }

@@ -1,5 +1,5 @@
 using UnityEngine;
-
+/*
 public class PickUpController : MonoBehaviour
 {
     public Rigidbody rb;
@@ -97,3 +97,4 @@ public class PickUpController : MonoBehaviour
 
     }
 }
+*/
