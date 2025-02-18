@@ -15,6 +15,15 @@ public abstract class ItemBehavior : MonoBehaviour
             rb = GetComponent<Rigidbody>();
             coll = GetComponent<Collider>();
     }
+
+    /// <summary>
+    /// Puts item in hand of player by turning making collider a trigger and the rigidbody kinematic. Re-parents the item to Item Location
+    /// </summary>
+    /// <param name="itemContainer">
+    /// The location where the item will be parented.
+    /// </param>
+    /// 
+    /// 
     public void PutInHand(Transform itemContainer)
     {
         transform.SetParent(itemContainer);
@@ -35,13 +44,14 @@ public abstract class ItemBehavior : MonoBehaviour
 
     }
     
+    /// <summary>
+    /// Gets rid of the parent and throws the item that is in the parents hand, while re-enabling the gravity and collider.
+    /// </summary>
     public void Drop()
     {
-        
-
-        rb.linearVelocity = transform.parent.GetComponent<Rigidbody>().linearVelocity;
+      
         transform.SetParent(null);
-        rb.AddForce(transform.forward * 100, ForceMode.Impulse);
+        
 
 
         if (rb != null)
@@ -49,22 +59,11 @@ public abstract class ItemBehavior : MonoBehaviour
             rb.isKinematic = false;
         }
 
+        rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
+
         if (coll != null)
         {
             coll.isTrigger = false;
         }
-    }
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

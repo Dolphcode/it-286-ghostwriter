@@ -9,6 +9,7 @@ public class ItemData : ScriptableObject
     public int ID;
     public string Name;
     public Sprite Icon;
+    [SerializeField]
     public GameObject Item;
     public ItemBehavior Behavior;
 
