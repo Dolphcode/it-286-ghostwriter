@@ -54,6 +54,32 @@ public class InventoryHolder : MonoBehaviour
             //itemContainer.GetChild(0).GetComponent<ItemBehavior>().Drop();
             inventorySystem.DropItem();
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            inventorySystem.ChangeHeldItem(0,itemContainer);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            inventorySystem.ChangeHeldItem(1, itemContainer);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            inventorySystem.ChangeHeldItem(2, itemContainer);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            inventorySystem.ChangeHeldItem(3, itemContainer);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            inventorySystem.ChangeHeldItem(4, itemContainer);
+        }
+
         //TODO: Add inventory slot changing using number keys using ChangeHeldItem() which is located in Inventory.cs
 
     }

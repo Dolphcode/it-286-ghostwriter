@@ -11,7 +11,8 @@ public class SodaBehavior : ItemBehavior
 
     public override void Load(ItemData itemData)
     {
-        
+        itemData.Behavior = this;
+        data = itemData;
     }
 
     public override void Unload()
