@@ -150,6 +150,8 @@ public class Inventory : MonoBehaviour
         }
 
         inventorySlots[emptySlot].AddItem(item.data);
+        Debug.Log(item.name);
+        item.data.Behavior = item;
 
         if (inventorySlots[emptySlot].holdOut)
         {
@@ -157,8 +159,9 @@ public class Inventory : MonoBehaviour
         } else
         {
             inventorySlots[emptySlot].ItemData.Behavior.Unload();
+            Destroy(inventorySlots[emptySlot].ItemData.Behavior.gameObject);
             inventorySlots[emptySlot].ItemData.Behavior = null;
-            Destroy(inventorySlots[emptySlot].ItemData.Behavior);
+            
         }
     }
 
@@ -167,7 +170,7 @@ public class Inventory : MonoBehaviour
     /// </summary>
     public void DropItem()
     {
-        int activeSlot = CheckSlots();
+        int activeSlot = CurrentHoldOut();
 
         inventorySlots[activeSlot].ItemData.Behavior.Drop();
         inventorySlots[activeSlot].ClearSlot();
