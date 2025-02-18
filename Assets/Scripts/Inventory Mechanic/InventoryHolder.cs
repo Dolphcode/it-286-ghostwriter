@@ -14,6 +14,8 @@ public class InventoryHolder : MonoBehaviour
 {
     [SerializeField] private int inventorySize;
     [SerializeField] protected Inventory inventorySystem;
+    [SerializeField] private GameObject inventorySlotPrefab;
+
 
     public RaycastHit lookingAt;
     public Transform itemContainer;
@@ -26,6 +28,7 @@ public class InventoryHolder : MonoBehaviour
     private void Awake()
     {
         inventorySystem = gameObject.AddComponent<Inventory>();
+        inventorySystem.inventorySlotPrefab = inventorySlotPrefab;
         inventorySystem.CreateInventory(inventorySize);
         inventorySystem.InventorySlots[0].holdOut = true;
     }

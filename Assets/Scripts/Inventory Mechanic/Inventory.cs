@@ -26,6 +26,7 @@ public class Inventory : MonoBehaviour
      */
     [SerializeField] private List<InventorySlot> inventorySlots;
 
+    public GameObject inventorySlotPrefab;
     public List<InventorySlot> InventorySlots => inventorySlots;    //The inventory
     public int InventorySize => InventorySlots.Count;               //Amount of inventory slots
 
@@ -50,7 +51,7 @@ public class Inventory : MonoBehaviour
 
         for (int i = 0; i < size; i++)
         {
-            inventorySlots.Add(new InventorySlot());
+            inventorySlots.Add(Instantiate(inventorySlotPrefab).GetComponent<InventorySlot>());
         }
     }
 
