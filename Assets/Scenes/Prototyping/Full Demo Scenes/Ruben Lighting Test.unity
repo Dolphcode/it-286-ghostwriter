@@ -384,6 +384,10 @@ PrefabInstance:
       propertyPath: itemContainer
       value: 
       objectReference: {fileID: 2084606565}
+    - target: {fileID: 601206402549692619, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
+      propertyPath: inventorySlotPrefab
+      value: 
+      objectReference: {fileID: 439254747478473102, guid: 07b073ded77ae184783473b09074cf06, type: 3}
     - target: {fileID: 750450068757333026, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
       propertyPath: m_Name
       value: Player
