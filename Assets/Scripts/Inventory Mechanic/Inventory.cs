@@ -121,8 +121,8 @@ public class Inventory : MonoBehaviour
 
         // Destroy the item instance
         inventorySlots[current].ItemData.Behavior.Unload();
+        Destroy(inventorySlots[current].ItemData.Behavior.gameObject);
         inventorySlots[current].ItemData.Behavior = null;
-        Destroy(inventorySlots[current].ItemData.Behavior);
 
         // Load the prefab for the new item being held out
         if (inventorySlots[newItemHold].ItemData != null)
@@ -149,7 +149,11 @@ public class Inventory : MonoBehaviour
             return;
         }
 
+        // THIS LINE OF CODE IS TEMPORARY, WHEN SPAWNING ITEMS WE HAVE TO INSTANTIATE
+        item.data = Instantiate(item.data); // Make a copy of the current item.data instance
+
         inventorySlots[emptySlot].AddItem(item.data);
+        item.data.Behavior = item;
 
         if (inventorySlots[emptySlot].holdOut)
         {
@@ -157,8 +161,9 @@ public class Inventory : MonoBehaviour
         } else
         {
             inventorySlots[emptySlot].ItemData.Behavior.Unload();
+            Destroy(inventorySlots[emptySlot].ItemData.Behavior.gameObject);
             inventorySlots[emptySlot].ItemData.Behavior = null;
-            Destroy(inventorySlots[emptySlot].ItemData.Behavior);
+            
         }
     }
 
@@ -167,7 +172,7 @@ public class Inventory : MonoBehaviour
     /// </summary>
     public void DropItem()
     {
-        int activeSlot = CheckSlots();
+        int activeSlot = CurrentHoldOut();
 
         inventorySlots[activeSlot].ItemData.Behavior.Drop();
         inventorySlots[activeSlot].ClearSlot();
