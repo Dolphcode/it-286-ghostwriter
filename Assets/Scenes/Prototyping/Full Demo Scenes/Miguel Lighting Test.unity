@@ -690,6 +690,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventorySize: 4
   inventorySystem: {fileID: 0}
+  inventorySlotPrefab: {fileID: 0}
 --- !u!4 &1868876573 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6630907220244335935, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
