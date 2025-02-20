@@ -114,6 +114,26 @@ public class Room : MonoBehaviour
         return output;
     }
 
+    /// <summary>
+    /// Filter the interactables list based on a set of ghost interactable
+    /// types.
+    /// </summary>
+    /// <param name="filter">A list of GhostInteractableType enums for filtering</param>
+    /// <returns>A list of matching ghost interactable objects</returns>
+    public List<GhostInteractable> filterInteractables(params GhostInteractableType[] filter) 
+    {
+        List<GhostInteractable> output = new List<GhostInteractable>();
+        foreach (GhostInteractable interactable in interactables)
+        {
+            if (filter.Contains(interactable.GetInteractableType()))
+            {
+                output.Append(interactable);
+            }
+        }
+
+        return output;
+    }
+
     // Level Loading Functions
 
     /// <summary>
