@@ -1171,6 +1171,8 @@ MonoBehaviour:
   teleportPosition: {fileID: 1068436702}
   portalCamera: {fileID: 301259650}
   mainCamera: {fileID: 151762805}
+  clipThreshold: -0.05
+  clipDirection: {x: 0, y: -1, z: 0}
 --- !u!64 &1068436699
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1216,7 +1218,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fcdcd58e872984341a4cbcbeafbb620b, type: 2}
+  - {fileID: 2100000, guid: d4e5b634b15a9ff4799a14daf23f8bbc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1621,6 +1623,8 @@ MonoBehaviour:
   teleportPosition: {fileID: 1805425175}
   portalCamera: {fileID: 1308511277}
   mainCamera: {fileID: 151762805}
+  clipThreshold: -0.01
+  clipDirection: {x: 0, y: 1, z: 0}
 --- !u!4 &1805425175
 Transform:
   m_ObjectHideFlags: 0
