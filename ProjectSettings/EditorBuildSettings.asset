@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Prototyping/LightingTest.unity
     guid: 1bd18f0ab1deed145b0d913c9042c01e
+  - enabled: 1
+    path: Assets/Scenes/Bootstrapped Scene.unity
+    guid: cd2b70de59a6d52429ddaae023df5327
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

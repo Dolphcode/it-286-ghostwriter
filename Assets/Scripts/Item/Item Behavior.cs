@@ -5,6 +5,7 @@ public abstract class ItemBehavior : MonoBehaviour
     public ItemData data;
     Collider coll;
     Rigidbody rb;
+
     public abstract void Unload();
     public abstract void Load(ItemData itemData);
 
@@ -12,18 +13,15 @@ public abstract class ItemBehavior : MonoBehaviour
 
     public void Awake()
     {
-            rb = GetComponent<Rigidbody>();
-            coll = GetComponent<Collider>();
+        rb = GetComponent<Rigidbody>();
+        coll = GetComponent<Collider>();
+
     }
 
     /// <summary>
     /// Puts item in hand of player by turning making collider a trigger and the rigidbody kinematic. Re-parents the item to Item Location
     /// </summary>
-    /// <param name="itemContainer">
-    /// The location where the item will be parented.
-    /// </param>
-    /// 
-    /// 
+    /// <param name="itemContainer"> The location where the item will be parented.  </param>
     public void PutInHand(Transform itemContainer)
     {
         transform.SetParent(itemContainer);
