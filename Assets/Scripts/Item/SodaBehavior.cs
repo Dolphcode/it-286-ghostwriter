@@ -1,12 +1,13 @@
 using UnityEngine;
 
 public class SodaBehavior : ItemBehavior
-
-
 {
+    public Fear fear;
+
     public override void Interact()
     {
-        
+
+        Debug.Log("Interacting");
     }
 
     public override void Load(ItemData itemData)

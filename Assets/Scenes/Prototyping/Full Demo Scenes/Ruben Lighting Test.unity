@@ -644,7 +644,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 4eb6073996365b64ca267932009f9ac8, type: 2}
     - target: {fileID: 4847825559594920050, guid: b1ee5c3683b99594e83fcc888388df68, type: 3}
       propertyPath: m_Name
-      value: Cube
+      value: Soda
       objectReference: {fileID: 0}
     - target: {fileID: 8057349796320396431, guid: b1ee5c3683b99594e83fcc888388df68, type: 3}
       propertyPath: m_LocalPosition.x
