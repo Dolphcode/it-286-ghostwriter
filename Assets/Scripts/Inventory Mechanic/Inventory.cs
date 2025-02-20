@@ -120,10 +120,12 @@ public class Inventory : MonoBehaviour
         inventorySlots[newItemHold].holdOut = true;
 
         // Destroy the item instance
+        if (inventorySlots[current].ItemData != null)
+        { 
         inventorySlots[current].ItemData.Behavior.Unload();
         Destroy(inventorySlots[current].ItemData.Behavior.gameObject);
         inventorySlots[current].ItemData.Behavior = null;
-
+        }
         // Load the prefab for the new item being held out
         if (inventorySlots[newItemHold].ItemData != null)
         {

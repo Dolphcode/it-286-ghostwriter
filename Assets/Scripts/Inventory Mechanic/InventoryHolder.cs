@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -32,6 +33,18 @@ public class InventoryHolder : MonoBehaviour
         inventorySystem.CreateInventory(inventorySize);
         inventorySystem.InventorySlots[0].holdOut = true;
     }
+    public ItemBehavior GetHeldItem()
+    {
+        int heldSlot = inventorySystem.CurrentHoldOut();
+        ItemData data = inventorySystem.InventorySlots[heldSlot].ItemData;
+        
+        if (data == null )
+        {
+            return null;
+        }
+
+        return data.Behavior;
+    }
 
     public void Update()
     {
@@ -43,8 +56,15 @@ public class InventoryHolder : MonoBehaviour
                 if (lookingAt.collider.GetComponent<ItemBehavior>() != null)
                 {
                     inventorySystem.PickUpItem(lookingAt.collider.GetComponent<ItemBehavior>(),itemContainer);
-                    Debug.Log("Pickiing up item");
+                    Debug.Log("Picking up item");
                 }
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (GetHeldItem() != null)
+            {
+                GetHeldItem().GetComponent<ItemBehavior>().Interact();
             }
         }
         //Debug.Log("looking At " + lookingAt.collider);
@@ -54,7 +74,31 @@ public class InventoryHolder : MonoBehaviour
             //itemContainer.GetChild(0).GetComponent<ItemBehavior>().Drop();
             inventorySystem.DropItem();
         }
-        //TODO: Add inventory slot changing using number keys using ChangeHeldItem() which is located in Inventory.cs
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            inventorySystem.ChangeHeldItem(0,itemContainer);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            inventorySystem.ChangeHeldItem(1, itemContainer);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            inventorySystem.ChangeHeldItem(2, itemContainer);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            inventorySystem.ChangeHeldItem(3, itemContainer);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            inventorySystem.ChangeHeldItem(4, itemContainer);
+        }
 
     }
 }
