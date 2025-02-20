@@ -7,8 +7,7 @@ using UnityEngine.UIElements;
 ///<summary>
 /// Ghost Types dropdown.
 /// </summary>
-[SerializeField]
-enum GhostType
+public enum GhostType
 {
     PSYCHOLOGICAL, BIOLOGICAL, METAPHYSICAL
 }
@@ -67,11 +66,6 @@ public class Ghost : MonoBehaviour
     ///</summary>
     [SerializeField]
     private int EMF;
-    ///<summary>
-    ///Hunting ghost prefab.
-    ///</summary>
-    [SerializeField]
-    private GameObject huntingGhostPrefab;
     ///<summary>
     ///Room the ghost is currently in. Initialized during start to be random room.
     ///</summary>
