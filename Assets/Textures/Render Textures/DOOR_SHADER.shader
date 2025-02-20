@@ -3,6 +3,7 @@ Shader"Custom/PortalShader" {
         _MainTex ("Base (RGB)", 2D) = "white" {}
     }
     SubShader {
+Cull Off
         Pass {
             CGPROGRAM
 
