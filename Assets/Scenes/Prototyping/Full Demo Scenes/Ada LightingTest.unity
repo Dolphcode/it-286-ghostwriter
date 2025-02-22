@@ -663,7 +663,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 1
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!114 &1361873531
 MonoBehaviour:
@@ -683,7 +683,6 @@ MonoBehaviour:
   difficultyLevel: 0
   type: 0
   EMF: 0
-  huntingGhostPrefab: {fileID: 0}
   currentRoom: {fileID: 0}
   agent: {fileID: 0}
   moveSpeed: 1
