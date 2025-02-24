@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// Static class for bootstrapping core game systems/managers
@@ -60,7 +61,12 @@ public class LevelLoader : MonoBehaviour
     void Update()
     {
         
-        loadingNumber.text = (progress / 3.0f).ToString();
+        loadingNumber.text = (progress).ToString();
+
+        if (Input.GetKeyDown(KeyCode.Space) && levelReady == true)
+        {
+            ActivateLevel();
+        }
     }
 
     /// <summary>
@@ -81,13 +87,8 @@ public class LevelLoader : MonoBehaviour
     /// </summary>
     public void ActivateLevel()
     {
-        if (asyncLoad != null && levelReady == true)
-        {
-            loadingLevel = false;
-            levelReady = false;
-            
-            asyncLoad = null;
-        }
+        Time.timeScale = 1f;
+        levelLoadingScreen.enabled = false;
     }
 
     /// <summary>
@@ -98,42 +99,42 @@ public class LevelLoader : MonoBehaviour
     public IEnumerator LoadScene(int index)
     {
         loadingLevel = true;
-
+        levelReady = false;
+        Time.timeScale = 0f;
         // Load level
         asyncLoad = SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
 
-        float total_progress = 0f;
+        float load_progress = 0f;
+        float unload_progress = 0f;
+        float item_progress = 0f;
         while (!asyncLoad.isDone) {
-            progress = asyncLoad.progress;
+            progress = asyncLoad.progress * 0.1f;
             yield return null;
         }
-
-        total_progress = progress;
+        load_progress = asyncLoad.progress;
 
         // Unload main menu
         AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(0);
 
         while (!asyncUnload.isDone)
         {
-            progress = total_progress + asyncUnload.progress;
+            progress = 0.1f * load_progress + 0.1f * unload_progress;
             yield return null;
         }
-
-        total_progress = progress;
+        unload_progress = asyncUnload.progress;
 
         // Instantiate objects
-        for (int i = 0; i < 0; i++)
+        for (int i = 0; i < 10; i++)
         {
             AsyncInstantiateOperation instantiation = LevelDataManager._Instance.InstantiateObjects();
 
             while (!instantiation.isDone)
             {
-                progress = total_progress + (instantiation.progress / 1000f);
+                progress = load_progress * 0.1f + unload_progress * 0.1f + item_progress / 10f * 0.8f + 0.8f * instantiation.progress / 10f;
                 yield return null;
             }
-            total_progress += progress / 1000f;
+            item_progress += instantiation.progress;
         }
-
-        levelLoadingScreen.enabled = false;
+        levelReady = true;
     }
 }

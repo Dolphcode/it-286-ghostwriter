@@ -56,7 +56,7 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.parent.tag == "Player")
+        if (other.transform.parent != null && other.transform.parent.tag == "Player")
         {
             if (teleportOut)
             {

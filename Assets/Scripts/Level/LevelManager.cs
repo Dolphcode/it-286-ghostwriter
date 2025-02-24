@@ -40,8 +40,8 @@ public class LevelManager : MonoBehaviour
     /// A list of ghosts, is initialized on start
     /// </summary>
     [SerializeField]
-    private GameObject[] ghosts;
-    public GameObject[] GetGhostList() { return ghosts; }
+    private Ghost[] ghosts;
+    public Ghost[] GetGhostList() { return ghosts; }
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -133,8 +133,8 @@ public class LevelManager : MonoBehaviour
     /// <returns>The number of ghosts in the room</returns>
     public int NumGhostsInRoom(Vector3 position)
     {
-        Room posRoom = GetRoomFromPosition(position);
-        return NumGhostsInRoom(posRoom);
+        Room room = GetRoomFromPosition(position);
+        return NumGhostsInRoom(position);
     }
 
     /// <summary>
@@ -146,6 +146,11 @@ public class LevelManager : MonoBehaviour
     public int NumGhostsInRoom(Room room)
     {
         // TODO: This needs implementing eventually
+        int numGhosts = 0;
+        foreach (Ghost ghost in ghosts)
+        {
+
+        }
         return (room == levelEvaluator.GetAllRooms()[0]) ? 1 : 0;
     }
 
