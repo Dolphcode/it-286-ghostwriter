@@ -96,6 +96,11 @@ public class Ghost : MonoBehaviour
     ///</summary>
     [SerializeField]
     private LevelManager levelManager1;
+    private float aggroTimer = 0f;
+    private float interactTimer = 0f;
+    private float teleportTimer = 0f;
+    private float emfTimer = 0f;
+    private float huntingTimer = 0f; 
     //<summary>
     //Sets ghost position to room.
     //</summary>
@@ -124,55 +129,58 @@ public class Ghost : MonoBehaviour
             // currentRoom.filterInteractables<> returns list of interactables, if iteratables are true for ghost type then randomly pick
         }
     }
+    // Increases aggresssion
+    public void IncreaseAggression()
+    {
+        aggression++;
+    }
     //<summary>
     //Ghost will switch locations rooms and randomly depending on aggression level.
     //</summary>
     private void Roam()
     {
-        // Timer for aggression increase when ghost is in room
-        float aggressionTimer = 0f;
+        teleportTimer += Time.deltaTime;
+        interactTimer += Time.deltaTime;
+        emfTimer += Time.deltaTime;
+        aggroTimer += Time.deltaTime;
         if (levelManager1.IsPlayerInRoom(currentRoom))
         {
-            aggressionTimer += Time.deltaTime;
-            // Every .75 seconds
-            if (aggressionTimer / .75f == 1)
+            if (aggroTimer >= 1f)
             {
                 aggression++;
+                aggroTimer = 0f;
             }
         }
         // Ghost is not visible when in passive.
         //GetComponent<Renderer>().enabled = false;
-        float interactTimer = 0f;
-        float teleportTimer = 0f;
-        float emfTimer = 0f;
         // If aggression less than half full game is slightly harder
         if (aggression < aggressionThreshold / 2)
         {
-            teleportTimer += Time.deltaTime;
-            interactTimer += Time.deltaTime;
             //supposed to be 90 im debugging out
-            if (teleportTimer / 10f == 1)
+            if (teleportTimer >= 10f)
             {
                 currentRoom = currentRoom.selectRandomAdjacentRoom(); 
                 SetGhostPosition(currentRoom.selectRandomSpawnPoint());
+                teleportTimer = 0f;
             }
             bool interactBool = Random.value > 0.75f;
             //supposed to be 180 im debugging out
-            if (interactTimer / 10f == 1)
+            if (interactTimer >= 10f)
             {
                 RandomGhostInteraction();
+                interactTimer = 0f;
             }
         }
         // When ghost is in second half of aggression threshold
         else if (aggression < aggressionThreshold)
         {
-            teleportTimer += Time.deltaTime;
-            interactTimer += Time.deltaTime;
             //supposed to be 50
             if (teleportTimer >= 20f)
             {
                 currentRoom = currentRoom.selectRandomAdjacentRoom();
                 SetGhostPosition(currentRoom.selectRandomSpawnPoint());
+
+                teleportTimer = 0f;
             }
             //supposed to be 100
             if (interactTimer >= 50f)
@@ -182,12 +190,13 @@ public class Ghost : MonoBehaviour
                 {
                     RandomGhostInteraction();
                 }
+                interactTimer = 0f;
             }
             // The harder is it, the more often EMF variable will change
             if (emfTimer >= 100 * 1 / difficultyLevel && psychologicalType)
             {
-                emfTimer += Time.deltaTime;
                 EMF = Random.Range(2, 3);
+                emfTimer = 0f;
             }
         }
     }
@@ -328,21 +337,19 @@ public class Ghost : MonoBehaviour
 
         if (huntingMode)
         {
+            huntingTimer += Time.deltaTime;
             // Tracks current room 
             currentRoom = levelManager1.GetRoomFromPosition(transform.position);
             // Makes Ghost visible during hunting mode
             GetComponent<Renderer>().enabled = true;
-            float huntingTimer = 0f;
             //Sets the minimum time a ghost will be hunting you for. Turns off hunting mode after that time.
             if (huntingTimer < 30f)
             {
-                huntingTimer += Time.deltaTime;
-
                 //Ghost will move towards player.
                 if (distanceFromPlayer > 1)
                 {
                     // Every ten seconds in Hunting Mode, changes the Ghost's speed depending on ghost type.
-                        if (huntingTimer <10f)
+                        if (huntingTimer/10f>=1)
                         {
                             if (psychologicalType)
                             {
@@ -364,8 +371,10 @@ public class Ghost : MonoBehaviour
             }
             else
             {
+                huntingTimer = 0f;
                 aggression = 0;
                 huntingMode = false;
+                Debug.Log("hunt end meow");
             }
         }
     }
