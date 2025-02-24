@@ -414,7 +414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5884321451958075205, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 2.24
       objectReference: {fileID: 0}
     - target: {fileID: 5884321451958075205, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -475,6 +475,10 @@ PrefabInstance:
     - target: {fileID: 8017807000502220816, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
       propertyPath: m_BackGroundColor.r
       value: 0.01904762
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155715551650229178, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9155715551650229178, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
