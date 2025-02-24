@@ -61,12 +61,29 @@ public class Inventory : MonoBehaviour
     /// <returns>-1 if there are no empty slots, or the next empty slot available</returns>
     public int CheckSlots()
     {
+        // Check first for the slot holded out 
         for (int i = 0; i < inventorySlots.Count;i++)
         {
-            if (inventorySlots[i].ItemData == null)
-            {
-                return i;
-            }
+            if (inventorySlots[i].holdOut == true && inventorySlots[i].ItemData == null) return i;
+        }
+        // Placed in first empty slot
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            if (inventorySlots[i].ItemData == null) return i;
+        }
+        return -1;
+    }
+
+    /// <summary>
+    /// Used for getting the current active slot
+    /// </summary>
+    /// <returns>-1 if there is an inventory error, or the active slot</returns>
+    public int CurrentActiveSlot()
+    {
+        // Check first for the slot holded out 
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            if (inventorySlots[i].holdOut == true) return i;
         }
         return -1;
     }
