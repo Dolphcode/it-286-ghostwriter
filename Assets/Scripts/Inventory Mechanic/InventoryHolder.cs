@@ -74,27 +74,27 @@ public class InventoryHolder : MonoBehaviour
             //itemContainer.GetChild(0).GetComponent<ItemBehavior>().Drop();
             inventorySystem.DropItem();
         }
-
+        // Key 1
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             inventorySystem.ChangeHeldItem(0,itemContainer);
         }
-
+        // Key 2
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             inventorySystem.ChangeHeldItem(1, itemContainer);
         }
-
+        // Key 3
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             inventorySystem.ChangeHeldItem(2, itemContainer);
         }
-
+        // Key 4
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             inventorySystem.ChangeHeldItem(3, itemContainer);
         }
-
+        // Key 5
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             inventorySystem.ChangeHeldItem(4, itemContainer);
