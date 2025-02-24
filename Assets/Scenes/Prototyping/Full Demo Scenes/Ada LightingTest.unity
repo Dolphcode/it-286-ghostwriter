@@ -285,7 +285,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 221031144}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.1, y: 0.1, z: 0.040000003}
@@ -407,7 +407,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 520658579}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.1, y: 0.1, z: 0.040000003}
@@ -428,7 +428,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710395271}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.1, y: 0.1, z: 0.040000003}
@@ -663,7 +663,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 1
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!114 &1361873531
 MonoBehaviour:
@@ -683,8 +683,7 @@ MonoBehaviour:
   difficultyLevel: 0
   type: 0
   EMF: 0
-  huntingGhostPrefab: {fileID: 0}
-  currentRoom: {fileID: 0}
+  currentRoom: {fileID: 9161617937282435672}
   agent: {fileID: 0}
   moveSpeed: 1
   huntingMode: 0
@@ -793,7 +792,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1651781351}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.1, y: 0.1, z: 0.040000003}
