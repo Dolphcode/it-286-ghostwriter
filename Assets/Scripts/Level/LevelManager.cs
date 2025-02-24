@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -121,7 +122,44 @@ public class LevelManager : MonoBehaviour
     {
         // TODO: Once ghost is implemented actually check this
         // For now returns true if the player is in room 0
-        return (room == levelEvaluator.GetAllRooms()[0]) ? true : false;
+        foreach (Ghost ghost in ghosts)
+        {
+            if (ghost.GetGhostRoom() == room)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Gets a list of ghosts in the current room given a point
+    /// </summary>
+    /// <param name="position">The position to test what room</param>
+    /// <returns>A List\<Ghost\> of ghosts in the room </returns>
+    public List<Ghost> GetGhostsInRoom(Vector3 position)
+    {
+        Room posRoom = GetRoomFromPosition(position);
+        return GetGhostsInRoom(posRoom);
+    }
+
+    /// <summary>
+    /// Gets a list of ghosts in the current room given a Room object
+    /// </summary>
+    /// <param name="room">The room to be searched</param>
+    /// <returns>A List\<Ghost\> of ghosts in the room </returns>
+    public List<Ghost> GetGhostsInRoom(Room room)
+    {
+        List<Ghost> ghostsInRoom = new List<Ghost>();
+
+        foreach (Ghost ghost in ghosts)
+        {
+            if (ghost.GetGhostRoom() == room)
+            {
+                ghostsInRoom.Append(ghost);
+            }
+        }
+        return ghostsInRoom;
     }
 
     /// <summary>
@@ -134,7 +172,7 @@ public class LevelManager : MonoBehaviour
     public int NumGhostsInRoom(Vector3 position)
     {
         Room room = GetRoomFromPosition(position);
-        return NumGhostsInRoom(position);
+        return NumGhostsInRoom(room);
     }
 
     /// <summary>
@@ -145,15 +183,22 @@ public class LevelManager : MonoBehaviour
     /// <returns>The number of ghosts in the room</returns>
     public int NumGhostsInRoom(Room room)
     {
-        // TODO: This needs implementing eventually
         int numGhosts = 0;
         foreach (Ghost ghost in ghosts)
         {
-
+            if (ghost.GetGhostRoom() == room)
+            {
+                numGhosts++;
+            }
         }
-        return (room == levelEvaluator.GetAllRooms()[0]) ? 1 : 0;
+        return numGhosts;
     }
 
+    /// <summary>
+    /// Checks if the player is in a given room
+    /// </summary>
+    /// <param name="room">The room to be tested</param>
+    /// <returns>True if the player is in the room, False if not</returns>
     public bool IsPlayerInRoom(Room room)
     {
         Room playerRoom = GetRoomFromPosition(player.transform.position);

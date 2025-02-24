@@ -87,7 +87,7 @@ public class Room : MonoBehaviour
     /// adjacent room list.</returns>
     public Room selectRandomAdjacentRoom()
     {
-        int idx = Random.Range(0, adjacentRooms.Count());
+        int idx = Random.Range(0, adjacentRooms.Count);
         return adjacentRooms[idx];
 
     }
