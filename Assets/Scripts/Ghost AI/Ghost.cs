@@ -65,7 +65,11 @@ public class Ghost : MonoBehaviour
     ///EMF variable.
     ///</summary>
     [SerializeField]
-    private int EMF;
+    private int emf;
+    ///<summary>
+    ///Aggression threshold/5.
+    ///</summary>
+    private int emfLevel;
     ///<summary>
     ///Room the ghost is currently in. Initialized during start to be random room.
     ///</summary>
@@ -99,7 +103,6 @@ public class Ghost : MonoBehaviour
     private float aggroTimer = 0f;
     private float interactTimer = 0f;
     private float teleportTimer = 0f;
-    private float emfTimer = 0f;
     private float huntingTimer = 0f; 
     //<summary>
     //Sets ghost position to room.
@@ -113,20 +116,16 @@ public class Ghost : MonoBehaviour
     ///<summary>
     ///Will randomize which interaction happens.
     ///</summary>
+    ///
     private void RandomGhostInteraction()
     {
         Debug.Log("OBJECT INTERACT");
-        // Sets variable randInteract to random number between 0 and max number of interactables. Can just set to however many interacts are implemented in the future.
-        int maxInteract = 1;
-        int randInteract = Random.Range(0, maxInteract);
-        //delete after; just to test to make sure interact works
-        randInteract = 0;
-        if (randInteract == 0)
+        //random chance of interact happening
+        bool doesInteract = Random.Range(0, 2) == 0;
+        int randInteract = Random.Range(0, currentRoom.filterInteractables<RoomLightInteractable>().Count);
+        if (doesInteract)
         {
-            currentRoom.filterInteractables<RoomLightInteractable>();
-            //add smth for each ghost type
-            //other interactables
-            // currentRoom.filterInteractables<> returns list of interactables, if iteratables are true for ghost type then randomly pick
+            currentRoom.filterInteractables<RoomLightInteractable>()[randInteract].interact();
         }
     }
     // Increases aggresssion
@@ -139,9 +138,12 @@ public class Ghost : MonoBehaviour
     //</summary>
     private void Roam()
     {
+        if (aggression < GetEmfLevel() && emf < 5)
+        {
+            emf++;
+        }
         teleportTimer += Time.deltaTime;
         interactTimer += Time.deltaTime;
-        emfTimer += Time.deltaTime;
         aggroTimer += Time.deltaTime;
         if (levelManager1.IsPlayerInRoom(currentRoom))
         {
@@ -192,12 +194,6 @@ public class Ghost : MonoBehaviour
                 }
                 interactTimer = 0f;
             }
-            // The harder is it, the more often EMF variable will change
-            if (emfTimer >= 100 * 1 / difficultyLevel && psychologicalType)
-            {
-                EMF = Random.Range(2, 3);
-                emfTimer = 0f;
-            }
         }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -235,45 +231,18 @@ public class Ghost : MonoBehaviour
         {
             aggressionThreshold += difficultyLevel*aggressionMultiplier;
         }
+        emfLevel = aggressionThreshold / 5;
         // Ensures only one Ghost type is true at a time. ELSE STATEMENTS HERE REQUIRE CLAMP TO WORK
         if (psychologicalType)
         {
-            // More difficult level means more range of EMF.
-            if (difficultyLevel >= 3)
-            {
-                EMF = Random.Range(1, 5);
-            }
-            else
-            {
-                EMF = Random.Range(2, 3);
-            }
             typeName = "Psychological";
         }
         if (biologicalType)
         {
-            // Easier difficulty means less range of EMF.
-            if (difficultyLevel < 3)
-            {
-                EMF = 1;
-            }
-            else
-            {
-                EMF = Random.Range(1, 2);
-            }
             typeName = "Biological";
         }
         if (metaphysicalType)
         {
-            // Easier difficulty means less range of EMF.
-            if (difficultyLevel < 3)
-            {
-                EMF = 5;
-            }
-            else
-            {
-                EMF = Random.Range(1, difficultyLevel);
-            }
-            EMF = Random.Range(3, 5);
             typeName = "Metaphysical";
         }
         // Sets Hunting Zone to all rooms.
@@ -296,24 +265,7 @@ public class Ghost : MonoBehaviour
         currentRoom = levelManager1.GetRoomFromPosition(transform.position);
         // Ghost's distance from player.
         float distanceFromPlayer = Vector3.Distance(transform.position, player.transform.position);
-        // ALSO IN START, HERE FOR TESTING IN SCENE: Ensures only one Ghost type is true at a time.
-        if (psychologicalType)
-        {
-            biologicalType = false;
-            metaphysicalType = false;
-        }
-        if (biologicalType)
-        {
-            psychologicalType = false;
-            metaphysicalType = false;
-        }
-        if (metaphysicalType)
-        {
-            biologicalType = false;
-            metaphysicalType = false;
-        }
         difficultyLevel = Mathf.Clamp(difficultyLevel, 1, 5);
-        //END OF STUFF HERE JUST FOR TESTING
         //Gets collider from Player Body
         Collider col = null;
         foreach (Transform child in player)
@@ -393,9 +345,9 @@ public class Ghost : MonoBehaviour
     /// Returns EMF 
     /// </summary>
     /// <returns>Integer</returns>
-    public int GetEMF()
+    public int GetEmf()
     {
-        return EMF;
+        return emf;
     }
     /// <summary>
     /// Returns type of ghost.
@@ -433,5 +385,9 @@ public class Ghost : MonoBehaviour
     public bool IsGhostHunting()
     {
         return huntingMode;
+    }
+    public int GetEmfLevel()
+    {
+        return emfLevel;
     }
 }
