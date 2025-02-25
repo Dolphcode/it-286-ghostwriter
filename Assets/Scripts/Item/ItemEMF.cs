@@ -1,9 +1,34 @@
 using UnityEngine;
 
-public class EMF : MonoBehaviour
+public class EMFBehavior : ItemBehavior
 {
-    LevelManager levelManager;
+    
     Ghost ghosty;
+    public override void Interact()
+    {
+        if (!data.isOn)
+        {
+            data.isOn = true;
+        }
+
+        else
+        {
+            data.isOn = false;
+        }
+
+        Debug.Log("Interacting with EMF");
+    }
+
+    public override void Load(ItemData itemData)
+    {
+        itemData.Behavior = this;
+        data = itemData;
+    }
+
+    public override void Unload()
+    {
+        Debug.Log("Unloading EMF");
+    }
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -18,16 +43,19 @@ public class EMF : MonoBehaviour
     void Update()
     {
         //Finds if player is in same room as ghost
-        if (levelManager.IsGhostInRoom(levelManager.GetRoomFromPosition(transform.position)))
+        if (data.isOn)
+        {
+
+            if (levelManager.IsGhostInRoom(levelManager.GetRoomFromPosition(transform.position)))
             {
-            //For now, returns true if player is in room 3
-            Debug.Log("Beep Beep");
+                //For now, returns true if player is in room 3
+                // Debug.Log("Beep Beep");
 
-            //Not implemented bc ada made it private tsk tsk tsk
 
-            //Debug.Log(ghosty.getEMF());
+                Debug.Log(ghosty.GetEMF());
 
             }
-        Debug.Log(levelManager.GetRoomFromPosition(transform.position).name);
+        }
+        //Debug.Log(levelManager.GetRoomFromPosition(transform.position).name);
     }
 }
