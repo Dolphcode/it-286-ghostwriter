@@ -48,6 +48,7 @@ public class InventoryHolder : MonoBehaviour
 
     public void Update()
     {
+        // Interact Button
         if (Input.GetKeyDown(KeyCode.E))
         {
             Physics.Raycast(cameraHolder.position, cameraHolder.forward, out lookingAt, 5f);
@@ -57,6 +58,12 @@ public class InventoryHolder : MonoBehaviour
                 {
                     inventorySystem.PickUpItem(lookingAt.collider.GetComponent<ItemBehavior>(),itemContainer);
                     Debug.Log("Picking up item");
+                }
+                // Van interact
+                else if (lookingAt.collider.GetComponent<InventoryVan>() != null) 
+                {
+                    
+                    Debug.Log("Storage open");
                 }
             }
         }
@@ -69,6 +76,7 @@ public class InventoryHolder : MonoBehaviour
         }
         //Debug.Log("looking At " + lookingAt.collider);
 
+        // Throw item
         if (Input.GetKeyDown(KeyCode.G))
         {
             //itemContainer.GetChild(0).GetComponent<ItemBehavior>().Drop();
