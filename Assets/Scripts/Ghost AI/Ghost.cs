@@ -44,17 +44,14 @@ public class Ghost : MonoBehaviour
     private GhostType type;
     ///<summary>
     ///Ghost type Psychological (more erratic behavior, speed changes, many interactions).
-    ///EMF changes from 1,5;
     ///</summary>
     private bool psychologicalType;
     ///<summary>
     ///Ghost type Biological (died a natural death - not as fast, hard to aggro).
-    ///EMF: 1
     ///</summary>
     private bool biologicalType;
     ///<summary>
     ///Ghost type Metaphysical (died but spiritually - aggression threshold lowers the more you aggro them. has a lot more interactions/tries to communicate with player more? maybe triggers a certain tool).
-    ///EMF: 5
     ///</summary>
     private bool metaphysicalType;
     ///<summary>
@@ -154,7 +151,12 @@ public class Ghost : MonoBehaviour
             }
         }
         // Ghost is not visible when in passive.
-        //GetComponent<Renderer>().enabled = false;
+        GetComponent<Renderer>().enabled = false;
+        // Gets model or first child
+        GameObject child = transform.GetChild(0).gameObject;
+        // Disables model
+        child.GetComponent<Renderer>().enabled = false;
+           
         // If aggression less than half full game is slightly harder
         if (aggression < aggressionThreshold / 2)
         {
@@ -294,6 +296,10 @@ public class Ghost : MonoBehaviour
             currentRoom = levelManager1.GetRoomFromPosition(transform.position);
             // Makes Ghost visible during hunting mode
             GetComponent<Renderer>().enabled = true;
+            // Gets model or first child
+            GameObject child = transform.GetChild(0).gameObject;
+            // Enables model
+            child.GetComponent<Renderer>().enabled = true;
             //Sets the minimum time a ghost will be hunting you for. Turns off hunting mode after that time.
             if (huntingTimer < 30f)
             {
@@ -308,14 +314,14 @@ public class Ghost : MonoBehaviour
                                 // Randomly changes speed every 10 seconds
                                 moveSpeed = Random.Range(1, 3);
                             }
-                             if (biologicalType)
-                             {
-                            // if difficulty is below lvl3, lowers moveSpeed every 10 seconds
+                            if (biologicalType)
+                            {
+                        // if difficulty is below lvl3, lowers moveSpeed every 10 seconds
                                 if (difficultyLevel < 3 && moveSpeed >= 2)
                                 { 
                                     moveSpeed -= 1;
                                 }
-                             }
+                            }
                           }
                     
                     transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
@@ -353,7 +359,7 @@ public class Ghost : MonoBehaviour
     /// Returns type of ghost.
     /// </summary>
     /// <returns>Type name as string</returns>
-    public string GetType()
+    public string GetGhostType()
     {
         return typeName;
     }
