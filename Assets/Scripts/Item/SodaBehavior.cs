@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class SodaBehavior : ItemBehavior
 {
-    public Fear fear;
 
     public override void Interact()
     {
+        GameObject.Find("Fear").GetComponent<Fear>().ChangeFearMeter(-20);
 
-        Debug.Log("Interacting");
+        Debug.Log("Interacting with Soda");
     }
 
     public override void Load(ItemData itemData)
