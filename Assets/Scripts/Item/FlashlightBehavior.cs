@@ -12,6 +12,8 @@ public class FlashlightBehavior : ItemBehavior
 
     public override void PutInHand(Transform itemContainer)
     {
+        //lightManager = FindAnyObjectByType<LightManager>();
+        Debug.Log(itemContainer);
         base.PutInHand(itemContainer);
         lightManager.SetFlashlightState(data.isOn);
     }
@@ -46,13 +48,13 @@ public class FlashlightBehavior : ItemBehavior
     {
         itemData.Behavior = this;
         data = itemData;
-        Debug.Log(itemData);
-        //lightManager.SetFlashlightState(itemData.isOn);
+        lightManager = FindAnyObjectByType<LightManager>();
+        lightManager.SetFlashlightState(false); // Start out as false, after load we put in hand anyway typically
     }
 
     public override void Unload()
     {
-        //lightManager.SetFlashlightState(false);
+        lightManager.SetFlashlightState(false);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
