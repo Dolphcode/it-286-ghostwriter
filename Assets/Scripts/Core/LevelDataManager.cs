@@ -40,6 +40,32 @@ public class LevelDataManager : MonoBehaviour
         
     }
 
+    // Inventory Config Buttons
+    public void BringItem(int index)
+    {
+        int totalItems = 0;
+        foreach (int count in selectedItemCounts) {
+            totalItems += count;
+        }
+        if (totalItems == maxItems) return;
+
+        // TODO also check itemCounts for this item
+        selectedItemCounts[index]++;
+    }
+
+    public void LeaveItem(int index)
+    {
+        if (selectedItemCounts[index] == 0) return;
+        selectedItemCounts[index]--;
+    }
+
+    public int GetItemCount(int index)
+    {
+        return selectedItemCounts[index];
+    }
+
+
+    // Level Loading Functions
     public AsyncInstantiateOperation InstantiateObjects()
     {
         return InstantiateAsync(obj);
@@ -54,6 +80,7 @@ public class LevelDataManager : MonoBehaviour
             {
                 output.Add(itemTemplates[i]);
             }
+            selectedItemCounts[i] = 0;
         }
         return output;
     }

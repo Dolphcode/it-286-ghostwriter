@@ -1024,8 +1024,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e122e3341fd393d47a7a3f7da21071aa, type: 2}
   - {fileID: 11400000, guid: 7606a9c65e46e304285e8a0811d31e1f, type: 2}
   - {fileID: 11400000, guid: 4eb6073996365b64ca267932009f9ac8, type: 2}
-  itemCounts: 020000000300000000000000
-  selectedItemCounts: 020000000300000000000000
+  itemCounts: e8030000e8030000e8030000
+  selectedItemCounts: 000000000000000000000000
   maxItems: 5
   ghostPrefab: {fileID: 8931265980793741926, guid: 6ac71ae20c3ff764681a8152d87509fc, type: 3}
   obj: {fileID: 3317281402428045863, guid: ab6b8aa620ff13c488fe61217e53a7e1, type: 3}
