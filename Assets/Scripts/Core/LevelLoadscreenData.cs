@@ -6,5 +6,5 @@ public class LevelLoadscreenData : ScriptableObject
 {
     public string levelName;
     public string loadingDescription;
-    public Texture backgroundImage;
+    public Sprite backgroundImage;
 }

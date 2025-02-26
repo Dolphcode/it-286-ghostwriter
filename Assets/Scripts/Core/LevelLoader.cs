@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -40,6 +41,21 @@ public class LevelLoader : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI loadingNumber;
 
+    [SerializeField]
+    private TextMeshProUGUI loadingDescriptionLabel;
+
+    [SerializeField]
+    private TextMeshProUGUI levelNameLabel;
+
+    [SerializeField]
+    private TextMeshProUGUI readyLabel;
+
+    [SerializeField]
+    private Image backgroundImage;
+
+    [SerializeField]
+    private List<LevelLoadscreenData> loadscreenDataList;
+
     public bool loadingLevel { get; private set; } = false;
     public bool levelReady { get; private set; } = false;
 
@@ -60,8 +76,7 @@ public class LevelLoader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        loadingNumber.text = (progress).ToString();
+        loadingNumber.text = (Mathf.Round(progress * 100)).ToString() + "%";
 
         if (Input.GetKeyDown(KeyCode.Space) && levelReady == true)
         {
@@ -78,6 +93,12 @@ public class LevelLoader : MonoBehaviour
     {
         progress = 0f;
         levelLoadingScreen.enabled = true;
+
+        LevelLoadscreenData screenData = loadscreenDataList[index];
+        loadingDescriptionLabel.text = screenData.loadingDescription;
+        levelNameLabel.text = screenData.levelName;
+        backgroundImage.sprite = screenData.backgroundImage;
+        readyLabel.text = "";
         StartCoroutine(LoadScene(index));
     }
 
@@ -135,6 +156,9 @@ public class LevelLoader : MonoBehaviour
             }
             item_progress += instantiation.progress;
         }
+        progress = 1f;
         levelReady = true;
+
+        readyLabel.text = "Press SPACE to start";
     }
 }
