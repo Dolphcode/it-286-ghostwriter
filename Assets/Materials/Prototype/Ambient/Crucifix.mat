@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Van_V1
+  m_Name: Crucifix
   m_Shader: {fileID: -6465566751694194690, guid: 3c7ac4d930f19154db0a7f9e4bd48753, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -42,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Base_Texture:
-        m_Texture: {fileID: 2800000, guid: 32cda237e0477cf46883111193641386, type: 3}
+        m_Texture: {fileID: 2800000, guid: 19602912960170c47a78b856fd494189, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -124,8 +124,8 @@ Material:
     - _EnvironmentReflections: 1
     - _FlashlightOn: 0
     - _Flashlight_On: 1
-    - _Fog_Max: 30
-    - _Fog_Min: 20
+    - _Fog_Max: 20
+    - _Fog_Min: 5
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -148,9 +148,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _Ambient_Color: {r: 0.18053079, g: 0.18053079, b: 0.35220122, a: 0}
+    - _Ambient_Color: {r: 0.14716971, g: 0.02304732, b: 0.112871446, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Base_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_Color: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Fog_Color: {r: 0.039337777, g: 0.04994355, b: 0.08176088, a: 0}
