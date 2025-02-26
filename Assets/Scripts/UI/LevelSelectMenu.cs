@@ -20,9 +20,9 @@ public class LevelSelectMenu : MonoBehaviour
     {
     }
 
-    public void StartLevelLoad()
+    public void StartLevelLoad(int index)
     {
-        LevelLoader._Instance.LoadLevel(1);
+        LevelLoader._Instance.LoadLevel(index);
     }
 
     public void ActivateLoadedLevel()
