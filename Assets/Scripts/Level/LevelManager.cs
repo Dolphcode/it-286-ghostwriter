@@ -126,7 +126,11 @@ public class LevelManager : MonoBehaviour
         {
             if (ghost.GetGhostRoom() == room)
             {
+                Debug.Log("there's a ghost here!");
                 return true;
+            } else
+            {
+                Debug.Log("no ghost here!");
             }
         }
         return false;

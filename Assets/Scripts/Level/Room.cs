@@ -106,8 +106,8 @@ public class Room : MonoBehaviour
         List<T> output = new List<T>();
         foreach (GhostInteractable interactable in interactables)
         {
-            if (interactable is T) { 
-                output.Append(interactable);
+            if (interactable.GetType() == typeof(T)) { 
+                output.Add((T)interactable);
             }
         }
 
@@ -127,7 +127,7 @@ public class Room : MonoBehaviour
         {
             if (filter.Contains(interactable.GetInteractableType()))
             {
-                output.Append(interactable);
+                output.Add(interactable);
             }
         }
 

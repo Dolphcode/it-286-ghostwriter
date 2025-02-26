@@ -30,6 +30,8 @@ public abstract class ItemBehavior : MonoBehaviour
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(Vector3.zero); //Quaternion.Euler(itemData.defaultRotation); 
 
+        itemContainer.localPosition = data.heldItemPosition;
+        itemContainer.localRotation = Quaternion.Euler(data.heldItemRotation);
 
         if (rb != null)
         {
