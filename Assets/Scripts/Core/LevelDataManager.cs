@@ -1,11 +1,26 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class LevelDataManager : MonoBehaviour
 {
 
-    [Header("Van Inventory Config")]
+    [Header("Van Inventory")]
     [SerializeField]
-    private int itemCount = 0;
+    private List<ItemData> itemTemplates;
+    [SerializeField]
+    private int[] itemCounts;
+    [SerializeField]
+    private int[] selectedItemCounts;
+    [SerializeField]
+    private int maxItems = 10;
+
+    [Header("Ghost Init")]
+    /// <summary>
+    /// The ghost prefab
+    /// </summary>
+    [SerializeField]
+    public GameObject ghostPrefab;
+
 
     [SerializeField]
     private GameObject obj;
@@ -28,5 +43,18 @@ public class LevelDataManager : MonoBehaviour
     public AsyncInstantiateOperation InstantiateObjects()
     {
         return InstantiateAsync(obj);
+    }
+
+    public List<ItemData> GetSpawnItems()
+    {
+        List<ItemData> output = new List<ItemData>();
+        for (int i = 0; i < selectedItemCounts.Length; i++)
+        {
+            for (int j = 0; j < selectedItemCounts[i]; j++)
+            {
+                output.Add(itemTemplates[i]);
+            }
+        }
+        return output;
     }
 }

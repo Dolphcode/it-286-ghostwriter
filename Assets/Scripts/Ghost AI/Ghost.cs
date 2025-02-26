@@ -18,6 +18,8 @@ public class Ghost : MonoBehaviour
     ///</summary>
     [SerializeField]
     private Transform player;
+    public void SetPlayer(Transform player) { this.player = player; }
+
     /// <summary>
     ///Amount of times a ghost can be provoked before entering Hunting Mode.
     ///</summary>

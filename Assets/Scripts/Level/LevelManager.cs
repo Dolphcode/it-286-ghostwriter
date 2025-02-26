@@ -9,6 +9,7 @@ using UnityEngine;
 /// </summary>
 public class LevelManager : MonoBehaviour
 {
+    [Header("Level Gen")]
     /// <summary>
     /// An implementation of the Strategy pattern for level generation and 
     /// determining which room a player is in.
@@ -16,6 +17,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private LevelEvaluator levelEvaluator;
 
+
+    [Header("World Items")]
     /// <summary>
     /// The scene's Light manager, which can be used to make calls to change
     /// the state of the flashlight. Also works in engine
@@ -41,8 +44,14 @@ public class LevelManager : MonoBehaviour
     /// A list of ghosts, is initialized on start
     /// </summary>
     [SerializeField]
-    private Ghost[] ghosts;
-    public Ghost[] GetGhostList() { return ghosts; }
+    private List<Ghost> ghosts;
+    public List<Ghost> GetGhostList() { return ghosts; }
+
+    /// <summary>
+    /// TEMPORARY a list of transforms representing item spawn points
+    /// </summary>
+    [SerializeField]
+    private Transform[] itemSpawnPoints;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -61,6 +70,36 @@ public class LevelManager : MonoBehaviour
     {
         //Debug.Log(IsPlayerInRoom(levelEvaluator.GetAllRooms()[0]));
     }
+
+    // -----------------------------------------------------------------------
+    //  Level Initialization
+    // -----------------------------------------------------------------------
+
+    /// <summary>
+    /// Adds an item behavior object to the world on load
+    /// </summary>
+    /// <param name="behavior">The object to be added to the world</param>
+    /// <param name="spawnPointNumber">The spawn position</param>
+    public void AddItemToWorld(ItemBehavior behavior, int spawnPointNumber)
+    {
+        // Add the item to the world
+        behavior.transform.SetParent(transform);
+
+        behavior.transform.position = itemSpawnPoints[spawnPointNumber].position;
+    }
+
+    public void AddGhostToWorld(Ghost ghost)
+    {
+        // TODO: Move Ghost initialization code to an Init function
+        // Put the ghost in the world
+        ghosts.Add(ghost);
+
+        // Need to flesh this out more
+        ghost.transform.SetParent(transform);
+
+        ghost.SetPlayer(player.transform);
+    }
+
 
     // -----------------------------------------------------------------------
     //  Exposing information stored in the Level Evaluator
