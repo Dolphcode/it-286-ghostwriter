@@ -52,7 +52,7 @@ public class EMFBehavior : ItemBehavior
                 // Debug.Log("Beep Beep");
 
 
-                Debug.Log(ghosty.GetEMF());
+                //Debug.Log(ghosty.GetEMF());
 
             }
         }
