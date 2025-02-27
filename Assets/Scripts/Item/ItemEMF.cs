@@ -15,8 +15,8 @@ public class EMFBehavior : ItemBehavior
         {
             data.isOn = false;
         }
-
-        Debug.Log("Interacting with EMF");
+        
+        Debug.Log("Interacting with EMF " + data.isOn);
     }
 
     public override void Load(ItemData itemData)
@@ -45,14 +45,15 @@ public class EMFBehavior : ItemBehavior
         //Finds if player is in same room as ghost
         if (data.isOn)
         {
-
+            Debug.Log("We are on");
+            Debug.Log(levelManager.IsGhostInRoom(levelManager.GetRoomFromPosition(transform.position)));
             if (levelManager.IsGhostInRoom(levelManager.GetRoomFromPosition(transform.position)))
             {
                 //For now, returns true if player is in room 3
                 // Debug.Log("Beep Beep");
 
 
-                //Debug.Log(ghosty.GetEMF());
+                Debug.Log(ghosty.GetEmf());
 
             }
         }

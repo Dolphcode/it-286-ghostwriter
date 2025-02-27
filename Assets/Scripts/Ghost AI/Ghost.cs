@@ -18,6 +18,7 @@ public class Ghost : MonoBehaviour
     ///</summary>
     [SerializeField]
     private Transform player;
+    public void SetPlayer(Transform player) { this.player = player; }
     /// <summary>
     ///Amount of times a ghost can be provoked before entering Hunting Mode.
     ///</summary>
@@ -119,10 +120,10 @@ public class Ghost : MonoBehaviour
         Debug.Log("OBJECT INTERACT");
         //random chance of interact happening
         bool doesInteract = Random.Range(0, 2) == 0;
-        int randInteract = Random.Range(0, currentRoom.filterInteractables<RoomLightInteractable>().Count);
+        int randInteract = Random.Range(0, currentRoom.filterInteractables(GhostInteractableType.Fingerprint).Count);
         if (doesInteract)
         {
-            currentRoom.filterInteractables<RoomLightInteractable>()[randInteract].interact();
+            currentRoom.filterInteractables(GhostInteractableType.Fingerprint)[randInteract].interact();
         }
     }
     // Increases aggresssion
@@ -156,7 +157,6 @@ public class Ghost : MonoBehaviour
         GameObject child = transform.GetChild(0).gameObject;
         // Disables model
         child.GetComponent<Renderer>().enabled = false;
-           
         // If aggression less than half full game is slightly harder
         if (aggression < aggressionThreshold / 2)
         {
