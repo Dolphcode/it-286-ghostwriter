@@ -127,7 +127,7 @@ public class Ghost : MonoBehaviour
         int randInteract = Random.Range(0, currentRoom.filterInteractables(GhostInteractableType.Fingerprint).Count);
         if (doesInteract)
         {
-            currentRoom.filterInteractables(GhostInteractableType.Fingerprint)[randInteract].interact();
+            currentRoom.filterInteractables(GhostInteractableType.Movable)[randInteract].interact();
         }
     }
     // Increases aggresssion
