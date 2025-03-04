@@ -101,7 +101,8 @@ public class Ghost : MonoBehaviour
     private float aggroTimer = 0f;
     private float interactTimer = 0f;
     private float teleportTimer = 0f;
-    private float huntingTimer = 0f; 
+    private float huntingTimer = 0f;
+    private float functionTimer = 0f;
     //<summary>
     //Sets ghost position to room.
     //</summary>
@@ -125,11 +126,6 @@ public class Ghost : MonoBehaviour
         {
             currentRoom.filterInteractables(GhostInteractableType.Fingerprint)[randInteract].interact();
         }
-    }
-    // Increases aggresssion
-    public void IncreaseAggression()
-    {
-        aggression++;
     }
     //<summary>
     //Ghost will switch locations rooms and randomly depending on aggression level.
@@ -386,12 +382,51 @@ public class Ghost : MonoBehaviour
     }
 
     /// <summary>
-    /// Returns 
+    /// Returns boolean for if ghost is in hunting mode or not
     /// </summary>
     public bool IsGhostHunting()
     {
         return huntingMode;
     }
+
+    /// <summary>
+    /// Turns Ghost Hunting Mode off
+    /// </summary>
+    public void GhostHuntOff()
+    {
+        huntingMode = false;
+    }
+    /// <summary>
+    /// Increases aggresssion by 1
+    /// </summary>
+    public void IncreaseAggression()
+    {
+        aggression++;
+    }
+    /// <summary>
+    /// Increases aggresssion by integer input
+    /// </summary>
+    public void IncreaseAggression(int increase)
+    {
+        aggression=aggression+ increase;
+    }
+    /// <summary>
+    /// Increases aggresssion by integer input, by a factor of the second argument (time in seconds)
+    /// Ex: IncreaseAggression(3, 2, 10) increases aggression by 3 every 2 seconds for 10 seconds
+    /// </summary>
+    public void IncreaseAggression(int increase, int timeOften, int timeEnd)
+    {
+        functionTimer = 0f;
+        while (functionTimer<timeEnd)
+        {
+            aggression += increase;
+            new WaitForSeconds(timeOften);
+            functionTimer+=timeOften;
+        }
+    }
+    /// <summary>
+    /// Returns EMF level
+    /// </summary>
     public int GetEmfLevel()
     {
         return emfLevel;
