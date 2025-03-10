@@ -238,6 +238,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventorySize: 5
   inventorySystem: {fileID: 0}
+  inventorySlotPrefab: {fileID: 0}
+  itemContainer: {fileID: 0}
+  cameraHolder: {fileID: 0}
 --- !u!1 &1827110535859588248
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,6 +521,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9148039120715910430, guid: 73aacdf37346c7f41bf4f0dc09e91b82, type: 3}
   m_PrefabInstance: {fileID: 2518053017146261537}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &8017807000502220816 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5599402723256154161, guid: 73aacdf37346c7f41bf4f0dc09e91b82, type: 3}
+  m_PrefabInstance: {fileID: 2518053017146261537}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3475488871286650991
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -526,6 +534,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5884321451958075205}
     m_Modifications:
+    - target: {fileID: 3082808363169757336, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082808363169757336, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 95
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085983959552713769, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085983959552713769, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085983959552713769, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 320
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085983959552713769, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 240
+      objectReference: {fileID: 0}
     - target: {fileID: 4176321566233845510, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -604,6 +636,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4176321566233845510, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250713798443016683, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
+      propertyPath: m_fontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250713798443016683, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5975294643986797012, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 8017807000502220816}
+    - target: {fileID: 5975294643986797012, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5975294643986797012, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
+      propertyPath: m_PixelPerfect
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8603817397128786195, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
