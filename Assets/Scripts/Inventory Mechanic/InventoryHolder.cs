@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 /*
  * @brief This script is so that the game object can interact with the inventory
@@ -21,6 +22,7 @@ public class InventoryHolder : MonoBehaviour
     public RaycastHit lookingAt;
     public Transform itemContainer;
     public Transform cameraHolder;
+    public Camera camera;
     public Inventory InventorySystem => inventorySystem;
 
     public static UnityAction<Inventory> InventoryDisplayRequest;
@@ -67,8 +69,19 @@ public class InventoryHolder : MonoBehaviour
                 }
             }
         }
+        // Left Mouse Click
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray,out lookingAt))
+            {
+                if (lookingAt.collider.gameObject.GetComponent<Canvas>() != null)
+                {
+                    Debug.Log("Working");
+                }
+            }
+
             if (GetHeldItem() != null)
             {
                 GetHeldItem().GetComponent<ItemBehavior>().Interact();
