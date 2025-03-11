@@ -1,0 +1,184 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2931956456077260730
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.518438
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.5797853
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 87e09558954332848ba4d8931a9bed7a, type: 2}
+    - target: {fileID: 919132149155446097, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+      propertyPath: m_Name
+      value: Rocking Chair
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6825754390140383862}
+  m_SourcePrefab: {fileID: 100100000, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+--- !u!1 &2625896607071652587 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+  m_PrefabInstance: {fileID: 2931956456077260730}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6825754390140383862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2625896607071652587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 097f4f80e8a3f314badab6e8d26164a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableType: 1
+  rock: 1
+  testCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 23.796421
+      outSlope: 23.796421
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.057633854
+    - serializedVersion: 3
+      time: 0.056454018
+      value: 0.98881453
+      inSlope: -0.022392342
+      outSlope: -0.022392342
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.7127771
+    - serializedVersion: 3
+      time: 0.1498113
+      value: 0.0076763183
+      inSlope: -12.7267685
+      outSlope: -12.7267685
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.104357384
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.24451911
+      value: -0.7712837
+      inSlope: 0.095142655
+      outSlope: 0.095142655
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.15731853
+    - serializedVersion: 3
+      time: 0.41814324
+      value: 0.39151955
+      inSlope: 2.269274
+      outSlope: 2.269274
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.59297764
+      value: -0.14872661
+      inSlope: 0.5623639
+      outSlope: 0.5623639
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6976969
+      value: 0.10244748
+      inSlope: 1.5891223
+      outSlope: 1.5891223
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8399974
+      value: -0.058513284
+      inSlope: -0.19443536
+      outSlope: -0.19443536
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0.42455283
+      outSlope: 0.42455283
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.5295742
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

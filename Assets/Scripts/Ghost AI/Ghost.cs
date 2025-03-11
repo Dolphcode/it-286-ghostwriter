@@ -121,10 +121,10 @@ public class Ghost : MonoBehaviour
         Debug.Log("OBJECT INTERACT");
         //random chance of interact happening
         bool doesInteract = Random.Range(0, 2) == 0;
-        int randInteract = Random.Range(0, currentRoom.filterInteractables(GhostInteractableType.Fingerprint).Count);
+        int randInteract = Random.Range(0, currentRoom.filterInteractables(GhostInteractableType.Lights).Count);
         if (doesInteract)
         {
-            currentRoom.filterInteractables(GhostInteractableType.Fingerprint)[randInteract].interact();
+            currentRoom.filterInteractables(GhostInteractableType.Lights)[randInteract].interact();
         }
     }
     //<summary>
