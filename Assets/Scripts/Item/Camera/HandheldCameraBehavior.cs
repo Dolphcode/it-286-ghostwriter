@@ -4,9 +4,21 @@ using UnityEngine;
 public class HandheldCameraBehavior : ItemBehavior
 {
 
+    [Header("References")]
     [SerializeField]
     Camera camReference;
+    [SerializeField]
+    MeshRenderer renderMesh;
 
+    public void Awake()
+    {
+        base.Awake();
+        RenderTexture tex = new RenderTexture(320, 240, 16, RenderTextureFormat.ARGB32);
+        tex.useDynamicScale = true;
+        tex.Create();
+        camReference.targetTexture = tex;
+        renderMesh.material.mainTexture = tex;
+    }
     public override void Interact()
     {
         Debug.Log("snap");
