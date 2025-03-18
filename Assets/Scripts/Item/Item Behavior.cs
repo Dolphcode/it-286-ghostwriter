@@ -54,7 +54,8 @@ public abstract class ItemBehavior : MonoBehaviour
     /// </summary>
     public virtual void Drop()
     {
-      
+
+        Transform p = transform.parent.parent;
         transform.SetParent(null);
         
         
@@ -65,7 +66,7 @@ public abstract class ItemBehavior : MonoBehaviour
             rb.useGravity = true;
         }
 
-        rb.AddForce(transform.forward * 10f, ForceMode.Impulse);
+        rb.AddForce(p.forward * 10f, ForceMode.Impulse);
 
         if (coll != null)
         {

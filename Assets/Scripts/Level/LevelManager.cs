@@ -92,6 +92,7 @@ public class LevelManager : MonoBehaviour
     {
         // TODO: Move Ghost initialization code to an Init function
         // Put the ghost in the world
+        ghosts = new List<Ghost>();
         ghosts.Add(ghost);
 
         // Need to flesh this out more
