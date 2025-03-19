@@ -17,6 +17,8 @@ MonoBehaviour:
   Icon: {fileID: 0}
   Item: {fileID: 4847825559594920050, guid: b1ee5c3683b99594e83fcc888388df68, type: 3}
   Behavior: {fileID: 4285149418881093880, guid: b1ee5c3683b99594e83fcc888388df68, type: 3}
+  heldItemPosition: {x: 0.24, y: -0.14, z: 0.45}
+  heldItemRotation: {x: 0, y: 0, z: 0}
   isEquiped: 0
   isOn: 0
   durability: 1

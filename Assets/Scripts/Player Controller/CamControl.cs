@@ -1,4 +1,3 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 /// <summary>
 /// Allows the player to control the camera using their mouse
