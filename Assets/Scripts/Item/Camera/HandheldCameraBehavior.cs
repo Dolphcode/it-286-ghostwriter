@@ -35,6 +35,8 @@ public class HandheldCameraBehavior : ItemBehavior
         var bytes = image.EncodeToPNG();
         Destroy(image);
         File.WriteAllBytes(Application.dataPath + "/Captures/test.png", bytes);
+
+        levelManager.GetCaptureManager().CaptureImage(image, camReference);
     }
 
     public override void Load(ItemData itemData)
