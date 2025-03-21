@@ -151,6 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelEvaluator: {fileID: 11400000, guid: 01e015f650a997f4db8029ebefae8a3c, type: 2}
   lightManager: {fileID: 45924915}
+  captureManager: {fileID: 0}
   interiorBase: {fileID: 1946607791}
   player: {fileID: 1096738990}
   ghosts:
@@ -1155,6 +1156,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 601206402549692619, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 151762805}
     - target: {fileID: 601206402549692619, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
       propertyPath: cameraHolder
       value: 
