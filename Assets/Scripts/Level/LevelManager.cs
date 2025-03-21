@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -8,6 +9,7 @@ using UnityEngine;
 /// </summary>
 public class LevelManager : MonoBehaviour
 {
+    [Header("Level Gen")]
     /// <summary>
     /// An implementation of the Strategy pattern for level generation and 
     /// determining which room a player is in.
@@ -15,6 +17,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private LevelEvaluator levelEvaluator;
 
+
+    [Header("World Items")]
     /// <summary>
     /// The scene's Light manager, which can be used to make calls to change
     /// the state of the flashlight. Also works in engine
@@ -40,8 +44,14 @@ public class LevelManager : MonoBehaviour
     /// A list of ghosts, is initialized on start
     /// </summary>
     [SerializeField]
-    private GameObject[] ghosts;
-    public GameObject[] GetGhostList() { return ghosts; }
+    private List<Ghost> ghosts;
+    public List<Ghost> GetGhostList() { return ghosts; }
+
+    /// <summary>
+    /// TEMPORARY a list of transforms representing item spawn points
+    /// </summary>
+    [SerializeField]
+    private Transform[] itemSpawnPoints;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -60,6 +70,37 @@ public class LevelManager : MonoBehaviour
     {
         //Debug.Log(IsPlayerInRoom(levelEvaluator.GetAllRooms()[0]));
     }
+
+    // -----------------------------------------------------------------------
+    //  Level Initialization
+    // -----------------------------------------------------------------------
+
+    /// <summary>
+    /// Adds an item behavior object to the world on load
+    /// </summary>
+    /// <param name="behavior">The object to be added to the world</param>
+    /// <param name="spawnPointNumber">The spawn position</param>
+    public void AddItemToWorld(ItemBehavior behavior, int spawnPointNumber)
+    {
+        // Add the item to the world
+        behavior.transform.SetParent(transform);
+
+        behavior.transform.position = itemSpawnPoints[spawnPointNumber].position;
+    }
+
+    public void AddGhostToWorld(Ghost ghost)
+    {
+        // TODO: Move Ghost initialization code to an Init function
+        // Put the ghost in the world
+        ghosts = new List<Ghost>();
+        ghosts.Add(ghost);
+
+        // Need to flesh this out more
+        ghost.transform.SetParent(transform);
+
+        ghost.SetPlayer(player.transform);
+    }
+
 
     // -----------------------------------------------------------------------
     //  Exposing information stored in the Level Evaluator
@@ -121,7 +162,48 @@ public class LevelManager : MonoBehaviour
     {
         // TODO: Once ghost is implemented actually check this
         // For now returns true if the player is in room 0
-        return (room == levelEvaluator.GetAllRooms()[0]) ? true : false;
+        foreach (Ghost ghost in ghosts)
+        {
+            if (ghost.GetGhostRoom() == room)
+            {
+                Debug.Log("there's a ghost here!");
+                return true;
+            } else
+            {
+                Debug.Log("no ghost here!");
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Gets a list of ghosts in the current room given a point
+    /// </summary>
+    /// <param name="position">The position to test what room</param>
+    /// <returns>A List\<Ghost\> of ghosts in the room </returns>
+    public List<Ghost> GetGhostsInRoom(Vector3 position)
+    {
+        Room posRoom = GetRoomFromPosition(position);
+        return GetGhostsInRoom(posRoom);
+    }
+
+    /// <summary>
+    /// Gets a list of ghosts in the current room given a Room object
+    /// </summary>
+    /// <param name="room">The room to be searched</param>
+    /// <returns>A List\<Ghost\> of ghosts in the room </returns>
+    public List<Ghost> GetGhostsInRoom(Room room)
+    {
+        List<Ghost> ghostsInRoom = new List<Ghost>();
+
+        foreach (Ghost ghost in ghosts)
+        {
+            if (ghost.GetGhostRoom() == room)
+            {
+                ghostsInRoom.Append(ghost);
+            }
+        }
+        return ghostsInRoom;
     }
 
     /// <summary>
@@ -133,8 +215,8 @@ public class LevelManager : MonoBehaviour
     /// <returns>The number of ghosts in the room</returns>
     public int NumGhostsInRoom(Vector3 position)
     {
-        Room posRoom = GetRoomFromPosition(position);
-        return NumGhostsInRoom(posRoom);
+        Room room = GetRoomFromPosition(position);
+        return NumGhostsInRoom(room);
     }
 
     /// <summary>
@@ -145,10 +227,22 @@ public class LevelManager : MonoBehaviour
     /// <returns>The number of ghosts in the room</returns>
     public int NumGhostsInRoom(Room room)
     {
-        // TODO: This needs implementing eventually
-        return (room == levelEvaluator.GetAllRooms()[0]) ? 1 : 0;
+        int numGhosts = 0;
+        foreach (Ghost ghost in ghosts)
+        {
+            if (ghost.GetGhostRoom() == room)
+            {
+                numGhosts++;
+            }
+        }
+        return numGhosts;
     }
 
+    /// <summary>
+    /// Checks if the player is in a given room
+    /// </summary>
+    /// <param name="room">The room to be tested</param>
+    /// <returns>True if the player is in the room, False if not</returns>
     public bool IsPlayerInRoom(Room room)
     {
         Room playerRoom = GetRoomFromPosition(player.transform.position);
