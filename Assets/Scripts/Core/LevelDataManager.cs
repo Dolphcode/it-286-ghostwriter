@@ -14,6 +14,9 @@ public class LevelDataManager : MonoBehaviour
     [SerializeField]
     private int maxItems = 10;
 
+    [SerializeField]
+    private int playerMoney = 200;
+
     [Header("Ghost Init")]
     /// <summary>
     /// The ghost prefab
@@ -40,7 +43,33 @@ public class LevelDataManager : MonoBehaviour
         
     }
 
-    // Inventory Config Buttons
+    // ----------------------------------------------
+    // INVENTORY CONFIG
+    // ----------------------------------------------
+
+    /// <summary>
+    /// A wrapper method used to increment the total inventory of a specific type of item
+    /// </summary>
+    /// <param name="index">Which item type to increment</param>
+    public void AddItem(int index)
+    {
+        itemCounts[index]++;
+    }
+
+    /// <summary>
+    /// A wrapper method used to decrement the total inventory of a specific type of item
+    /// </summary>
+    /// <param name="index">Which item type to decrement</param>
+    public void RemoveItem(int index)
+    {
+        if (itemCounts[index] == 0) return;
+        itemCounts[index]--;
+    }
+
+    /// <summary>
+    /// This function is called to add an item to the list of items being brought to the level
+    /// </summary>
+    /// <param name="index">Which item type to bring</param>
     public void BringItem(int index)
     {
         int totalItems = 0;
@@ -48,17 +77,27 @@ public class LevelDataManager : MonoBehaviour
             totalItems += count;
         }
         if (totalItems == maxItems) return;
+        if (selectedItemCounts[index] + 1 > itemCounts[index]) return;
 
-        // TODO also check itemCounts for this item
         selectedItemCounts[index]++;
     }
 
+    /// <summary>
+    /// This function is called to remove an item from the list of items being brought to this level
+    /// </summary>
+    /// <param name="index">Which item type to leave behind</param>
     public void LeaveItem(int index)
     {
         if (selectedItemCounts[index] == 0) return;
         selectedItemCounts[index]--;
     }
 
+    /// <summary>
+    /// Get the number of a specific type of item being brought into the level (the number of
+    /// a specific item type that are selected)
+    /// </summary>
+    /// <param name="index">Which item type to check</param>
+    /// <returns>The number of that item that is currently selected to be brought into the level</returns>
     public int GetItemCount(int index)
     {
         return selectedItemCounts[index];
