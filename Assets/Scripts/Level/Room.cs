@@ -50,6 +50,7 @@ public class Room : MonoBehaviour
     /// </summary>
     [SerializeField]
     public List<GhostInteractable> interactables;
+    public List<GhostInteractable> GetAllInteractables() { return interactables; }
 
     // Accessors
     public Bounds GetBoundingBox() { return boundingBox; }
@@ -73,7 +74,7 @@ public class Room : MonoBehaviour
     /// Selects a random spawn point from the room's list of ghost spawn points
     /// </summary>
     /// <returns>A Transform object where the ghost can be spawned in the room</returns>
-    public Transform selectRandomSpawnPoint()
+    public Transform SelectRandomSpawnPoint()
     {
         int idx = Random.Range(0, spawnPoints.Count);
         return spawnPoints[idx];
@@ -85,7 +86,7 @@ public class Room : MonoBehaviour
     /// </summary>
     /// <returns>A randomly selected Room object in this object's 
     /// adjacent room list.</returns>
-    public Room selectRandomAdjacentRoom()
+    public Room SelectRandomAdjacentRoom()
     {
         int idx = Random.Range(0, adjacentRooms.Count);
         return adjacentRooms[idx];
@@ -101,7 +102,7 @@ public class Room : MonoBehaviour
     /// <typeparam name="T">Essentially the filter criteria</typeparam>
     /// <returns>A List of GhostInteractables containing only
     /// objects matching the filter type.</returns>
-    public List<T> filterInteractables<T>() where T : GhostInteractable
+    public List<T> FilterInteractables<T>() where T : GhostInteractable
     {
         List<T> output = new List<T>();
         foreach (GhostInteractable interactable in interactables)
@@ -120,7 +121,7 @@ public class Room : MonoBehaviour
     /// </summary>
     /// <param name="filter">A list of GhostInteractableType enums for filtering</param>
     /// <returns>A list of matching ghost interactable objects</returns>
-    public List<GhostInteractable> filterInteractables(params GhostInteractableType[] filter) 
+    public List<GhostInteractable> FilterInteractables(params GhostInteractableType[] filter) 
     {
         List<GhostInteractable> output = new List<GhostInteractable>();
         foreach (GhostInteractable interactable in interactables)
@@ -143,7 +144,7 @@ public class Room : MonoBehaviour
     /// </summary>
     /// <param name="a">The first room</param>
     /// <param name="b">The second room</param>
-    public static void setRoomAdjacency(Room a, Room b)
+    public static void SetRoomAdjacency(Room a, Room b)
     {
         a.adjacentRooms.Append(b);
         b.adjacentRooms.Append(a);

@@ -6,6 +6,8 @@ public class CaptureManager : MonoBehaviour
 {
     [Header("Capturable Objects")]
     [SerializeField]
+    private List<ItemBehavior> behaviors;
+    [SerializeField]
     private List<GhostInteractable> interactables;
     [SerializeField]
     private List<Ghost> ghosts;
@@ -13,9 +15,22 @@ public class CaptureManager : MonoBehaviour
     [SerializeField] 
     private List<CaptureData> captures;
 
+    /// <summary>
+    /// Wrapper function to add an item behavior object to the list of behaviors in this capture manager
+    /// </summary>
+    /// <param name="itemBehavior"></param>
+    public void AppendItemBehavior(ItemBehavior itemBehavior)
+    {
+        behaviors.Add(itemBehavior);
+    }
+
+    /// <summary>
+    /// Wrapper function to add an interactable to the list of ghost interactables in this capture manager
+    /// </summary>
+    /// <param name="interactable"></param>
     public void AppendInteractable(GhostInteractable interactable)
     {
-        interactables.Append(interactable);
+        interactables.Add(interactable);
     }
 
     /// <summary>
@@ -24,7 +39,7 @@ public class CaptureManager : MonoBehaviour
     /// <param name="ghost"></param>
     public void AppendGhost(Ghost ghost)
     {
-        ghosts.Append(ghost);
+        ghosts.Add(ghost);
     }
 
     /// <summary>

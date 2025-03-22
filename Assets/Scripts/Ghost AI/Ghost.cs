@@ -124,10 +124,10 @@ public class Ghost : MonoBehaviour
         Debug.Log("OBJECT INTERACT");
         //random chance of interact happening
         bool doesInteract = Random.Range(0, 2) == 0;
-        int randInteract = Random.Range(0, currentRoom.filterInteractables(GhostInteractableType.Fingerprint, GhostInteractableType.Movable).Count);
+        int randInteract = Random.Range(0, currentRoom.FilterInteractables(GhostInteractableType.Fingerprint, GhostInteractableType.Movable).Count);
         if (doesInteract)
         {
-            currentRoom.filterInteractables(GhostInteractableType.Fingerprint, GhostInteractableType.Movable)[randInteract].interact();
+            currentRoom.FilterInteractables(GhostInteractableType.Fingerprint, GhostInteractableType.Movable)[randInteract].interact();
         }
     }
     // Increases aggresssion
@@ -163,8 +163,8 @@ public class Ghost : MonoBehaviour
             //supposed to be 90 im debugging out
             if (teleportTimer >= 10f)
             {
-                currentRoom = currentRoom.selectRandomAdjacentRoom(); 
-                SetGhostPosition(currentRoom.selectRandomSpawnPoint());
+                currentRoom = currentRoom.SelectRandomAdjacentRoom(); 
+                SetGhostPosition(currentRoom.SelectRandomSpawnPoint());
                 teleportTimer = 0f;
             }
             bool interactBool = Random.value > 0.75f;
@@ -181,8 +181,8 @@ public class Ghost : MonoBehaviour
             //supposed to be 50
             if (teleportTimer >= 20f)
             {
-                currentRoom = currentRoom.selectRandomAdjacentRoom();
-                SetGhostPosition(currentRoom.selectRandomSpawnPoint());
+                currentRoom = currentRoom.SelectRandomAdjacentRoom();
+                SetGhostPosition(currentRoom.SelectRandomSpawnPoint());
 
                 teleportTimer = 0f;
             }
@@ -217,7 +217,7 @@ public class Ghost : MonoBehaviour
         levelManager1 = (LevelManager)FindAnyObjectByType(typeof(LevelManager));
         // Sets the current room ghost is in to spawn room.
         currentRoom = levelManager1.SelectRandomRoom();
-        SetGhostPosition(currentRoom.selectRandomSpawnPoint());
+        SetGhostPosition(currentRoom.SelectRandomSpawnPoint());
         // Sets aggressionThreshold to 1
         aggressionThreshold = 1;
         // Sets aggression to 0.
