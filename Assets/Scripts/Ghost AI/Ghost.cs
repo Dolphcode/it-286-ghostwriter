@@ -1,4 +1,6 @@
+using System.Linq;
 using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
@@ -94,6 +96,11 @@ public class Ghost : MonoBehaviour
     [SerializeField]
     private System.Collections.Generic.List<Room> huntingZone;
     ///<summary>
+    ///Number of rooms that the ghost can access.
+    ///</summary>
+    [SerializeField]
+    private int huntingZoneRoomCount;
+    ///<summary>
     ///Level manager.
     ///</summary>
     [SerializeField]
@@ -103,9 +110,19 @@ public class Ghost : MonoBehaviour
     private float teleportTimer = 0f;
     private float huntingTimer = 0f;
     private float functionTimer = 0f;
-    //<summary>
-    //Sets ghost position to room.
-    //</summary>
+
+    ///<summary>
+    ///Returns random room in Hunting Zone
+    ///</summary>
+    public Room SelectRandomHuntingRoom()
+    {
+        int idx = Random.Range(0, huntingZone.Count);
+        return huntingZone[idx];
+
+    }
+    ///<summary>
+    ///Sets ghost position to room.
+    ///</summary>
     private void SetGhostPosition(Transform spawnPoint)
     {
         transform.position = spawnPoint.transform.position;
@@ -115,7 +132,6 @@ public class Ghost : MonoBehaviour
     ///<summary>
     ///Will randomize which interaction happens.
     ///</summary>
-    ///
     private void RandomGhostInteraction()
     {
         Debug.Log("OBJECT INTERACT");
@@ -127,9 +143,52 @@ public class Ghost : MonoBehaviour
             currentRoom.filterInteractables(GhostInteractableType.Fingerprint, GhostInteractableType.Movable)[randInteract].interact();
         }
     }
-    //<summary>
-    //Ghost will switch locations rooms and randomly depending on aggression level.
-    //</summary>
+    ///<summary>
+    ///Ghost will teleport to an adjacent rooom once every given input time (float) if room is within hunting zone
+    ///Requires that one of the adjacent rooms is in the hunting zone or it will end up as a recursive hellloop
+    ///</summary>
+    private void GhostTeleportsAdjacentRoom(float time)
+    {
+        Room possibleRoom = currentRoom.selectRandomAdjacentRoom();
+        bool validRoom = false;
+        // Checks if room is in hunting zone
+        foreach (Room room in huntingZone)
+        {
+            if (room == possibleRoom)
+            {
+                validRoom = true;
+                if (teleportTimer >= time)
+                {
+                    currentRoom = possibleRoom;
+                    SetGhostPosition(currentRoom.selectRandomSpawnPoint());
+                    teleportTimer = 0f;
+                }
+            }
+        }
+        if (!validRoom)
+        {
+            GhostTeleportsAdjacentRoom(time);
+        }
+    }
+    ///<summary>
+    /// Ghost will have a chance (double) to interact in a room every given input time (float)
+    ///</summary>
+    private void GhostInteracts(float time, double chance)
+    {
+        if (interactTimer >= time)
+        {
+            double likeliness = 1.0 - chance;
+            bool interactBool = Random.value > likeliness;
+            if (interactBool)
+            {
+                RandomGhostInteraction();
+            }
+            interactTimer = 0f;
+        }
+    }
+    ///<summary>
+    ///Ghost will switch locations rooms and randomly depending on aggression level.
+    ///</summary>
     private void Roam()
     {
         if (aggression < GetEmfLevel() && emf < 5)
@@ -156,41 +215,52 @@ public class Ghost : MonoBehaviour
         // If aggression less than half full game is slightly harder
         if (aggression < aggressionThreshold / 2)
         {
-            //supposed to be 90 im debugging out
-            if (teleportTimer >= 10f)
-            {
-                currentRoom = currentRoom.selectRandomAdjacentRoom(); 
-                SetGhostPosition(currentRoom.selectRandomSpawnPoint());
-                teleportTimer = 0f;
-            }
-            bool interactBool = Random.value > 0.75f;
-            //supposed to be 180 im debugging out
-            if (interactTimer >= 10f)
-            {
-                RandomGhostInteraction();
-                interactTimer = 0f;
-            }
+            GhostTeleportsAdjacentRoom(90f);
+            //takes longer, less chance = harder
+            GhostInteracts(180f, 0.25);
         }
         // When ghost is in second half of aggression threshold
         else if (aggression < aggressionThreshold)
         {
-            //supposed to be 50
-            if (teleportTimer >= 20f)
+            GhostTeleportsAdjacentRoom(50f);
+            GhostInteracts(100f, 0.5);
+        }
+    }
+    /// <summary>
+    /// Assigns a random hunting zone with given # of rooms
+    /// ***NOTE TO SELF: this code is kinda stupid but also maybe check if selectRandomAdjacentRoom() isn't og room...
+    /// </summary>
+    private void RandomHuntingZone(Room spawnRoom, int numOfRooms)
+    {
+        //Adds spawn room as a valid room in huntingZone
+        huntingZone.Append(spawnRoom);
+        Debug.Log("added ghost");
+        numOfRooms--;
+        Room a = spawnRoom.selectRandomAdjacentRoom();
+        Room b = spawnRoom.selectRandomAdjacentRoom().selectRandomAdjacentRoom();
+        for (int i = 0; i < numOfRooms; i++)
+        {
+            while (a == b)
             {
-                currentRoom = currentRoom.selectRandomAdjacentRoom();
-                SetGhostPosition(currentRoom.selectRandomSpawnPoint());
-
-                teleportTimer = 0f;
+                a = spawnRoom.selectRandomAdjacentRoom();
+                b = spawnRoom.selectRandomAdjacentRoom().selectRandomAdjacentRoom();
             }
-            //supposed to be 100
-            if (interactTimer >= 50f)
+            Room c = spawnRoom.selectRandomAdjacentRoom().selectRandomAdjacentRoom().selectRandomAdjacentRoom();
+            // Makes sure rooms aren't added twice (each room is unique)
+            foreach (Room room in huntingZone)
             {
-                bool interactBool = Random.value > 0.5f;
-                if (interactBool)
+                if (room != a)
                 {
-                    RandomGhostInteraction();
+                    huntingZone.Append(a);
                 }
-                interactTimer = 0f;
+                else if (room != b)
+                {
+                    huntingZone.Append(b);
+                }
+                else if (room != c)
+                {
+                    huntingZone.Append(c);
+                }
             }
         }
     }
@@ -213,6 +283,7 @@ public class Ghost : MonoBehaviour
         levelManager1 = (LevelManager)FindAnyObjectByType(typeof(LevelManager));
         // Sets the current room ghost is in to spawn room.
         currentRoom = levelManager1.SelectRandomRoom();
+        RandomHuntingZone(currentRoom, huntingZoneRoomCount);
         SetGhostPosition(currentRoom.selectRandomSpawnPoint());
         // Sets aggressionThreshold to 1
         aggressionThreshold = 1;
@@ -290,20 +361,28 @@ public class Ghost : MonoBehaviour
             huntingTimer += Time.deltaTime;
             // Tracks current room 
             currentRoom = levelManager1.GetRoomFromPosition(transform.position);
-            // Makes Ghost visible during hunting mode
-            GetComponent<Renderer>().enabled = true;
             // Gets model or first child
             GameObject child = transform.GetChild(0).gameObject;
             // Enables model
             child.GetComponent<Renderer>().enabled = true;
             //Sets the minimum time a ghost will be hunting you for. Turns off hunting mode after that time.
+            bool validRoom = false;
             if (huntingTimer < 30f)
             {
                 //Ghost will move towards player.
                 if (distanceFromPlayer > 1)
                 {
-                    // Every ten seconds in Hunting Mode, changes the Ghost's speed depending on ghost type.
-                        if (huntingTimer/10f>=1)
+                    foreach (Room room in huntingZone)
+                    {
+                        if (room==currentRoom)
+                        {
+                            validRoom = true;
+                        }
+                    }
+                    if (validRoom)
+                    {
+                        // Every ten seconds in Hunting Mode, changes the Ghost's speed depending on ghost type.
+                        if (huntingTimer >= 10f)
                         {
                             if (psychologicalType)
                             {
@@ -312,15 +391,25 @@ public class Ghost : MonoBehaviour
                             }
                             if (biologicalType)
                             {
-                        // if difficulty is below lvl3, lowers moveSpeed every 10 seconds
+                                // if difficulty is below lvl3, lowers moveSpeed every 10 seconds
                                 if (difficultyLevel < 3 && moveSpeed >= 2)
-                                { 
+                                {
                                     moveSpeed -= 1;
                                 }
                             }
-                          }
-                    
-                    transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+                        }
+                        // Ghost moves towards player
+                        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+                    }
+                    // If the room the ghost is in is not a valid room, ghost will spawn into a random point within hunting zone and end of hunting mode occurs
+                    else
+                    {
+                        SetGhostPosition(SelectRandomHuntingRoom().selectRandomSpawnPoint());
+                        huntingTimer = 0f;
+                        aggression = 0;
+                        huntingMode = false;
+                        Debug.Log("hunt end meow");
+                    }
                 }
             }
             else
