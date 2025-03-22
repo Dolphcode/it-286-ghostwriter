@@ -28,6 +28,13 @@ public class LevelManager : MonoBehaviour
     public LightManager GetLightManager() { return lightManager; }
 
     /// <summary>
+    /// The scene's Capture manage responsible for storing capture data
+    /// </summary>
+    [SerializeField]
+    private CaptureManager captureManager;
+    public CaptureManager GetCaptureManager() { return captureManager; }
+
+    /// <summary>
     /// The root object of the interior of the level in the scene hierarchy.
     /// </summary>
     [SerializeField]
@@ -58,7 +65,7 @@ public class LevelManager : MonoBehaviour
     void Awake()
     {
         // This will run level generation/initialization
-        levelEvaluator.InitializeInterior(interiorBase, 1);
+        levelEvaluator.InitializeInterior(interiorBase, 1); // should relegate this to the level loader really
 
         // Instantiate and initialize the ghost objects
 
