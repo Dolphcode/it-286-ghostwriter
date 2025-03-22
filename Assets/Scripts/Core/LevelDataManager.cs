@@ -44,6 +44,51 @@ public class LevelDataManager : MonoBehaviour
     }
 
     // ----------------------------------------------
+    // PLAYER DATA
+    // ----------------------------------------------
+
+    /// <summary>
+    /// Get the amount of money the player has
+    /// </summary>
+    /// <returns>The player's current amount of money</returns>
+    public int GetMoney() { return playerMoney; }
+
+    /// <summary>
+    /// Adds an amount of money to the player's total money
+    /// </summary>
+    /// <param name="amount">The amount to be added</param>
+    public void AddMoney(int amount)
+    {
+        playerMoney += amount;
+    }
+
+    /// <summary>
+    /// Removes money from the player's bank without checking if that amount can be spent. Money
+    /// is automatically clamped to 0 if it drops below a negative number.
+    /// </summary>
+    /// <param name="amount">The amount to be removed</param>
+    public void RemoveMoney(int amount)
+    {
+        playerMoney -= amount;
+        if (playerMoney < 0) playerMoney = 0;
+    }
+
+    /// <summary>
+    /// Attempts to consume the player's money. If the amount being spent is larger than the amount
+    /// the player has, the player's money will not be consumed and this function will return false.
+    /// </summary>
+    /// <param name="amount">The amount to decrement from the player's money pool</param>
+    /// <returns>Whether the spend attempt was successful or not</returns>
+    public bool SpendMoney(int amount)
+    {
+        if (playerMoney < amount) {
+            return false;
+        }
+        playerMoney -= amount;
+        return true;
+    }
+
+    // ----------------------------------------------
     // INVENTORY CONFIG
     // ----------------------------------------------
 
