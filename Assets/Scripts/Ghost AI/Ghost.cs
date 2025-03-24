@@ -13,7 +13,7 @@ public enum GhostType
 {
     PSYCHOLOGICAL, BIOLOGICAL, METAPHYSICAL
 }
-public class GhostAI : MonoBehaviour
+public class Ghost : MonoBehaviour
 {
     ///<summary>
     ///Target the ghost is chasing.

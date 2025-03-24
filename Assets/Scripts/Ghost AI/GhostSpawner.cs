@@ -16,7 +16,7 @@ public class GhostSpawner : MonoBehaviour
         if (ghostPrefab != null)
         {
             GameObject newGhost = Instantiate(ghostPrefab);
-            GhostAI ghostScript = newGhost.GetComponent<GhostAI>();
+            Ghost ghostScript = newGhost.GetComponent<Ghost>();
             if (ghostScript != null)
             {
                 ghostScript.SetBodyTypeF(false);
@@ -32,7 +32,7 @@ public class GhostSpawner : MonoBehaviour
         if (ghostPrefab != null)
         {
             GameObject newGhost = Instantiate(ghostPrefab);
-            GhostAI ghostScript = newGhost.GetComponent<GhostAI>();
+            Ghost ghostScript = newGhost.GetComponent<Ghost>();
             if (ghostScript != null)
             {
                 ghostScript.SetBodyTypeF(isFem);
