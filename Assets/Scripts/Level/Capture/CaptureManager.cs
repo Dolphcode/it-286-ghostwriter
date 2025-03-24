@@ -12,6 +12,8 @@ public class CaptureManager : MonoBehaviour
     private List<GhostInteractable> interactables;
     [SerializeField]
     private List<Ghost> ghosts;
+    [SerializeField]
+    private List<Capturable> capturables;
 
     [SerializeField] 
     private List<CaptureData> captures;
@@ -86,6 +88,7 @@ public class CaptureManager : MonoBehaviour
                 }
             }
         }
+
 
         captures.Add(data);
         return data;
