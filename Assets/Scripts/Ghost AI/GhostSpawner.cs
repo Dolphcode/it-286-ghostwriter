@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GhostSpawner : MonoBehaviour
@@ -9,18 +8,38 @@ public class GhostSpawner : MonoBehaviour
     [SerializeField]
     private GameObject ghostPrefab;
 
-    private void Start()
-    {
-        SpawnGhost();
-    }
     ///<summary>
-    ///Instantiates Ghost if prefab does not exist.
+    ///Instantiates Ghost if prefab does not exist. Will have randomized difficulty and hunting zone. Default masc model.
     ///</summary>
     public void SpawnGhost()
     {
         if (ghostPrefab != null)
         {
-            Instantiate(ghostPrefab);
+            GameObject newGhost = Instantiate(ghostPrefab);
+            GhostAI ghostScript = newGhost.GetComponent<GhostAI>();
+            if (ghostScript != null)
+            {
+                ghostScript.SetBodyTypeF(false);
+                ghostScript.SetDifficulty(Random.Range(1, 5));
+            }
+        }
+    }
+    ///<summary>
+    ///Instantiates Ghost if prefab does not exist. GhostType must be PSYCHOLOGICAL, BIOLOGICAL, or METAPHYSICAL.
+    ///</summary>
+    public void SpawnGhost(bool isFem, GhostType type, int difficultyLevel, System.Collections.Generic.List<Room> huntingArea)
+    {
+        if (ghostPrefab != null)
+        {
+            GameObject newGhost = Instantiate(ghostPrefab);
+            GhostAI ghostScript = newGhost.GetComponent<GhostAI>();
+            if (ghostScript != null)
+            {
+                ghostScript.SetBodyTypeF(isFem);
+                ghostScript.SetDifficulty(difficultyLevel);
+                ghostScript.SetGhostType(type);
+                ghostScript.SetHuntingZone(huntingArea);
+            }
         }
     }
 }

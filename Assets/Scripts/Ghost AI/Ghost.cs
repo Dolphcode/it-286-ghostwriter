@@ -13,14 +13,17 @@ public enum GhostType
 {
     PSYCHOLOGICAL, BIOLOGICAL, METAPHYSICAL
 }
-public class Ghost : MonoBehaviour
+public class GhostAI : MonoBehaviour
 {
     ///<summary>
     ///Target the ghost is chasing.
     ///</summary>
     [SerializeField]
     private Transform player;
-    public void SetPlayer(Transform player) { this.player = player; }
+    public void SetPlayer(Transform player) 
+    { 
+        this.player = player; 
+    }
     /// <summary>
     ///Amount of times a ghost can be provoked before entering Hunting Mode.
     ///</summary>
@@ -35,11 +38,16 @@ public class Ghost : MonoBehaviour
     ///Aggression multiplier of ghost. Lowers difficulty based on multiplier.
     ///</summary>
     private int aggressionMultiplier;
+    /// <summary>
+    /// Determines model type. true - fem, masc - false.
+    ///</summary>
+    [SerializeField]
+    private bool bodyTypeF;
     ///<summary>
     ///Difficulty of ghost (lower level = higher aggression threshold, slower)
     ///</summary>
     [SerializeField]
-    private int difficultyLevel;
+    private int difficultyLevel = 0;
     /// <summary>
     /// Ghost's type.
     /// </summary>
@@ -84,7 +92,7 @@ public class Ghost : MonoBehaviour
     ///Movement speed of ghost.
     ///</summary>
     [SerializeField]
-    private float moveSpeed = 1f;
+    private float moveSpeed;
     ///<summary>
     ///Indication of ghost being in Hunting Mode. 
     ///</summary>
@@ -118,7 +126,6 @@ public class Ghost : MonoBehaviour
     {
         int idx = Random.Range(0, huntingZone.Count);
         return huntingZone[idx];
-
     }
     ///<summary>
     ///Sets ghost position to room.
@@ -283,27 +290,26 @@ public class Ghost : MonoBehaviour
         levelManager1 = (LevelManager)FindAnyObjectByType(typeof(LevelManager));
         // Sets the current room ghost is in to spawn room.
         currentRoom = levelManager1.SelectRandomRoom();
-
         RandomHuntingZone(currentRoom, huntingZoneRoomCount);
         SetGhostPosition(currentRoom.SelectRandomSpawnPoint());
-
         // Sets aggressionThreshold to 1
         aggressionThreshold = 1;
         // Sets aggression to 0.
         aggression = 0;
         // Sets aggression multiplier.
         aggressionMultiplier = 25;
-        // Randomizes difficulty level if not specified.
-        difficultyLevel = Random.Range(1, 5);
-        // Forces difficulty level to be between 1 and 5.
-        difficultyLevel = Mathf.Clamp(difficultyLevel, 1, 5);
+        // Default move speed for Level 1 Ghost is 1f; increases by 0.25f for each increase in level.
+        moveSpeed = 1f;
+        if (difficultyLevel>1)
+        {
+            moveSpeed += difficultyLevel*0.25f;
+        }
         // Makes aggression threshold in terms of difficulty. Min 25, Max 125. Lower threshold, easier to aggro ghost and considered "harder".
         for (int i = 5; i>2; i--)
         {
             aggressionThreshold += difficultyLevel*aggressionMultiplier;
         }
         emfLevel = aggressionThreshold / 5;
-        // Ensures only one Ghost type is true at a time. ELSE STATEMENTS HERE REQUIRE CLAMP TO WORK
         if (psychologicalType)
         {
             typeName = "Psychological";
@@ -456,11 +462,25 @@ public class Ghost : MonoBehaviour
         return typeName;
     }
     /// <summary>
+    /// Sets enum type of ghost.
+    /// </summary>
+    public void SetGhostType(GhostType ghostType)
+    {
+        this.type = ghostType;
+    }
+    /// <summary>
     /// Returns difficulty level as an integer (1-5)
     /// </summary>
     public int GetDifficulty()
     {
         return difficultyLevel;
+    }
+    /// <summary>
+    /// Sets difficulty level as an integer (forced to be between 1-5).
+    /// </summary>
+    public void SetDifficulty(int level)
+    {
+        difficultyLevel = Mathf.Clamp(level, 1, 5);
     }
     /// <summary>
     /// Returns the room the ghost is currently in.
@@ -526,5 +546,22 @@ public class Ghost : MonoBehaviour
     public int GetEmfLevel()
     {
         return emfLevel;
+    }
+    /// <summary>
+    /// Sets body type/model for ghost. true - fem, masc - false
+    /// </summary>
+    public void SetBodyTypeF(bool body)
+    {
+        bodyTypeF = body;
+    }
+    /// <summary>
+    /// Sets body type/model for ghost. true - fem, masc - false
+    /// </summary>
+    public void SetHuntingZone(System.Collections.Generic.List<Room> huntingArea)
+    {
+        foreach (Room room in huntingArea)
+        {
+            huntingZone.Add(room);
+        }
     }
 }
