@@ -322,11 +322,25 @@ public class Ghost : MonoBehaviour
         huntingMode = false;
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
-        //Adds Capsule collider for ghost if one doesn't exist.
+        // Adds Capsule collider for ghost if one doesn't exist.
         if (GetComponent<Collider>() == null)
         {
             CapsuleCollider collider = gameObject.AddComponent<CapsuleCollider>();
             collider.isTrigger = true;
+        }
+        // Set player Transform if null
+        if (player == null)
+        {
+            player = GameObject.FindWithTag("Player").transform;
+        }
+        // Gets collider from Player Body
+        Collider col = null;
+        foreach (Transform child in player)
+        {
+            if (child.name == "Player Body")
+            {
+                col = child.GetComponent<Collider>();
+            }
         }
     }
     // Update is called once per frame
@@ -337,15 +351,6 @@ public class Ghost : MonoBehaviour
         // Ghost's distance from player.
         float distanceFromPlayer = Vector3.Distance(transform.position, player.transform.position);
         difficultyLevel = Mathf.Clamp(difficultyLevel, 1, 5);
-        //Gets collider from Player Body
-        Collider col = null;
-        foreach (Transform child in player)
-        {
-            if (child.name == "Player Body")
-            {
-                col = child.GetComponent<Collider>();
-            }
-        }
         // When aggression increases enough, hunting mode turns on.
         if (aggression > aggressionThreshold)
         {
