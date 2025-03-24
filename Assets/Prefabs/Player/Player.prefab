@@ -238,9 +238,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventorySize: 5
   inventorySystem: {fileID: 0}
-  inventorySlotPrefab: {fileID: 0}
+  inventorySlotPrefab: {fileID: 439254747478473102, guid: 07b073ded77ae184783473b09074cf06, type: 3}
   itemContainer: {fileID: 0}
-  cameraHolder: {fileID: 0}
+  cameraHolder: {fileID: 6630907220244335935}
+  camera: {fileID: 8017807000502220816}
 --- !u!1 &1827110535859588248
 GameObject:
   m_ObjectHideFlags: 0

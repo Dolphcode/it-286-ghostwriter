@@ -1,4 +1,6 @@
+using System.Linq;
 using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
@@ -19,7 +21,6 @@ public class Ghost : MonoBehaviour
     [SerializeField]
     private Transform player;
     public void SetPlayer(Transform player) { this.player = player; }
-
     /// <summary>
     ///Amount of times a ghost can be provoked before entering Hunting Mode.
     ///</summary>
@@ -46,17 +47,14 @@ public class Ghost : MonoBehaviour
     private GhostType type;
     ///<summary>
     ///Ghost type Psychological (more erratic behavior, speed changes, many interactions).
-    ///EMF changes from 1,5;
     ///</summary>
     private bool psychologicalType;
     ///<summary>
     ///Ghost type Biological (died a natural death - not as fast, hard to aggro).
-    ///EMF: 1
     ///</summary>
     private bool biologicalType;
     ///<summary>
     ///Ghost type Metaphysical (died but spiritually - aggression threshold lowers the more you aggro them. has a lot more interactions/tries to communicate with player more? maybe triggers a certain tool).
-    ///EMF: 5
     ///</summary>
     private bool metaphysicalType;
     ///<summary>
@@ -98,6 +96,11 @@ public class Ghost : MonoBehaviour
     [SerializeField]
     private System.Collections.Generic.List<Room> huntingZone;
     ///<summary>
+    ///Number of rooms that the ghost can access.
+    ///</summary>
+    [SerializeField]
+    private int huntingZoneRoomCount;
+    ///<summary>
     ///Level manager.
     ///</summary>
     [SerializeField]
@@ -105,10 +108,21 @@ public class Ghost : MonoBehaviour
     private float aggroTimer = 0f;
     private float interactTimer = 0f;
     private float teleportTimer = 0f;
-    private float huntingTimer = 0f; 
-    //<summary>
-    //Sets ghost position to room.
-    //</summary>
+    private float huntingTimer = 0f;
+    private float functionTimer = 0f;
+
+    ///<summary>
+    ///Returns random room in Hunting Zone
+    ///</summary>
+    public Room SelectRandomHuntingRoom()
+    {
+        int idx = Random.Range(0, huntingZone.Count);
+        return huntingZone[idx];
+
+    }
+    ///<summary>
+    ///Sets ghost position to room.
+    ///</summary>
     private void SetGhostPosition(Transform spawnPoint)
     {
         transform.position = spawnPoint.transform.position;
@@ -118,26 +132,63 @@ public class Ghost : MonoBehaviour
     ///<summary>
     ///Will randomize which interaction happens.
     ///</summary>
-    ///
     private void RandomGhostInteraction()
     {
         Debug.Log("OBJECT INTERACT");
         //random chance of interact happening
         bool doesInteract = Random.Range(0, 2) == 0;
-        int randInteract = Random.Range(0, currentRoom.filterInteractables(GhostInteractableType.Fingerprint, GhostInteractableType.Movable).Count);
+        int randInteract = Random.Range(0, currentRoom.FilterInteractables(GhostInteractableType.Fingerprint, GhostInteractableType.Movable).Count);
         if (doesInteract)
         {
-            currentRoom.filterInteractables(GhostInteractableType.Fingerprint, GhostInteractableType.Movable)[randInteract].interact();
+            currentRoom.FilterInteractables(GhostInteractableType.Fingerprint, GhostInteractableType.Movable)[randInteract].interact();
         }
     }
-    // Increases aggresssion
-    public void IncreaseAggression()
+    ///<summary>
+    ///Ghost will teleport to an adjacent rooom once every given input time (float) if room is within hunting zone
+    ///Requires that one of the adjacent rooms is in the hunting zone or it will end up as a recursive hellloop
+    ///</summary>
+    private void GhostTeleportsAdjacentRoom(float time)
     {
-        aggression++;
+        Room possibleRoom = currentRoom.SelectRandomAdjacentRoom();
+        bool validRoom = false;
+        // Checks if room is in hunting zone
+        foreach (Room room in huntingZone)
+        {
+            if (room == possibleRoom)
+            {
+                validRoom = true;
+                if (teleportTimer >= time)
+                {
+                    currentRoom = possibleRoom;
+                    SetGhostPosition(currentRoom.SelectRandomSpawnPoint());
+                    teleportTimer = 0f;
+                }
+            }
+        }
+        if (!validRoom)
+        {
+            GhostTeleportsAdjacentRoom(time);
+        }
     }
-    //<summary>
-    //Ghost will switch locations rooms and randomly depending on aggression level.
-    //</summary>
+    ///<summary>
+    /// Ghost will have a chance (double) to interact in a room every given input time (float)
+    ///</summary>
+    private void GhostInteracts(float time, double chance)
+    {
+        if (interactTimer >= time)
+        {
+            double likeliness = 1.0 - chance;
+            bool interactBool = Random.value > likeliness;
+            if (interactBool)
+            {
+                RandomGhostInteraction();
+            }
+            interactTimer = 0f;
+        }
+    }
+    ///<summary>
+    ///Ghost will switch locations rooms and randomly depending on aggression level.
+    ///</summary>
     private void Roam()
     {
         if (aggression < GetEmfLevel() && emf < 5)
@@ -157,44 +208,59 @@ public class Ghost : MonoBehaviour
         }
         // Ghost is not visible when in passive.
         GetComponent<Renderer>().enabled = false;
+        // Gets model or first child
+        GameObject child = transform.GetChild(0).gameObject;
+        // Disables model
+        child.GetComponent<Renderer>().enabled = false;
         // If aggression less than half full game is slightly harder
         if (aggression < aggressionThreshold / 2)
         {
-            //supposed to be 90 im debugging out
-            if (teleportTimer >= 10f)
-            {
-                currentRoom = currentRoom.selectRandomAdjacentRoom(); 
-                SetGhostPosition(currentRoom.selectRandomSpawnPoint());
-                teleportTimer = 0f;
-            }
-            bool interactBool = Random.value > 0.75f;
-            //supposed to be 180 im debugging out
-            if (interactTimer >= 10f)
-            {
-                RandomGhostInteraction();
-                interactTimer = 0f;
-            }
+            GhostTeleportsAdjacentRoom(90f);
+            //takes longer, less chance = harder
+            GhostInteracts(180f, 0.25);
         }
         // When ghost is in second half of aggression threshold
         else if (aggression < aggressionThreshold)
         {
-            //supposed to be 50
-            if (teleportTimer >= 20f)
+            GhostTeleportsAdjacentRoom(50f);
+            GhostInteracts(100f, 0.5);
+        }
+    }
+    /// <summary>
+    /// Assigns a random hunting zone with given # of rooms
+    /// ***NOTE TO SELF: this code is kinda stupid but also maybe check if selectRandomAdjacentRoom() isn't og room...
+    /// </summary>
+    private void RandomHuntingZone(Room spawnRoom, int numOfRooms)
+    {
+        //Adds spawn room as a valid room in huntingZone
+        huntingZone.Add(spawnRoom);
+        Debug.Log("added ghost");
+        numOfRooms--;
+        Room a = spawnRoom.SelectRandomAdjacentRoom();
+        Room b = spawnRoom.SelectRandomAdjacentRoom().SelectRandomAdjacentRoom();
+        for (int i = 0; i < numOfRooms; i++)
+        {
+            while (a == b)
             {
-                currentRoom = currentRoom.selectRandomAdjacentRoom();
-                SetGhostPosition(currentRoom.selectRandomSpawnPoint());
-
-                teleportTimer = 0f;
+                a = spawnRoom.SelectRandomAdjacentRoom();
+                b = spawnRoom.SelectRandomAdjacentRoom().SelectRandomAdjacentRoom();
             }
-            //supposed to be 100
-            if (interactTimer >= 50f)
+            Room c = spawnRoom.SelectRandomAdjacentRoom().SelectRandomAdjacentRoom().SelectRandomAdjacentRoom();
+            // Makes sure rooms aren't added twice (each room is unique)
+            foreach (Room room in huntingZone)
             {
-                bool interactBool = Random.value > 0.5f;
-                if (interactBool)
+                if (room != a)
                 {
-                    RandomGhostInteraction();
+                    huntingZone.Add(a);
                 }
-                interactTimer = 0f;
+                else if (room != b)
+                {
+                    huntingZone.Add(b);
+                }
+                else if (room != c)
+                {
+                    huntingZone.Add(c);
+                }
             }
         }
     }
@@ -217,7 +283,10 @@ public class Ghost : MonoBehaviour
         levelManager1 = (LevelManager)FindAnyObjectByType(typeof(LevelManager));
         // Sets the current room ghost is in to spawn room.
         currentRoom = levelManager1.SelectRandomRoom();
-        SetGhostPosition(currentRoom.selectRandomSpawnPoint());
+
+        RandomHuntingZone(currentRoom, huntingZoneRoomCount);
+        SetGhostPosition(currentRoom.SelectRandomSpawnPoint());
+
         // Sets aggressionThreshold to 1
         aggressionThreshold = 1;
         // Sets aggression to 0.
@@ -294,33 +363,55 @@ public class Ghost : MonoBehaviour
             huntingTimer += Time.deltaTime;
             // Tracks current room 
             currentRoom = levelManager1.GetRoomFromPosition(transform.position);
-            // Makes Ghost visible during hunting mode
-            GetComponent<Renderer>().enabled = true;
+            // Gets model or first child
+            GameObject child = transform.GetChild(0).gameObject;
+            // Enables model
+            child.GetComponent<Renderer>().enabled = true;
             //Sets the minimum time a ghost will be hunting you for. Turns off hunting mode after that time.
+            bool validRoom = false;
             if (huntingTimer < 30f)
             {
                 //Ghost will move towards player.
                 if (distanceFromPlayer > 1)
                 {
-                    // Every ten seconds in Hunting Mode, changes the Ghost's speed depending on ghost type.
-                        if (huntingTimer/10f>=1)
+                    foreach (Room room in huntingZone)
+                    {
+                        if (room==currentRoom)
+                        {
+                            validRoom = true;
+                        }
+                    }
+                    if (validRoom)
+                    {
+                        // Every ten seconds in Hunting Mode, changes the Ghost's speed depending on ghost type.
+                        if (huntingTimer >= 10f)
                         {
                             if (psychologicalType)
                             {
                                 // Randomly changes speed every 10 seconds
                                 moveSpeed = Random.Range(1, 3);
                             }
-                             if (biologicalType)
-                             {
-                            // if difficulty is below lvl3, lowers moveSpeed every 10 seconds
+                            if (biologicalType)
+                            {
+                                // if difficulty is below lvl3, lowers moveSpeed every 10 seconds
                                 if (difficultyLevel < 3 && moveSpeed >= 2)
-                                { 
+                                {
                                     moveSpeed -= 1;
                                 }
-                             }
-                          }
-                    
-                    transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+                            }
+                        }
+                        // Ghost moves towards player
+                        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+                    }
+                    // If the room the ghost is in is not a valid room, ghost will spawn into a random point within hunting zone and end of hunting mode occurs
+                    else
+                    {
+                        SetGhostPosition(SelectRandomHuntingRoom().SelectRandomSpawnPoint());
+                        huntingTimer = 0f;
+                        aggression = 0;
+                        huntingMode = false;
+                        Debug.Log("hunt end meow");
+                    }
                 }
             }
             else
@@ -355,7 +446,7 @@ public class Ghost : MonoBehaviour
     /// Returns type of ghost.
     /// </summary>
     /// <returns>Type name as string</returns>
-    public string GetType()
+    public string GetGhostType()
     {
         return typeName;
     }
@@ -382,12 +473,51 @@ public class Ghost : MonoBehaviour
     }
 
     /// <summary>
-    /// Returns 
+    /// Returns boolean for if ghost is in hunting mode or not
     /// </summary>
     public bool IsGhostHunting()
     {
         return huntingMode;
     }
+
+    /// <summary>
+    /// Turns Ghost Hunting Mode off
+    /// </summary>
+    public void GhostHuntOff()
+    {
+        huntingMode = false;
+    }
+    /// <summary>
+    /// Increases aggresssion by 1
+    /// </summary>
+    public void IncreaseAggression()
+    {
+        aggression++;
+    }
+    /// <summary>
+    /// Increases aggresssion by integer input
+    /// </summary>
+    public void IncreaseAggression(int increase)
+    {
+        aggression=aggression+ increase;
+    }
+    /// <summary>
+    /// Increases aggresssion by integer input, by a factor of the second argument (time in seconds)
+    /// Ex: IncreaseAggression(3, 2, 10) increases aggression by 3 every 2 seconds for 10 seconds
+    /// </summary>
+    public void IncreaseAggression(int increase, int timeOften, int timeEnd)
+    {
+        functionTimer = 0f;
+        while (functionTimer<timeEnd)
+        {
+            aggression += increase;
+            new WaitForSeconds(timeOften);
+            functionTimer+=timeOften;
+        }
+    }
+    /// <summary>
+    /// Returns EMF level
+    /// </summary>
     public int GetEmfLevel()
     {
         return emfLevel;

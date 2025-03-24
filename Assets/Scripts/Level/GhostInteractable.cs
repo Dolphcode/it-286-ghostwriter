@@ -12,8 +12,15 @@ public enum GhostInteractableType
 /// The base GhostInteractable interface which must be implemented by
 /// all objects that the ghost can interact with in the level.
 /// </summary>
-public abstract class GhostInteractable : MonoBehaviour
+public abstract class GhostInteractable : MonoBehaviour, Capturable
 {
+
+    private MeshRenderer m_Renderer;
+    private void Awake()
+    {
+        m_Renderer = GetComponent<MeshRenderer>();
+    }
+
     /// <summary>
     /// The specific category of interactable that this interactable is
     /// </summary>
@@ -34,4 +41,12 @@ public abstract class GhostInteractable : MonoBehaviour
     /// object.
     /// </summary>
     public abstract void interact();
+    public Renderer GetRendererCheckable()
+    {
+        return m_Renderer;
+    }
+    public int GetCaptureScore()
+    {
+        return (!interactable) ? 5 : 0; // Assumes if an object is not interactable it has been interacted with or is being interacted with
+    }
 }

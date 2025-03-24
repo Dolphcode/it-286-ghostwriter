@@ -66,10 +66,15 @@ public class LevelManager : MonoBehaviour
     {
         // This will run level generation/initialization
         levelEvaluator.InitializeInterior(interiorBase, 1); // should relegate this to the level loader really
-
-        // Instantiate and initialize the ghost objects
-
-        // TODO: Give the player a reference to this object
+        
+        // Append every interactable to the capture manager
+        foreach (Room r in levelEvaluator.GetAllRooms())
+        {
+            foreach (GhostInteractable i in r.GetAllInteractables())
+            {
+                captureManager.AppendInteractable(i);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -93,6 +98,9 @@ public class LevelManager : MonoBehaviour
         behavior.transform.SetParent(transform);
 
         behavior.transform.position = itemSpawnPoints[spawnPointNumber].position;
+
+        // Add this item to the capture manager's list?
+        captureManager.AppendItemBehavior(behavior);
     }
 
     public void AddGhostToWorld(Ghost ghost)
@@ -104,8 +112,10 @@ public class LevelManager : MonoBehaviour
 
         // Need to flesh this out more
         ghost.transform.SetParent(transform);
-
         ghost.SetPlayer(player.transform);
+
+        // Add this ghost to the capture manager's list
+        captureManager.AppendGhost(ghost);
     }
 
 
