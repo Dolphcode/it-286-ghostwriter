@@ -59,10 +59,13 @@ public class CaptureManager : MonoBehaviour
         capturables.Add(capturable); 
     }
 
-    public void RegisterEventListener(UnityAction callback)
+    public void RegisterEventListener(UnityAction<Capturable> callback)
     {
+        Debug.Log("registering events");
         foreach (Capturable c in capturables)
         {
+            Debug.Log(c.name);
+            
             if (c.HasTriggerCaptureEvent())
             {
                 c.AddTriggerListener(callback);

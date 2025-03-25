@@ -14,7 +14,7 @@ public class FingerprintInteractable : GhostInteractable
         {
             interactable = false;
             fingerprintMesh.enabled = true;
-            m_TriggerCapture.Invoke();
+            m_TriggerCapture.Invoke(this);
         }
     }
 

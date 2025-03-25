@@ -20,7 +20,7 @@ public abstract class GhostInteractable : Capturable
     {
         interactable = true;
         m_Renderer = GetComponent<MeshRenderer>();
-        m_TriggerCapture = new UnityEvent();
+        m_TriggerCapture = new UnityEvent<Capturable>();
     }
 
     /// <summary>
