@@ -1,8 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public interface Capturable
+public abstract class Capturable : MonoBehaviour
 {
+    /// <summary>
+    /// A UnityEvent for triggering the capture of a remote camera
+    /// </summary>
+    protected UnityEvent m_TriggerCapture;
+
+    public void AddTriggerListener(UnityAction callback)
+    {
+        m_TriggerCapture.AddListener(callback);
+    }
+
     /// <summary>
     /// Get the gameobject used for a raycast test for this capturable
     /// </summary>

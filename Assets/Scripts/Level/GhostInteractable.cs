@@ -12,7 +12,7 @@ public enum GhostInteractableType
 /// The base GhostInteractable interface which must be implemented by
 /// all objects that the ghost can interact with in the level.
 /// </summary>
-public abstract class GhostInteractable : MonoBehaviour, Capturable
+public abstract class GhostInteractable : Capturable
 {
 
     private MeshRenderer m_Renderer;
@@ -43,12 +43,12 @@ public abstract class GhostInteractable : MonoBehaviour, Capturable
     /// </summary>
     public abstract void interact();
 
-    public GameObject GetCheckObject()
+    public override GameObject GetCheckObject()
     {
         return gameObject;
     }
 
-    public int GetCaptureScore(float rayProp, CaptureData data)
+    public override int GetCaptureScore(float rayProp, CaptureData data)
     {
         if (!interactable)
         {
