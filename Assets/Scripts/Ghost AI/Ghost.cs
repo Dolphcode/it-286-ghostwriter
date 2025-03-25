@@ -541,6 +541,27 @@ public class Ghost : MonoBehaviour
         }
     }
     /// <summary>
+    /// Returns aggresion threshold.
+    /// </summary>
+    public int GetAggressionThreshold()
+    {
+        return aggressionThreshold;
+    }
+    /// <summary>
+    /// Sets aggresion threshold based on input number.
+    /// </summary>
+    public void SetAggressionThreshold(int newThreshold)
+    {
+        aggressionThreshold = newThreshold; 
+    }
+    /// <summary>
+    /// Lowers aggresion threshold based on input number.
+    /// </summary>
+    public void LowerAggressionThreshold(int lowerBy)
+    {
+        aggressionThreshold -= lowerBy;
+    }
+    /// <summary>
     /// Returns EMF level
     /// </summary>
     public int GetEmfLevel()
