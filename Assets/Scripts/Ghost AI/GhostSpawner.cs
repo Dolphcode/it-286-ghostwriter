@@ -8,7 +8,7 @@ public class GhostSpawner : MonoBehaviour
     [SerializeField]
     private GameObject ghostPrefab;
     ///<summary>
-    ///Instantiates Ghost if prefab does not exist. Will have randomized difficulty and hunting zone. Default masc model.
+    ///Instantiates Ghost if prefab does not exist. Will have randomized difficulty and hunting zone. Random between fem or masc model.
     ///</summary>
     public void SpawnGhost()
     {
@@ -18,7 +18,7 @@ public class GhostSpawner : MonoBehaviour
             Ghost ghostScript = newGhost.GetComponent<Ghost>();
             if (ghostScript != null)
             {
-                ghostScript.SetBodyType(false);
+                ghostScript.SetBodyType(Random.Range(0f,1f) >= 0.5);
                 ghostScript.SetDifficulty(Random.Range(1, 6));
                 ghostScript.SetGhostType(Random.Range(1, 4));
             }
