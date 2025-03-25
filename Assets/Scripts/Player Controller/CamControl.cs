@@ -21,7 +21,7 @@ public class CamControl : MonoBehaviour
         /// Makes the cursor invisible & locks it in the window
         /// </summary>
 
-        Cursor.lockState = CursorLockMode.Locked;
+       Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         
     }
@@ -29,8 +29,6 @@ public class CamControl : MonoBehaviour
     
     void Update()
     {
-        
-
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
 

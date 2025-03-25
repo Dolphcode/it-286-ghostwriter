@@ -18,6 +18,7 @@ public abstract class GhostInteractable : MonoBehaviour, Capturable
     private MeshRenderer m_Renderer;
     private void Awake()
     {
+        interactable = true;
         m_Renderer = GetComponent<MeshRenderer>();
     }
 
@@ -34,19 +35,29 @@ public abstract class GhostInteractable : MonoBehaviour, Capturable
     /// and will be modified by the specific implementation of 
     /// GhostInteraction.
     /// </summary>
-    public bool interactable { get; protected set; }
+    public bool interactable;
 
     /// <summary>
     /// Call this function to trigger the ghost's interaction with this
     /// object.
     /// </summary>
     public abstract void interact();
-    public Renderer GetRendererCheckable()
+
+    public GameObject GetCheckObject()
     {
-        return m_Renderer;
+        return gameObject;
     }
-    public int GetCaptureScore()
+
+    public int GetCaptureScore(float rayProp, CaptureData data)
     {
-        return (!interactable) ? 5 : 0; // Assumes if an object is not interactable it has been interacted with or is being interacted with
+        if (!interactable)
+        {
+            data.evidenceCount++;
+            return 5;
+        } else
+        {
+            return 0;
+        }
     }
+
 }

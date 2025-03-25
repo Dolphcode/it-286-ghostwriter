@@ -32,10 +32,15 @@ public class HandheldCameraBehavior : ItemBehavior
         image.Apply();
         RenderTexture.active = currentRT;
 
+        /*
         var bytes = image.EncodeToPNG();
-        Destroy(image);
+        
         File.WriteAllBytes(Application.dataPath + "/Captures/test.png", bytes);
-
+        */
+        Debug.Log(levelManager);
+        Debug.Log(levelManager.GetCaptureManager());
+        Debug.Log(image);
+        Debug.Log(camReference);
         levelManager.GetCaptureManager().CaptureImage(image, camReference);
     }
 

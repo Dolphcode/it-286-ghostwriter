@@ -1,17 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public interface Capturable
 {
     /// <summary>
-    /// Returns the renderer to be checked by the camera
+    /// Get the gameobject used for a raycast test for this capturable
     /// </summary>
-    /// <returns>A Renderer reference</returns>
-    public Renderer GetRendererCheckable();
-
+    /// <returns>A gameobject which should be used to test if the raycast is hitting the object</returns>
+    public abstract GameObject GetCheckObject();
 
     /// <summary>
     /// Returns a score associated with this object if it is captured
     /// </summary>
+    /// <param name="rayProp">The proportion of rays in a raycast grid hitting this object</param>
+    /// <param name="data">A reference to the data object to trigger flags</param>
     /// <returns>An integer score for this object</returns>
-    public int GetCaptureScore();
+    public abstract int GetCaptureScore(float rayProp, CaptureData data);
 }
