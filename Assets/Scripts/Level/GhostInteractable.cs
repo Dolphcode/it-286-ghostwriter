@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.Events;
 
 public enum GhostInteractableType
 {
@@ -20,6 +20,7 @@ public abstract class GhostInteractable : Capturable
     {
         interactable = true;
         m_Renderer = GetComponent<MeshRenderer>();
+        m_TriggerCapture = new UnityEvent();
     }
 
     /// <summary>

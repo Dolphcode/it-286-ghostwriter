@@ -8,6 +8,7 @@ public abstract class Capturable : MonoBehaviour
     /// A UnityEvent for triggering the capture of a remote camera
     /// </summary>
     protected UnityEvent m_TriggerCapture;
+    public bool HasTriggerCaptureEvent() { return m_TriggerCapture != null; }
 
     public void AddTriggerListener(UnityAction callback)
     {

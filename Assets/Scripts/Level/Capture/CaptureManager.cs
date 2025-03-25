@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class CaptureManager : MonoBehaviour
@@ -58,6 +59,17 @@ public class CaptureManager : MonoBehaviour
         capturables.Add(capturable); 
     }
 
+    public void RegisterEventListener(UnityAction callback)
+    {
+        foreach (Capturable c in capturables)
+        {
+            if (c.HasTriggerCaptureEvent())
+            {
+                c.AddTriggerListener(callback);
+            }
+        }
+    }
+
     /// <summary>
     /// Generate a capture data 
     /// </summary>
@@ -77,7 +89,6 @@ public class CaptureManager : MonoBehaviour
         foreach (Ghost ghost in ghosts)
         {
             Vector3 screenpos = camera.WorldToViewportPoint(ghost.transform.position);
-            Debug.Log(screenpos.ToString());
             // First test if it is on screen
             if (screenpos.x < 1 && screenpos.x > 0 && screenpos.y > 0 && screenpos.y < 1 &&  screenpos.z >= 0)
             {

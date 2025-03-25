@@ -1,26 +1,38 @@
-using System.IO;
 using UnityEngine;
 
-public class HandheldCameraBehavior : ItemBehavior
+public class RemoteCameraBehavior : ItemBehavior
 {
-
     [Header("References")]
     [SerializeField]
     Camera camReference;
     [SerializeField]
     MeshRenderer renderMesh;
 
+    Collider coll;
+    Rigidbody rb;
+
     public void Awake()
     {
-        base.Awake();
+        rb = GetComponent<Rigidbody>();
+        coll = GetComponent<Collider>();
+
         RenderTexture tex = new RenderTexture(320, 240, 16, RenderTextureFormat.ARGB32);
         tex.useDynamicScale = true;
         tex.Create();
         camReference.targetTexture = tex;
         renderMesh.material.mainTexture = tex;
     }
-    public override void Interact()
+
+    public void Start()
     {
+        levelManager.GetCaptureManager().RegisterEventListener(Capture);
+    }
+
+    public override void Interact() {}
+
+    public void Capture()
+    {
+        Debug.Log("I HAVE DETECTED SOMETHING! SOMETHING HAS HAPPENED");
         RenderTexture currentRT = RenderTexture.active;
         RenderTexture.active = camReference.targetTexture;
 
@@ -45,10 +57,20 @@ public class HandheldCameraBehavior : ItemBehavior
         Debug.Log("Camera unloaded");
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void Drop()
     {
-        
+        transform.SetParent(null);
+
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.useGravity = true;
+        }
+
+        if (coll != null)
+        {
+            coll.isTrigger = false;
+        }
     }
 
     // Update is called once per frame
