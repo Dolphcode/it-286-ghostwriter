@@ -76,9 +76,9 @@ public class InventoryHolder : MonoBehaviour
 
             if (Physics.Raycast(ray,out lookingAt))
             {
-                if (lookingAt.collider.gameObject.GetComponent<Canvas>() != null)
+                if (lookingAt.collider.gameObject.GetComponent<ButtonAction>() != null)
                 {
-                    Debug.Log("Working");
+                    lookingAt.collider.gameObject.GetComponent<ButtonAction>().Button_clicked();
                 }
             }
 
