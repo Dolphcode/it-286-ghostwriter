@@ -159,6 +159,7 @@ MonoBehaviour:
   uiOff1: {fileID: 630635346705184541}
   uiOff2: {fileID: 6941138778058326688}
   uiOff3: {fileID: 144663789264470120}
+  itemShop: {fileID: 0}
 --- !u!1 &630635346705184541
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1573329054442314000
 Transform:
   m_ObjectHideFlags: 0
@@ -454,6 +455,7 @@ MonoBehaviour:
   uiOff1: {fileID: 630635346705184541}
   uiOff2: {fileID: 7348431358272675638}
   uiOff3: {fileID: 144663789264470120}
+  itemShop: {fileID: 0}
 --- !u!1 &1537014149001927051
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,9 +599,9 @@ RectTransform:
   m_Father: {fileID: 7500854594844828511}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2058088487054267577
 CanvasRenderer:
@@ -1146,7 +1148,7 @@ RectTransform:
   m_Father: {fileID: 6665835659408860625}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.6666665}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1734,6 +1736,7 @@ MonoBehaviour:
   uiOff1: {fileID: 6941138778058326688}
   uiOff2: {fileID: 7348431358272675638}
   uiOff3: {fileID: 144663789264470120}
+  itemShop: {fileID: 0}
 --- !u!1 &5426316946404427379
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,6 +1999,7 @@ MonoBehaviour:
   uiOff1: {fileID: 630635346705184541}
   uiOff2: {fileID: 6941138778058326688}
   uiOff3: {fileID: 7348431358272675638}
+  itemShop: {fileID: 0}
 --- !u!1 &6799090170630899743
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,7 +2355,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &92409111760402209
 Transform:
   m_ObjectHideFlags: 0
