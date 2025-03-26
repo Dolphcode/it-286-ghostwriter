@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 1121933945}
   m_Layer: 0
   m_Name: EventSystem
-  m_TagString: Untagged
+  m_TagString: Event
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1022,12 +1022,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemTemplates:
-  - {fileID: 11400000, guid: e122e3341fd393d47a7a3f7da21071aa, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 1b863bc33428ac04e8931355b0002e1c, type: 2}
   - {fileID: 11400000, guid: 7606a9c65e46e304285e8a0811d31e1f, type: 2}
+  - {fileID: 11400000, guid: e122e3341fd393d47a7a3f7da21071aa, type: 2}
   - {fileID: 11400000, guid: 4eb6073996365b64ca267932009f9ac8, type: 2}
-  itemCounts: 050000000500000005000000
-  selectedItemCounts: 000000000000000000000000
+  - {fileID: 11400000, guid: f98fd3faf43d13c4aa27877ca398b048, type: 2}
+  itemCounts: 000000000000000000000000000000000000000000000000
+  selectedItemCounts: 000000000000000000000000000000000000000000000000
   maxItems: 5
+  playerMoney: 10000
   ghostPrefab: {fileID: 8931265980793741926, guid: 6ac71ae20c3ff764681a8152d87509fc, type: 3}
   obj: {fileID: 3317281402428045863, guid: ab6b8aa620ff13c488fe61217e53a7e1, type: 3}
 --- !u!1660057539 &9223372036854775807
