@@ -17,7 +17,6 @@ public abstract class ItemBehavior : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         coll = GetComponent<Collider>();
-
     }
 
     /// <summary>

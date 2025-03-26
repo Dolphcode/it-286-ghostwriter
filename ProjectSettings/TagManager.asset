@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Event
+  - CameraItem
   layers:
   - Default
   - TransparentFX

@@ -21,7 +21,6 @@ public class HandheldCameraBehavior : ItemBehavior
     }
     public override void Interact()
     {
-        Debug.Log("snap");
         RenderTexture currentRT = RenderTexture.active;
         RenderTexture.active = camReference.targetTexture;
 
@@ -31,10 +30,6 @@ public class HandheldCameraBehavior : ItemBehavior
         image.ReadPixels(new Rect(0, 0, image.width, image.height), 0, 0);
         image.Apply();
         RenderTexture.active = currentRT;
-
-        var bytes = image.EncodeToPNG();
-        Destroy(image);
-        File.WriteAllBytes(Application.dataPath + "/Captures/test.png", bytes);
 
         levelManager.GetCaptureManager().CaptureImage(image, camReference);
     }

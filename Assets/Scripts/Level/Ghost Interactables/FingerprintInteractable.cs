@@ -10,8 +10,12 @@ public class FingerprintInteractable : GhostInteractable
 
     public override void interact()
     {
-        interactable = false;
-        fingerprintMesh.enabled = true;
+        if (interactable)
+        {
+            interactable = false;
+            fingerprintMesh.enabled = true;
+            m_TriggerCapture.Invoke(this);
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

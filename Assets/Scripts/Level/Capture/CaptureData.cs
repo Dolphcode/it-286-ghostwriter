@@ -14,5 +14,6 @@ public class CaptureData : ScriptableObject
     public bool hasGhost;
     public bool hasExtraEvent;
     public int evidenceCount;
+    public bool remoteCapture;
     
 }
