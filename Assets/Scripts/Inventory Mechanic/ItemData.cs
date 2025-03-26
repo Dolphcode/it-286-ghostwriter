@@ -17,4 +17,6 @@ public class ItemData : ScriptableObject
     public bool isEquiped;
     public bool isOn;
     public float durability; // flashlight and the pills but not emf
+    public int itemCost;
+
 }

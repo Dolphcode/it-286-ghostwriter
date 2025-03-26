@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402f0402b6f74f746b099c9460b5637f, type: 3}
   m_Name: Soda Data
   m_EditorClassIdentifier: 
-  ID: 0
+  ID: 4
   Name: Item
   Icon: {fileID: 0}
   Item: {fileID: 4847825559594920050, guid: b1ee5c3683b99594e83fcc888388df68, type: 3}
@@ -22,3 +22,4 @@ MonoBehaviour:
   isEquiped: 0
   isOn: 0
   durability: 1
+  itemCost: 200

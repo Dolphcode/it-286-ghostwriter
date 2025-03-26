@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402f0402b6f74f746b099c9460b5637f, type: 3}
   m_Name: Flashlight Data
   m_EditorClassIdentifier: 
-  ID: 0
+  ID: 2
   Name: Flashlight
   Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   Item: {fileID: 3307104046245901012, guid: 09d3fde86d9da2b40a69167acd5a00aa, type: 3}
@@ -22,3 +22,4 @@ MonoBehaviour:
   isEquiped: 0
   isOn: 0
   durability: 0
+  itemCost: 300

@@ -15,7 +15,7 @@ public class LevelDataManager : MonoBehaviour
     private int maxItems = 10;
 
     [SerializeField]
-    private int playerMoney = 200;
+    private int playerMoney = 10000;
 
     [Header("Ghost Init")]
     /// <summary>
