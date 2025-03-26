@@ -16,6 +16,12 @@ public class CaptureManager : MonoBehaviour
     [SerializeField]
     private List<Capturable> capturables;
 
+    [Header("Debug")]
+    [SerializeField]
+    private bool debug = false;
+    [SerializeField]
+    private Canvas debugCanvas;
+
     [SerializeField] 
     private List<CaptureData> captures;
 

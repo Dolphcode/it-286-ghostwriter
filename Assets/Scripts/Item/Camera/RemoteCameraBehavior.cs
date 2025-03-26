@@ -52,7 +52,8 @@ public class RemoteCameraBehavior : ItemBehavior
                 image.Apply();
                 RenderTexture.active = currentRT;
 
-                levelManager.GetCaptureManager().CaptureImage(image, camReference);
+                CaptureData data = levelManager.GetCaptureManager().CaptureImage(image, camReference);
+                data.remoteCapture = true;
             }
         }
 
