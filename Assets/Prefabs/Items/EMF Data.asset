@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402f0402b6f74f746b099c9460b5637f, type: 3}
   m_Name: EMF Data
   m_EditorClassIdentifier: 
-  ID: 0
+  ID: 3
   Name: EMF Reader
   Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   Item: {fileID: 4094513679903417089, guid: cef0cff88427a2840bc5f2d5fc29143a, type: 3}
@@ -22,3 +22,4 @@ MonoBehaviour:
   isEquiped: 0
   isOn: 0
   durability: 0
+  itemCost: 400

@@ -12,6 +12,7 @@ public class ButtonUIEditor : Editor
     SerializedProperty uiOff2;
     SerializedProperty uiOff3;
 
+    SerializedProperty itemShop;
 
     void OnEnable()
     {
@@ -20,6 +21,7 @@ public class ButtonUIEditor : Editor
         uiOff1 = serializedObject.FindProperty("uiOff1");
         uiOff2 = serializedObject.FindProperty("uiOff2");
         uiOff3 = serializedObject.FindProperty("uiOff3");
+        itemShop = serializedObject.FindProperty("itemShop");
     }
 
     public override void OnInspectorGUI()
@@ -37,7 +39,7 @@ public class ButtonUIEditor : Editor
         }
         else if (buttonAction.enumValueIndex == 1)
         {
-
+            EditorGUILayout.PropertyField(itemShop);
         }
         serializedObject.ApplyModifiedProperties();
     }

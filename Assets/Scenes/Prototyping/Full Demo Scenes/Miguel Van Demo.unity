@@ -151,6 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelEvaluator: {fileID: 11400000, guid: 01e015f650a997f4db8029ebefae8a3c, type: 2}
   lightManager: {fileID: 0}
+  captureManager: {fileID: 0}
   interiorBase: {fileID: 0}
   player: {fileID: 1096738990}
   ghosts: []
@@ -1590,6 +1591,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 151762805}
+    - target: {fileID: 3406199269873702989, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}
+      propertyPath: m_SortingOrder
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131543395582777608, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5146572789756574815, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 494130793500477833}
   - component: {fileID: 2986540499886444147}
   - component: {fileID: 4145407830569633037}
-  - component: {fileID: 6730189058290359683}
   - component: {fileID: 6543300437934091824}
+  - component: {fileID: 394049890139110995}
   m_Layer: 0
-  m_Name: Held Camera
+  m_Name: Tripod Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2686501479970085783}
-  m_Mesh: {fileID: 3967848542767632393, guid: cc27761afafd7e742aaab37f5f365578, type: 3}
+  m_Mesh: {fileID: 3967848542767632393, guid: 8f6a47c04a107af47b4c2e61f7ed030e, type: 3}
 --- !u!23 &494130793500477833
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -111,8 +111,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.05, y: 0.03, z: 0.03}
-  m_Center: {x: 0, y: 0, z: -0.005}
+  m_Size: {x: 0.076927185, y: 0.09439688, z: 0.2838438}
+  m_Center: {x: -0.0008979798, y: -0.0089856, z: -0.13192183}
 --- !u!114 &4145407830569633037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,23 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18391fb5db0a4c14ba3163165e6e3ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behavior: {fileID: 6730189058290359683}
---- !u!114 &6730189058290359683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2686501479970085783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e61d844279ddbb14d9e0fe39045d5301, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 1b863bc33428ac04e8931355b0002e1c, type: 2}
-  levelManager: {fileID: 0}
-  camReference: {fileID: 3084643859791744567}
-  renderMesh: {fileID: 1710963023012198504}
+  behavior: {fileID: 0}
 --- !u!54 &6543300437934091824
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -167,8 +151,24 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 48
   m_CollisionDetection: 0
+--- !u!114 &394049890139110995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2686501479970085783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d3bb4af1ac430a45a3e8aeb561ae6ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: e60ab107004441b48990bc8ef9dfff9f, type: 2}
+  levelManager: {fileID: 0}
+  camReference: {fileID: 3084643859791744567}
+  renderMesh: {fileID: 1710963023012198504}
 --- !u!1 &6343558117014470622
 GameObject:
   m_ObjectHideFlags: 0

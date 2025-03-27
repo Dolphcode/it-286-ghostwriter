@@ -62,7 +62,7 @@ public class LevelManager : MonoBehaviour
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    void Start()
     {
         // This will run level generation/initialization
         levelEvaluator.InitializeInterior(interiorBase, 1); // should relegate this to the level loader really
@@ -73,6 +73,7 @@ public class LevelManager : MonoBehaviour
             foreach (GhostInteractable i in r.GetAllInteractables())
             {
                 captureManager.AppendInteractable(i);
+                captureManager.AppendCapturable(i);
             }
         }
     }
