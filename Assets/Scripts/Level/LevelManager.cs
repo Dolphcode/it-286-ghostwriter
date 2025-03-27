@@ -61,11 +61,16 @@ public class LevelManager : MonoBehaviour
     private Transform[] itemSpawnPoints;
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
         // This will run level generation/initialization
         levelEvaluator.InitializeInterior(interiorBase, 1); // should relegate this to the level loader really
+
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
         
         // Append every interactable to the capture manager
         foreach (Room r in levelEvaluator.GetAllRooms())

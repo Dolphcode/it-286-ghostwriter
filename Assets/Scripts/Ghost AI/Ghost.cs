@@ -238,8 +238,8 @@ public class Ghost : MonoBehaviour
     private void Start()
     {
         // care the Female_Ghost vs Female Ghost (same w male)
-        femModel = transform.Find("Female Ghost")?.gameObject;
-        mascModel = transform.Find("Male Ghost")?.gameObject;
+        femModel = transform.Find("Female_Ghost")?.gameObject;
+        mascModel = transform.Find("Male_Ghost")?.gameObject;
         if (femModel == null || mascModel == null)
         {
             Debug.LogError("dawg where my gender at.");
