@@ -30,10 +30,12 @@ public class CrucifixBehavior : ItemBehavior
     {
         if (ghost.IsGhostHunting())
         {
+            Debug.Log("Stopped Ghost From Hunting");
             ghost.GhostHuntOff();
         }
         else
         {
+            Debug.Log("Ghost Was Not Hunting");
             time -= 5;
         }
         yield return new WaitForSeconds(time);
