@@ -15,10 +15,10 @@ MonoBehaviour:
   ID: 5
   Name: Crucifix
   Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  Item: {fileID: 0}
-  Behavior: {fileID: 0}
-  heldItemPosition: {x: 0.45, y: -0.31, z: 0.8}
-  heldItemRotation: {x: -60.26, y: 14.46, z: -178.52}
+  Item: {fileID: 4094513679903417089, guid: b0ac9630c44846347a33fa676242e93a, type: 3}
+  Behavior: {fileID: 3210643910149377038, guid: b0ac9630c44846347a33fa676242e93a, type: 3}
+  heldItemPosition: {x: 0.45, y: -0.31, z: 1.3}
+  heldItemRotation: {x: 0, y: 0, z: 0}
   isEquiped: 0
   isOn: 0
   durability: 1
