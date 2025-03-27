@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class CaptureManager : MonoBehaviour
@@ -15,8 +16,22 @@ public class CaptureManager : MonoBehaviour
     [SerializeField]
     private List<Capturable> capturables;
 
+    [Header("Debug")]
+    [SerializeField]
+    private bool debug = false;
+    [SerializeField]
+    private Canvas debugCanvas;
+
     [SerializeField] 
     private List<CaptureData> captures;
+
+    public void Awake()
+    {
+        behaviors = new List<ItemBehavior>();
+        interactables = new List<GhostInteractable>();
+        ghosts = new List<Ghost>();
+        capturables = new List<Capturable>();
+    }
 
     /// <summary>
     /// Wrapper function to add an item behavior object to the list of behaviors in this capture manager
@@ -45,6 +60,25 @@ public class CaptureManager : MonoBehaviour
         ghosts.Add(ghost);
     }
 
+    public void AppendCapturable(Capturable capturable)
+    {
+        capturables.Add(capturable); 
+    }
+
+    public void RegisterEventListener(UnityAction<Capturable> callback)
+    {
+        Debug.Log("registering events");
+        foreach (Capturable c in capturables)
+        {
+            Debug.Log(c.name);
+            
+            if (c.HasTriggerCaptureEvent())
+            {
+                c.AddTriggerListener(callback);
+            }
+        }
+    }
+
     /// <summary>
     /// Generate a capture data 
     /// </summary>
@@ -64,7 +98,6 @@ public class CaptureManager : MonoBehaviour
         foreach (Ghost ghost in ghosts)
         {
             Vector3 screenpos = camera.WorldToViewportPoint(ghost.transform.position);
-            Debug.Log(screenpos.ToString());
             // First test if it is on screen
             if (screenpos.x < 1 && screenpos.x > 0 && screenpos.y > 0 && screenpos.y < 1 &&  screenpos.z >= 0)
             {
@@ -85,6 +118,28 @@ public class CaptureManager : MonoBehaviour
                     {
                         data.score += 2; //????
                     }
+                }
+            }
+        }
+
+        foreach (Capturable capturable in capturables)
+        {
+            Transform t = capturable.GetCheckObject().transform;
+            Vector3 screenpos = camera.WorldToViewportPoint(t.position);
+            Debug.Log(screenpos.ToString());
+            // First test if it is on screen
+            if (screenpos.x < 1 && screenpos.x > 0 && screenpos.y > 0 && screenpos.y < 1 && screenpos.z >= 0)
+            {
+                Debug.Log(t.name + " is in the frustum and is object " + t.gameObject.name);
+                // Now fire off a raycast to check for anything blocking
+                // TODO: Find a more accurate way to do this?
+                RaycastHit hit;
+                if (Physics.Raycast(camera.transform.position,
+                    (t.position - camera.transform.position).normalized,
+                    out hit, Mathf.Infinity, ~LayerMask.GetMask("BoundingBox")) && hit.collider.gameObject == capturable.GetCheckObject())
+                {
+                    Debug.Log(hit.collider.gameObject.name + " was hit");
+                    data.score += capturable.GetCaptureScore(1f, data);
                 }
             }
         }

@@ -20,7 +20,25 @@ public class Ghost : MonoBehaviour
     ///</summary>
     [SerializeField]
     private Transform player;
-    public void SetPlayer(Transform player) { this.player = player; }
+    public void SetPlayer(Transform playerTransform)
+    {
+        player = playerTransform;
+    }
+    /// <summary>
+    ///Reference to the female ghost model.
+    ///</summary>
+    [SerializeField]
+    private GameObject ghostModel;
+    /// <summary>
+    ///Reference to the female ghost model.
+    ///</summary>
+    [SerializeField]
+    private GameObject femModel;
+    /// <summary>
+    ///Reference to the male ghost model.
+    ///</summary>
+    [SerializeField]
+    private GameObject mascModel;
     /// <summary>
     ///Amount of times a ghost can be provoked before entering Hunting Mode.
     ///</summary>
@@ -35,28 +53,24 @@ public class Ghost : MonoBehaviour
     ///Aggression multiplier of ghost. Lowers difficulty based on multiplier.
     ///</summary>
     private int aggressionMultiplier;
+    /// <summary>
+    /// Determines model type. true - fem, masc - false.
+    ///</summary>
+    [SerializeField]
+    private bool bodyTypeF;
     ///<summary>
     ///Difficulty of ghost (lower level = higher aggression threshold, slower)
     ///</summary>
     [SerializeField]
-    private int difficultyLevel;
+    private int difficultyLevel = 0;
     /// <summary>
-    /// Ghost's type.
+    /// Ghost's types:
+    /// Psychological (more erratic behavior, speed changes, many interactions). 
+    /// Biological (died a natural death - not as fast, hard to aggro). 
+    /// Metaphysical (died but spiritually - aggression threshold lowers the more you aggro them. has a lot more interactions/tries to communicate with player more? maybe triggers a certain tool).
     /// </summary>
     [SerializeField]
     private GhostType type;
-    ///<summary>
-    ///Ghost type Psychological (more erratic behavior, speed changes, many interactions).
-    ///</summary>
-    private bool psychologicalType;
-    ///<summary>
-    ///Ghost type Biological (died a natural death - not as fast, hard to aggro).
-    ///</summary>
-    private bool biologicalType;
-    ///<summary>
-    ///Ghost type Metaphysical (died but spiritually - aggression threshold lowers the more you aggro them. has a lot more interactions/tries to communicate with player more? maybe triggers a certain tool).
-    ///</summary>
-    private bool metaphysicalType;
     ///<summary>
     ///String containting name of ghost type.
     ///</summary>
@@ -67,9 +81,9 @@ public class Ghost : MonoBehaviour
     [SerializeField]
     private int emf;
     ///<summary>
-    ///Aggression threshold/5.
+    /// EMF Player has to track (highest EMF)
     ///</summary>
-    private int emfLevel;
+    private int emfPeak;
     ///<summary>
     ///Room the ghost is currently in. Initialized during start to be random room.
     ///</summary>
@@ -84,7 +98,7 @@ public class Ghost : MonoBehaviour
     ///Movement speed of ghost.
     ///</summary>
     [SerializeField]
-    private float moveSpeed = 1f;
+    private float moveSpeed;
     ///<summary>
     ///Indication of ghost being in Hunting Mode. 
     ///</summary>
@@ -95,11 +109,6 @@ public class Ghost : MonoBehaviour
     ///</summary>
     [SerializeField]
     private System.Collections.Generic.List<Room> huntingZone;
-    ///<summary>
-    ///Number of rooms that the ghost can access.
-    ///</summary>
-    [SerializeField]
-    private int huntingZoneRoomCount;
     ///<summary>
     ///Level manager.
     ///</summary>
@@ -118,7 +127,6 @@ public class Ghost : MonoBehaviour
     {
         int idx = Random.Range(0, huntingZone.Count);
         return huntingZone[idx];
-
     }
     ///<summary>
     ///Sets ghost position to room.
@@ -191,9 +199,11 @@ public class Ghost : MonoBehaviour
     ///</summary>
     private void Roam()
     {
-        if (aggression < GetEmfLevel() && emf < 5)
+        // does this make sense chat. see: aggressionThreshold/5
+        if (aggression < aggressionThreshold/5 && emf < 5)
         {
             emf++;
+            emfPeak = emf;
         }
         teleportTimer += Time.deltaTime;
         interactTimer += Time.deltaTime;
@@ -208,10 +218,8 @@ public class Ghost : MonoBehaviour
         }
         // Ghost is not visible when in passive.
         GetComponent<Renderer>().enabled = false;
-        // Gets model or first child
-        GameObject child = transform.GetChild(0).gameObject;
         // Disables model
-        child.GetComponent<Renderer>().enabled = false;
+        ghostModel.SetActive(false);
         // If aggression less than half full game is slightly harder
         if (aggression < aggressionThreshold / 2)
         {
@@ -226,107 +234,77 @@ public class Ghost : MonoBehaviour
             GhostInteracts(100f, 0.5);
         }
     }
-    /// <summary>
-    /// Assigns a random hunting zone with given # of rooms
-    /// ***NOTE TO SELF: this code is kinda stupid but also maybe check if selectRandomAdjacentRoom() isn't og room...
-    /// </summary>
-    private void RandomHuntingZone(Room spawnRoom, int numOfRooms)
-    {
-        //Adds spawn room as a valid room in huntingZone
-        huntingZone.Add(spawnRoom);
-        Debug.Log("added ghost");
-        numOfRooms--;
-        Room a = spawnRoom.SelectRandomAdjacentRoom();
-        Room b = spawnRoom.SelectRandomAdjacentRoom().SelectRandomAdjacentRoom();
-        for (int i = 0; i < numOfRooms; i++)
-        {
-            while (a == b)
-            {
-                a = spawnRoom.SelectRandomAdjacentRoom();
-                b = spawnRoom.SelectRandomAdjacentRoom().SelectRandomAdjacentRoom();
-            }
-            Room c = spawnRoom.SelectRandomAdjacentRoom().SelectRandomAdjacentRoom().SelectRandomAdjacentRoom();
-            // Makes sure rooms aren't added twice (each room is unique)
-            foreach (Room room in huntingZone)
-            {
-                if (room != a)
-                {
-                    huntingZone.Add(a);
-                }
-                else if (room != b)
-                {
-                    huntingZone.Add(b);
-                }
-                else if (room != c)
-                {
-                    huntingZone.Add(c);
-                }
-            }
-        }
-    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
-        if (type == GhostType.PSYCHOLOGICAL)
+        // care the Female_Ghost vs Female Ghost (same w male)
+        femModel = transform.Find("Female Ghost")?.gameObject;
+        mascModel = transform.Find("Male Ghost")?.gameObject;
+        if (femModel == null || mascModel == null)
         {
-              psychologicalType = true;
+            Debug.LogError("dawg where my gender at.");
         }
-        if (type == GhostType.BIOLOGICAL)
-        {
-            biologicalType = true;
-        }
-        if (type == GhostType.METAPHYSICAL)
-        {
-            metaphysicalType = true;
-        }
-        // Finds and gets level manager
-        levelManager1 = (LevelManager)FindAnyObjectByType(typeof(LevelManager));
         // Sets the current room ghost is in to spawn room.
         currentRoom = levelManager1.SelectRandomRoom();
-
-        RandomHuntingZone(currentRoom, huntingZoneRoomCount);
+        huntingZone.Add(currentRoom);
+        huntingZone.Add(currentRoom.SelectRandomAdjacentRoom());
         SetGhostPosition(currentRoom.SelectRandomSpawnPoint());
-
         // Sets aggressionThreshold to 1
         aggressionThreshold = 1;
         // Sets aggression to 0.
         aggression = 0;
         // Sets aggression multiplier.
         aggressionMultiplier = 25;
-        // Randomizes difficulty level if not specified.
-        difficultyLevel = Random.Range(1, 5);
-        // Forces difficulty level to be between 1 and 5.
-        difficultyLevel = Mathf.Clamp(difficultyLevel, 1, 5);
+        // Default move speed for Level 1 Ghost is 1f; increases by 0.25f for each increase in level.
+        moveSpeed = 1f;
+        if (difficultyLevel>1)
+        {
+            moveSpeed += difficultyLevel*0.25f;
+        }
+        else if (difficultyLevel == 0)
+        {
+            difficultyLevel = Random.Range(1, 6);
+        }
         // Makes aggression threshold in terms of difficulty. Min 25, Max 125. Lower threshold, easier to aggro ghost and considered "harder".
         for (int i = 5; i>2; i--)
         {
             aggressionThreshold += difficultyLevel*aggressionMultiplier;
         }
-        emfLevel = aggressionThreshold / 5;
-        // Ensures only one Ghost type is true at a time. ELSE STATEMENTS HERE REQUIRE CLAMP TO WORK
-        if (psychologicalType)
+        if (type == GhostType.PSYCHOLOGICAL)
         {
             typeName = "Psychological";
         }
-        if (biologicalType)
+        if (type == GhostType.BIOLOGICAL)
         {
             typeName = "Biological";
         }
-        if (metaphysicalType)
+        if (type == GhostType.METAPHYSICAL)
         {
             typeName = "Metaphysical";
         }
-        // Sets Hunting Zone to all rooms.
-        huntingZone = levelManager1.GetAllRooms();
         // Initailzes ghost in passive mode.
         huntingMode = false;
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
-        //Adds Capsule collider for ghost if one doesn't exist.
+        // Adds Capsule collider for ghost if one doesn't exist.
         if (GetComponent<Collider>() == null)
         {
             CapsuleCollider collider = gameObject.AddComponent<CapsuleCollider>();
             collider.isTrigger = true;
+        }
+        // Set player Transform if null
+        if (player == null)
+        {
+            player = GameObject.FindWithTag("Player").transform;
+        }
+        // Gets collider from Player Body
+        Collider col = null;
+        foreach (Transform child in player)
+        {
+            if (child.name == "Player Body")
+            {
+                col = child.GetComponent<Collider>();
+            }
         }
     }
     // Update is called once per frame
@@ -337,15 +315,6 @@ public class Ghost : MonoBehaviour
         // Ghost's distance from player.
         float distanceFromPlayer = Vector3.Distance(transform.position, player.transform.position);
         difficultyLevel = Mathf.Clamp(difficultyLevel, 1, 5);
-        //Gets collider from Player Body
-        Collider col = null;
-        foreach (Transform child in player)
-        {
-            if (child.name == "Player Body")
-            {
-                col = child.GetComponent<Collider>();
-            }
-        }
         // When aggression increases enough, hunting mode turns on.
         if (aggression > aggressionThreshold)
         {
@@ -363,10 +332,7 @@ public class Ghost : MonoBehaviour
             huntingTimer += Time.deltaTime;
             // Tracks current room 
             currentRoom = levelManager1.GetRoomFromPosition(transform.position);
-            // Gets model or first child
-            GameObject child = transform.GetChild(0).gameObject;
-            // Enables model
-            child.GetComponent<Renderer>().enabled = true;
+            ghostModel.SetActive(true);
             //Sets the minimum time a ghost will be hunting you for. Turns off hunting mode after that time.
             bool validRoom = false;
             if (huntingTimer < 30f)
@@ -386,12 +352,12 @@ public class Ghost : MonoBehaviour
                         // Every ten seconds in Hunting Mode, changes the Ghost's speed depending on ghost type.
                         if (huntingTimer >= 10f)
                         {
-                            if (psychologicalType)
+                            if (type == GhostType.PSYCHOLOGICAL)
                             {
                                 // Randomly changes speed every 10 seconds
                                 moveSpeed = Random.Range(1, 3);
                             }
-                            if (biologicalType)
+                            if (type == GhostType.BIOLOGICAL)
                             {
                                 // if difficulty is below lvl3, lowers moveSpeed every 10 seconds
                                 if (difficultyLevel < 3 && moveSpeed >= 2)
@@ -402,6 +368,7 @@ public class Ghost : MonoBehaviour
                         }
                         // Ghost moves towards player
                         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+                        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
                     }
                     // If the room the ghost is in is not a valid room, ghost will spawn into a random point within hunting zone and end of hunting mode occurs
                     else
@@ -423,6 +390,9 @@ public class Ghost : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    /// If players in ghost, aggression plus plus.
+    /// </summary>
     private void OnTriggerEnter(Collider col)
     {
         if (!huntingMode)
@@ -451,11 +421,49 @@ public class Ghost : MonoBehaviour
         return typeName;
     }
     /// <summary>
+    /// Sets enum type of ghost.
+    /// </summary>
+    public void SetGhostType(GhostType ghostType)
+    {
+        type = ghostType;
+    }
+    /// <summary>
+    /// Sets enum type of ghost based on integer.
+    /// </summary>
+    public void SetGhostType(int randNum)
+    {
+        if (randNum == 1)
+        { type = GhostType.PSYCHOLOGICAL; }
+        else if (randNum == 2)
+        { type = GhostType.BIOLOGICAL; }
+        else if (randNum == 3)
+        { type = GhostType.METAPHYSICAL; }
+    }
+    /// <summary>
+    /// Sets enum type of ghost based on string.
+    /// </summary>
+    public void SetGhostType(string a)
+    {
+        if (a == "P" || a == "PSYCH")
+        { type = GhostType.PSYCHOLOGICAL; }
+        else if (a == "B" || a == "BIO")
+        { type = GhostType.BIOLOGICAL; }
+        else if (a == "M" || a == "META" || a == "PHYS")
+        { type = GhostType.METAPHYSICAL; }
+    }
+    /// <summary>
     /// Returns difficulty level as an integer (1-5)
     /// </summary>
     public int GetDifficulty()
     {
         return difficultyLevel;
+    }
+    /// <summary>
+    /// Sets difficulty level as an integer (forced to be between 1-5).
+    /// </summary>
+    public void SetDifficulty(int level)
+    {
+        difficultyLevel = Mathf.Clamp(level, 1, 5);
     }
     /// <summary>
     /// Returns the room the ghost is currently in.
@@ -471,7 +479,6 @@ public class Ghost : MonoBehaviour
     {
         return transform.position;
     }
-
     /// <summary>
     /// Returns boolean for if ghost is in hunting mode or not
     /// </summary>
@@ -479,7 +486,6 @@ public class Ghost : MonoBehaviour
     {
         return huntingMode;
     }
-
     /// <summary>
     /// Turns Ghost Hunting Mode off
     /// </summary>
@@ -499,7 +505,7 @@ public class Ghost : MonoBehaviour
     /// </summary>
     public void IncreaseAggression(int increase)
     {
-        aggression=aggression+ increase;
+        aggression += increase;
     }
     /// <summary>
     /// Increases aggresssion by integer input, by a factor of the second argument (time in seconds)
@@ -516,10 +522,62 @@ public class Ghost : MonoBehaviour
         }
     }
     /// <summary>
-    /// Returns EMF level
+    /// Returns aggresion threshold.
     /// </summary>
-    public int GetEmfLevel()
+    public int GetAggressionThreshold()
     {
-        return emfLevel;
+        return aggressionThreshold;
+    }
+    /// <summary>
+    /// Sets aggresion threshold based on input number.
+    /// </summary>
+    public void SetAggressionThreshold(int newThreshold)
+    {
+        aggressionThreshold = newThreshold; 
+    }
+    /// <summary>
+    /// Lowers aggresion threshold based on input number.
+    /// </summary>
+    public void LowerAggressionThreshold(int lowerBy)
+    {
+        aggressionThreshold -= lowerBy;
+    }
+    /// <summary>
+    /// Sets body type/model for ghost. true - fem, masc - false
+    /// </summary>
+    public string GetBodyType()
+    {
+        if (bodyTypeF == true)
+        {
+            return "Female";
+        }
+        return "Male";
+    }
+    /// <summary>
+    /// Sets body type/model for ghost. true - fem, masc - false
+    /// </summary>
+    public void SetBodyType(bool body)
+    {
+        bodyTypeF = body;
+        // Fem Model ON
+        if (bodyTypeF == true)
+        {
+            ghostModel = femModel;
+        }
+        // Masc Model ON
+        else
+        {
+            ghostModel = mascModel;
+        }
+    }
+    /// <summary>
+    /// Sets body type/model for ghost. true - fem, masc - false
+    /// </summary>
+    public void SetHuntingZone(System.Collections.Generic.List<Room> huntingArea)
+    {
+        foreach (Room room in huntingArea)
+        {
+            huntingZone.Add(room);
+        }
     }
 }

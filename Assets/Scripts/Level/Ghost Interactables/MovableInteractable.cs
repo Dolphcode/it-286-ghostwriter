@@ -30,6 +30,7 @@ public class MovableInteractable : GhostInteractable
             transform.DORotate(new Vector3(-70, transform.eulerAngles.y, transform.eulerAngles.z), 3).SetEase(testCurve);
             interactable = false;
             cooldown = 4f;
+            m_TriggerCapture.Invoke(this);
         }
 
         if (cooldown > 0f)
