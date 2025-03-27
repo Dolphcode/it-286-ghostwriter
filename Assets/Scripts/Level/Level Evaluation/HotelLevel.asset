@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21d27869f4d66ca45984fb5c33d4b25c, type: 3}
+  m_Name: HotelLevel
+  m_EditorClassIdentifier: 
+  floorCount: 1
+  corridorSize: 4
+  centralAreaWidth: 10
+  corridorWidth: 6
+  roomUnitSize: 10
+  floorVerticalDistance: 8
+  corridorHeight: 6
+  tileWidth1Prefabs:
+  - {fileID: 5840150343080833524, guid: 05d5d724eb8e5e34b89d34064afbb9f7, type: 3}
+  tileWidth2Prefabs: []
+  tileWidth3Prefabs: []
+  stairwellBase: {fileID: 5354760294184352756, guid: cc5118e5994f3f340977a199c9462b8b, type: 3}
+  stairwellMid: {fileID: 0}
+  stairwellBlocked: {fileID: 0}
+  corridorPiece: {fileID: 5332153228439162159, guid: ffd4731a7cf20cc49b913473d858944d, type: 3}
+  corridorPrefab: {fileID: 5840150343080833524, guid: b8786b0247a577947a17db8e3acde116, type: 3}
+  centerPrefab: {fileID: 5840150343080833524, guid: 8251068055c70764f973226ac8a28913, type: 3}

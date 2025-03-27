@@ -18,6 +18,15 @@ public class RoomLightInteractable : GhostInteractable
     /// </summary>
     private bool storedState = false;
 
+    /// <summary>
+    /// Append a lit mesh to this room light interactable's lit mesh list
+    /// </summary>
+    /// <param name="mesh">The mesh renderer to be appended</param>
+    public void AddLitMesh(MeshRenderer mesh)
+    {
+        litMeshes.Add(mesh);
+    }
+
     private void Awake()
     {
         storedState = currentState;
