@@ -41,11 +41,11 @@ public class ShopManager : MonoBehaviour
 
         // Item Cost
         
-          shopItems[2, 1] = 999;
+          shopItems[2, 1] = 1000;
           shopItems[2, 2] = 300;
           shopItems[2, 3] = 400;
           shopItems[2, 4] = 200;
-          shopItems[2, 5] = 666;
+          shopItems[2, 5] = 600;
 
         // Quantity
         //Left at 0 for now, should try to make it change to how many the player has currently.
@@ -73,17 +73,19 @@ public class ShopManager : MonoBehaviour
         GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
         if(levelDataManager.SpendMoney(shopItems[2,ButtonRef.GetComponent<ButtonInfo>().itemID]))
         {
-            levelDataManager.RemoveMoney(shopItems[2, ButtonRef.GetComponent<ButtonInfo>().itemID]);
+            Debug.Log("Purchasing");
         }
 
         else
         {
+            Debug.Log("Not Enough Money");
             return;
         }
         shopItems[3, ButtonRef.GetComponent<ButtonInfo>().itemID]++;
         levelDataManager.AddItem(ButtonRef.GetComponent<ButtonInfo>().itemID);
+        levelDataManager.BringItem(ButtonRef.GetComponent<ButtonInfo>().itemID);
         moneyTxt.text = "Money: $" + levelDataManager.GetMoney().ToString();
         ButtonRef.GetComponent<ButtonInfo>().quantityTxt.text = shopItems[3, ButtonRef.GetComponent<ButtonInfo>().itemID].ToString();
-        Debug.Log("Purchasing");
+        
     }
 }

@@ -22,4 +22,4 @@ MonoBehaviour:
   isEquiped: 0
   isOn: 0
   durability: 0
-  itemCost: 999
+  itemCost: 1000

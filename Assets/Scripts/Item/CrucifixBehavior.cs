@@ -1,8 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class CrucifixBehavior : ItemBehavior
 {
     Ghost ghost;
+    private bool isCounting;
+    private float currentTime;
     void Start()
     {
         ghost = FindAnyObjectByType<Ghost>();
@@ -10,23 +13,34 @@ public class CrucifixBehavior : ItemBehavior
 
     public override void Interact()
     {
-        /*if (ghost.IsGhostHunting())
-        //{ 
-            ghost.GhostHuntOff();
-        }
-        else
-        {
-           new WaitForSeconds(3f);
-        }
-        */
-        new WaitForSeconds(7f);
-        ghost.IncreaseAggression(1, 2, 10);
-        Debug.Log("Ghost Agression Increased");
+        StartCoroutine(Compel(10));
     }
     public override void Load(ItemData itemData)
     {
         itemData.Behavior = this;
         data = itemData;
+    }
+    /// <summary>
+    /// Waits for <paramref name="time"/> seconds to pass and then increases ghost agression.
+    /// If the ghost is hunting, it turns the hunting mode off. The ghost will then gain 5 agression in 10 seconds.
+    /// If the Ghost is not hunting, the ghost gains agression in 5 seconds.
+    /// </summary>
+    /// <param name="time"> Amount of Seconds to count for </param>
+    private IEnumerator Compel(int time)
+    {
+        if (ghost.IsGhostHunting())
+        {
+            Debug.Log("Stopped Ghost From Hunting");
+            ghost.GhostHuntOff();
+        }
+        else
+        {
+            Debug.Log("Ghost Was Not Hunting");
+            time -= 5;
+        }
+        yield return new WaitForSeconds(time);
+        ghost.IncreaseAggression(5);
+        Debug.Log("Ghost Agression Increased");
     }
 
     public override void Unload()
@@ -34,9 +48,4 @@ public class CrucifixBehavior : ItemBehavior
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
