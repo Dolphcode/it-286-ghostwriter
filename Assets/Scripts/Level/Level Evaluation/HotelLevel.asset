@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d27869f4d66ca45984fb5c33d4b25c, type: 3}
   m_Name: HotelLevel
   m_EditorClassIdentifier: 
-  floorCount: 1
-  corridorSize: 4
+  floorCount: 4
+  corridorSize: 7
   centralAreaWidth: 10
   corridorWidth: 6
   roomUnitSize: 10

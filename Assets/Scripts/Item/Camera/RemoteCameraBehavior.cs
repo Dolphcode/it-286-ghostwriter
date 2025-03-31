@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.IO;
 
 public class RemoteCameraBehavior : ItemBehavior
 {
@@ -54,6 +55,10 @@ public class RemoteCameraBehavior : ItemBehavior
 
                 CaptureData data = levelManager.GetCaptureManager().CaptureImage(image, camReference);
                 data.remoteCapture = true;
+
+                var bytes = image.EncodeToPNG();
+                File.WriteAllBytes(Application.dataPath + "/Captures/" + data.timestamp.ToShortDateString().Replace("/", "-") + "-" +
+                    data.timestamp.ToLongTimeString().Replace(":", "-").Replace(" ", "-") + ".png", bytes);
             }
         }
 
