@@ -83,7 +83,7 @@ public class ShopManager : MonoBehaviour
         }
         shopItems[3, ButtonRef.GetComponent<ButtonInfo>().itemID]++;
         levelDataManager.AddItem(ButtonRef.GetComponent<ButtonInfo>().itemID);
-        levelDataManager.BringItem(ButtonRef.GetComponent<ButtonInfo>().itemID);
+        //levelDataManager.BringItem(ButtonRef.GetComponent<ButtonInfo>().itemID);
         moneyTxt.text = "Money: $" + levelDataManager.GetMoney().ToString();
         ButtonRef.GetComponent<ButtonInfo>().quantityTxt.text = shopItems[3, ButtonRef.GetComponent<ButtonInfo>().itemID].ToString();
         

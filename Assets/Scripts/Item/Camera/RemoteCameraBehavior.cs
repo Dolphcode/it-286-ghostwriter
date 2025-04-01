@@ -26,7 +26,10 @@ public class RemoteCameraBehavior : ItemBehavior
         renderMesh.material.mainTexture = tex;
     }
 
-    
+    public void Start()
+    {
+        levelManager = FindAnyObjectByType<LevelManager>();
+    }
 
     public override void Interact() {}
 

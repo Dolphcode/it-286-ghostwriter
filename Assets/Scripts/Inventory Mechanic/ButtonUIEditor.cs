@@ -1,4 +1,5 @@
 using UnityEngine;
+/*
 using UnityEditor;
 
 [CustomEditor(typeof(ButtonAction))]
@@ -43,4 +44,4 @@ public class ButtonUIEditor : Editor
         }
         serializedObject.ApplyModifiedProperties();
     }
-}
+}*/

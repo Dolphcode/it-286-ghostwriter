@@ -1,8 +1,12 @@
+using TMPro;
 using UnityEngine;
 
 public class EMFBehavior : ItemBehavior
 {
-    
+
+    [SerializeField]
+    TextMeshProUGUI m_TextMeshProUGUI;
+
     Ghost ghosty;
     public override void Interact()
     {
@@ -42,6 +46,11 @@ public class EMFBehavior : ItemBehavior
     // Update is called once per frame
     void Update()
     {
+        if (ghosty == null)
+        {
+            ghosty = FindAnyObjectByType<Ghost>();
+        }
+
         //Finds if player is in same room as ghost
         if (data.isOn)
         {
@@ -49,13 +58,16 @@ public class EMFBehavior : ItemBehavior
             Debug.Log(levelManager.IsGhostInRoom(levelManager.GetRoomFromPosition(transform.position)));
             if (levelManager.IsGhostInRoom(levelManager.GetRoomFromPosition(transform.position)))
             {
-                //For now, returns true if player is in room 3
-                // Debug.Log("Beep Beep");
-
-
                 Debug.Log(ghosty.GetEmf());
+                m_TextMeshProUGUI.text = ghosty.GetEmf().ToString();
 
+            } else
+            {
+                m_TextMeshProUGUI.text = "0";
             }
+        } else
+        {
+            m_TextMeshProUGUI.text = "";
         }
         //Debug.Log(levelManager.GetRoomFromPosition(transform.position).name);
     }
