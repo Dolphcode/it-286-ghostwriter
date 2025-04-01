@@ -19,8 +19,14 @@ public class HandheldCameraBehavior : ItemBehavior
         camReference.targetTexture = tex;
         renderMesh.material.mainTexture = tex;
     }
+
+    public void Start()
+    {
+        levelManager = FindAnyObjectByType<LevelManager>();
+    }
     public override void Interact()
     {
+
         RenderTexture currentRT = RenderTexture.active;
         RenderTexture.active = camReference.targetTexture;
 
@@ -31,7 +37,11 @@ public class HandheldCameraBehavior : ItemBehavior
         image.Apply();
         RenderTexture.active = currentRT;
 
-        levelManager.GetCaptureManager().CaptureImage(image, camReference);
+        CaptureData data = levelManager.GetCaptureManager().CaptureImage(image, camReference);
+
+        var bytes = image.EncodeToPNG();
+        File.WriteAllBytes(Application.dataPath + "/Captures/" + data.timestamp.ToShortDateString().Replace("/","-") + "-" + 
+            data.timestamp.ToLongTimeString().Replace(":","-").Replace(" ","-") + ".png", bytes);
     }
 
     public override void Load(ItemData itemData)
@@ -43,12 +53,6 @@ public class HandheldCameraBehavior : ItemBehavior
     public override void Unload()
     {
         Debug.Log("Camera unloaded");
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Event
   - CameraItem
+  - LitMesh
   layers:
   - Default
   - TransparentFX

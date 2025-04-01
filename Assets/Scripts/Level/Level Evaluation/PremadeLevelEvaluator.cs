@@ -7,7 +7,7 @@ using UnityEngine;
 /// no room generation/procedural generation whatsoever). In this case, all we
 /// need to do is build the navmesh.
 /// </summary>
-[CreateAssetMenu(fileName = "Unnamed Level Evaluator", menuName = "Scriptable Objects/Premade Level Evaluator")]
+[CreateAssetMenu(fileName = "Unnamed Level Evaluator", menuName = "Level Evaluators/Premade Level Evaluator")]
 public class PremadeLevelEvaluator : LevelEvaluator
 {
     public override List<Room>[] InitializeInterior(GameObject g, int zones)

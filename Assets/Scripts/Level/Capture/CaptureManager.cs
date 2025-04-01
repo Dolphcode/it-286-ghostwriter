@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CaptureManager : MonoBehaviour
 {
@@ -21,16 +23,76 @@ public class CaptureManager : MonoBehaviour
     private bool debug = false;
     [SerializeField]
     private Canvas debugCanvas;
+    [SerializeField]
+    private TextMeshProUGUI remoteTimestampLabel;
+    [SerializeField]
+    private TextMeshProUGUI remoteScoreLabel;
+    [SerializeField]
+    private TextMeshProUGUI handheldTimestampLabel;
+    [SerializeField]
+    private TextMeshProUGUI handheldScoreLabel;
+    [SerializeField]
+    private Image remoteIcon;
+    [SerializeField]
+    private Image handheldIcon;
+
 
     [SerializeField] 
     private List<CaptureData> captures;
 
     public void Awake()
     {
+        if (debug)
+        {
+            debugCanvas.enabled = true;
+        } else
+        {
+            debugCanvas.enabled = false;
+        }
         behaviors = new List<ItemBehavior>();
         interactables = new List<GhostInteractable>();
         ghosts = new List<Ghost>();
         capturables = new List<Capturable>();
+    }
+
+    public void Update()
+    {
+        if (debug)
+        {
+            bool handheldFound = false, remoteFound = false;
+            for (int i = captures.Count() - 1; i >= 0; --i)
+            {
+                if (captures[i].remoteCapture && !remoteFound)
+                {
+                    remoteFound = true;
+                    remoteIcon.sprite = Sprite.Create(captures[i].capture, new Rect(0, 0, 320, 240), new Vector2(0, 0));
+                    remoteScoreLabel.text = captures[i].score.ToString();
+                    remoteTimestampLabel.text = captures[i].timestamp.ToShortTimeString();
+                } else if (!handheldFound)
+                {
+                    handheldFound = true;
+                    handheldIcon.sprite = Sprite.Create(captures[i].capture, new Rect(0, 0, 320, 240), new Vector2(0, 0));
+                    handheldScoreLabel.text = captures[i].score.ToString();
+                    handheldTimestampLabel.text = captures[i].timestamp.ToShortTimeString();
+                }
+
+                if (remoteFound && handheldFound) break;
+            }
+
+            if (!handheldFound)
+            {
+                handheldIcon.sprite = null;
+                handheldScoreLabel.text = "";
+                handheldTimestampLabel.text = "";
+            }
+
+            if (!remoteFound)
+            {
+                remoteIcon.sprite = null;
+                remoteScoreLabel.text = "";
+                remoteTimestampLabel.text = "";
+            }
+        }
     }
 
     /// <summary>

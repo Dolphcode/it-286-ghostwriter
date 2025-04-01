@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
@@ -13,7 +14,7 @@ public enum GhostType
 {
     PSYCHOLOGICAL, BIOLOGICAL, METAPHYSICAL
 }
-public class Ghost : MonoBehaviour
+public class Ghost : Capturable
 {
     ///<summary>
     ///Target the ghost is chasing.
@@ -79,7 +80,7 @@ public class Ghost : MonoBehaviour
     ///EMF variable.
     ///</summary>
     [SerializeField]
-    private int emf;
+    private int emf = 1;
     ///<summary>
     /// EMF Player has to track (highest EMF)
     ///</summary>
@@ -113,7 +114,7 @@ public class Ghost : MonoBehaviour
     ///Level manager.
     ///</summary>
     [SerializeField]
-    private LevelManager levelManager1;
+    public LevelManager levelManager1;
     private float aggroTimer = 0f;
     private float interactTimer = 0f;
     private float teleportTimer = 0f;
@@ -144,12 +145,9 @@ public class Ghost : MonoBehaviour
     {
         Debug.Log("OBJECT INTERACT");
         //random chance of interact happening
-        bool doesInteract = Random.Range(0, 2) == 0;
-        int randInteract = Random.Range(0, currentRoom.FilterInteractables(GhostInteractableType.Fingerprint, GhostInteractableType.Movable).Count);
-        if (doesInteract)
-        {
-            currentRoom.FilterInteractables(GhostInteractableType.Fingerprint, GhostInteractableType.Movable)[randInteract].interact();
-        }
+        int randInteract = Random.Range(0, currentRoom.FilterInteractables(GhostInteractableType.Lights, GhostInteractableType.Fingerprint, GhostInteractableType.Movable).Count);
+        currentRoom.FilterInteractables(GhostInteractableType.Lights, GhostInteractableType.Fingerprint, GhostInteractableType.Movable)[randInteract].interact();
+
     }
     ///<summary>
     ///Ghost will teleport to an adjacent rooom once every given input time (float) if room is within hunting zone
@@ -199,11 +197,12 @@ public class Ghost : MonoBehaviour
     ///</summary>
     private void Roam()
     {
-        // does this make sense chat. see: aggressionThreshold/5
-        if (aggression < aggressionThreshold/5 && emf < 5)
+        int thresholdChange = aggressionThreshold / 5;
+        if (aggression < thresholdChange && emf < 5)
         {
             emf++;
             emfPeak = emf;
+            thresholdChange += thresholdChange;
         }
         teleportTimer += Time.deltaTime;
         interactTimer += Time.deltaTime;
@@ -225,30 +224,28 @@ public class Ghost : MonoBehaviour
         {
             GhostTeleportsAdjacentRoom(90f);
             //takes longer, less chance = harder
-            GhostInteracts(180f, 0.25);
+            GhostInteracts(15f, 0.25);
         }
         // When ghost is in second half of aggression threshold
         else if (aggression < aggressionThreshold)
         {
             GhostTeleportsAdjacentRoom(50f);
-            GhostInteracts(100f, 0.5);
+            GhostInteracts(10f, 0.5);
         }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
+        m_TriggerCapture = new UnityEvent<Capturable>();
         // care the Female_Ghost vs Female Ghost (same w male)
-        femModel = transform.Find("Female Ghost")?.gameObject;
-        mascModel = transform.Find("Male Ghost")?.gameObject;
+        femModel = transform.Find("Female_Ghost")?.gameObject;
+        mascModel = transform.Find("Male_Ghost")?.gameObject;
         if (femModel == null || mascModel == null)
         {
             Debug.LogError("dawg where my gender at.");
         }
         // Sets the current room ghost is in to spawn room.
-        currentRoom = levelManager1.SelectRandomRoom();
-        huntingZone.Add(currentRoom);
-        huntingZone.Add(currentRoom.SelectRandomAdjacentRoom());
-        SetGhostPosition(currentRoom.SelectRandomSpawnPoint());
+        
         // Sets aggressionThreshold to 1
         aggressionThreshold = 1;
         // Sets aggression to 0.
@@ -329,6 +326,8 @@ public class Ghost : MonoBehaviour
 
         if (huntingMode)
         {
+            m_TriggerCapture.Invoke(this);
+
             huntingTimer += Time.deltaTime;
             // Tracks current room 
             currentRoom = levelManager1.GetRoomFromPosition(transform.position);
@@ -579,5 +578,17 @@ public class Ghost : MonoBehaviour
         {
             huntingZone.Add(room);
         }
+        currentRoom = levelManager1.SelectRandomRoom();
+        SetGhostPosition(currentRoom.SelectRandomSpawnPoint());
+    }
+
+    public override GameObject GetCheckObject()
+    {
+        return gameObject;
+    }
+
+    public override int GetCaptureScore(float rayProp, CaptureData data)
+    {
+        return (IsGhostHunting() ? 5 : 2);
     }
 }
