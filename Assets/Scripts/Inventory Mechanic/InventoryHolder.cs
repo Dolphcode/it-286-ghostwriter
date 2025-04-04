@@ -51,6 +51,7 @@ public class InventoryHolder : MonoBehaviour
 
     public void Update()
     {
+        /* moved this to camcontrol
         // Interact Button
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -69,26 +70,8 @@ public class InventoryHolder : MonoBehaviour
                     Debug.Log("Storage open");
                 }
             }
-        }
-        // Left Mouse Click
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray,out lookingAt))
-            {
-                if (lookingAt.collider.gameObject.GetComponent<ButtonAction>() != null)
-                {
-                    lookingAt.collider.gameObject.GetComponent<ButtonAction>().Button_clicked();
-                }
-            }
-
-            if (GetHeldItem() != null)
-            {
-                GetHeldItem().GetComponent<ItemBehavior>().Interact();
-            }
-        }
-        //Debug.Log("looking At " + lookingAt.collider);
+        }*/ 
+        
 
         // Throw item
         if (Input.GetKeyDown(KeyCode.G))

@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.Events;
 
-public class ButtonAction : MonoBehaviour
+public class ButtonAction : PlayerInteractable
 {
     public enum ButtonType { ComputerButton, ShopItem, WorldButton }
     
@@ -16,6 +17,14 @@ public class ButtonAction : MonoBehaviour
 
     // For shop UI
     public ItemData itemShop;
+
+    public UnityEvent _OnClick;
+
+    public override void interact()
+    {
+        //Button_clicked();
+        _OnClick.Invoke();
+    }
 
     // When the button is interacted with, turn on the targeted ui and turn off all other ui screens
     public void Button_clicked()
