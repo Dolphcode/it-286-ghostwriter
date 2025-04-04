@@ -32,6 +32,7 @@ public class InventoryHolder : MonoBehaviour
     {
         inventorySystem = gameObject.AddComponent<Inventory>();
         inventorySystem.inventorySlotPrefab = inventorySlotPrefab;
+        Debug.Log("creating the inventory");
         inventorySystem.CreateInventory(inventorySize);
         inventorySystem.InventorySlots[0].holdOut = true;
     }

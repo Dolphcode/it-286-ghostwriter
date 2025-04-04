@@ -531,7 +531,7 @@ PrefabInstance:
     - target: {fileID: 131952063703746883, guid: 73aacdf37346c7f41bf4f0dc09e91b82, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 5884321451958075205}
+      objectReference: {fileID: 6630907220244335935}
     - target: {fileID: 131952063703746883, guid: 73aacdf37346c7f41bf4f0dc09e91b82, type: 3}
       propertyPath: orientation
       value: 
