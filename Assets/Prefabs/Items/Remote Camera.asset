@@ -15,7 +15,7 @@ MonoBehaviour:
   ID: 0
   Name: Remote Camera
   Description: A camera pre-equipped with sensors for detecting paranormal activity
-  Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  Icon: {fileID: 21300000, guid: 9f6dbc8b16857f443a129a371b2e5cdb, type: 3}
   Item: {fileID: 2686501479970085783, guid: 1e82f1024dd94674a874d03fffd22352, type: 3}
   Behavior: {fileID: 0}
   heldItemPosition: {x: 0.19, y: -0.11, z: 0.66}

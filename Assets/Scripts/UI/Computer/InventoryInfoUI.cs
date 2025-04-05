@@ -68,5 +68,6 @@ public class InventoryInfoUI : MonoBehaviour
         totalItemCountLabel.text = totalItems.ToString();
         countLabel.text = levelDataManager.GetItemCount(selectedItemIndex).ToString();
         nameLabel.text = levelDataManager.GetItemInfo(selectedItemIndex).Name.ToString();
+        icon.sprite = levelDataManager.GetItemInfo(selectedItemIndex).Icon;
     }
 }

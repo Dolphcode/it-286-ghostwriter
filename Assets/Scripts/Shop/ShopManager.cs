@@ -15,6 +15,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI qtyTxt;
     [SerializeField] private TextMeshProUGUI descTxt;
     [SerializeField] private Button purchaseBtn;
+    [SerializeField] private Image icon;
 
     // State
     private int selectedItem = 1; // Keeps track of which item is being viewed in the shop UI
@@ -86,6 +87,7 @@ public class ShopManager : MonoBehaviour
         priceTxt.text = "Price: $" + (shopItems[2, selectedItem]).ToString();
         qtyTxt.text = "Owned: " + (levelDataManager.GetOwnedCount(selectedItem)).ToString();
         descTxt.text = levelDataManager.GetItemInfo(selectedItem).Description;
+        icon.sprite = levelDataManager.GetItemInfo(selectedItem).Icon;
 
         if (shopItems[2, selectedItem] <= levelDataManager.GetMoney())
         {

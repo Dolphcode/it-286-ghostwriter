@@ -15,7 +15,7 @@ MonoBehaviour:
   ID: 3
   Name: EMF Reader
   Description: Measures and detects fluctuations in background EMF
-  Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  Icon: {fileID: 21300000, guid: 41813e4bda2ab8147bd3b05be91b88eb, type: 3}
   Item: {fileID: 4094513679903417089, guid: cef0cff88427a2840bc5f2d5fc29143a, type: 3}
   Behavior: {fileID: 4946792872829545759, guid: cef0cff88427a2840bc5f2d5fc29143a, type: 3}
   heldItemPosition: {x: 0.22, y: -0.3, z: 0.52}
