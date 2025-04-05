@@ -57,6 +57,7 @@ public class LevelLoader : MonoBehaviour
     public bool levelReady { get; private set; } = false;
 
     private float progress = 0f;
+    private LevelManager levelManager;
 
     // Initialize the static levelloader instance
     void Awake()
@@ -120,6 +121,7 @@ public class LevelLoader : MonoBehaviour
     {
         Time.timeScale = 1f;
         levelLoadingScreen.enabled = false;
+        levelManager.levelStarted = true;
     }
 
     /// <summary>
@@ -155,7 +157,7 @@ public class LevelLoader : MonoBehaviour
         unload_progress = asyncUnload.progress;
 
         // Get the level manager
-        LevelManager levelManager = FindAnyObjectByType<LevelManager>();
+        levelManager = FindAnyObjectByType<LevelManager>();
 
         // Load the level with level evaluator
         levelManager.InitializeLevel(eval);

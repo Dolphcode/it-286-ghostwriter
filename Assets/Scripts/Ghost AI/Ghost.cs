@@ -307,6 +307,9 @@ public class Ghost : Capturable
     // Update is called once per frame
     private void Update()
     {
+        // DO NOT DO ANYTHING until level is started
+        if (levelManager1 == null || !levelManager1.levelStarted) return;
+
         // Tracks current room 
         currentRoom = levelManager1.GetRoomFromPosition(transform.position);
         Debug.Log("currentRoom: " + currentRoom.name);

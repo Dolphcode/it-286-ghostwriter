@@ -60,7 +60,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private Transform[] itemSpawnPoints;
 
+    // State
     List<Room>[] zones;
+    public bool levelStarted = false;
     private void Awake()
     {
         // This will run level generation/initialization
