@@ -52,8 +52,21 @@ public class CamControl : MonoBehaviour
         // Always be checking raycast
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
+        
+
         if (Physics.Raycast(ray, out lookingAt))
         {
+            // Check for pickups
+            if (lookingAt.collider != null)
+            {
+                if (lookingAt.collider.GetComponent<ItemBehavior>() != null && Input.GetKeyDown(KeyCode.E))
+                {
+                    inventory.InventorySystem.PickUpItem(lookingAt.collider.GetComponent<ItemBehavior>(), inventory.itemContainer);
+                    Debug.Log("Picking up item");
+                }
+            }
+
+            // Check for player interactable
             if (lookingAt.collider.gameObject.GetComponent<PlayerInteractable>() != null)
             {
                 // Check if we're clicking a button
@@ -91,14 +104,11 @@ public class CamControl : MonoBehaviour
         // Left Mouse Click
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            
-
             if (inventory.GetHeldItem() != null)
             {
                 inventory.GetHeldItem().GetComponent<ItemBehavior>().Interact();
             }
         }
-
 
     }
 }
