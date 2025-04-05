@@ -70,6 +70,13 @@ public class Room : MonoBehaviour
         boundingBox.center = transform.position + GetComponent<BoxCollider>().center;
     }
 
+    public void ResetBounds()
+    {
+        boundingBox = new Bounds();
+        boundingBox.extents = GetComponent<BoxCollider>().size;
+        boundingBox.center = transform.position + GetComponent<BoxCollider>().center;
+    }
+
     // Functions to be called by the ghost behavior manager
 
     /// <summary>
