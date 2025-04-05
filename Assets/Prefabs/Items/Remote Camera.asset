@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 0
   Name: Remote Camera
+  Description: A camera pre-equipped with sensors for detecting paranormal activity
   Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   Item: {fileID: 2686501479970085783, guid: 1e82f1024dd94674a874d03fffd22352, type: 3}
   Behavior: {fileID: 0}
@@ -22,3 +23,4 @@ MonoBehaviour:
   isEquiped: 0
   isOn: 0
   durability: 0
+  itemCost: 0

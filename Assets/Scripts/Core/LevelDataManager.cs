@@ -14,6 +14,9 @@ public class LevelDataManager : MonoBehaviour
     [SerializeField]
     private int maxItems = 10;
 
+    public int TemplateCount { private set { }
+        get { return itemTemplates.Count; } }
+
     [SerializeField]
     private int playerMoney = 10000;
 

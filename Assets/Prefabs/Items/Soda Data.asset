@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Soda Data
   m_EditorClassIdentifier: 
   ID: 4
-  Name: Item
+  Name: Soda
+  Description: Soda. It's so-damn good
   Icon: {fileID: 0}
   Item: {fileID: 4847825559594920050, guid: b1ee5c3683b99594e83fcc888388df68, type: 3}
   Behavior: {fileID: 4285149418881093880, guid: b1ee5c3683b99594e83fcc888388df68, type: 3}

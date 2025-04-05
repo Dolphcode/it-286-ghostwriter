@@ -82,10 +82,10 @@ public class ShopManager : MonoBehaviour
         moneyTxt.text = "Money: $" + levelDataManager.GetMoney().ToString();
 
         // Display item info
-        itemTxt.text = levelDataManager.GetItemInfo(selectedItem).name;
+        itemTxt.text = levelDataManager.GetItemInfo(selectedItem).Name;
         priceTxt.text = "Price: $" + (shopItems[2, selectedItem]).ToString();
         qtyTxt.text = "Owned: " + (levelDataManager.GetOwnedCount(selectedItem)).ToString();
-        //descTxt.text = levelDataManager.GetItemInfo(selectedItem).;
+        descTxt.text = levelDataManager.GetItemInfo(selectedItem).Description;
 
         if (shopItems[2, selectedItem] <= levelDataManager.GetMoney())
         {
@@ -125,6 +125,7 @@ public class ShopManager : MonoBehaviour
         if (levelDataManager.SpendMoney(shopItems[2, selectedItem]))
         {
             Debug.Log("Purchasing");
+            levelDataManager.AddItem(selectedItem);
         }
 
         else
@@ -133,6 +134,6 @@ public class ShopManager : MonoBehaviour
             return;
         }
 
-        levelDataManager.AddItem(selectedItem);
+        
     }
 }

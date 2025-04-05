@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 5
   Name: Crucifix
+  Description: A Holy item said to be capable of deterring ghosts
   Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   Item: {fileID: 4094513679903417089, guid: b0ac9630c44846347a33fa676242e93a, type: 3}
   Behavior: {fileID: 3210643910149377038, guid: b0ac9630c44846347a33fa676242e93a, type: 3}
