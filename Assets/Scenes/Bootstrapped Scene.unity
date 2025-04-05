@@ -748,7 +748,7 @@ MonoBehaviour:
   readyLabel: {fileID: 25933819}
   backgroundImage: {fileID: 1712890484}
   loadscreenDataList:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: e927cad238317ef4ebee00a54c4c5305, type: 2}
   - {fileID: 11400000, guid: 36bf34e02e9d90547a30eefb3ab25aba, type: 2}
   - {fileID: 11400000, guid: eac0c834b66f5af46a39f5c54111f0af, type: 2}
 --- !u!4 &1156473804
