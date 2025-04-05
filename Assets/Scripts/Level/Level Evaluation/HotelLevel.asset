@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HotelLevel
   m_EditorClassIdentifier: 
   settingName: Hotel
-  sceneIndex: 2
+  sceneIndex: 3
   numGhosts: 1
   difficulty: 1
   floorCount: 1

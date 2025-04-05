@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BasicLevelEvaluator
   m_EditorClassIdentifier: 
   settingName: House
-  sceneIndex: 1
+  sceneIndex: 2
   numGhosts: 1
   difficulty: 1

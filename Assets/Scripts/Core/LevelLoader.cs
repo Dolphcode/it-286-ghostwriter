@@ -33,6 +33,7 @@ public static class PerformBootstrap
 public class LevelLoader : MonoBehaviour
 {
     public static LevelLoader _Instance { get; private set; } = null;
+    public int lobbyIndex = 1;
 
     private AsyncOperation asyncLoad = null;
 
@@ -150,7 +151,7 @@ public class LevelLoader : MonoBehaviour
         levelReady = false;
         Time.timeScale = 0f;
         // Load level
-        asyncLoad = SceneManager.LoadSceneAsync(0, LoadSceneMode.Additive);
+        asyncLoad = SceneManager.LoadSceneAsync(lobbyIndex, LoadSceneMode.Additive);
 
         float load_progress = 0f;
         float unload_progress = 0f;
@@ -162,7 +163,7 @@ public class LevelLoader : MonoBehaviour
         load_progress = asyncLoad.progress;
 
         // Unload main menu
-        if (loadedIndex > 0)
+        if (loadedIndex >= 0)
         {
             AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(loadedIndex);
 
@@ -203,7 +204,7 @@ public class LevelLoader : MonoBehaviour
         load_progress = asyncLoad.progress;
 
         // Unload main menu
-        AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(0);
+        AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(lobbyIndex);
 
         while (!asyncUnload.isDone)
         {

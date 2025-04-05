@@ -510,7 +510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf14f271e23f4e4e8f721a8f76a8481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuIndex: 4
+  mainMenuIndex: 0
 --- !u!1001 &466986674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -895,10 +895,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LevelSelectMenu, Assembly-CSharp
-        m_MethodName: StartLevelLoad
-        m_Mode: 3
+      - m_Target: {fileID: 378447775}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Alpha v0.1
+  m_text: BETA v0.2.1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: af5cdacb5da9c4e4b94142167b3e38cf, type: 2}
   m_sharedMaterial: {fileID: 5146161365279092845, guid: af5cdacb5da9c4e4b94142167b3e38cf, type: 2}
