@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd75f225961f46c45a30589b16880df4, type: 3}
   m_Name: BasicLevelEvaluator
   m_EditorClassIdentifier: 
+  settingName: House
+  sceneIndex: 1
+  numGhosts: 1
+  difficulty: 1

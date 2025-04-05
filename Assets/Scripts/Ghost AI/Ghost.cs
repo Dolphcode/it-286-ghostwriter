@@ -309,6 +309,7 @@ public class Ghost : Capturable
     {
         // Tracks current room 
         currentRoom = levelManager1.GetRoomFromPosition(transform.position);
+        Debug.Log("currentRoom: " + currentRoom.name);
         // Ghost's distance from player.
         float distanceFromPlayer = Vector3.Distance(transform.position, player.transform.position);
         difficultyLevel = Mathf.Clamp(difficultyLevel, 1, 5);
@@ -579,6 +580,7 @@ public class Ghost : Capturable
             huntingZone.Add(room);
         }
         currentRoom = levelManager1.SelectRandomRoom();
+
         SetGhostPosition(currentRoom.SelectRandomSpawnPoint());
     }
 

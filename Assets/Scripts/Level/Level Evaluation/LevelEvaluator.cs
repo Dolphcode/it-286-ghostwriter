@@ -9,6 +9,14 @@ using UnityEngine;
 /// </summary>
 public abstract class LevelEvaluator : ScriptableObject
 {
+    [Header("Level Metadata")]
+    public string settingName;
+    public int sceneIndex; // Which scene to load
+
+    [Header("Level Generation Config")]
+    public int numGhosts = 1;
+    public int difficulty = 1;
+
     /// <summary>
     /// A list of room references in the evaluator, used primarily by
     /// GetRoomFromPositions.
@@ -18,6 +26,11 @@ public abstract class LevelEvaluator : ScriptableObject
     {
         return rooms;
     }
+
+    /// <summary>
+    /// Call this to randomize the initial values of the evaluator instance
+    /// </summary>
+    public abstract void RandomizeValues();
 
     /// <summary>
     /// This method generates and initializes the interior structure of a
@@ -43,6 +56,7 @@ public abstract class LevelEvaluator : ScriptableObject
     {
         foreach (Room room in rooms)
         {
+            Debug.Log(globalPosition);
             if (room.GetBoundingBox().Contains(globalPosition))
             {
                 return room;

@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d27869f4d66ca45984fb5c33d4b25c, type: 3}
   m_Name: HotelLevel
   m_EditorClassIdentifier: 
-  floorCount: 4
+  settingName: Hotel
+  sceneIndex: 2
+  numGhosts: 1
+  difficulty: 1
+  floorCount: 1
   corridorSize: 7
   centralAreaWidth: 10
   corridorWidth: 6

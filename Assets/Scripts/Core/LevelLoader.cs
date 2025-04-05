@@ -96,7 +96,20 @@ public class LevelLoader : MonoBehaviour
         levelNameLabel.text = screenData.levelName;
         backgroundImage.sprite = screenData.backgroundImage;
         readyLabel.text = "";
-        StartCoroutine(LoadScene(index));
+        StartCoroutine(LoadScene(index, null));
+    }
+
+    public void LoadLevel(int index, LevelEvaluator eval)
+    {
+        progress = 0f;
+        levelLoadingScreen.enabled = true;
+        Debug.Log(index);
+        LevelLoadscreenData screenData = loadscreenDataList[index];
+        loadingDescriptionLabel.text = screenData.loadingDescription;
+        levelNameLabel.text = screenData.levelName;
+        backgroundImage.sprite = screenData.backgroundImage;
+        readyLabel.text = "";
+        StartCoroutine(LoadScene(index, eval));
     }
 
     /// <summary>
@@ -114,7 +127,7 @@ public class LevelLoader : MonoBehaviour
     /// </summary>
     /// <param name="index">Buildi ndex of scene to be loaded</param>
     /// <returns>Coroutine</returns>
-    public IEnumerator LoadScene(int index)
+    public IEnumerator LoadScene(int index, LevelEvaluator eval)
     {
         loadingLevel = true;
         levelReady = false;
@@ -132,7 +145,7 @@ public class LevelLoader : MonoBehaviour
         load_progress = asyncLoad.progress;
 
         // Unload main menu
-        AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(0);
+        AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(4);
 
         while (!asyncUnload.isDone)
         {
@@ -143,6 +156,9 @@ public class LevelLoader : MonoBehaviour
 
         // Get the level manager
         LevelManager levelManager = FindAnyObjectByType<LevelManager>();
+
+        // Load the level with level evaluator
+        levelManager.InitializeLevel(eval);
 
         // Instantiate the items
         List<ItemData> itemsToSpawn = LevelDataManager._Instance.GetSpawnItems();
@@ -181,4 +197,5 @@ public class LevelLoader : MonoBehaviour
 
         readyLabel.text = "Press SPACE to start";
     }
+
 }

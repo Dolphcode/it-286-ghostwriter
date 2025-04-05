@@ -47,6 +47,11 @@ public class HotelLevelEvaluator : LevelEvaluator
     [SerializeField]
     private GameObject centerPrefab;
 
+    public override void RandomizeValues()
+    {
+
+    }
+
     public override List<Room>[] InitializeInterior(GameObject g, int zones)
     {
         rooms = new List<Room>();
