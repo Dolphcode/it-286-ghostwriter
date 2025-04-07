@@ -6326,6 +6326,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1471803612861475040, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2532468106701015394, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
       propertyPath: computerInfoCanvas
       value: 
@@ -6370,8 +6374,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 1471803612861475040, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 2433081975905721309, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5884321451958075205, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
       insertIndex: -1

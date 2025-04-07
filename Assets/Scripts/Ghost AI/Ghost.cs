@@ -160,7 +160,7 @@ public class Ghost : Capturable
         // Checks if room is in hunting zone
         foreach (Room room in huntingZone)
         {
-            Debug.Log("At time " + teleportTimer.ToString() + " Room 1 " + room.name + " Room 2 " + possibleRoom.name + " what ? " + (room == possibleRoom).ToString());
+            //Debug.Log("At time " + teleportTimer.ToString() + " Room 1 " + room.name + " Room 2 " + possibleRoom.name + " what ? " + (room == possibleRoom).ToString());
             if (room == possibleRoom)
             {
                 validRoom = true;
@@ -255,7 +255,7 @@ public class Ghost : Capturable
         // Sets aggression multiplier.
         aggressionMultiplier = 25;
         // Default move speed for Level 1 Ghost is 1f; increases by 0.25f for each increase in level.
-        moveSpeed = 1f;
+        moveSpeed = 2f;
         if (difficultyLevel>1)
         {
             moveSpeed += difficultyLevel*0.25f;
@@ -359,7 +359,7 @@ public class Ghost : Capturable
                             if (type == GhostType.PSYCHOLOGICAL)
                             {
                                 // Randomly changes speed every 10 seconds
-                                moveSpeed = Random.Range(1, 3);
+                                moveSpeed = Random.Range(1.5f, 2f);
                             }
                             if (type == GhostType.BIOLOGICAL)
                             {
