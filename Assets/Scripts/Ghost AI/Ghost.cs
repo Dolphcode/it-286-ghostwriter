@@ -238,6 +238,8 @@ public class Ghost : Capturable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
+        // Disables model
+        ghostModel.SetActive(false);
         m_TriggerCapture = new UnityEvent<Capturable>();
         // care the Female_Ghost vs Female Ghost (same w male)
         femModel = transform.Find("Female_Ghost")?.gameObject;
@@ -495,6 +497,9 @@ public class Ghost : Capturable
     /// </summary>
     public void GhostHuntOff()
     {
+        SetGhostPosition(SelectRandomHuntingRoom().SelectRandomSpawnPoint());
+        huntingTimer = 0f;
+        aggression = 0;
         huntingMode = false;
     }
     /// <summary>
