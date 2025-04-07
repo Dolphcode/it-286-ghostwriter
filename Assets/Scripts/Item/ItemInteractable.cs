@@ -3,7 +3,7 @@ using UnityEngine;
 public class ItemInteractable : PlayerInteractable
 {
     public ItemBehavior behavior;
-    public override void Interact()
+    public override void interact()
     {
         //TODO: 
         

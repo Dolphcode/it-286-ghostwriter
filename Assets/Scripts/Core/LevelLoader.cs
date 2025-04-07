@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 /// <summary>
 /// Static class for bootstrapping core game systems/managers
@@ -32,6 +33,7 @@ public static class PerformBootstrap
 public class LevelLoader : MonoBehaviour
 {
     public static LevelLoader _Instance { get; private set; } = null;
+    public int lobbyIndex = 1;
 
     private AsyncOperation asyncLoad = null;
 
@@ -57,6 +59,8 @@ public class LevelLoader : MonoBehaviour
     public bool levelReady { get; private set; } = false;
 
     private float progress = 0f;
+    private LevelManager levelManager;
+    public int loadedIndex = -1;
 
     // Initialize the static levelloader instance
     void Awake()
@@ -96,7 +100,34 @@ public class LevelLoader : MonoBehaviour
         levelNameLabel.text = screenData.levelName;
         backgroundImage.sprite = screenData.backgroundImage;
         readyLabel.text = "";
-        StartCoroutine(LoadScene(index));
+        loadedIndex = index;
+        StartCoroutine(LoadScene(index, null));
+    }
+
+    public void LoadLevel(int index, LevelEvaluator eval)
+    {
+        progress = 0f;
+        levelLoadingScreen.enabled = true;
+        Debug.Log(index);
+        LevelLoadscreenData screenData = loadscreenDataList[index];
+        loadingDescriptionLabel.text = screenData.loadingDescription;
+        levelNameLabel.text = screenData.levelName;
+        backgroundImage.sprite = screenData.backgroundImage;
+        readyLabel.text = "";
+        loadedIndex = index;
+        StartCoroutine(LoadScene(index, eval));
+    }
+
+    public void LoadLobby()
+    {
+        progress = 0f;
+        levelLoadingScreen.enabled = true;
+        LevelLoadscreenData screenData = loadscreenDataList[0];
+        loadingDescriptionLabel.text = screenData.loadingDescription;
+        levelNameLabel.text = screenData.levelName;
+        backgroundImage.sprite = screenData.backgroundImage;
+        readyLabel.text = "";
+        StartCoroutine(LoadLobbyScene());
     }
 
     /// <summary>
@@ -107,6 +138,47 @@ public class LevelLoader : MonoBehaviour
     {
         Time.timeScale = 1f;
         levelLoadingScreen.enabled = false;
+        if (levelManager != null) levelManager.levelStarted = true;
+    }
+
+    /// <summary>
+    /// Loads the lobby scene and unloads the currently loaded level
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator LoadLobbyScene()
+    {
+        loadingLevel = true;
+        levelReady = false;
+        Time.timeScale = 0f;
+        // Load level
+        asyncLoad = SceneManager.LoadSceneAsync(lobbyIndex, LoadSceneMode.Additive);
+
+        float load_progress = 0f;
+        float unload_progress = 0f;
+        while (!asyncLoad.isDone)
+        {
+            progress = asyncLoad.progress * 0.5f;
+            yield return null;
+        }
+        load_progress = asyncLoad.progress;
+
+        // Unload main menu
+        if (loadedIndex >= 0)
+        {
+            AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(loadedIndex);
+
+            while (!asyncUnload.isDone)
+            {
+                progress = 0.5f * load_progress + 0.5f * unload_progress;
+                yield return null;
+            }
+            unload_progress = asyncUnload.progress;
+        }
+
+        progress = 1f;
+        levelReady = true;
+
+        readyLabel.text = "Press SPACE to start";
     }
 
     /// <summary>
@@ -114,7 +186,7 @@ public class LevelLoader : MonoBehaviour
     /// </summary>
     /// <param name="index">Buildi ndex of scene to be loaded</param>
     /// <returns>Coroutine</returns>
-    public IEnumerator LoadScene(int index)
+    public IEnumerator LoadScene(int index, LevelEvaluator eval)
     {
         loadingLevel = true;
         levelReady = false;
@@ -132,7 +204,7 @@ public class LevelLoader : MonoBehaviour
         load_progress = asyncLoad.progress;
 
         // Unload main menu
-        AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(0);
+        AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(lobbyIndex);
 
         while (!asyncUnload.isDone)
         {
@@ -142,7 +214,10 @@ public class LevelLoader : MonoBehaviour
         unload_progress = asyncUnload.progress;
 
         // Get the level manager
-        LevelManager levelManager = FindAnyObjectByType<LevelManager>();
+        levelManager = FindAnyObjectByType<LevelManager>();
+
+        // Load the level with level evaluator
+        levelManager.InitializeLevel(eval);
 
         // Instantiate the items
         List<ItemData> itemsToSpawn = LevelDataManager._Instance.GetSpawnItems();
@@ -181,4 +256,5 @@ public class LevelLoader : MonoBehaviour
 
         readyLabel.text = "Press SPACE to start";
     }
+
 }

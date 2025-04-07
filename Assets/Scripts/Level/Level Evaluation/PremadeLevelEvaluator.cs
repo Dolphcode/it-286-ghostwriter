@@ -10,6 +10,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Unnamed Level Evaluator", menuName = "Level Evaluators/Premade Level Evaluator")]
 public class PremadeLevelEvaluator : LevelEvaluator
 {
+    public override void RandomizeValues()
+    {
+
+    }
+
     public override List<Room>[] InitializeInterior(GameObject g, int zones)
     {
         rooms = new List<Room>();

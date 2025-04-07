@@ -60,12 +60,13 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private Transform[] itemSpawnPoints;
 
+    // State
     List<Room>[] zones;
+    public bool levelStarted = false;
     private void Awake()
     {
         // This will run level generation/initialization
-        zones = levelEvaluator.InitializeInterior(interiorBase, 1); // should relegate this to the level loader really
-
+        
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -73,7 +74,21 @@ public class LevelManager : MonoBehaviour
     {
         
         // Append every interactable to the capture manager
-        foreach (Room r in levelEvaluator.GetAllRooms())
+        
+    }
+
+    /// <summary>
+    /// Call this function to initialize the level, leave null if using default
+    /// evaluator
+    /// </summary>
+    /// <param name="eval">The evaluator instance to be used</param>
+    public void InitializeLevel(LevelEvaluator eval)
+    {
+        if (eval == null) eval = levelEvaluator;
+        else levelEvaluator = eval;
+        zones = eval.InitializeInterior(interiorBase, 1); // should relegate this to the level loader really
+        Debug.Log(zones[0].Count);
+        foreach (Room r in eval.GetAllRooms())
         {
             foreach (GhostInteractable i in r.GetAllInteractables())
             {
@@ -140,6 +155,8 @@ public class LevelManager : MonoBehaviour
     {
         List<Room> roomList = levelEvaluator.GetAllRooms();
         int index = Random.Range(0, roomList.Count);
+        Debug.Log("room index " + index.ToString());
+        Debug.Log(roomList.Count);
         return roomList[index];
     }
 

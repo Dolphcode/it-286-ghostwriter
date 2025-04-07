@@ -50,6 +50,7 @@ public class Inventory : MonoBehaviour
 
         for (int i = 0; i < size; i++)
         {
+            Debug.Log("instantiating");
             inventorySlots.Add(Instantiate(inventorySlotPrefab).GetComponent<InventorySlot>());
         }
     }

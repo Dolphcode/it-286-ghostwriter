@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 1
   Name: Handheld Camera
-  Icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  Description: A standard grade reporter's camera
+  Icon: {fileID: 21300000, guid: 73adb5ef05503144ab606e94f35165c3, type: 3}
   Item: {fileID: 2686501479970085783, guid: 7fc4ae945b2e0bb45b89aa884bb54fbf, type: 3}
   Behavior: {fileID: 0}
   heldItemPosition: {x: 0.19, y: -0.11, z: 0.66}

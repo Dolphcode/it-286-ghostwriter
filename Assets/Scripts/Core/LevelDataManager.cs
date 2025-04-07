@@ -14,6 +14,9 @@ public class LevelDataManager : MonoBehaviour
     [SerializeField]
     private int maxItems = 10;
 
+    public int TemplateCount { private set { }
+        get { return itemTemplates.Count; } }
+
     [SerializeField]
     private int playerMoney = 10000;
 
@@ -146,6 +149,27 @@ public class LevelDataManager : MonoBehaviour
     public int GetItemCount(int index)
     {
         return selectedItemCounts[index];
+    }
+
+    /// <summary>
+    /// Get the number of a specific type of item owned by the player
+    /// </summary>
+    /// <param name="index">Which item type to check</param>
+    /// <returns>The number of that item that is owned by the player</returns>
+    public int GetOwnedCount(int index)
+    {
+        return itemCounts[index];
+    }
+
+    /// <summary>
+    /// Returns a reference to the ItemData object representing an item of a particular
+    /// index.
+    /// </summary>
+    /// <param name="index">What index we should be retrieving data for</param>
+    /// <returns>The ItemData template</returns>
+    public ItemData GetItemInfo(int index)
+    {
+        return itemTemplates[index];
     }
 
 

@@ -741,6 +741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c2d11ca1f382f340a0b9616d00972fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lobbyIndex: 1
   levelLoadingScreen: {fileID: 877879925}
   loadingNumber: {fileID: 422617308}
   loadingDescriptionLabel: {fileID: 492119852}
@@ -748,9 +749,11 @@ MonoBehaviour:
   readyLabel: {fileID: 25933819}
   backgroundImage: {fileID: 1712890484}
   loadscreenDataList:
-  - {fileID: 0}
-  - {fileID: 11400000, guid: 36bf34e02e9d90547a30eefb3ab25aba, type: 2}
+  - {fileID: 11400000, guid: e927cad238317ef4ebee00a54c4c5305, type: 2}
   - {fileID: 11400000, guid: eac0c834b66f5af46a39f5c54111f0af, type: 2}
+  - {fileID: 11400000, guid: eac0c834b66f5af46a39f5c54111f0af, type: 2}
+  - {fileID: 11400000, guid: 36717b9e74bac0b4c9374cd28659e0b2, type: 2}
+  loadedIndex: -1
 --- !u!4 &1156473804
 Transform:
   m_ObjectHideFlags: 0
