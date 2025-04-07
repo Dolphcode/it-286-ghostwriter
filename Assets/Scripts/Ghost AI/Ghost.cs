@@ -495,6 +495,9 @@ public class Ghost : Capturable
     /// </summary>
     public void GhostHuntOff()
     {
+        SetGhostPosition(SelectRandomHuntingRoom().SelectRandomSpawnPoint());
+        huntingTimer = 0f;
+        aggression = 0;
         huntingMode = false;
     }
     /// <summary>
