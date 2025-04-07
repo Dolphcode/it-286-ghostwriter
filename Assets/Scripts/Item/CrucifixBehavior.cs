@@ -4,8 +4,6 @@ using UnityEngine;
 public class CrucifixBehavior : ItemBehavior
 {
     Ghost ghost;
-    private bool isCounting;
-    private float currentTime;
     void Start()
     {
         ghost = FindAnyObjectByType<Ghost>();
@@ -14,6 +12,14 @@ public class CrucifixBehavior : ItemBehavior
     public override void Interact()
     {
         StartCoroutine(Compel(10));
+        data.durability -= 1;
+        /*
+        if (data.durability <= 0)
+        {
+            Unload();
+            Destroy(gameObject);
+        }
+        */
     }
     public override void Load(ItemData itemData)
     {
@@ -51,10 +57,10 @@ public class CrucifixBehavior : ItemBehavior
         ghost.IncreaseAggression(5);
         Debug.Log("Ghost Agression Increased");
     }
-
+ 
     public override void Unload()
     {
-
+        
     }
 
 }

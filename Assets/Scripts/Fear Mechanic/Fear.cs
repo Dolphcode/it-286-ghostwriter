@@ -11,15 +11,20 @@ public class Fear : MonoBehaviour
     public bool isSanity100;
     [SerializeField]
     int minFear;
+    public Ghost boo;
+    public LevelManager levelManager;
+    private bool spooked;
     void Start()
     {
-
+        boo = FindAnyObjectByType<Ghost>();
+        levelManager = FindAnyObjectByType<LevelManager>();
         ///<summary>
         /// Starts fear at 0%
         /// </summary>
         fearMeter = 0;
         minFear = 1;
         isSanity100 = false;
+
     }
 
     void Update()
@@ -48,8 +53,36 @@ public class Fear : MonoBehaviour
 
         }
 
-        
+        if (boo.IsGhostHunting())
+        {
+            IsScared();
+        }
+
+        else if (!boo.IsGhostHunting())
+        {
+            IsNotScared();
+        }
     }
+
+    private void IsScared()
+    {
+        if (!spooked)
+        { 
+            ChangeFearRate(0.5f);
+            spooked = true;
+        }
+    }
+
+    private void IsNotScared()
+    {
+        if (spooked)
+        {
+            ChangeFearRate(-0.5f);
+            spooked = false;
+        }
+            
+    }
+
     /// <summary>
     /// Changes the rate at which fear depletes.
     /// </summary>
@@ -57,7 +90,6 @@ public class Fear : MonoBehaviour
     public void ChangeFearRate(float newRate)
         {
             fearRate = newRate;
-            
         }
 
     /// <summary>
@@ -68,4 +100,6 @@ public class Fear : MonoBehaviour
     {
         fearMeter += fearChange;
     }
+
+
 }

@@ -7,7 +7,6 @@ public abstract class ItemBehavior : MonoBehaviour
     Collider coll;
     Rigidbody rb;
 
-
     public abstract void Unload();
     public abstract void Load(ItemData itemData);
 
