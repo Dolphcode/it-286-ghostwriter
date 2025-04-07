@@ -169,6 +169,7 @@ MonoBehaviour:
   - {fileID: 1219290877}
   - {fileID: 1007032963}
   - {fileID: 36903429}
+  levelStarted: 0
 --- !u!4 &45924914
 Transform:
   m_ObjectHideFlags: 0
