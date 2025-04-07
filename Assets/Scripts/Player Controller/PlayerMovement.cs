@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     /// <summary>
-    /// Movement
+    /// Movement Speed (Default = 3)
     /// </summary>
     public float moveSpeed;
 
@@ -14,8 +14,9 @@ public class PlayerMovement : MonoBehaviour
     public float groundDrag;
     public float playerHeight;
     public LayerMask whatIsGround;
-    bool isOnGround;
-    
+
+    private float timeSprinting;
+    private bool sprintCooldown;
 
     public Transform orientation;
     
@@ -30,27 +31,50 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-
+        Mathf.Clamp(timeSprinting, 0,5);
+        timeSprinting = 0;
     }
 
     private void Update()
     {
-        ///<summary>
-        ///Ground Check
-        ///</summary>
-        isOnGround = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-        
         MyInput();
         SpeedControl();
-        if (isOnGround)
-            rb.linearDamping = groundDrag;
+        rb.linearDamping = groundDrag;
+
+        //Left Shift
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            //if (timeSprinting <= 5 && !sprintCooldown)
+            //{ 
+                Sprint();
+               // timeSprinting += Time.deltaTime;
+            //}
+           /* else
+            {
+                Walk();
+                timeSprinting -= Time.deltaTime;
+                if (timeSprinting == 0)
+                {
+                    sprintCooldown = false;
+                }
+                else
+                {
+                    sprintCooldown = true;
+                }
+            }
+           */
+        }
+
         else
-            rb.linearDamping = 0;
+        {
+            Walk();
+           // timeSprinting -= Time.deltaTime;
+        }
     }
     private void FixedUpdate()
     {
         ///<summary>
-        ///Uses MovePLayer() function to check if an input is pressed
+        ///Uses MovePlayer() function to check if an input is pressed
         ///so that the player is moved 
         ///</summary>
         MovePlayer();
@@ -65,7 +89,15 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
     }
+    private void Sprint()
+    {
+        moveSpeed = 4.5f;
+    }
 
+    private void Walk()
+    {
+        moveSpeed = 3f;
+    }
     private void MovePlayer()
     {
         ///<summary>

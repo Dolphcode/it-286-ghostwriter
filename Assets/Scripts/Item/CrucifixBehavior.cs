@@ -11,15 +11,18 @@ public class CrucifixBehavior : ItemBehavior
 
     public override void Interact()
     {
-        StartCoroutine(Compel(10));
-        data.durability -= 1;
-        /*
-        if (data.durability <= 0)
+        
+    
+        if (data.durability > 0)
         {
-            Unload();
-            Destroy(gameObject);
+            data.durability -= 1;
+            StartCoroutine(Compel(10));
         }
-        */
+        else
+        {
+            
+            Debug.Log("No More Durability");
+        }
     }
     public override void Load(ItemData itemData)
     {
