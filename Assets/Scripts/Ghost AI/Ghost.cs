@@ -160,6 +160,7 @@ public class Ghost : Capturable
         // Checks if room is in hunting zone
         foreach (Room room in huntingZone)
         {
+            Debug.Log("At time " + teleportTimer.ToString() + " Room 1 " + room.name + " Room 2 " + possibleRoom.name + " what ? " + (room == possibleRoom).ToString());
             if (room == possibleRoom)
             {
                 validRoom = true;
@@ -171,10 +172,11 @@ public class Ghost : Capturable
                 }
             }
         }
+        /*
         if (!validRoom)
         {
             GhostTeleportsAdjacentRoom(time);
-        }
+        }*/
     }
     ///<summary>
     /// Ghost will have a chance (double) to interact in a room every given input time (float)
@@ -222,14 +224,14 @@ public class Ghost : Capturable
         // If aggression less than half full game is slightly harder
         if (aggression < aggressionThreshold / 2)
         {
-            GhostTeleportsAdjacentRoom(90f);
+            GhostTeleportsAdjacentRoom(40f);
             //takes longer, less chance = harder
             GhostInteracts(15f, 0.25);
         }
         // When ghost is in second half of aggression threshold
         else if (aggression < aggressionThreshold)
         {
-            GhostTeleportsAdjacentRoom(50f);
+            GhostTeleportsAdjacentRoom(20f);
             GhostInteracts(10f, 0.5);
         }
     }
@@ -307,6 +309,9 @@ public class Ghost : Capturable
     // Update is called once per frame
     private void Update()
     {
+        // DO NOT DO ANYTHING until level is started
+        if (levelManager1 == null || !levelManager1.levelStarted) return;
+
         // Tracks current room 
         currentRoom = levelManager1.GetRoomFromPosition(transform.position);
         // Ghost's distance from player.
@@ -578,7 +583,8 @@ public class Ghost : Capturable
         {
             huntingZone.Add(room);
         }
-        currentRoom = levelManager1.SelectRandomRoom();
+        currentRoom = huntingZone[Random.Range(0, huntingZone.Count)];
+
         SetGhostPosition(currentRoom.SelectRandomSpawnPoint());
     }
 

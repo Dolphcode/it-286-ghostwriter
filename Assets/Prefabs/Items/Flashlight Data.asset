@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 2
   Name: Flashlight
-  Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  Description: A standard grade flashlight
+  Icon: {fileID: 21300000, guid: b961b86682cb43749a6ff346a282aaaa, type: 3}
   Item: {fileID: 3307104046245901012, guid: 09d3fde86d9da2b40a69167acd5a00aa, type: 3}
   Behavior: {fileID: 2565670772473954464, guid: 09d3fde86d9da2b40a69167acd5a00aa, type: 3}
   heldItemPosition: {x: 0.45, y: -0.31, z: 0.8}

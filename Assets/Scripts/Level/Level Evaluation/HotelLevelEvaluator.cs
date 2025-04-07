@@ -47,6 +47,11 @@ public class HotelLevelEvaluator : LevelEvaluator
     [SerializeField]
     private GameObject centerPrefab;
 
+    public override void RandomizeValues()
+    {
+
+    }
+
     public override List<Room>[] InitializeInterior(GameObject g, int zones)
     {
         rooms = new List<Room>();
@@ -80,6 +85,7 @@ public class HotelLevelEvaluator : LevelEvaluator
 
             RoomLightInteractable lights = corr.GetComponent<RoomLightInteractable>();
             Room corrRoom = corr.GetComponent<Room>();
+            corrRoom.ResetBounds();
             zoneArr[j].Add(corrRoom);
             rooms.Add(corrRoom);
 
@@ -128,6 +134,7 @@ public class HotelLevelEvaluator : LevelEvaluator
                 surfaces.Add(r.GetComponentInChildren<NavMeshSurface>());
                 zoneArr[j].Add(r.GetComponent<Room>());
                 rooms.Add(r.GetComponent<Room>());
+                r.GetComponent<Room>().ResetBounds();
                 Room.SetRoomAdjacency(r.GetComponent<Room>(), corrRoom);
 
             }
@@ -165,6 +172,7 @@ public class HotelLevelEvaluator : LevelEvaluator
                 surfaces.Add(r.GetComponentInChildren<NavMeshSurface>());
                 zoneArr[j].Add(r.GetComponent<Room>());
                 rooms.Add(r.GetComponent<Room>());
+                r.GetComponent<Room>().ResetBounds();
                 Room.SetRoomAdjacency(r.GetComponent<Room>(), corrRoom);
             }
 
@@ -175,9 +183,10 @@ public class HotelLevelEvaluator : LevelEvaluator
             coll = corr.GetComponent<BoxCollider>();
             coll.center = new Vector3(-roomUnitSize * 0.5f * (corridorSize - 1), corridorHeight * 0.5f, 0);
             coll.size = new Vector3(roomUnitSize * corridorSize, corridorHeight, corridorWidth);
-
+            
             lights = corr.GetComponent<RoomLightInteractable>();
             corrRoom = corr.GetComponent<Room>();
+            corrRoom.ResetBounds();
             zoneArr[j].Add(corrRoom);
             rooms.Add(corrRoom);
 
@@ -230,6 +239,7 @@ public class HotelLevelEvaluator : LevelEvaluator
                 surfaces.Add(r.GetComponentInChildren<NavMeshSurface>());
                 zoneArr[j].Add(r.GetComponent<Room>());
                 rooms.Add(r.GetComponent<Room>());
+                r.GetComponent<Room>().ResetBounds();
                 Room.SetRoomAdjacency(r.GetComponent<Room>(), corrRoom);
             }
 
@@ -266,6 +276,7 @@ public class HotelLevelEvaluator : LevelEvaluator
                 surfaces.Add(r.GetComponentInChildren<NavMeshSurface>());
                 zoneArr[j].Add(r.GetComponent<Room>());
                 rooms.Add(r.GetComponent<Room>());
+                r.GetComponent<Room>().ResetBounds();
                 Room.SetRoomAdjacency(r.GetComponent<Room>(), corrRoom);
             }
 

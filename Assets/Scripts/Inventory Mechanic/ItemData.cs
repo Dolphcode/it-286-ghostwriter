@@ -6,6 +6,7 @@ public class ItemData : ScriptableObject
 {
     public int ID;
     public string Name;
+    public string Description;
     public Sprite Icon;
     [SerializeField]
     public GameObject Item;
