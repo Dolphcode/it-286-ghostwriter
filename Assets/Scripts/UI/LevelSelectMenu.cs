@@ -28,7 +28,7 @@ public class LevelSelectMenu : MonoBehaviour
 
     void UpdateInventoryDisplay()
     {
-        for (int i = 0; i < itemCounters.Count; i++)
+        for (int i = 1; i < itemCounters.Count; i++)
         {
             itemCounters[i].text = LevelDataManager._Instance.GetItemCount(i).ToString();
         }

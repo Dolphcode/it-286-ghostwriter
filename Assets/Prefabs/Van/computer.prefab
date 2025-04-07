@@ -170,7 +170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1573329054442314000}
   m_Layer: 0
-  m_Name: News_UI
+  m_Name: Blog_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -521,7 +521,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'News
+  m_text: 'Blog
 
 '
   m_isRightToLeft: 0
@@ -1840,7 +1840,7 @@ GameObject:
   - component: {fileID: 6886193218062963970}
   - component: {fileID: 7163656179799677384}
   m_Layer: 5
-  m_Name: News_Button
+  m_Name: Blog_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2042,7 +2042,7 @@ GameObject:
   - component: {fileID: 7949899414452303133}
   - component: {fileID: 5859457632779222825}
   m_Layer: 0
-  m_Name: News_Image
+  m_Name: Blog_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2503,7 +2503,7 @@ GameObject:
   - component: {fileID: 3281562065417866724}
   - component: {fileID: 7380560178955099284}
   m_Layer: 5
-  m_Name: News_Text
+  m_Name: Blog_Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2517,7 +2517,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8258692166298348678}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -0.008876319}
+  m_LocalPosition: {x: 0, y: 0, z: -0.2}
   m_LocalScale: {x: 0.225, y: 0.29999998, z: 1.2375}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2525,7 +2525,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4, y: -17}
+  m_AnchoredPosition: {x: -9.6, y: -16.4}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3281562065417866724
@@ -2556,12 +2556,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Ghost Reporter
+  m_text: 'Ghost Writer
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: af5cdacb5da9c4e4b94142167b3e38cf, type: 2}
+  m_sharedMaterial: {fileID: 5146161365279092845, guid: af5cdacb5da9c4e4b94142167b3e38cf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2585,13 +2585,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.55
+  m_fontSize: 22.3
   m_fontSizeBase: 23
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 3
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -3411,7 +3411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7945604376341869030, guid: 9a3b57d275b4d424d886c80a39ccb466, type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

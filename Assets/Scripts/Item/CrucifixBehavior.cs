@@ -26,6 +26,15 @@ public class CrucifixBehavior : ItemBehavior
         itemData.Behavior = this;
         data = itemData;
     }
+
+    public void Update()
+    {
+        if (ghost == null)
+        {
+            ghost = FindAnyObjectByType<Ghost>();
+        }
+    }
+
     /// <summary>
     /// Waits for <paramref name="time"/> seconds to pass and then increases ghost agression.
     /// If the ghost is hunting, it turns the hunting mode off. The ghost will then gain 5 agression in 10 seconds.

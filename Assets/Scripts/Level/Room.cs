@@ -146,7 +146,7 @@ public class Room : MonoBehaviour
     /// <param name="b">The second room</param>
     public static void SetRoomAdjacency(Room a, Room b)
     {
-        a.adjacentRooms.Append(b);
-        b.adjacentRooms.Append(a);
+        a.adjacentRooms.Add(b);
+        b.adjacentRooms.Add(a);
     }
 }
