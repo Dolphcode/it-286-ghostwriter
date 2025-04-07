@@ -140,6 +140,7 @@ public class LevelManager : MonoBehaviour
         ghost.SetBodyType(true);
         ghost.levelManager1 = this;
         ghost.SetHuntingZone(zones[0]);
+        ghost.SetGhostType(GhostType.METAPHYSICAL);
         ghost.SetDifficulty(1);
     }
 
