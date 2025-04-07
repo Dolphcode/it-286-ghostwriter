@@ -22,5 +22,5 @@ MonoBehaviour:
   heldItemRotation: {x: 81.93, y: 0, z: 0}
   isEquiped: 0
   isOn: 0
-  durability: 0
+  durability: 9999
   itemCost: 300
