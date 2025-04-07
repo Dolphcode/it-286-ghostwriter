@@ -56,7 +56,7 @@ public abstract class LevelEvaluator : ScriptableObject
     {
         foreach (Room room in rooms)
         {
-            if (room.GetBoundingBox().Contains(globalPosition))
+            if (room.myCollider.bounds.Contains(globalPosition))
             {
                 return room;
             }
