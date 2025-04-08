@@ -125,10 +125,8 @@ public class Ghost : Capturable
     private float teleportTimer = 0f;
     private float huntingTimer = 0f;
     private float functionTimer = 0f;
-    ///<summary>
-    ///Animator
-    ///</summary>
-    public Animation animator;
+
+    private Animator modelAnimController;
 
     ///<summary>
     ///Returns random room in Hunting Zone
@@ -336,19 +334,27 @@ public class Ghost : Capturable
             Debug.Log("HUNT");
             huntingMode = true;
 
-            animator.Play("Female Rig|Walk-Angry");
         }
         // When ghost is in passive mode, ghost will randomly teleport between rooms.
         if (!huntingMode)
         {
-            animator.Play("Female Rig|Idle-Calm");
             Roam();
             thresholdChange = aggressionThreshold / maxEMF;
+            modelAnimController.SetFloat("MoveSpeed", -1f);
+            /* uncomment this if you want to modulate aggro based on aggression threshold
+            modelAnimController.SetFloat("Aggro",
+                Mathf.Clamp(aggression / aggressionThreshold, 0, 1) * 2f - 1f);*/
+            modelAnimController.SetFloat("Aggro", -1f);
         }
 
         if (huntingMode)
         {
             m_TriggerCapture.Invoke(this);
+
+            // Set the animation controller blending
+            // Both male and female model controllers have the same parameters
+            modelAnimController.SetFloat("MoveSpeed", 0f);
+            modelAnimController.SetFloat("Aggro", 0f);
 
             huntingTimer += Time.deltaTime;
             // Tracks current room 
@@ -598,9 +604,12 @@ public class Ghost : Capturable
             ghostModel = femModel;
         }
         // Masc Model ON
-        ghostModel = mascModel;
+        else
+        {
+            ghostModel = mascModel;
+        }
         // Set Animator of ghost type
-        animator = ghostModel.GetComponent<Animation>();
+        modelAnimController = ghostModel.GetComponent<Animator>();
     }
     /// <summary>
     /// Sets body type/model for ghost. true - fem, masc - false
