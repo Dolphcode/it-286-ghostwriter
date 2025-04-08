@@ -167,6 +167,7 @@ MonoBehaviour:
   player: {fileID: 1096738990}
   ghosts:
   - {fileID: 0}
+  vanBox: {fileID: 882943059}
   itemSpawnPoints:
   - {fileID: 892776272}
   - {fileID: 971530491}
@@ -2374,6 +2375,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -85
       objectReference: {fileID: 0}
+    - target: {fileID: 1965816028689469596, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}
+      propertyPath: _OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965816028689469596, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}
+      propertyPath: _OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965816028689469596, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}
+      propertyPath: _OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 45924913}
+    - target: {fileID: 1965816028689469596, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}
+      propertyPath: _OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965816028689469596, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}
+      propertyPath: _OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965816028689469596, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}
+      propertyPath: _OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965816028689469596, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}
+      propertyPath: _OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2257561501309741739, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -2531,6 +2560,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}
+--- !u!65 &882943059 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2236730051231665892, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}
+  m_PrefabInstance: {fileID: 882943058}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &892776272 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 471770420035361846, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}

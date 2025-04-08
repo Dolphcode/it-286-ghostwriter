@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -55,6 +56,12 @@ public class LevelManager : MonoBehaviour
     public List<Ghost> GetGhostList() { return ghosts; }
 
     /// <summary>
+    /// The van collision box for checking if items are still in the level
+    /// </summary>
+    [SerializeField]
+    private Collider vanBox;
+
+    /// <summary>
     /// TEMPORARY a list of transforms representing item spawn points
     /// </summary>
     [SerializeField]
@@ -62,7 +69,9 @@ public class LevelManager : MonoBehaviour
 
     // State
     List<Room>[] zones;
+    List<ItemData> itemsInLevel = new List<ItemData>();
     public bool levelStarted = false;
+
     private void Awake()
     {
         // This will run level generation/initialization
@@ -122,6 +131,8 @@ public class LevelManager : MonoBehaviour
 
         // Add this item to the capture manager's list?
         captureManager.AppendItemBehavior(behavior);
+        Debug.Log(behavior.data.name);
+        itemsInLevel.Add(behavior.data);
     }
 
     public void AddGhostToWorld(Ghost ghost)
@@ -306,7 +317,16 @@ public class LevelManager : MonoBehaviour
     public void ExitLevel()
     {
         // Call functions in the level data to create the blog entry
-        // Call functions in the level data to deal with readding items
+        // Call functions in the level data to deal with reading items
+        foreach (ItemData data in itemsInLevel)
+        {
+            Debug.Log(data.name);
+            if (vanBox.bounds.Contains(data.Behavior.transform.position))
+            {
+                LevelDataManager._Instance.AddItem(data.ID);
+            }
+            
+        }
         LevelLoader._Instance.LoadLobby();
     }
 

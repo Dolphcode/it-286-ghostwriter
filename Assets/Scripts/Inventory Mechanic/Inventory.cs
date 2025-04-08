@@ -184,7 +184,7 @@ public class Inventory : MonoBehaviour
         }
 
         // THIS LINE OF CODE IS TEMPORARY, WHEN SPAWNING ITEMS WE HAVE TO INSTANTIATE
-        item.data = Instantiate(item.data); // Make a copy of the current item.data instance
+        //item.data = Instantiate(item.data); // Make a copy of the current item.data instance
 
         inventorySlots[emptySlot].AddItem(item.data);
         item.data.Behavior = item;
