@@ -354,7 +354,7 @@ public class Ghost : Capturable
             // Set the animation controller blending
             // Both male and female model controllers have the same parameters
             modelAnimController.SetFloat("MoveSpeed", 0f);
-            modelAnimController.SetFloat("Aggro", 0f);
+            modelAnimController.SetFloat("Aggro", -1f);
 
             huntingTimer += Time.deltaTime;
             // Tracks current room 
