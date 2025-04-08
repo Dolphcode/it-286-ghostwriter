@@ -187,6 +187,7 @@ public class LevelDataManager : MonoBehaviour
             for (int j = 0; j < selectedItemCounts[i]; j++)
             {
                 output.Add(itemTemplates[i]);
+                itemCounts[i]--;
             }
             selectedItemCounts[i] = 0;
         }
