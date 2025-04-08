@@ -293,4 +293,25 @@ public class LevelManager : MonoBehaviour
         Room playerRoom = GetRoomFromPosition(player.transform.position);
         return room == playerRoom;
     }
+
+    // -----------------------------------------------------------------------
+    //  Level Transitions
+    // -----------------------------------------------------------------------
+
+    public void LoseLevel()
+    {
+        LevelLoader._Instance.LoadLobby();
+    }
+
+    public void ExitLevel()
+    {
+        // Call functions in the level data to create the blog entry
+        // Call functions in the level data to deal with readding items
+        LevelLoader._Instance.LoadLobby();
+    }
+
+    public void TriggerLoadLobby()
+    {
+        LevelLoader._Instance.LoadLobby();
+    }
 }
