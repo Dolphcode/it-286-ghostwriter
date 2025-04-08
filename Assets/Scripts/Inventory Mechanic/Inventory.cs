@@ -133,23 +133,38 @@ public class Inventory : MonoBehaviour
     public void ChangeHeldItem(int newItemHold, Transform itemHolder)
     {
         int current = CurrentHoldOut();
-        inventorySlots[current].holdOut = false;
-        inventorySlots[newItemHold].holdOut = true;
-
-        // Destroy the item instance
-        if (inventorySlots[current].ItemData != null)
-        { 
-        inventorySlots[current].ItemData.Behavior.Unload();
-        Destroy(inventorySlots[current].ItemData.Behavior.gameObject);
-        inventorySlots[current].ItemData.Behavior = null;
-        }
-        // Load the prefab for the new item being held out
-        if (inventorySlots[newItemHold].ItemData != null)
+        if (newItemHold != current && !inventorySlots[newItemHold].holdOut)
         {
-            ItemBehavior item = Instantiate(inventorySlots[newItemHold].ItemData.Item).GetComponent<ItemBehavior>();
-            inventorySlots[newItemHold].ItemData.Behavior = item;
-            item.Load(inventorySlots[newItemHold].ItemData);
-            item.PutInHand(itemHolder);
+            Debug.Log("equip");
+            if (current > 0) inventorySlots[current].holdOut = false;
+            inventorySlots[newItemHold].holdOut = true;
+
+            // Destroy the item instance
+            if (current > 0 && inventorySlots[current].ItemData != null)
+            {
+                inventorySlots[current].ItemData.Behavior.Unload();
+                Destroy(inventorySlots[current].ItemData.Behavior.gameObject);
+                inventorySlots[current].ItemData.Behavior = null;
+            }
+            // Load the prefab for the new item being held out
+            if (inventorySlots[newItemHold].ItemData != null)
+            {
+                ItemBehavior item = Instantiate(inventorySlots[newItemHold].ItemData.Item).GetComponent<ItemBehavior>();
+                inventorySlots[newItemHold].ItemData.Behavior = item;
+                item.Load(inventorySlots[newItemHold].ItemData);
+                item.PutInHand(itemHolder);
+            }
+        } else
+        {
+            Debug.Log("unequip");
+            inventorySlots[current].holdOut = false;
+            // Destroy the item instance
+            if (inventorySlots[current].ItemData != null)
+            {
+                inventorySlots[current].ItemData.Behavior.Unload();
+                Destroy(inventorySlots[current].ItemData.Behavior.gameObject);
+                inventorySlots[current].ItemData.Behavior = null;
+            }
         }
     }
 
