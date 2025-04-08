@@ -321,7 +321,7 @@ public class LevelManager : MonoBehaviour
         foreach (ItemData data in itemsInLevel)
         {
             Debug.Log(data.name);
-            if (vanBox.bounds.Contains(data.Behavior.transform.position))
+            if (data.inInventory || (data.Behavior != null && vanBox.bounds.Contains(data.Behavior.transform.position)))
             {
                 LevelDataManager._Instance.AddItem(data.ID);
             }
