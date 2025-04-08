@@ -204,7 +204,7 @@ public class Inventory : MonoBehaviour
     public void DropItem()
     {
         int activeSlot = CurrentHoldOut();
-
+        if (activeSlot < 0) return;
         inventorySlots[activeSlot].ItemData.Behavior.Drop();
         inventorySlots[activeSlot].ItemData.inInventory = false;
         inventorySlots[activeSlot].ClearSlot();
