@@ -39,9 +39,11 @@ public class HandheldCameraBehavior : ItemBehavior
 
         CaptureData data = levelManager.GetCaptureManager().CaptureImage(image, camReference);
 
+        /*
         var bytes = image.EncodeToPNG();
         File.WriteAllBytes(Application.dataPath + "/Captures/" + data.timestamp.ToShortDateString().Replace("/","-") + "-" + 
             data.timestamp.ToLongTimeString().Replace(":","-").Replace(" ","-") + ".png", bytes);
+        */
     }
 
     public override void Load(ItemData itemData)

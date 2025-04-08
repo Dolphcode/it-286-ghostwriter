@@ -602,4 +602,9 @@ public class Ghost : Capturable
     {
         return (IsGhostHunting() ? 5 : 2);
     }
+
+    public void Awake()
+    {
+        m_TriggerCapture = new UnityEvent<Capturable>();
+    }
 }
