@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class EMFBehavior : ItemBehavior
 {
@@ -8,6 +9,9 @@ public class EMFBehavior : ItemBehavior
     TextMeshProUGUI m_TextMeshProUGUI;
 
     Ghost ghosty;
+    public List<GameObject> emfLvls;
+    [SerializeField]
+    int testEMF;
     public override void Interact()
     {
         if (!data.isOn)
@@ -34,37 +38,47 @@ public class EMFBehavior : ItemBehavior
         Debug.Log("Unloading EMF");
     }
 
-
+ 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
        levelManager = FindAnyObjectByType<LevelManager>();
        ghosty = FindAnyObjectByType<Ghost>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (ghosty == null)
+        /*if (ghosty == null)
         {
             ghosty = FindAnyObjectByType<Ghost>();
         }
-
+        */
         //Finds if player is in same room as ghost
         if (data.isOn)
         {
             Debug.Log("We are on");
             Debug.Log(levelManager.IsGhostInRoom(levelManager.GetRoomFromPosition(transform.position)));
-            if (levelManager.IsGhostInRoom(levelManager.GetRoomFromPosition(transform.position)))
-            {
+            //if (levelManager.IsGhostInRoom(levelManager.GetRoomFromPosition(transform.position)))
+           // {
+                for (int i = 0; i < 5; i++)
+                {
+                    if (i < testEMF)
+                    {
+                        emfLvls[i].GetComponent<MeshRenderer>().material.SetFloat("_Light_On_Interior",1);
+                    }
+                    else
+                    {
+                        emfLvls[i].GetComponent<MeshRenderer>().material.SetFloat("_Light_On_Interior", 0);
+                    }
+                }
                 Debug.Log(ghosty.GetEmf());
                 m_TextMeshProUGUI.text = ghosty.GetEmf().ToString();
 
-            } else
-            {
-                m_TextMeshProUGUI.text = "0";
-            }
+            //} else
+            //{
+           //     m_TextMeshProUGUI.text = "0";
+           // }
         } else
         {
             m_TextMeshProUGUI.text = "";
