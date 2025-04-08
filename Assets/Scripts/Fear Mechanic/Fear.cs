@@ -29,6 +29,7 @@ public class Fear : MonoBehaviour
 
     void Update()
     {
+        if (boo == null) boo = FindAnyObjectByType<Ghost>();
         ///<summary>
         /// Makes the fear tick down at a constant rate
         /// Modifiable by changing <param> fearRate </param> 

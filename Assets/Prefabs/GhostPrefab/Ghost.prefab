@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  ghostModel: {fileID: 0}
+  ghostModel: {fileID: 4683428534170690823}
   femModel: {fileID: 5886594339065697909}
   mascModel: {fileID: 4683428534170690823}
   aggressionThreshold: 0
