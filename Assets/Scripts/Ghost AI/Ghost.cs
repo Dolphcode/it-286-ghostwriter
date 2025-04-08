@@ -245,7 +245,6 @@ public class Ghost : Capturable
     {
         // Disables model
         ghostModel.SetActive(false);
-        m_TriggerCapture = new UnityEvent<Capturable>();
         // care the Female_Ghost vs Female Ghost (same w male)
         femModel = transform.Find("Female_Ghost")?.gameObject;
         mascModel = transform.Find("Male_Ghost")?.gameObject;

@@ -148,6 +148,7 @@ public class LevelManager : MonoBehaviour
 
         // Add this ghost to the capture manager's list
         captureManager.AppendGhost(ghost);
+        captureManager.AppendCapturable(ghost);
         ghost.SetBodyType(true);
         ghost.levelManager1 = this;
         ghost.SetHuntingZone(zones[0]);

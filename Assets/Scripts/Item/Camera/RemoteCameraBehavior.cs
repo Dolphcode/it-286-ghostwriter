@@ -29,7 +29,6 @@ public class RemoteCameraBehavior : ItemBehavior
     public void Start()
     {
         levelManager = FindAnyObjectByType<LevelManager>();
-        levelManager.GetCaptureManager().RegisterEventListener(Capture);
     }
 
     public override void Interact() {}
@@ -37,15 +36,24 @@ public class RemoteCameraBehavior : ItemBehavior
     public void Capture(Capturable obj)
     {
         Debug.Log(obj.name);
+        
+        if (data.cooldowns[0] <= 0) return;
+        data.cooldowns[0] = data.cooldownMaxes[0];
+
+        Debug.Log("we good with the cooldown");
+
         Vector3 screenpos = camReference.WorldToViewportPoint(obj.transform.position);
         // First test if it is on screen
         if (screenpos.x < 1 && screenpos.x > 0 && screenpos.y > 0 && screenpos.y < 1 && screenpos.z >= 0)
         {
+            Debug.Log("The thing is on screen");
             RaycastHit hit;
+            
             if (Physics.Raycast(camReference.transform.position,
                 (obj.transform.position - camReference.transform.position).normalized,
                 out hit, Mathf.Infinity, ~LayerMask.GetMask("BoundingBox")) && hit.collider.gameObject == obj.gameObject)
             {
+                Debug.Log("I hit a " + hit.collider.name);
                 Debug.Log("I HAVE DETECTED SOMETHING! SOMETHING HAS HAPPENED");
                 RenderTexture currentRT = RenderTexture.active;
                 RenderTexture.active = camReference.targetTexture;
@@ -75,6 +83,13 @@ public class RemoteCameraBehavior : ItemBehavior
     {
         itemData.Behavior = this;
         data = itemData;
+        levelManager = FindAnyObjectByType<LevelManager>();
+        if (!registered)
+        {
+            registered = true;
+            Debug.Log("Registering");
+            levelManager.GetCaptureManager().RegisterEventListener(Capture);
+        }
     }
 
     public override void Unload()
@@ -126,7 +141,12 @@ public class RemoteCameraBehavior : ItemBehavior
         if (!registered)
         {
             registered = true;
+            Debug.Log("Registering");
             levelManager.GetCaptureManager().RegisterEventListener(Capture);    
+        }
+        if (data.cooldowns[0] > 0f)
+        {
+            data.cooldowns[0] -= Time.deltaTime;
         }
     }
 }

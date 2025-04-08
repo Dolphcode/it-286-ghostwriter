@@ -20,7 +20,12 @@ MonoBehaviour:
   Behavior: {fileID: 0}
   heldItemPosition: {x: 0.19, y: -0.11, z: 0.66}
   heldItemRotation: {x: -90, y: 0, z: 180}
+  inInventory: 0
   isEquiped: 0
   isOn: 0
   durability: 9999
   itemCost: 0
+  cooldownMaxes:
+  - 3
+  cooldowns:
+  - 0
