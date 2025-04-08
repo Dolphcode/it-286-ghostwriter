@@ -166,6 +166,7 @@ MonoBehaviour:
   huntingMode: 0
   huntingZone: []
   levelManager1: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!95 &-1712345760309523279
 Animator:
   serializedVersion: 7
@@ -389,7 +390,9 @@ Animation:
   m_Enabled: 1
   serializedVersion: 4
   m_Animation: {fileID: -6394311247318349533, guid: f7e5711423c9e094db437056645f4590, type: 3}
-  m_Animations: []
+  m_Animations:
+  - {fileID: -6394311247318349533, guid: f7e5711423c9e094db437056645f4590, type: 3}
+  - {fileID: -6846518573350295838, guid: f7e5711423c9e094db437056645f4590, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -568,7 +571,10 @@ Animation:
   m_Enabled: 1
   serializedVersion: 4
   m_Animation: {fileID: -6063538105309431850, guid: 0463a0562c1c9ff429d4f249bb6ee806, type: 3}
-  m_Animations: []
+  m_Animations:
+  - {fileID: -6063538105309431850, guid: 0463a0562c1c9ff429d4f249bb6ee806, type: 3}
+  - {fileID: -5027700431126578608, guid: 0463a0562c1c9ff429d4f249bb6ee806, type: 3}
+  - {fileID: 7072135527666660300, guid: 0463a0562c1c9ff429d4f249bb6ee806, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0

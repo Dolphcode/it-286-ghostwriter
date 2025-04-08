@@ -120,6 +120,10 @@ public class Ghost : Capturable
     private float teleportTimer = 0f;
     private float huntingTimer = 0f;
     private float functionTimer = 0f;
+    ///<summary>
+    ///Animator
+    ///</summary>
+    public Animation animator;
 
     ///<summary>
     ///Returns random room in Hunting Zone
@@ -249,7 +253,7 @@ public class Ghost : Capturable
             Debug.LogError("dawg where my gender at.");
         }
         // Sets the current room ghost is in to spawn room.
-        
+
         // Sets aggressionThreshold to 1
         aggressionThreshold = 1;
         // Sets aggression to 0.
@@ -307,6 +311,8 @@ public class Ghost : Capturable
                 col = child.GetComponent<Collider>();
             }
         }
+
+
     }
     // Update is called once per frame
     private void Update()
@@ -324,10 +330,13 @@ public class Ghost : Capturable
         {
             Debug.Log("HUNT");
             huntingMode = true;
+
+            animator.Play("Female Rig|Walk-Angry");
         }
         // When ghost is in passive mode, ghost will randomly teleport between rooms.
         if (!huntingMode)
         {
+            animator.Play("Female Rig|Idle-Calm");
             Roam();
         }
 
@@ -578,6 +587,8 @@ public class Ghost : Capturable
         {
             ghostModel = mascModel;
         }
+        // Set Animator of ghost type
+        animator = ghostModel.GetComponent<Animation>();
     }
     /// <summary>
     /// Sets body type/model for ghost. true - fem, masc - false
