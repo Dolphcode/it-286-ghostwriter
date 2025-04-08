@@ -155,11 +155,12 @@ MonoBehaviour:
   femModel: {fileID: 5886594339065697909}
   mascModel: {fileID: 4683428534170690823}
   aggressionThreshold: 0
+  thresholdChange: 0
   aggression: 0
   bodyTypeF: 0
   difficultyLevel: 0
   type: 0
-  emf: 0
+  emf: 1
   currentRoom: {fileID: 0}
   agent: {fileID: 0}
   moveSpeed: 1
