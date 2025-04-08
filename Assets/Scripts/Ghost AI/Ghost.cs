@@ -45,6 +45,11 @@ public class Ghost : Capturable
     ///</summary>
     [SerializeField]
     private int aggressionThreshold;
+    /// <summary>
+    ///Amount of times a ghost can be provoked before entering Hunting Mode.
+    ///</summary>
+    [SerializeField]
+    int thresholdChange;
     ///<summary>
     ///Amount of times a ghost has been provoked.
     ///</summary>
@@ -84,7 +89,7 @@ public class Ghost : Capturable
     ///<summary>
     /// EMF Player has to track (highest EMF)
     ///</summary>
-    private int emfPeak;
+    private int maxEMF;
     ///<summary>
     ///Room the ghost is currently in. Initialized during start to be random room.
     ///</summary>
@@ -203,12 +208,10 @@ public class Ghost : Capturable
     ///</summary>
     private void Roam()
     {
-        int thresholdChange = aggressionThreshold / 5;
-        if (aggression < thresholdChange && emf < 5)
+        if (aggression == thresholdChange && emf < maxEMF)
         {
             emf++;
-            emfPeak = emf;
-            thresholdChange += thresholdChange;
+            thresholdChange += aggressionThreshold / maxEMF;
         }
         teleportTimer += Time.deltaTime;
         interactTimer += Time.deltaTime;
@@ -252,8 +255,6 @@ public class Ghost : Capturable
         {
             Debug.LogError("dawg where my gender at.");
         }
-        // Sets the current room ghost is in to spawn room.
-
         // Sets aggressionThreshold to 1
         aggressionThreshold = 1;
         // Sets aggression to 0.
@@ -275,17 +276,21 @@ public class Ghost : Capturable
         {
             aggressionThreshold += difficultyLevel*aggressionMultiplier;
         }
+        thresholdChange = aggressionThreshold / maxEMF;
         if (type == GhostType.PSYCHOLOGICAL)
         {
             typeName = "Psychological";
+            maxEMF = 5;
         }
         if (type == GhostType.BIOLOGICAL)
         {
             typeName = "Biological";
+            maxEMF = 2;
         }
         if (type == GhostType.METAPHYSICAL)
         {
             typeName = "Metaphysical";
+            maxEMF = 4;
         }
         // Initailzes ghost in passive mode.
         huntingMode = false;
@@ -338,6 +343,7 @@ public class Ghost : Capturable
         {
             animator.Play("Female Rig|Idle-Calm");
             Roam();
+            thresholdChange = aggressionThreshold / maxEMF;
         }
 
         if (huntingMode)
@@ -417,6 +423,7 @@ public class Ghost : Capturable
         else
         {
             Debug.Log("GAME OVER :C");
+            //levelManager1.LoseLevel();
         }
     }
     /// <summary>
@@ -426,6 +433,14 @@ public class Ghost : Capturable
     public int GetEmf()
     {
         return emf;
+    }
+    /// <summary>
+    /// Returns tracked EMF (for ghost type).
+    /// </summary>
+    /// <returns>Integer</returns>
+    public int GetMaxEmf()
+    {
+        return maxEMF;
     }
     /// <summary>
     /// Returns type of ghost.
@@ -583,10 +598,7 @@ public class Ghost : Capturable
             ghostModel = femModel;
         }
         // Masc Model ON
-        else
-        {
-            ghostModel = mascModel;
-        }
+        ghostModel = mascModel;
         // Set Animator of ghost type
         animator = ghostModel.GetComponent<Animation>();
     }
@@ -603,17 +615,14 @@ public class Ghost : Capturable
 
         SetGhostPosition(currentRoom.SelectRandomSpawnPoint());
     }
-
     public override GameObject GetCheckObject()
     {
         return gameObject;
     }
-
     public override int GetCaptureScore(float rayProp, CaptureData data)
     {
         return (IsGhostHunting() ? 5 : 2);
     }
-
     public void Awake()
     {
         m_TriggerCapture = new UnityEvent<Capturable>();
