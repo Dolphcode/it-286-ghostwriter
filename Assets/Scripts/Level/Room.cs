@@ -53,12 +53,14 @@ public class Room : MonoBehaviour
     public List<GhostInteractable> GetAllInteractables() { return interactables; }
 
     // Accessors
+    public Collider myCollider;
     public Bounds GetBoundingBox() { return boundingBox; }
     public NavMeshSurface GetNavMeshSurface() { return roomNavmeshSurface; }
 
     // Awake is called even before Start
     private void Awake()
     {
+        myCollider = GetComponent<Collider>();
         // Assign a list of all GhostInteractable objects to this list
         // reference
         interactables = GetComponentsInChildren<GhostInteractable>()

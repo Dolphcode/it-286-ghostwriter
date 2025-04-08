@@ -1144,6 +1144,10 @@ PrefabInstance:
       propertyPath: m_HorizontalAlignment
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4403443381082926723, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}
+      propertyPath: m_text
+      value: Inv
+      objectReference: {fileID: 0}
     - target: {fileID: 4447273379004141174, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 19.8
@@ -6326,6 +6330,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1471803612861475040, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2532468106701015394, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
       propertyPath: computerInfoCanvas
       value: 
@@ -6370,8 +6378,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    - target: {fileID: 6366927330869750338, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6366927330869750338, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6366927330869750338, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6366927330869750338, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1471803612861475040, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 2433081975905721309, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5884321451958075205, guid: aa871efd6b88ef54aa9a3caafcac17c9, type: 3}
       insertIndex: -1

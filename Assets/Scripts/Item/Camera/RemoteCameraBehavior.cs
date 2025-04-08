@@ -29,13 +29,14 @@ public class RemoteCameraBehavior : ItemBehavior
     public void Start()
     {
         levelManager = FindAnyObjectByType<LevelManager>();
+        levelManager.GetCaptureManager().RegisterEventListener(Capture);
     }
 
     public override void Interact() {}
 
     public void Capture(Capturable obj)
     {
-
+        Debug.Log(obj.name);
         Vector3 screenpos = camReference.WorldToViewportPoint(obj.transform.position);
         // First test if it is on screen
         if (screenpos.x < 1 && screenpos.x > 0 && screenpos.y > 0 && screenpos.y < 1 && screenpos.z >= 0)
@@ -58,10 +59,12 @@ public class RemoteCameraBehavior : ItemBehavior
 
                 CaptureData data = levelManager.GetCaptureManager().CaptureImage(image, camReference);
                 data.remoteCapture = true;
-
+                /*
                 var bytes = image.EncodeToPNG();
                 File.WriteAllBytes(Application.dataPath + "/Captures/" + data.timestamp.ToShortDateString().Replace("/", "-") + "-" +
                     data.timestamp.ToLongTimeString().Replace(":", "-").Replace(" ", "-") + ".png", bytes);
+            
+               */ 
             }
         }
 

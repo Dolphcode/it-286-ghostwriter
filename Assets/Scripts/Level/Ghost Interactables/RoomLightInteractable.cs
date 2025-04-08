@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 /// <summary>
 /// The base GhostInteractable interface which must be implemented by
 /// all objects that the ghost can interact with in the level.
@@ -29,6 +30,7 @@ public class RoomLightInteractable : GhostInteractable
 
     private void Awake()
     {
+        m_TriggerCapture = new UnityEvent<Capturable>();
         storedState = currentState;
         foreach (var l in litMeshes)
         {
