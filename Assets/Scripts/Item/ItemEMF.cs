@@ -49,40 +49,33 @@ public class EMFBehavior : ItemBehavior
     // Update is called once per frame
     void Update()
     {
-        /*if (ghosty == null)
+        if (ghosty == null)
         {
             ghosty = FindAnyObjectByType<Ghost>();
         }
-        */
+
         //Finds if player is in same room as ghost
         if (data.isOn)
         {
-            Debug.Log("We are on");
-            Debug.Log(levelManager.IsGhostInRoom(levelManager.GetRoomFromPosition(transform.position)));
-            //if (levelManager.IsGhostInRoom(levelManager.GetRoomFromPosition(transform.position)))
-           // {
+            Debug.Log(testEMF);
+            if (levelManager.IsGhostInRoom(levelManager.GetRoomFromPosition(transform.position)))
+            {
                 for (int i = 0; i < 5; i++)
                 {
-                    if (i < testEMF)
+                    if (i < ghosty.GetEmf())
                     {
-                        emfLvls[i].GetComponent<MeshRenderer>().material.SetFloat("_Light_On_Interior",1);
+                        emfLvls[i].GetComponent<MeshRenderer>().material.SetFloat("_Light_On_Interior", 1);
+                    }
+                    else if (!data.isOn)
+                    {
+                        emfLvls[i].GetComponent<MeshRenderer>().material.SetFloat("_Light_On_Interior", 0);
                     }
                     else
                     {
                         emfLvls[i].GetComponent<MeshRenderer>().material.SetFloat("_Light_On_Interior", 0);
                     }
                 }
-                Debug.Log(ghosty.GetEmf());
-                m_TextMeshProUGUI.text = ghosty.GetEmf().ToString();
-
-            //} else
-            //{
-           //     m_TextMeshProUGUI.text = "0";
-           // }
-        } else
-        {
-            m_TextMeshProUGUI.text = "";
+            }
         }
-        //Debug.Log(levelManager.GetRoomFromPosition(transform.position).name);
     }
 }

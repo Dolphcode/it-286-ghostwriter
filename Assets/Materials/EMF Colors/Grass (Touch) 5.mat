@@ -130,7 +130,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Light_On: 1
-    - _Light_On_Interior: 1
+    - _Light_On_Interior: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Outer_Cutoff: 25
@@ -150,7 +150,7 @@ Material:
     m_Colors:
     - _Ambient_Color: {r: 0.18053079, g: 0.18053079, b: 0.35220122, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Base_Color: {r: 0.6679245, g: 0.35300484, b: 0.028985329, a: 1}
+    - _Base_Color: {r: 0.93207544, g: 0.17162213, b: 0.06155202, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Fog_Color: {r: 0.039337777, g: 0.04994355, b: 0.08176088, a: 0}

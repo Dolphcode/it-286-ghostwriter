@@ -39,6 +39,7 @@ public class Fear : MonoBehaviour
             fearMeter += Time.deltaTime * fearRate;
             fearMeter.ToString();
             text.text = "Fear: " + (int)fearMeter + "%";
+            boo.IncreaseAggression((int)(fearMeter*Time.deltaTime));
         }
 
         ///<summary>
@@ -49,7 +50,7 @@ public class Fear : MonoBehaviour
         {
             isSanity100 = true;
             text.text = "You Blacked Out";
-
+           // levelManager.LoseLevel();
 
         }
 

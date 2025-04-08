@@ -11,7 +11,7 @@ public class SodaBehavior : ItemBehavior
         if (data.durability > 0)
         {
             data.durability -= 1;
-            //GameObject.Find("Fear").GetComponent<Fear>().ChangeFearMeter(-20);
+            GameObject.Find("Fear").GetComponent<Fear>().ChangeFearMeter(-20);
         }
         else
         {
