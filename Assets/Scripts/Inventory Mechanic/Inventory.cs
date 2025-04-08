@@ -133,10 +133,10 @@ public class Inventory : MonoBehaviour
     public void ChangeHeldItem(int newItemHold, Transform itemHolder)
     {
         int current = CurrentHoldOut();
-        if (newItemHold != current && !inventorySlots[newItemHold].holdOut)
+        if (newItemHold != current)
         {
             Debug.Log("equip");
-            if (current > 0) inventorySlots[current].holdOut = false;
+            if (current >= 0) inventorySlots[current].holdOut = false;
             inventorySlots[newItemHold].holdOut = true;
 
             // Destroy the item instance
