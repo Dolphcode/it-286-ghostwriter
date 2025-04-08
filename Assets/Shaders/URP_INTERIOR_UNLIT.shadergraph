@@ -830,7 +830,7 @@
     "m_Title": "Texture/Color Sampling",
     "m_Position": {
         "x": -1134.6666259765625,
-        "y": 753.9998779296875
+        "y": 754.0
     }
 }
 
@@ -1279,8 +1279,8 @@
     "m_ObjectId": "3809f24182b54d41aa589fc68e284b1e",
     "m_Title": "Dither Filter",
     "m_Position": {
-        "x": 890.666748046875,
-        "y": 782.6668701171875
+        "x": 890.6666870117188,
+        "y": 782.666748046875
     }
 }
 
@@ -1541,7 +1541,7 @@
         "m_SerializedTexture": "",
         "m_Guid": ""
     },
-    "isMainTexture": false,
+    "isMainTexture": true,
     "useTilingAndOffset": false,
     "m_Modifiable": true,
     "m_DefaultType": 0
@@ -2539,7 +2539,7 @@
     "m_ObjectId": "89c8bb49026847a9b43e92f20532c84b",
     "m_Title": "Fog Color",
     "m_Position": {
-        "x": -107.33331298828125,
+        "x": -107.33334350585938,
         "y": 1313.3333740234375
     }
 }
@@ -3016,7 +3016,7 @@
     "m_Title": "Fog Calculation",
     "m_Position": {
         "x": -1580.0001220703125,
-        "y": 1325.3331298828125
+        "y": 1325.3333740234375
     }
 }
 
