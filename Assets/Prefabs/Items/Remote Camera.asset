@@ -17,7 +17,7 @@ MonoBehaviour:
   Description: A camera pre-equipped with sensors for detecting paranormal activity
   Icon: {fileID: 21300000, guid: 9f6dbc8b16857f443a129a371b2e5cdb, type: 3}
   Item: {fileID: 2686501479970085783, guid: 1e82f1024dd94674a874d03fffd22352, type: 3}
-  Behavior: {fileID: 0}
+  Behavior: {fileID: 394049890139110995, guid: 1e82f1024dd94674a874d03fffd22352, type: 3}
   heldItemPosition: {x: 0.19, y: -0.11, z: 0.66}
   heldItemRotation: {x: -90, y: 0, z: 180}
   inInventory: 0
