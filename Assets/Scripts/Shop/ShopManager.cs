@@ -128,7 +128,7 @@ public class ShopManager : MonoBehaviour
         ButtonRef.GetComponent<ButtonInfo>().quantityTxt.text = shopItems[3, ButtonRef.GetComponent<ButtonInfo>().itemID].ToString();
         */
 
-        if (levelDataManager.SpendMoney(shopItemIDs[selectedItem]))
+        if (levelDataManager.SpendMoney(shopItemPrices[selectedItem]))
         {
             Debug.Log("Purchasing");
             levelDataManager.AddItem(selectedItem);
