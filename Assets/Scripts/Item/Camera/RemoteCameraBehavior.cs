@@ -35,10 +35,9 @@ public class RemoteCameraBehavior : ItemBehavior
 
     public void Capture(Capturable obj)
     {
-        Debug.Log(obj.name);
-        
-        if (data.cooldowns[0] <= 0) return;
-        data.cooldowns[0] = data.cooldownMaxes[0];
+        //Debug.Log(obj.name);
+        //Debug.Log("Cooldown " + data.cooldowns[0].ToString() + " Cooldown Max " + data.cooldownMaxes[0].ToString());
+        if (data.cooldowns[0] > 0) return;
 
         Debug.Log("we good with the cooldown");
 
@@ -46,15 +45,15 @@ public class RemoteCameraBehavior : ItemBehavior
         // First test if it is on screen
         if (screenpos.x < 1 && screenpos.x > 0 && screenpos.y > 0 && screenpos.y < 1 && screenpos.z >= 0)
         {
-            Debug.Log("The thing is on screen");
+            //Debug.Log("The thing is on screen");
             RaycastHit hit;
             
             if (Physics.Raycast(camReference.transform.position,
                 (obj.transform.position - camReference.transform.position).normalized,
                 out hit, Mathf.Infinity, ~LayerMask.GetMask("BoundingBox")) && hit.collider.gameObject == obj.gameObject)
             {
-                Debug.Log("I hit a " + hit.collider.name);
-                Debug.Log("I HAVE DETECTED SOMETHING! SOMETHING HAS HAPPENED");
+                //Debug.Log("I hit a " + hit.collider.name);
+                //Debug.Log("I HAVE DETECTED SOMETHING! SOMETHING HAS HAPPENED");
                 RenderTexture currentRT = RenderTexture.active;
                 RenderTexture.active = camReference.targetTexture;
 
@@ -67,12 +66,9 @@ public class RemoteCameraBehavior : ItemBehavior
 
                 CaptureData data = levelManager.GetCaptureManager().CaptureImage(image, camReference);
                 data.remoteCapture = true;
-                /*
-                var bytes = image.EncodeToPNG();
-                File.WriteAllBytes(Application.dataPath + "/Captures/" + data.timestamp.ToShortDateString().Replace("/", "-") + "-" +
-                    data.timestamp.ToLongTimeString().Replace(":", "-").Replace(" ", "-") + ".png", bytes);
-            
-               */ 
+
+                // Reset cooldown
+                this.data.cooldowns[0] = this.data.cooldownMaxes[0];
             }
         }
 
