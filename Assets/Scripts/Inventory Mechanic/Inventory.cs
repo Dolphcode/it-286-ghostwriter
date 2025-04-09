@@ -140,7 +140,7 @@ public class Inventory : MonoBehaviour
             inventorySlots[newItemHold].holdOut = true;
 
             // Destroy the item instance
-            if (current > 0 && inventorySlots[current].ItemData != null)
+            if (current >= 0 && inventorySlots[current].ItemData != null)
             {
                 inventorySlots[current].ItemData.Behavior.Unload();
                 Destroy(inventorySlots[current].ItemData.Behavior.gameObject);

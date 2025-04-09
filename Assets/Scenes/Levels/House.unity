@@ -4605,7 +4605,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1991891856510284393, guid: cba8de8e860f50147b543e85c2c3ecbe, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2681194060593613232, guid: cba8de8e860f50147b543e85c2c3ecbe, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3612146207382326307, guid: cba8de8e860f50147b543e85c2c3ecbe, type: 3}
       propertyPath: m_Name
@@ -4849,6 +4853,10 @@ PrefabInstance:
       propertyPath: 'adjacentRooms.Array.data[0]'
       value: 
       objectReference: {fileID: 920869242}
+    - target: {fileID: 3529758360917280132, guid: e9768bf793388284fb6de9f36d21dcf3, type: 3}
+      propertyPath: interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3529758360917280132, guid: e9768bf793388284fb6de9f36d21dcf3, type: 3}
       propertyPath: litMeshes.Array.size
       value: 14
@@ -5143,10 +5151,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 133919424}
     m_Modifications:
-    - target: {fileID: 1991891856510284393, guid: cba8de8e860f50147b543e85c2c3ecbe, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3612146207382326307, guid: cba8de8e860f50147b543e85c2c3ecbe, type: 3}
       propertyPath: m_Name
       value: Window (1)

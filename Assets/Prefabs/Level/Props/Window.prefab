@@ -73,9 +73,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6537787327328517349, guid: f0551826f40fecd419724c328f67dd58, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6537787327328517349, guid: f0551826f40fecd419724c328f67dd58, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: cb1caac8f4b65fa44bb5f705c7c6890c, type: 2}
+      objectReference: {fileID: 2100000, guid: f12ea1a8fbaafe84fbabe7a63703bbba, type: 2}
     - target: {fileID: -4178894445829616765, guid: f0551826f40fecd419724c328f67dd58, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.001
@@ -130,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableType: 2
+  interactable: 0
   fingerprintMesh: {fileID: 1991891856510284393}
 --- !u!65 &8482791321053359138
 BoxCollider:
