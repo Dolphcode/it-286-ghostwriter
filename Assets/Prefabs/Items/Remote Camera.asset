@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402f0402b6f74f746b099c9460b5637f, type: 3}
   m_Name: Remote Camera
   m_EditorClassIdentifier: 
-  ID: 0
+  ID: 6
   Name: Remote Camera
   Description: A camera pre-equipped with sensors for detecting paranormal activity
   Icon: {fileID: 21300000, guid: 9f6dbc8b16857f443a129a371b2e5cdb, type: 3}
