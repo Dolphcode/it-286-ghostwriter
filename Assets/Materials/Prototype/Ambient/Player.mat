@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bed
+  m_Name: Player
   m_Shader: {fileID: -6465566751694194690, guid: 3c7ac4d930f19154db0a7f9e4bd48753, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
