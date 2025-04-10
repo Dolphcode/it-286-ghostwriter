@@ -141,7 +141,8 @@ public class Ghost : Capturable
     ///</summary>
     private void SetGhostPosition(Transform spawnPoint)
     {
-        transform.position = spawnPoint.transform.position;
+        //transform.position = spawnPoint.transform.position;
+        agent.Warp(spawnPoint.transform.position);
         Physics.SyncTransforms();
         Debug.Log("GHOST POSITION CHANGE");
     }
@@ -291,7 +292,7 @@ public class Ghost : Capturable
         }
         // Initailzes ghost in passive mode.
         huntingMode = false;
-        agent = GetComponent<NavMeshAgent>();
+        //agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
         // Adds Capsule collider for ghost if one doesn't exist.
         if (GetComponent<Collider>() == null)
@@ -344,6 +345,7 @@ public class Ghost : Capturable
             modelAnimController.SetFloat("Aggro",
                 Mathf.Clamp(aggression / aggressionThreshold, 0, 1) * 2f - 1f);*/
             modelAnimController.SetFloat("Aggro", -1f);
+            agent.SetDestination(transform.position); // A little hacky but it gets the job done
         }
 
         if (huntingMode)
@@ -393,7 +395,10 @@ public class Ghost : Capturable
                             }
                         }
                         // Ghost moves towards player
-                        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+                        //transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+                        Debug.Log("Is on navmesh: " + agent.isOnNavMesh.ToString());
+                        Debug.Log("Is active and enabled: " + agent.isActiveAndEnabled.ToString());
+                        agent.SetDestination(player.transform.position);
                         transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
                     }
                     // If the room the ghost is in is not a valid room, ghost will spawn into a random point within hunting zone and end of hunting mode occurs
