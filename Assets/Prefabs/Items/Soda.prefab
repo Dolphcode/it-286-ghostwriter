@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18391fb5db0a4c14ba3163165e6e3ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactable: 0
   behavior: {fileID: 4285149418881093880}
 --- !u!54 &6276550975380350224
 Rigidbody:
@@ -216,6 +217,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: a0016814b08de1041960d8f6681e5f76, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 01cb2a8bf13b167498baf1e329372bce, type: 2}
     - target: {fileID: 919132149155446097, guid: a0016814b08de1041960d8f6681e5f76, type: 3}
       propertyPath: m_Name
       value: soda

@@ -1022,7 +1022,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BETA v0.2.3
+  m_text: 'BETA v0.2.4
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: af5cdacb5da9c4e4b94142167b3e38cf, type: 2}
   m_sharedMaterial: {fileID: 5146161365279092845, guid: af5cdacb5da9c4e4b94142167b3e38cf, type: 2}

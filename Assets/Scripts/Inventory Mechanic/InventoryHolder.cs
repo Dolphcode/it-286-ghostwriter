@@ -65,6 +65,7 @@ public class InventoryHolder : MonoBehaviour
     public ItemBehavior GetHeldItem()
     {
         int heldSlot = inventorySystem.CurrentHoldOut();
+        if (heldSlot < 0) return null;
         ItemData data = inventorySystem.InventorySlots[heldSlot].ItemData;
         
         if (data == null )

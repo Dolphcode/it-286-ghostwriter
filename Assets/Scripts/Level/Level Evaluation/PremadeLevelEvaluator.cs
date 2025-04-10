@@ -25,9 +25,9 @@ public class PremadeLevelEvaluator : LevelEvaluator
             rooms.Add(room);
 
             // Build the navmesh
-            room.GetNavMeshSurface().BuildNavMesh();
+            //room.GetNavMeshSurface().BuildNavMesh();
         }
-
+        rooms[0].GetNavMeshSurface().BuildNavMesh();
         // TODO: List<Room>[] zones = new List<Room>[zones];
         List<Room>[] zoneArr = new List<Room>[1];
         zoneArr[0] = rooms;

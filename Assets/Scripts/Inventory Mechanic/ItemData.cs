@@ -21,4 +21,6 @@ public class ItemData : ScriptableObject
     public float durability; // flashlight and the pills but not emf
     public int itemCost;
 
+    public float[] cooldownMaxes; // Feel free to designate this arbitrarily per item
+    public float[] cooldowns;
 }

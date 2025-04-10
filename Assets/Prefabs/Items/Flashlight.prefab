@@ -187,6 +187,38 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: c0fbcaaac1886b8409ab7a7f81770c25, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5c0a015cbc08a044c8480b24ebda92d4, type: 2}
+    - target: {fileID: -7511558181221131132, guid: c0fbcaaac1886b8409ab7a7f81770c25, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5c0a015cbc08a044c8480b24ebda92d4, type: 2}
+    - target: {fileID: -7511558181221131132, guid: c0fbcaaac1886b8409ab7a7f81770c25, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5c0a015cbc08a044c8480b24ebda92d4, type: 2}
+    - target: {fileID: -7511558181221131132, guid: c0fbcaaac1886b8409ab7a7f81770c25, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: aabebea0094b2d747bafed26e58e4b91, type: 2}
+    - target: {fileID: -7511558181221131132, guid: c0fbcaaac1886b8409ab7a7f81770c25, type: 3}
+      propertyPath: 'm_Materials.Array.data[4]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d7e0f13989d1ee243aa43e3dc7ec4584, type: 2}
+    - target: {fileID: -7511558181221131132, guid: c0fbcaaac1886b8409ab7a7f81770c25, type: 3}
+      propertyPath: 'm_Materials.Array.data[5]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d65bfd89957004499e2b39711bd996b, type: 2}
+    - target: {fileID: -7511558181221131132, guid: c0fbcaaac1886b8409ab7a7f81770c25, type: 3}
+      propertyPath: 'm_Materials.Array.data[6]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d65bfd89957004499e2b39711bd996b, type: 2}
+    - target: {fileID: -7511558181221131132, guid: c0fbcaaac1886b8409ab7a7f81770c25, type: 3}
+      propertyPath: 'm_Materials.Array.data[7]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d7e0f13989d1ee243aa43e3dc7ec4584, type: 2}
     - target: {fileID: 919132149155446097, guid: c0fbcaaac1886b8409ab7a7f81770c25, type: 3}
       propertyPath: m_Name
       value: flashlight
