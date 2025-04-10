@@ -39,6 +39,10 @@ public class CaptureManager : MonoBehaviour
 
     [SerializeField] 
     private List<CaptureData> captures;
+    
+    public int CaptureCount { private set { } get { return captures.Count; } }
+    public Texture2D GetImage(int index) { return captures[index].capture; }
+    public CaptureData GetCaptureData(int index) { return captures[index]; }
 
     public void Awake()
     {
