@@ -162,7 +162,7 @@ MonoBehaviour:
   player: {fileID: 1096738990}
   ghosts:
   - {fileID: 0}
-  vanBox: {fileID: 0}
+  vanBox: {fileID: 1202017312}
   itemSpawnPoints:
   - {fileID: 1720082844}
   - {fileID: 305963704}
@@ -2777,6 +2777,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &1202017312 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2740321417204148505, guid: 5bf712f3f799cda449a2de1b196279c5, type: 3}
+  m_PrefabInstance: {fileID: 1202017308}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1229650695 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 201624850060708257, guid: 5bf712f3f799cda449a2de1b196279c5, type: 3}

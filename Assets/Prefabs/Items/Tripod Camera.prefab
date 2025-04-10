@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4145407830569633037}
   - component: {fileID: 6543300437934091824}
   - component: {fileID: 394049890139110995}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tripod Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 2180677617162335987}
   - component: {fileID: 3084643859791744567}
   - component: {fileID: 6136268975600431335}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Held Camera View
   m_TagString: CameraItem
   m_Icon: {fileID: 0}
@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 8539088777628957513}
   - component: {fileID: 1710963023012198504}
   - component: {fileID: 1948253064503965324}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Held Camera Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

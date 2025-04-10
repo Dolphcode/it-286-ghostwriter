@@ -100,7 +100,7 @@ public class LevelComputerManager : MonoBehaviour
     {
         if (leaving)
         {
-            LevelLoader._Instance.LoadLobby();
+            levelManager.ExitLevel();
         } else
         {
             leaving = true;

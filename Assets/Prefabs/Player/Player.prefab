@@ -242,6 +242,7 @@ MonoBehaviour:
   uiPrefab: {fileID: 5059425532779138060, guid: 098b33d10e3117c45a0215f79156b5ef, type: 3}
   inventoryUI: {fileID: 6389404273813010447}
   icons: []
+  invNums: []
   itemContainer: {fileID: 0}
   cameraHolder: {fileID: 6630907220244335935}
   camera: {fileID: 8017807000502220816}
@@ -749,6 +750,10 @@ PrefabInstance:
       propertyPath: itemContainer
       value: 
       objectReference: {fileID: 4243292312208686504}
+    - target: {fileID: 5599402723256154161, guid: 73aacdf37346c7f41bf4f0dc09e91b82, type: 3}
+      propertyPath: m_AllowDynamicResolution
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6220911657537586121, guid: 73aacdf37346c7f41bf4f0dc09e91b82, type: 3}
       propertyPath: m_Name
       value: Camera Holder

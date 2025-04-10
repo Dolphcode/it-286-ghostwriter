@@ -247,8 +247,8 @@ public class Ghost : Capturable
         // Disables model
         ghostModel.SetActive(false);
         // care the Female_Ghost vs Female Ghost (same w male)
-        femModel = transform.Find("Female_Ghost")?.gameObject;
-        mascModel = transform.Find("Male_Ghost")?.gameObject;
+        femModel = transform.Find("SEb_Ghost")?.gameObject;
+        mascModel = transform.Find("SEb_Ghost")?.gameObject;
         if (femModel == null || mascModel == null)
         {
             Debug.LogError("dawg where my gender at.");
@@ -272,7 +272,7 @@ public class Ghost : Capturable
         // Makes aggression threshold in terms of difficulty. Min 25, Max 125. Lower threshold, easier to aggro ghost and considered "harder".
         for (int i = 5; i>2; i--)
         {
-            aggressionThreshold += difficultyLevel*aggressionMultiplier;
+            aggressionThreshold += Mathf.RoundToInt(difficultyLevel*0.5f*aggressionMultiplier);
         }
         thresholdChange = aggressionThreshold / maxEMF;
         if (type == GhostType.PSYCHOLOGICAL)

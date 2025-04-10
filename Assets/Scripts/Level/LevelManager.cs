@@ -129,8 +129,10 @@ public class LevelManager : MonoBehaviour
 
         behavior.transform.position = itemSpawnPoints[spawnPointNumber].position;
 
+        Debug.Log("Spawned item");
         // Add this item to the capture manager's list?
         captureManager.AppendItemBehavior(behavior);
+        Debug.Log("appended item behavior");
         Debug.Log(behavior.data.name);
         itemsInLevel.Add(behavior.data);
     }
@@ -312,13 +314,16 @@ public class LevelManager : MonoBehaviour
 
     public void LoseLevel()
     {
+        levelStarted = false;
         LevelLoader._Instance.LoadLobby();
     }
 
     public void ExitLevel()
     {
+        levelStarted = false;
         // Call functions in the level data to create the blog entry
         // Call functions in the level data to deal with reading items
+        Debug.Log(itemsInLevel.Count);
         foreach (ItemData data in itemsInLevel)
         {
             Debug.Log(data.name);

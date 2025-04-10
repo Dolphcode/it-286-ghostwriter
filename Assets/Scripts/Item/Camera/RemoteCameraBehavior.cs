@@ -69,6 +69,10 @@ public class RemoteCameraBehavior : ItemBehavior
 
                 // Reset cooldown
                 this.data.cooldowns[0] = this.data.cooldownMaxes[0];
+                /*
+                var bytes = image.EncodeToPNG();
+                File.WriteAllBytes(Application.dataPath + "/Captures/" + data.timestamp.ToShortDateString().Replace("/", "-") + "-" +
+                    data.timestamp.ToLongTimeString().Replace(":", "-").Replace(" ", "-") + ".png", bytes);*/
             }
         }
 
