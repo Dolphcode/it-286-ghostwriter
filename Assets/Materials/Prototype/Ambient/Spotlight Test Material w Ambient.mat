@@ -30,9 +30,11 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses:
   - MOTIONVECTORS
+  - SHADOWCASTER
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -110,6 +112,7 @@ Material:
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
+    - _CastShadows: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -124,15 +127,16 @@ Material:
     - _EnvironmentReflections: 1
     - _FlashlightOn: 1
     - _Flashlight_On: 1
-    - _Fog_Max: 20
+    - _Fog_Max: 12
     - _Fog_Min: 5
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Light_On: 0
+    - _Light_On_Interior: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _Outer_Cutoff: 25
+    - _Outer_Cutoff: 15
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -145,14 +149,16 @@ Material:
     - _Surface: 0
     - _Use_Texture: 0
     - _WorkflowMode: 1
+    - _ZTest: 4
     - _ZWrite: 1
+    - _ZWriteControl: 0
     m_Colors:
-    - _Ambient_Color: {r: 0.09019608, g: 0.11372549, b: 0.23529412, a: 0}
+    - _Ambient_Color: {r: 0.028499639, g: 0.035008874, b: 0.06918234, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Base_Color: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Fog_Color: {r: 0.033028696, g: 0.03925041, b: 0.06289297, a: 0}
+    - _Fog_Color: {r: 0.01886791, g: 0.01886791, b: 0.01886791, a: 0}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
     - _Light_Color: {r: 1, g: 0, b: 0.13725519, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
