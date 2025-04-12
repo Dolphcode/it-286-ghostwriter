@@ -18,7 +18,6 @@ public class GhostSpawner : MonoBehaviour
             Ghost ghostScript = newGhost.GetComponent<Ghost>();
             if (ghostScript != null)
             {
-                ghostScript.SetBodyType(Random.Range(0f,1f) >= 0.5);
                 ghostScript.SetDifficulty(Random.Range(1, 6));
                 ghostScript.SetGhostType(Random.Range(1, 4));
             }
@@ -35,7 +34,6 @@ public class GhostSpawner : MonoBehaviour
             Ghost ghostScript = newGhost.GetComponent<Ghost>();
             if (ghostScript != null)
             {
-                ghostScript.SetBodyType(isFem);
                 ghostScript.SetDifficulty(difficultyLevel);
                 ghostScript.SetGhostType(type);
                 ghostScript.SetHuntingZone(huntingArea);
@@ -53,7 +51,6 @@ public class GhostSpawner : MonoBehaviour
             Ghost ghostScript = newGhost.GetComponent<Ghost>();
             if (ghostScript != null)
             {
-                ghostScript.SetBodyType(isFem);
                 ghostScript.SetDifficulty(difficultyLevel);
                 ghostScript.SetGhostType(type);
                 ghostScript.SetHuntingZone(huntingArea);
