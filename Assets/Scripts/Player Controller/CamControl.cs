@@ -9,6 +9,7 @@ public class CamControl : MonoBehaviour
 
     public Transform orientation;
     public Transform player;
+    public Transform playerModel;
     float xRotation;
     float yRotation;
 
@@ -42,6 +43,7 @@ public class CamControl : MonoBehaviour
         yRotation += mouseX;
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation,-90f, 90f);
+        playerModel.eulerAngles = new Vector3(playerModel.eulerAngles.x, yRotation, playerModel.eulerAngles.z);
 
         player.transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
