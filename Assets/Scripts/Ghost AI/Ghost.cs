@@ -17,17 +17,9 @@ public enum GhostType
 
 public class Ghost : Capturable
 {
+    private Dictionary<GhostType, GhostTypeData> ghostTypeMap = new();
     public static List<GameObject> ghostModelsList = new List<GameObject>();
     public static List<GhostInteractable> ghostTypeInteractables = new List<GhostInteractable>();
-    ///<summary>
-    /// Contains each GhostType's  typeName, moveSpeed, aggressionMultiplier, maxEMF
-    ///</summary>
-    private Dictionary<GhostType, GhostTypeData> ghostTypeMap = new()
-    {
-        { GhostType.PSYCHOLOGICAL, new GhostTypeData("Psychological", Random.Range(1f,2f), Random.Range(15,31), 5, ghostModelsList, ghostTypeInteractables)},
-        { GhostType.BIOLOGICAL, new GhostTypeData("Biological", 1f, 20, 2, ghostModelsList, ghostTypeInteractables)},
-        { GhostType.METAPHYSICAL, new GhostTypeData("Metaphysical", 1.5f, 25, 4, ghostModelsList, ghostTypeInteractables)}
-    };
     private GhostTypeData ghostData;
     ///<summary>
     ///Target the ghost is chasing.
@@ -232,6 +224,15 @@ public class Ghost : Capturable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
+        ///<summary>
+        /// Contains each GhostType's  typeName, moveSpeed, aggressionMultiplier, maxEMF
+        ///</summary>
+        Dictionary<GhostType, GhostTypeData> ghostTypeMap = new()
+        {
+            { GhostType.PSYCHOLOGICAL, new GhostTypeData("Psychological", Random.Range(1f,2f), Random.Range(15,31), 5, ghostModelsList, ghostTypeInteractables)},
+            { GhostType.BIOLOGICAL, new GhostTypeData("Biological", 1f, 20, 2, ghostModelsList, ghostTypeInteractables)},
+            { GhostType.METAPHYSICAL, new GhostTypeData("Metaphysical", 1.5f, 25, 4, ghostModelsList, ghostTypeInteractables)}
+        };
         // Disables model
         ghostModel.SetActive(false);
         // care the Female_Ghost vs Female Ghost (same w male)
@@ -348,11 +349,9 @@ public class Ghost : Capturable
                         //transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
                         Debug.Log("Is on navmesh: " + agent.isOnNavMesh.ToString());
                         Debug.Log("Is active and enabled: " + agent.isActiveAndEnabled.ToString());
-                        if (Vector3.Distance(transform.position, player.position) > currentRoom.GetRoomBounds().size.x)
-                        {
+                        //if (Vector3.Distance(transform.position, player.position) > currentRoom.GetRoomBoundsets().size.x)
                             agent.speed = ghostData.moveSpeed;
-                        }
-                        else
+                        //else
                         {
                             agent.speed = ghostData.moveSpeed;
                         }
@@ -455,6 +454,10 @@ public class Ghost : Capturable
     public void SetGhostType(GhostType ghostType)
     {
         type = ghostType;
+    }
+    public void SetBodyType(bool boo)
+    {
+
     }
     /// <summary>
     /// Sets enum type of ghost based on integer.
