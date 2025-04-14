@@ -15,9 +15,12 @@ public class ItemData : ScriptableObject
     public Vector3 heldItemPosition;
     public Vector3 heldItemRotation;
 
+    public bool inInventory = false;
     public bool isEquiped;
     public bool isOn;
     public float durability; // flashlight and the pills but not emf
     public int itemCost;
 
+    public float[] cooldownMaxes; // Feel free to designate this arbitrarily per item
+    public float[] cooldowns;
 }

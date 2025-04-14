@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class LevelDataManager : MonoBehaviour
 {
@@ -38,6 +40,10 @@ public class LevelDataManager : MonoBehaviour
     {
         //DontDestroyOnLoad(this);
         _Instance = this;
+        /*
+        float renderScale = 240f / Screen.height;
+        UniversalRenderPipelineAsset asset = (UniversalRenderPipelineAsset)GraphicsSettings.currentRenderPipeline;
+        asset.renderScale = renderScale;*/
     }
 
     // Update is called once per frame
@@ -187,6 +193,7 @@ public class LevelDataManager : MonoBehaviour
             for (int j = 0; j < selectedItemCounts[i]; j++)
             {
                 output.Add(itemTemplates[i]);
+                itemCounts[i]--;
             }
             selectedItemCounts[i] = 0;
         }

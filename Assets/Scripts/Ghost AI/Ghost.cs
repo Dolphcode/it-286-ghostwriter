@@ -45,6 +45,11 @@ public class Ghost : Capturable
     ///</summary>
     [SerializeField]
     private int aggressionThreshold;
+    /// <summary>
+    ///Amount of times a ghost can be provoked before entering Hunting Mode.
+    ///</summary>
+    [SerializeField]
+    int thresholdChange;
     ///<summary>
     ///Amount of times a ghost has been provoked.
     ///</summary>
@@ -84,7 +89,7 @@ public class Ghost : Capturable
     ///<summary>
     /// EMF Player has to track (highest EMF)
     ///</summary>
-    private int emfPeak;
+    private int maxEMF;
     ///<summary>
     ///Room the ghost is currently in. Initialized during start to be random room.
     ///</summary>
@@ -121,6 +126,8 @@ public class Ghost : Capturable
     private float huntingTimer = 0f;
     private float functionTimer = 0f;
 
+    private Animator modelAnimController;
+
     ///<summary>
     ///Returns random room in Hunting Zone
     ///</summary>
@@ -134,7 +141,8 @@ public class Ghost : Capturable
     ///</summary>
     private void SetGhostPosition(Transform spawnPoint)
     {
-        transform.position = spawnPoint.transform.position;
+        //transform.position = spawnPoint.transform.position;
+        agent.Warp(spawnPoint.transform.position);
         Physics.SyncTransforms();
         Debug.Log("GHOST POSITION CHANGE");
     }
@@ -199,12 +207,10 @@ public class Ghost : Capturable
     ///</summary>
     private void Roam()
     {
-        int thresholdChange = aggressionThreshold / 5;
-        if (aggression < thresholdChange && emf < 5)
+        if (aggression == thresholdChange && emf < maxEMF)
         {
             emf++;
-            emfPeak = emf;
-            thresholdChange += thresholdChange;
+            thresholdChange += aggressionThreshold / maxEMF;
         }
         teleportTimer += Time.deltaTime;
         interactTimer += Time.deltaTime;
@@ -240,16 +246,13 @@ public class Ghost : Capturable
     {
         // Disables model
         ghostModel.SetActive(false);
-        m_TriggerCapture = new UnityEvent<Capturable>();
         // care the Female_Ghost vs Female Ghost (same w male)
-        femModel = transform.Find("Female_Ghost")?.gameObject;
-        mascModel = transform.Find("Male_Ghost")?.gameObject;
+        femModel = transform.Find("SEb_Ghost")?.gameObject;
+        mascModel = transform.Find("SEb_Ghost")?.gameObject;
         if (femModel == null || mascModel == null)
         {
             Debug.LogError("dawg where my gender at.");
         }
-        // Sets the current room ghost is in to spawn room.
-        
         // Sets aggressionThreshold to 1
         aggressionThreshold = 1;
         // Sets aggression to 0.
@@ -269,23 +272,27 @@ public class Ghost : Capturable
         // Makes aggression threshold in terms of difficulty. Min 25, Max 125. Lower threshold, easier to aggro ghost and considered "harder".
         for (int i = 5; i>2; i--)
         {
-            aggressionThreshold += difficultyLevel*aggressionMultiplier;
+            aggressionThreshold += Mathf.RoundToInt(difficultyLevel*0.5f*aggressionMultiplier);
         }
+        thresholdChange = aggressionThreshold / maxEMF;
         if (type == GhostType.PSYCHOLOGICAL)
         {
             typeName = "Psychological";
+            maxEMF = 5;
         }
         if (type == GhostType.BIOLOGICAL)
         {
             typeName = "Biological";
+            maxEMF = 2;
         }
         if (type == GhostType.METAPHYSICAL)
         {
             typeName = "Metaphysical";
+            maxEMF = 4;
         }
         // Initailzes ghost in passive mode.
         huntingMode = false;
-        agent = GetComponent<NavMeshAgent>();
+        //agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
         // Adds Capsule collider for ghost if one doesn't exist.
         if (GetComponent<Collider>() == null)
@@ -307,6 +314,8 @@ public class Ghost : Capturable
                 col = child.GetComponent<Collider>();
             }
         }
+
+
     }
     // Update is called once per frame
     private void Update()
@@ -324,16 +333,29 @@ public class Ghost : Capturable
         {
             Debug.Log("HUNT");
             huntingMode = true;
+
         }
         // When ghost is in passive mode, ghost will randomly teleport between rooms.
         if (!huntingMode)
         {
             Roam();
+            thresholdChange = aggressionThreshold / maxEMF;
+            modelAnimController.SetFloat("MoveSpeed", -1f);
+            /* uncomment this if you want to modulate aggro based on aggression threshold
+            modelAnimController.SetFloat("Aggro",
+                Mathf.Clamp(aggression / aggressionThreshold, 0, 1) * 2f - 1f);*/
+            modelAnimController.SetFloat("Aggro", -1f);
+            agent.SetDestination(transform.position); // A little hacky but it gets the job done
         }
 
         if (huntingMode)
         {
             m_TriggerCapture.Invoke(this);
+
+            // Set the animation controller blending
+            // Both male and female model controllers have the same parameters
+            modelAnimController.SetFloat("MoveSpeed", 0f);
+            modelAnimController.SetFloat("Aggro", -1f);
 
             huntingTimer += Time.deltaTime;
             // Tracks current room 
@@ -373,7 +395,10 @@ public class Ghost : Capturable
                             }
                         }
                         // Ghost moves towards player
-                        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+                        //transform.position = Vector3.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+                        Debug.Log("Is on navmesh: " + agent.isOnNavMesh.ToString());
+                        Debug.Log("Is active and enabled: " + agent.isActiveAndEnabled.ToString());
+                        agent.SetDestination(player.transform.position);
                         transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
                     }
                     // If the room the ghost is in is not a valid room, ghost will spawn into a random point within hunting zone and end of hunting mode occurs
@@ -408,6 +433,7 @@ public class Ghost : Capturable
         else
         {
             Debug.Log("GAME OVER :C");
+            //levelManager1.LoseLevel();
         }
     }
     /// <summary>
@@ -417,6 +443,14 @@ public class Ghost : Capturable
     public int GetEmf()
     {
         return emf;
+    }
+    /// <summary>
+    /// Returns tracked EMF (for ghost type).
+    /// </summary>
+    /// <returns>Integer</returns>
+    public int GetMaxEmf()
+    {
+        return maxEMF;
     }
     /// <summary>
     /// Returns type of ghost.
@@ -578,6 +612,8 @@ public class Ghost : Capturable
         {
             ghostModel = mascModel;
         }
+        // Set Animator of ghost type
+        modelAnimController = ghostModel.GetComponent<Animator>();
     }
     /// <summary>
     /// Sets body type/model for ghost. true - fem, masc - false
@@ -592,17 +628,14 @@ public class Ghost : Capturable
 
         SetGhostPosition(currentRoom.SelectRandomSpawnPoint());
     }
-
     public override GameObject GetCheckObject()
     {
         return gameObject;
     }
-
     public override int GetCaptureScore(float rayProp, CaptureData data)
     {
         return (IsGhostHunting() ? 5 : 2);
     }
-
     public void Awake()
     {
         m_TriggerCapture = new UnityEvent<Capturable>();

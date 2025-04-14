@@ -8,6 +8,10 @@ public class ShopManager : MonoBehaviour
 
     LevelDataManager levelDataManager;
 
+    [Header("Store Items")]
+    [SerializeField] private int[] shopItemIDs;
+    [SerializeField] private int[] shopItemPrices;
+
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI moneyTxt;
     [SerializeField] private TextMeshProUGUI itemTxt;
@@ -23,7 +27,7 @@ public class ShopManager : MonoBehaviour
     // Callback functions to modify the internal state of the shop manager
     // using buttons
     public void CheckPrevItem() { if (selectedItem > 1) selectedItem--; }
-    public void CheckNextItem() { if (selectedItem < 5) selectedItem++; }
+    public void CheckNextItem() { if (selectedItem < shopItemPrices.Length - 1) selectedItem++; }
 
     //For the 2-D Array:
 
@@ -84,12 +88,12 @@ public class ShopManager : MonoBehaviour
 
         // Display item info
         itemTxt.text = levelDataManager.GetItemInfo(selectedItem).Name;
-        priceTxt.text = "Price: $" + (shopItems[2, selectedItem]).ToString();
+        priceTxt.text = "Price: $" + (shopItemPrices[selectedItem]).ToString();
         qtyTxt.text = "Owned: " + (levelDataManager.GetOwnedCount(selectedItem)).ToString();
         descTxt.text = levelDataManager.GetItemInfo(selectedItem).Description;
         icon.sprite = levelDataManager.GetItemInfo(selectedItem).Icon;
 
-        if (shopItems[2, selectedItem] <= levelDataManager.GetMoney())
+        if (shopItemPrices[selectedItem] <= levelDataManager.GetMoney())
         {
             purchaseBtn.enabled = true;
         } else
@@ -124,7 +128,7 @@ public class ShopManager : MonoBehaviour
         ButtonRef.GetComponent<ButtonInfo>().quantityTxt.text = shopItems[3, ButtonRef.GetComponent<ButtonInfo>().itemID].ToString();
         */
 
-        if (levelDataManager.SpendMoney(shopItems[2, selectedItem]))
+        if (levelDataManager.SpendMoney(shopItemPrices[selectedItem]))
         {
             Debug.Log("Purchasing");
             levelDataManager.AddItem(selectedItem);

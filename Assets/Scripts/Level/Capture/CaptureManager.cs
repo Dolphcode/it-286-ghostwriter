@@ -39,6 +39,10 @@ public class CaptureManager : MonoBehaviour
 
     [SerializeField] 
     private List<CaptureData> captures;
+    
+    public int CaptureCount { private set { } get { return captures.Count; } }
+    public Texture2D GetImage(int index) { return captures[index].capture; }
+    public CaptureData GetCaptureData(int index) { return captures[index]; }
 
     public void Awake()
     {
@@ -129,7 +133,7 @@ public class CaptureManager : MonoBehaviour
 
     public void RegisterEventListener(UnityAction<Capturable> callback)
     {
-        Debug.Log("registering events");
+        Debug.Log("registering events " + capturables.Count().ToString());
         foreach (Capturable c in capturables)
         {
             Debug.Log(c.name);
@@ -155,6 +159,7 @@ public class CaptureManager : MonoBehaviour
         data.capture = image;
         data.timestamp = System.DateTime.Now;
 
+        /*
         // Compute score and append flags depending on contents of image
         // First check if the ghost is in view
         foreach (Ghost ghost in ghosts)
@@ -182,7 +187,7 @@ public class CaptureManager : MonoBehaviour
                     }
                 }
             }
-        }
+        }*/
 
         foreach (Capturable capturable in capturables)
         {

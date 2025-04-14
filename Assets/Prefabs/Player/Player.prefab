@@ -898,7 +898,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9028987672969666587}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 07134221171c545429f2573e07de2de0, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -942,6 +942,10 @@ PrefabInstance:
       propertyPath: itemContainer
       value: 
       objectReference: {fileID: 4243292312208686504}
+    - target: {fileID: 5599402723256154161, guid: 73aacdf37346c7f41bf4f0dc09e91b82, type: 3}
+      propertyPath: m_AllowDynamicResolution
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6220911657537586121, guid: 73aacdf37346c7f41bf4f0dc09e91b82, type: 3}
       propertyPath: m_Name
       value: Camera Holder

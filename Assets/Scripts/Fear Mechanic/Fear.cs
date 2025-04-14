@@ -32,6 +32,8 @@ public class Fear : MonoBehaviour
 
     void Update()
     {
+        if (levelManager.levelStarted == false) return;
+        if (boo == null) boo = FindAnyObjectByType<Ghost>();
         ///<summary>
         /// Makes the fear tick down at a constant rate
         /// Modifiable by changing <param> fearRate </param> 
@@ -41,10 +43,12 @@ public class Fear : MonoBehaviour
         {
             fearMeter += Time.deltaTime * fearRate;
             fearMeter.ToString();
+        }
+        
             //text.text = "Fear: " + (int)fearMeter + "%";
-            if (boo != null)
+            if (boo != null && fearMeter > 50)
             { 
-                boo.IncreaseAggression((int)(fearMeter * Time.deltaTime));
+                boo.IncreaseAggression((int)(fearMeter * 0.01 * Time.deltaTime));
             }
         }
 
@@ -55,8 +59,10 @@ public class Fear : MonoBehaviour
         if (fearMeter >= 100)
         {
             isSanity100 = true;
-            //text.text = "You Blacked Out";
-           // levelManager.LoseLevel();
+
+            text.text = "You Blacked Out";
+           levelManager.LoseLevel();
+
 
         }
         if (boo != null)
@@ -98,7 +104,7 @@ public class Fear : MonoBehaviour
     /// <param name="newRate"> Default is .25 </param>
     public void ChangeFearRate(float newRate)
         {
-            fearRate = newRate;
+            fearRate += newRate;
         }
 
     /// <summary>

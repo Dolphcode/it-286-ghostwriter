@@ -66,16 +66,18 @@ public class EMFBehavior : ItemBehavior
                     {
                         emfLvls[i].GetComponent<MeshRenderer>().material.SetFloat("_Light_On_Interior", 1);
                     }
-                    else if (!data.isOn)
-                    {
-                        emfLvls[i].GetComponent<MeshRenderer>().material.SetFloat("_Light_On_Interior", 0);
-                    }
                     else
                     {
                         emfLvls[i].GetComponent<MeshRenderer>().material.SetFloat("_Light_On_Interior", 0);
                     }
                 }
+            } else
+            {
+                for (int i = 0; i < 5; ++i) emfLvls[i].GetComponent<MeshRenderer>().material.SetFloat("_Light_On_Interior", 0);
             }
+        } else
+        {
+            for (int i = 0; i < 5; ++i) emfLvls[i].GetComponent<MeshRenderer>().material.SetFloat("_Light_On_Interior", 0);
         }
     }
 }

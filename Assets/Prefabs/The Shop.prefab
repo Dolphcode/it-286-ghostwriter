@@ -1515,7 +1515,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615434ad3a5860c45b0ac2749b488679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyTxt: {fileID: 1407183065301068579}
+  shopItemIDs: 00000000010000000200000003000000040000000500000006000000
+  shopItemPrices: 00000000e80300002c01000090010000c800000058020000dc050000
+  moneyTxt: {fileID: 0}
+  itemTxt: {fileID: 0}
+  priceTxt: {fileID: 0}
+  qtyTxt: {fileID: 0}
+  descTxt: {fileID: 0}
+  purchaseBtn: {fileID: 0}
+  icon: {fileID: 0}
 --- !u!1 &2911763559463030064
 GameObject:
   m_ObjectHideFlags: 0
