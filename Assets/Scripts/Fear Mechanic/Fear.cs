@@ -50,8 +50,8 @@ public class Fear : MonoBehaviour
             { 
                 boo.IncreaseAggression((int)(fearMeter * 0.01 * Time.deltaTime));
             }
-        }
-
+        
+    
         ///<summary>
         ///detects if the players sanity drops to 0
         /// </summary>
@@ -60,7 +60,7 @@ public class Fear : MonoBehaviour
         {
             isSanity100 = true;
 
-            text.text = "You Blacked Out";
+            //text.text = "You Blacked Out";
            levelManager.LoseLevel();
 
 
