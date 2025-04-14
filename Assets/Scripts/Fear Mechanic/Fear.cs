@@ -1,11 +1,11 @@
 using UnityEngine;
-using TMPro;
-
+//using TMPro;
+//Commented out the text part of Fear Meter
 public class Fear : MonoBehaviour
 {
     [HideInInspector]
     public float fearMeter;
-    public TMP_Text text;
+    //public TMP_Text text;
     public float fearRate;
     [HideInInspector]
     public bool isSanity100;
@@ -16,7 +16,10 @@ public class Fear : MonoBehaviour
     private bool spooked;
     void Start()
     {
-        boo = FindAnyObjectByType<Ghost>();
+        if (boo != null)
+        {
+            boo = FindAnyObjectByType<Ghost>();
+        }
         levelManager = FindAnyObjectByType<LevelManager>();
         ///<summary>
         /// Starts fear at 0%
@@ -38,8 +41,11 @@ public class Fear : MonoBehaviour
         {
             fearMeter += Time.deltaTime * fearRate;
             fearMeter.ToString();
-            text.text = "Fear: " + (int)fearMeter + "%";
-            boo.IncreaseAggression((int)(fearMeter*Time.deltaTime));
+            //text.text = "Fear: " + (int)fearMeter + "%";
+            if (boo != null)
+            { 
+                boo.IncreaseAggression((int)(fearMeter * Time.deltaTime));
+            }
         }
 
         ///<summary>
@@ -49,19 +55,21 @@ public class Fear : MonoBehaviour
         if (fearMeter >= 100)
         {
             isSanity100 = true;
-            text.text = "You Blacked Out";
+            //text.text = "You Blacked Out";
            // levelManager.LoseLevel();
 
         }
-
-        if (boo.IsGhostHunting())
+        if (boo != null)
         {
-            IsScared();
-        }
+            if (boo.IsGhostHunting())
+            {
+                IsScared();
+            }
 
-        else if (!boo.IsGhostHunting())
-        {
-            IsNotScared();
+            else if (!boo.IsGhostHunting())
+            {
+                IsNotScared();
+            }
         }
     }
 
