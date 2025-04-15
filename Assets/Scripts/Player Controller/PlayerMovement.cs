@@ -1,7 +1,15 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public Image staminaBar;
+    public float stamina;
+    public float maxStamina;
+    public float stamChargeRate;
+    public float runCost;
+    private Coroutine recharging;
     /// <summary>
     /// Movement Speed (Default = 3)
     /// </summary>
@@ -15,8 +23,6 @@ public class PlayerMovement : MonoBehaviour
     public float playerHeight;
     public LayerMask whatIsGround;
 
-    private float timeSprinting;
-    private bool sprintCooldown;
 
     public Transform orientation;
     
@@ -31,8 +37,6 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        Mathf.Clamp(timeSprinting, 0,5);
-        timeSprinting = 0;
     }
 
     private void Update()
@@ -44,31 +48,57 @@ public class PlayerMovement : MonoBehaviour
         //Left Shift
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            //if (timeSprinting <= 5 && !sprintCooldown)
-            //{ 
-                Sprint();
-               // timeSprinting += Time.deltaTime;
-            //}
-           /* else
-            {
-                Walk();
-                timeSprinting -= Time.deltaTime;
-                if (timeSprinting == 0)
-                {
-                    sprintCooldown = false;
-                }
-                else
-                {
-                    sprintCooldown = true;
-                }
+            StopCoroutine(recharging);
+            if (stamina > 0)
+            { 
+            Sprint();
+            stamina -= runCost * Time.deltaTime;
+            
             }
-           */
-        }
+            
+            if (stamina <= 0)
+            {
+                stamina = 0;
+                Walk();
 
-        else
+            }
+            staminaBar.fillAmount = stamina / maxStamina;
+        } 
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             Walk();
-           // timeSprinting -= Time.deltaTime;
+
+            if (recharging != null)
+            {
+                StopCoroutine(recharging);
+            }
+
+            recharging = StartCoroutine(RechargeStamina());
+
+        }
+
+
+        
+    }
+
+    
+    /// <summary>
+    /// Starts recharging the players stamina after they stop running for 1 second.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator RechargeStamina()
+    {
+        yield return new WaitForSeconds(1f);
+
+        while (stamina < maxStamina)
+        {
+            stamina += stamChargeRate / 10f;
+            if (stamina > maxStamina)
+            {
+                stamina = maxStamina;
+            }
+            staminaBar.fillAmount = stamina / maxStamina;
+            yield return new WaitForSeconds(.1f);
         }
     }
     private void FixedUpdate()
