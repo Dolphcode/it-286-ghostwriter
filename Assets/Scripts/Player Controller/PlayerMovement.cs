@@ -48,7 +48,11 @@ public class PlayerMovement : MonoBehaviour
         //Left Shift
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            StopCoroutine(recharging);
+            if (recharging != null)
+            {
+                StopCoroutine(recharging);
+            }
+
             if (stamina > 0)
             { 
             Sprint();
