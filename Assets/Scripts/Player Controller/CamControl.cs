@@ -75,7 +75,8 @@ public class CamControl : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Mouse0)) lookingAt.collider.gameObject.GetComponent<PlayerInteractable>().interact();
                 
                 // Show zoom in screen
-                if (Input.GetKey(KeyCode.Mouse1))
+                
+                if (Input.GetKey(KeyCode.Mouse1) && lookingAt.collider.tag == "Computer")
                 {
                     computerInfoCanvas.gameObject.SetActive(true);
                 }

@@ -590,7 +590,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -665,8 +665,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 3
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 2
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
@@ -1068,6 +1068,10 @@ PrefabInstance:
       propertyPath: itemContainer
       value: 
       objectReference: {fileID: 4243292312208686504}
+    - target: {fileID: 5599402723256154161, guid: 73aacdf37346c7f41bf4f0dc09e91b82, type: 3}
+      propertyPath: m_AllowMSAA
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5599402723256154161, guid: 73aacdf37346c7f41bf4f0dc09e91b82, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 1015

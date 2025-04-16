@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9175540462303363846}
   - component: {fileID: 5471590739000317526}
   - component: {fileID: 6772551950996590679}
+  - component: {fileID: 2188047050193800230}
   m_Layer: 8
   m_Name: EMF 5
   m_TagString: EMF Level
@@ -86,6 +87,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2188047050193800230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2169639486174603290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab5d527286926849a0de5bed4b0d275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 0}
 --- !u!1 &3240677128932985983
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,6 +353,7 @@ GameObject:
   - component: {fileID: 7245896924990075344}
   - component: {fileID: 4072461741180887591}
   - component: {fileID: 815665828334743294}
+  - component: {fileID: 2551085353609591073}
   m_Layer: 8
   m_Name: EMF Beeper
   m_TagString: Untagged
@@ -505,6 +520,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5495902117074765545, guid: 85cca73f49e88ca4e8fecde08e9466a0, type: 3}
+--- !u!114 &2551085353609591073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4094513679903417089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab5d527286926849a0de5bed4b0d275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 0}
 --- !u!1 &5912213374545835026
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,6 +544,7 @@ GameObject:
   - component: {fileID: 3869849816142633096}
   - component: {fileID: 4053941780711174956}
   - component: {fileID: 3853449506623005527}
+  - component: {fileID: 6263702619208257365}
   m_Layer: 8
   m_Name: EMF 2
   m_TagString: EMF Level
@@ -591,6 +620,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6263702619208257365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5912213374545835026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab5d527286926849a0de5bed4b0d275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 0}
 --- !u!1 &6255830352168547967
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,6 +644,7 @@ GameObject:
   - component: {fileID: 1705990257891604507}
   - component: {fileID: 1156580937190454092}
   - component: {fileID: 8884787460024435533}
+  - component: {fileID: 7323447722867956653}
   m_Layer: 8
   m_Name: EMF 3
   m_TagString: EMF Level
@@ -677,6 +720,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7323447722867956653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6255830352168547967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab5d527286926849a0de5bed4b0d275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 0}
 --- !u!1 &6460302944511212672
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,6 +744,7 @@ GameObject:
   - component: {fileID: 3309361957109461045}
   - component: {fileID: 7722520336956863117}
   - component: {fileID: 7753813317541229503}
+  - component: {fileID: 3116546501492211101}
   m_Layer: 8
   m_Name: EMF 4
   m_TagString: EMF Level
@@ -763,6 +820,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3116546501492211101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6460302944511212672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab5d527286926849a0de5bed4b0d275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 0}
 --- !u!1 &9207022641259900352
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,6 +844,7 @@ GameObject:
   - component: {fileID: 3140066114407148857}
   - component: {fileID: 6358442671519168321}
   - component: {fileID: 7870116338351877863}
+  - component: {fileID: 6388409467794872470}
   m_Layer: 8
   m_Name: EMF 1
   m_TagString: EMF Level
@@ -849,3 +920,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6388409467794872470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9207022641259900352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab5d527286926849a0de5bed4b0d275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 0}
