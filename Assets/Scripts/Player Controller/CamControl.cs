@@ -56,7 +56,7 @@ public class CamControl : MonoBehaviour
 
         
 
-        if (Physics.Raycast(ray, out lookingAt, 10f))
+        if (Physics.Raycast(ray, out lookingAt, 10f, ~LayerMask.GetMask("BoundingBox")))
         {
             // Check for pickups
             if (lookingAt.collider != null)
@@ -75,7 +75,7 @@ public class CamControl : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Mouse0)) lookingAt.collider.gameObject.GetComponent<PlayerInteractable>().interact();
                 
                 // Show zoom in screen
-                if (Input.GetKey(KeyCode.Mouse1) )
+                if (Input.GetKey(KeyCode.Mouse1))
                 {
                     computerInfoCanvas.gameObject.SetActive(true);
                 }
