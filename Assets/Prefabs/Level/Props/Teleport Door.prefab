@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4300694884567295394}
   - component: {fileID: 970764482455304979}
   - component: {fileID: 3983116399497949529}
+  - component: {fileID: 980867018299790021}
+  - component: {fileID: 485344209405616750}
   m_Layer: 0
   m_Name: Door.003
   m_TagString: Untagged
@@ -100,6 +102,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 0}
+--- !u!114 &980867018299790021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373024262235172268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bc5fc9893f1eab46892897b78c5aee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactable: 0
+  _OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3704208872729977795}
+        m_TargetAssemblyTypeName: PlayerTeleporter, Assembly-CSharp
+        m_MethodName: Teleport
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!65 &485344209405616750
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373024262235172268}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.035123732, y: 0.0075290664, z: 0.07756188}
+  m_Center: {x: 0.017561862, y: -0.000000031482436, z: -0.03878091}
 --- !u!1 &2724902880479782838
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,6 +163,7 @@ GameObject:
   - component: {fileID: 1188949446455376022}
   - component: {fileID: 1410523648267426776}
   - component: {fileID: 2849726091238885717}
+  - component: {fileID: 3704208872729977795}
   m_Layer: 0
   m_Name: Teleport Door
   m_TagString: Untagged
@@ -201,3 +253,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 0}
+--- !u!114 &3704208872729977795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2724902880479782838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfda46e7f17f1bc4c8ead3e21ba2d724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  tpos: {fileID: 0}
