@@ -89,6 +89,11 @@ public class RoomLightInteractable : GhostInteractable
     public override void interact()
     {
         currentState = !currentState;
-        m_TriggerCapture.Invoke(this); // Only remote cameras can capture this
+        //m_TriggerCapture.Invoke(this); // Only remote cameras can capture this
+    }
+
+    public void ChangeState()
+    {
+        currentState = !currentState;
     }
 }
