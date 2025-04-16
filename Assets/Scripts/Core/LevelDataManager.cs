@@ -38,6 +38,7 @@ public class LevelDataManager : MonoBehaviour
     // Initialize the static levelloader instance
     void Awake()
     {
+        Screen.SetResolution(320, 240, true);
         //DontDestroyOnLoad(this);
         _Instance = this;
         /*
