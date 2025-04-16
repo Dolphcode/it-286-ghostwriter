@@ -142,8 +142,9 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Light_On: 1
-    - _Light_On_Interior: 0
+    - _Light_On_Interior: 1
     - _Metallic: 0
+    - _Nightvision_Enabled: 0
     - _OcclusionStrength: 1
     - _Outer_Cutoff: 25
     - _Parallax: 0.005

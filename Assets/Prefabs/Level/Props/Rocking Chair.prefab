@@ -63,14 +63,14 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 87e09558954332848ba4d8931a9bed7a, type: 2}
+      objectReference: {fileID: 2100000, guid: fd7fd615466bbb64e896133b3550cb87, type: 2}
     - target: {fileID: 919132149155446097, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
       propertyPath: m_Name
       value: Rocking Chair
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -82,6 +82,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1368683300273917961}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6306332134311647455}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6170660373385276504}
   m_SourcePrefab: {fileID: 100100000, guid: 73bff79480738af4cb21ee8a43314697, type: 3}
 --- !u!1 &2625896607071652587 stripped
 GameObject:
@@ -102,7 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableType: 1
   interactable: 0
-  rock: 1
+  rock: 0
   testCurve:
     serializedVersion: 2
     m_Curve:
@@ -212,3 +218,32 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.027060712, y: 0.028227635, z: 0.039162464}
   m_Center: {x: -0.000000015082554, y: -0.0010572345, z: 0.01953889}
+--- !u!114 &6306332134311647455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2625896607071652587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab5d527286926849a0de5bed4b0d275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 0}
+--- !u!208 &6170660373385276504
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2625896607071652587}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.014, y: 0.014, z: 0.020000001}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.001, z: 0.020000001}
+  m_TimeToStationary: 0.5

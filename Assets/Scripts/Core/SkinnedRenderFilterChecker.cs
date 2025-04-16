@@ -6,15 +6,15 @@ using UnityEngine.Rendering;
 /// This script is responsible for checking the type of camera that is rendering this
 /// object and applying filters if necessary
 /// </summary>
-public class RenderFilterChecker : MonoBehaviour
+public class SkinnedRenderFilterChecker : MonoBehaviour
 {
     [SerializeField]
-    private MeshRenderer meshRenderer;
+    private SkinnedMeshRenderer meshRenderer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        meshRenderer = GetComponent<MeshRenderer>();    
+        meshRenderer = GetComponent<SkinnedMeshRenderer>();
         RenderPipelineManager.beginCameraRendering += OnBeginCameraRendering;
         RenderPipelineManager.endCameraRendering += OnEndCameraRendering;
     }
@@ -28,8 +28,7 @@ public class RenderFilterChecker : MonoBehaviour
                 if (mat.HasFloat("_Nightvision_Enabled"))
                 {
                     mat.SetFloat("_Nightvision_Enabled", 1f);
-                }
-                else
+                } else
                 {
                     mat.SetFloat("_Nightvision_Enabled", 0f);
                 }
@@ -57,6 +56,6 @@ public class RenderFilterChecker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
