@@ -345,6 +345,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 163523992}
     - target: {fileID: 3529758360917280132, guid: 1b496838f4c57fe459f6652431c45a48, type: 3}
+      propertyPath: currentState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3529758360917280132, guid: 1b496838f4c57fe459f6652431c45a48, type: 3}
       propertyPath: litMeshes.Array.size
       value: 8
       objectReference: {fileID: 0}
@@ -703,6 +707,10 @@ PrefabInstance:
       propertyPath: 'interactables.Array.data[4]'
       value: 
       objectReference: {fileID: 461834764}
+    - target: {fileID: 3529758360917280132, guid: 52a62e600c75cc44d88346808875307b, type: 3}
+      propertyPath: currentState
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3529758360917280132, guid: 52a62e600c75cc44d88346808875307b, type: 3}
       propertyPath: litMeshes.Array.size
       value: 10
@@ -2172,6 +2180,10 @@ PrefabInstance:
       propertyPath: 'adjacentRooms.Array.data[3]'
       value: 
       objectReference: {fileID: 1105472014}
+    - target: {fileID: 3529758360917280132, guid: 8251068055c70764f973226ac8a28913, type: 3}
+      propertyPath: currentState
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3539227981734591199, guid: 8251068055c70764f973226ac8a28913, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2354,8 +2366,8 @@ Transform:
   m_GameObject: {fileID: 1068436697}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: -820, y: 1.5, z: -14.88}
-  m_LocalScale: {x: 0.3, y: 0.5000001, z: 0.3}
+  m_LocalPosition: {x: -820, y: 3.39, z: -29.04}
+  m_LocalScale: {x: 0.6, y: 1, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2925,7 +2937,7 @@ PrefabInstance:
       objectReference: {fileID: 503084333}
     - target: {fileID: 3529758360917280132, guid: bb8349c15c71d1545a6fea9fa95fd468, type: 3}
       propertyPath: currentState
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3529758360917280132, guid: bb8349c15c71d1545a6fea9fa95fd468, type: 3}
       propertyPath: litMeshes.Array.size
@@ -3239,6 +3251,10 @@ PrefabInstance:
       propertyPath: 'interactables.Array.data[2]'
       value: 
       objectReference: {fileID: 273338264}
+    - target: {fileID: 3529758360917280132, guid: bb8349c15c71d1545a6fea9fa95fd468, type: 3}
+      propertyPath: currentState
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3529758360917280132, guid: bb8349c15c71d1545a6fea9fa95fd468, type: 3}
       propertyPath: litMeshes.Array.size
       value: 10
@@ -3801,7 +3817,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -820, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 896577077}
@@ -3853,6 +3869,10 @@ PrefabInstance:
       propertyPath: 'interactables.Array.data[2]'
       value: 
       objectReference: {fileID: 1940803473}
+    - target: {fileID: 3529758360917280132, guid: df640ff04e90137448f5bcb4b83221c3, type: 3}
+      propertyPath: currentState
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3529758360917280132, guid: df640ff04e90137448f5bcb4b83221c3, type: 3}
       propertyPath: litMeshes.Array.size
       value: 8
@@ -3953,6 +3973,10 @@ PrefabInstance:
       propertyPath: 'adjacentRooms.Array.data[0]'
       value: 
       objectReference: {fileID: 920869242}
+    - target: {fileID: 3529758360917280132, guid: e9768bf793388284fb6de9f36d21dcf3, type: 3}
+      propertyPath: currentState
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3529758360917280132, guid: e9768bf793388284fb6de9f36d21dcf3, type: 3}
       propertyPath: interactable
       value: 0

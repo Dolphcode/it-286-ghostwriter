@@ -9,6 +9,8 @@ public class RoomLightInteractable : GhostInteractable
 {
     [SerializeField]
     private List<MeshRenderer> litMeshes;
+    [SerializeField]
+    private List<SkinnedMeshRenderer> litSkinnedMeshes;
 
     [SerializeField]
     private bool currentState;
@@ -31,24 +33,53 @@ public class RoomLightInteractable : GhostInteractable
     private void Awake()
     {
         m_TriggerCapture = new UnityEvent<Capturable>();
-        storedState = currentState;
+        storedState = (currentState = false);
         foreach (var l in litMeshes)
         {
-            l.material = Instantiate(l.material); // Make material unique to object
-            l.material.SetFloat("_Light_On_Interior", (storedState ? 1f : 0f));
+            for (int i = 0; i < l.materials.Length; ++i)
+            {
+                Material m = Instantiate(l.materials[i]);
+                l.materials[i] = m;
+                m.SetFloat("_Light_On_Interior", 0f);
+            }
+            //l.material = Instantiate(l.material); // Make material unique to object
+            //l.material.SetFloat("_Light_On_Interior", (storedState ? 1f : 0f));
+        }
+        foreach (var l in litSkinnedMeshes)
+        {
+            for (int i = 0; i < l.materials.Length; ++i)
+            {
+                Material m = Instantiate(l.materials[i]);
+                l.materials[i] = m;
+                m.SetFloat("_Light_On_Interior", 0f);
+            }
+            //l.material = Instantiate(l.material); // Make material unique to object
+            //l.material.SetFloat("_Light_On_Interior", (storedState ? 1f : 0f));
         }
     }
 
     private void Update()
     {
-        if (storedState !=  currentState)
-        {
+        //if (storedState !=  currentState)
+        //{
             storedState = currentState;
             foreach (var l in litMeshes)
             {
-                l.material.SetFloat("_Light_On_Interior", (storedState ? 1f : 0f));
+                foreach (var m in l.materials)
+                {
+                    m.SetFloat("_Light_On_Interior", (storedState ? 1f : 0f));
+                }
+                //l.material.SetFloat("_Light_On_Interior", (storedState ? 1f : 0f));
             }
-        }
+            foreach (var l in litSkinnedMeshes)
+            {
+                foreach (var m in l.materials)
+                {
+                    m.SetFloat("_Light_On_Interior", (storedState ? 1f : 0f));
+                }
+                //l.material.SetFloat("_Light_On_Interior", (storedState ? 1f : 0f));
+            }
+       // }
     }
 
     /// <summary>
