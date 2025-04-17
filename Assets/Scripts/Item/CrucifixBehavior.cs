@@ -4,6 +4,7 @@ using UnityEngine;
 public class CrucifixBehavior : ItemBehavior
 {
     Ghost ghost;
+    Coroutine compel;
     void Start()
     {
         ghost = FindAnyObjectByType<Ghost>();
@@ -11,18 +12,19 @@ public class CrucifixBehavior : ItemBehavior
 
     public override void Interact()
     {
-        
-    
-        if (data.durability > 0)
+        // if (camControl.lookingAt.transform.gameObject.CompareTag("Interactable"))
+        // {
+        //     return;
+        // }
+
+        //  else
+        //   {
+        if (compel == null)
         {
             data.durability -= 1;
-            StartCoroutine(Compel(10));
+            compel = StartCoroutine(Compel(6));
         }
-        else
-        {
-            
-            Debug.Log("No More Durability");
-        }
+       // }
     }
     public override void Load(ItemData itemData)
     {
@@ -36,6 +38,7 @@ public class CrucifixBehavior : ItemBehavior
         {
             ghost = FindAnyObjectByType<Ghost>();
         }
+        
     }
 
     /// <summary>
@@ -54,16 +57,21 @@ public class CrucifixBehavior : ItemBehavior
         else
         {
             Debug.Log("Ghost Was Not Hunting");
-            time -= 5;
+            time -= 3;
         }
         yield return new WaitForSeconds(time);
         ghost.IncreaseAggression(5);
         Debug.Log("Ghost Agression Increased");
+       
+        if (data.durability == 0)
+        {
+            BreakItem(0.0001f);
+        }
+        compel = null;
     }
  
     public override void Unload()
     {
         
     }
-
 }

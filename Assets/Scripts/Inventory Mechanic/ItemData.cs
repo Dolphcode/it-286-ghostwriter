@@ -18,7 +18,7 @@ public class ItemData : ScriptableObject
     public bool inInventory = false;
     public bool isEquiped;
     public bool isOn;
-    public float durability; // flashlight and the pills but not emf
+    public int durability; // flashlight and the pills but not emf
     public int itemCost;
 
     public float[] cooldownMaxes; // Feel free to designate this arbitrarily per item
