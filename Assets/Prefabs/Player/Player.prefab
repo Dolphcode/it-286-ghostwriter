@@ -1158,10 +1158,30 @@ PrefabInstance:
       propertyPath: tempFear
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 689707707083412907, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
+      propertyPath: imageColor.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 689707707083412907, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
+      propertyPath: imageColor.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 689707707083412907, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
+      propertyPath: imageColor.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 689707707083412907, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
+      propertyPath: imageColor.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2618719077725868175, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
       propertyPath: text
       value: 
       objectReference: {fileID: 820832980807612169}
+    - target: {fileID: 2618719077725868175, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
+      propertyPath: fearRate
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 3082808363169757336, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -9

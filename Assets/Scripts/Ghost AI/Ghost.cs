@@ -219,7 +219,7 @@ public class Ghost : Capturable
         {
             if (aggroTimer >= 1f)
             {
-                aggression++;
+                aggression += 2;
                 aggroTimer = 0f;
             }
         }
@@ -230,14 +230,14 @@ public class Ghost : Capturable
         // If aggression less than half full game is slightly harder
         if (aggression < aggressionThreshold / 2)
         {
-            GhostTeleportsAdjacentRoom(40f);
+            GhostTeleportsAdjacentRoom(80f);
             //takes longer, less chance = harder
             GhostInteracts(15f, 0.25);
         }
         // When ghost is in second half of aggression threshold
         else if (aggression < aggressionThreshold)
         {
-            GhostTeleportsAdjacentRoom(20f);
+            GhostTeleportsAdjacentRoom(60f);
             GhostInteracts(10f, 0.5);
         }
     }
@@ -428,7 +428,7 @@ public class Ghost : Capturable
     {
         if (!huntingMode)
         {
-            aggression++;
+            aggression += 2;
         }
         else
         {
@@ -541,7 +541,7 @@ public class Ghost : Capturable
     /// </summary>
     public void IncreaseAggression()
     {
-        aggression++;
+        aggression += 2;
     }
     /// <summary>
     /// Increases aggresssion by integer input
