@@ -189,7 +189,7 @@ MonoBehaviour:
   staminaBar: {fileID: 1731387870402165226}
   stamina: 50
   maxStamina: 50
-  stamChargeRate: 10
+  stamChargeRate: 2.5
   runCost: 10
   moveSpeed: 3
   groundDrag: 5
