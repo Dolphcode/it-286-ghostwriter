@@ -128,6 +128,7 @@ Material:
     - _GlossyReflections: 0
     - _Light_On_Interior: 0
     - _Metallic: 0
+    - _Nightvision_Enabled: 0
     - _OcclusionStrength: 1
     - _Outer_Cutoff: 0
     - _Parallax: 0.005
