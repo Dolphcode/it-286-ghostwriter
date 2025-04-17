@@ -14,6 +14,7 @@ public class Fear : MonoBehaviour
     public Ghost boo;
     public LevelManager levelManager;
     private bool spooked;
+    public bool fearful;
     void Start()
     {
         if (boo != null)
@@ -27,54 +28,56 @@ public class Fear : MonoBehaviour
         fearMeter = 0;
         minFear = 1;
         isSanity100 = false;
-
+        fearful = true;
     }
 
     void Update()
     {
-        if (levelManager.levelStarted == false) return;
-        if (boo == null) boo = FindAnyObjectByType<Ghost>();
+
         ///<summary>
         /// Makes the fear tick down at a constant rate
         /// Modifiable by changing <param> fearRate </param> 
         /// </summary>
         fearMeter = Mathf.Clamp(fearMeter, minFear, 100);
-        if (fearMeter < 100)
+        if (fearful)
         {
-            fearMeter += Time.deltaTime * fearRate;
-            fearMeter.ToString();
-        }
-        
+            if (fearMeter < 100)
+            {
+                fearMeter += Time.deltaTime * fearRate;
+                fearMeter.ToString();
+            }
+
             //text.text = "Fear: " + (int)fearMeter + "%";
             if (boo != null && fearMeter > 50)
-            { 
+            {
                 boo.IncreaseAggression((int)(fearMeter * 0.01 * Time.deltaTime));
             }
-        
-    
-        ///<summary>
-        ///detects if the players sanity drops to 0
-        /// </summary>
-
-        if (fearMeter >= 100)
-        {
-            isSanity100 = true;
-
-            //text.text = "You Blacked Out";
-           levelManager.LoseLevel();
 
 
-        }
-        if (boo != null)
-        {
-            if (boo.IsGhostHunting())
+            ///<summary>
+            ///detects if the players sanity drops to 0
+            /// </summary>
+
+            if (fearMeter >= 100)
             {
-                IsScared();
+                isSanity100 = true;
+
+                //text.text = "You Blacked Out";
+                levelManager.LoseLevel();
+
+
             }
-
-            else if (!boo.IsGhostHunting())
+            if (boo != null)
             {
-                IsNotScared();
+                if (boo.IsGhostHunting())
+                {
+                    IsScared();
+                }
+
+                else if (!boo.IsGhostHunting())
+                {
+                    IsNotScared();
+                }
             }
         }
     }
@@ -115,6 +118,18 @@ public class Fear : MonoBehaviour
     {
         fearMeter += fearChange;
     }
-
-
+    /// <summary>
+    /// Stops the fear from increasing
+    /// </summary>
+    public void PauseFear()
+    {
+        fearful = false;
+    }
+    /// <summary>
+    /// Makes the fear start increasing
+    /// </summary>
+    public void StartFear()
+    {
+        fearful = true;
+    }
 }

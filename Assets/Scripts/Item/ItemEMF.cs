@@ -10,21 +10,32 @@ public class EMFBehavior : ItemBehavior
 
     Ghost ghosty;
     public List<GameObject> emfLvls;
+    public GameObject emfOnLight;
     [SerializeField]
-    int testEMF;
     public override void Interact()
     {
-        if (!data.isOn)
+        if (camControl.lookingAt.transform.gameObject.CompareTag("Interactable"))
         {
-            data.isOn = true;
+            return;
         }
 
         else
         {
-            data.isOn = false;
+
+            if (!data.isOn)
+            {
+                data.isOn = true;
+
+            }
+
+            else
+            {
+                data.isOn = false;
+
+            }
+
+            Debug.Log("Interacting with EMF " + data.isOn);
         }
-        
-        Debug.Log("Interacting with EMF " + data.isOn);
     }
 
     public override void Load(ItemData itemData)
@@ -57,7 +68,8 @@ public class EMFBehavior : ItemBehavior
         //Finds if player is in same room as ghost
         if (data.isOn)
         {
-            Debug.Log(testEMF);
+            emfOnLight.GetComponent<MeshRenderer>().material.SetFloat("_Light_On_Interior", 1);
+
             if (levelManager.IsGhostInRoom(levelManager.GetRoomFromPosition(transform.position)))
             {
                 for (int i = 0; i < 5; i++)
@@ -71,13 +83,18 @@ public class EMFBehavior : ItemBehavior
                         emfLvls[i].GetComponent<MeshRenderer>().material.SetFloat("_Light_On_Interior", 0);
                     }
                 }
-            } else
+            } 
+
+            else
             {
                 for (int i = 0; i < 5; ++i) emfLvls[i].GetComponent<MeshRenderer>().material.SetFloat("_Light_On_Interior", 0);
             }
-        } else
+        } 
+
+        else
         {
             for (int i = 0; i < 5; ++i) emfLvls[i].GetComponent<MeshRenderer>().material.SetFloat("_Light_On_Interior", 0);
+            emfOnLight.GetComponent<MeshRenderer>().material.SetFloat("_Light_On_Interior", 0);
         }
     }
 }

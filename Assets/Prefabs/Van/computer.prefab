@@ -154,12 +154,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc5fc9893f1eab46892897b78c5aee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonType: 0
-  targetUI: {fileID: 7348431358272675638}
-  uiOff1: {fileID: 630635346705184541}
-  uiOff2: {fileID: 6941138778058326688}
-  uiOff3: {fileID: 144663789264470120}
-  itemShop: {fileID: 0}
+  interactable: 0
+  _OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &630635346705184541
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,12 +448,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc5fc9893f1eab46892897b78c5aee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonType: 0
-  targetUI: {fileID: 6941138778058326688}
-  uiOff1: {fileID: 630635346705184541}
-  uiOff2: {fileID: 7348431358272675638}
-  uiOff3: {fileID: 144663789264470120}
-  itemShop: {fileID: 0}
+  interactable: 0
+  _OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1969890102870622769
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,7 +1277,7 @@ GameObject:
   - component: {fileID: 9183532620719991282}
   m_Layer: 0
   m_Name: News_Button_Cube
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1387,12 +1383,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc5fc9893f1eab46892897b78c5aee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonType: 0
-  targetUI: {fileID: 630635346705184541}
-  uiOff1: {fileID: 6941138778058326688}
-  uiOff2: {fileID: 7348431358272675638}
-  uiOff3: {fileID: 144663789264470120}
-  itemShop: {fileID: 0}
+  interactable: 0
+  _OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5426316946404427379
 GameObject:
   m_ObjectHideFlags: 0
@@ -1650,12 +1644,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc5fc9893f1eab46892897b78c5aee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonType: 0
-  targetUI: {fileID: 144663789264470120}
-  uiOff1: {fileID: 630635346705184541}
-  uiOff2: {fileID: 6941138778058326688}
-  uiOff3: {fileID: 7348431358272675638}
-  itemShop: {fileID: 0}
+  interactable: 0
+  _OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6799090170630899743
 GameObject:
   m_ObjectHideFlags: 0

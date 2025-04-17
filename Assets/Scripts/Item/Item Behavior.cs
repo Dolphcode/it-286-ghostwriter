@@ -4,8 +4,14 @@ public abstract class ItemBehavior : MonoBehaviour
 {
     public ItemData data;
     public LevelManager levelManager;
-    Collider coll;
-    Rigidbody rb;
+    [HideInInspector]
+    public Collider coll;
+    [HideInInspector]
+    public Rigidbody rb;
+    [HideInInspector]
+    public CamControl camControl;
+    [HideInInspector]
+    public Inventory inventory;
 
     public abstract void Unload();
     public abstract void Load(ItemData itemData);
@@ -16,6 +22,8 @@ public abstract class ItemBehavior : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         coll = GetComponent<Collider>();
+        camControl = FindAnyObjectByType<CamControl>();
+        inventory = FindAnyObjectByType<Inventory>();
     }
 
     /// <summary>
@@ -70,5 +78,13 @@ public abstract class ItemBehavior : MonoBehaviour
         {
             coll.isTrigger = false;
         }
+        
+    }
+    public virtual void BreakItem(float time)
+    {
+        
+        inventory.inventorySlots[inventory.CurrentHoldOut()].ClearSlot();
+        data.inInventory = false;
+        Destroy(coll.gameObject,time);
     }
 }

@@ -26,24 +26,31 @@ public class HandheldCameraBehavior : ItemBehavior
     }
     public override void Interact()
     {
+        if (camControl.lookingAt.transform.gameObject.CompareTag("Interactable"))
+        {
+            return;
+        }
 
-        RenderTexture currentRT = RenderTexture.active;
-        RenderTexture.active = camReference.targetTexture;
+        else
+        {
+            RenderTexture currentRT = RenderTexture.active;
+            RenderTexture.active = camReference.targetTexture;
 
-        camReference.Render();
+            camReference.Render();
 
-        Texture2D image = new Texture2D(camReference.targetTexture.width, camReference.targetTexture.height);
-        image.ReadPixels(new Rect(0, 0, image.width, image.height), 0, 0);
-        image.Apply();
-        RenderTexture.active = currentRT;
+            Texture2D image = new Texture2D(camReference.targetTexture.width, camReference.targetTexture.height);
+            image.ReadPixels(new Rect(0, 0, image.width, image.height), 0, 0);
+            image.Apply();
+            RenderTexture.active = currentRT;
 
-        CaptureData data = levelManager.GetCaptureManager().CaptureImage(image, camReference);
+            CaptureData data = levelManager.GetCaptureManager().CaptureImage(image, camReference);
 
-        /*
-        var bytes = image.EncodeToPNG();
-        File.WriteAllBytes(Application.dataPath + "/Captures/" + data.timestamp.ToShortDateString().Replace("/","-") + "-" + 
-            data.timestamp.ToLongTimeString().Replace(":","-").Replace(" ","-") + ".png", bytes);
-        */
+            /*
+            var bytes = image.EncodeToPNG();
+            File.WriteAllBytes(Application.dataPath + "/Captures/" + data.timestamp.ToShortDateString().Replace("/","-") + "-" + 
+                data.timestamp.ToLongTimeString().Replace(":","-").Replace(" ","-") + ".png", bytes);
+            */
+        }
     }
 
     public override void Load(ItemData itemData)

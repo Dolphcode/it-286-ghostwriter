@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 /// <summary>
 /// Allows the player to control the camera using their mouse
 /// </summary>
@@ -12,6 +14,9 @@ public class CamControl : MonoBehaviour
     public Transform playerModel;
     float xRotation;
     float yRotation;
+
+    public TMP_Text lookingName;
+    public Image crosshair;
 
     public RaycastHit lookingAt;
     public Camera camera;
@@ -29,7 +34,7 @@ public class CamControl : MonoBehaviour
 
        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
+        crosshair.color = Color.white;
         camera = GetComponent<Camera>();
         
     }
@@ -65,6 +70,24 @@ public class CamControl : MonoBehaviour
                 {
                     inventory.InventorySystem.PickUpItem(lookingAt.collider.GetComponent<ItemBehavior>(), inventory.itemContainer);
                     Debug.Log("Picking up item");
+                }
+
+                if (lookingAt.collider.GetComponent<ItemBehavior>() != null)
+                {
+                    lookingName.text = lookingAt.collider.gameObject.GetComponent<ItemBehavior>().data.Name;
+                }
+                else
+                {
+                    lookingName.text = " ";
+                }
+                if (lookingAt.transform.gameObject.CompareTag("Interactable"))
+                {
+                    //Set to red for now, add sprite later.
+                    crosshair.color = Color.red;
+                }
+                else
+                {
+                    crosshair.color = Color.white;
                 }
             }
 
@@ -107,8 +130,9 @@ public class CamControl : MonoBehaviour
         // Left Mouse Click
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if (inventory.GetHeldItem() != null)
+            if (inventory != null && inventory.GetHeldItem() != null)
             {
+                
                 inventory.GetHeldItem().GetComponent<ItemBehavior>().Interact();
             }
         }

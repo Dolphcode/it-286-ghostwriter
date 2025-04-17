@@ -23,7 +23,7 @@ public class Inventory : MonoBehaviour
     /*
      * @brief The inventory of the player. The inventory is saved thoughout every scene.
      */
-    [SerializeField] private List<InventorySlot> inventorySlots;
+    [SerializeField] public List<InventorySlot> inventorySlots;
 
     public GameObject inventorySlotPrefab;
     public List<InventorySlot> InventorySlots => inventorySlots;    //The inventory
