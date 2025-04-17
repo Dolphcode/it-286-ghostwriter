@@ -14,6 +14,7 @@ public class FearBorder : MonoBehaviour
 
     void Update()
     {
+        imageColor = new Color(1f, 1f, 1f, 0f);
         imageColor.w = (fear.fearMeter/100f);
         image.color = imageColor;
     }

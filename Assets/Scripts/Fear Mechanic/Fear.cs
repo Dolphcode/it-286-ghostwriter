@@ -3,7 +3,7 @@ using UnityEngine;
 //Commented out the text part of Fear Meter
 public class Fear : MonoBehaviour
 {
-    [HideInInspector]
+    //[HideInInspector]
     public float fearMeter;
     //public TMP_Text text;
     public float fearRate;
