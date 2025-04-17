@@ -5,21 +5,27 @@ public class SodaBehavior : ItemBehavior
 
     public override void Interact()
     {
-        
-        Debug.Log("Interacting with Soda");
-        
-        if (data.durability > 0)
-        {
-            data.durability -= 1;
-            GameObject.Find("Fear").GetComponent<Fear>().ChangeFearMeter(-20);
-        }
-        else
-        {
-            
-            Debug.Log("No More Durability");
-        }
+        //if (camControl.lookingAt.transform.gameObject.CompareTag("Interactable"))
+       // {
+        //    return;
+       // }
 
-        
+       // else
+       // {
+            Debug.Log("Interacting with Soda");
+
+            if (data.durability >= 1)
+            {
+                data.durability -= 1;
+                GameObject.Find("Player UI").GetComponent<Fear>().ChangeFearMeter(-20);
+            }
+            if (data.durability == 0)
+            {
+                GameObject.Find("Player UI").GetComponent<Fear>().ChangeFearMeter(-20);
+                BreakItem(0.001f);
+                Debug.Log("No More Durability");
+            }
+      //  }
     }
 
     public override void Load(ItemData itemData)

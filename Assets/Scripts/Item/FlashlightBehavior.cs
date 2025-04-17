@@ -19,27 +19,35 @@ public class FlashlightBehavior : ItemBehavior
     }
     public override void Interact()
     {
-        if (!data.isOn)
+        if (camControl.lookingAt.transform.gameObject.CompareTag("Interactable"))
         {
-            data.isOn = true;
+            return;
         }
 
         else
         {
-            data.isOn = false;
-        }
+            if (!data.isOn)
+            {
+                data.isOn = true;
+            }
+
+            else
+            {
+                data.isOn = false;
+            }
 
 
-        if (data.isOn)
-        {
-            lightManager.SetFlashlightState(true);
-            Debug.Log("Flashlight On");
-        }
-        
-        if (!data.isOn)
-        {
-            lightManager.SetFlashlightState(false);
-            Debug.Log("Flashlight Off");
+            if (data.isOn)
+            {
+                lightManager.SetFlashlightState(true);
+                Debug.Log("Flashlight On");
+            }
+
+            if (!data.isOn)
+            {
+                lightManager.SetFlashlightState(false);
+                Debug.Log("Flashlight Off");
+            }
         }
     }
     
