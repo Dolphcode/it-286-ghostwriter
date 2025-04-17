@@ -48,10 +48,8 @@ public class PlayerMovement : MonoBehaviour
         //Left Shift
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            if (recharging != null)
-            {
-                StopCoroutine(recharging);
-            }
+
+            if (recharging != null) StopCoroutine(recharging);
 
             if (stamina > 0)
             { 
@@ -137,8 +135,19 @@ public class PlayerMovement : MonoBehaviour
         ///<summary>
         ///Finds the direction the player is moving
         ///</summary>
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        Vector3 normal = orientation.up;
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity))
+        {
+            normal = hit.normal;
+        }
+        Quaternion floorRot = Quaternion.LookRotation(transform.forward, normal);
+        moveDirection = floorRot * orientation.forward * verticalInput + floorRot * orientation.right * horizontalInput;
         rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+
+        //float d = groundDrag; // drag coefficient
+        //Vector3 vel = rb.linearVelocity;
+        //vel.y = 0;
+        //rb.AddForce(-d * vel, ForceMode.Force);
     }
     private void SpeedControl()
     {
@@ -147,7 +156,8 @@ public class PlayerMovement : MonoBehaviour
         if (flatVel.magnitude > moveSpeed)
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
-            rb.linearVelocity = new Vector3(limitedVel.x,rb.linearVelocity.y, limitedVel.z);
+            rb.linearVelocity.Set(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
+            //rb.linearVelocity = new Vector3(limitedVel.x,rb.linearVelocity.y, limitedVel.z);
         }
     }
 

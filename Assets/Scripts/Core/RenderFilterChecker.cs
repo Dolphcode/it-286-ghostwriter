@@ -29,6 +29,10 @@ public class RenderFilterChecker : MonoBehaviour
                 {
                     mat.SetFloat("_Nightvision_Enabled", 1f);
                 }
+                else
+                {
+                    mat.SetFloat("_Nightvision_Enabled", 0f);
+                }
             }
         }
     }

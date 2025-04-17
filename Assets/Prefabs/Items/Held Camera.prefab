@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4145407830569633037}
   - component: {fileID: 6730189058290359683}
   - component: {fileID: 6543300437934091824}
+  - component: {fileID: 2536447560068248692}
   m_Layer: 0
   m_Name: Held Camera
   m_TagString: Untagged
@@ -170,6 +171,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2536447560068248692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2686501479970085783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab5d527286926849a0de5bed4b0d275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 0}
 --- !u!1 &6343558117014470622
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,6 +324,7 @@ GameObject:
   - component: {fileID: 8539088777628957513}
   - component: {fileID: 1710963023012198504}
   - component: {fileID: 1948253064503965324}
+  - component: {fileID: 6527543799198472330}
   m_Layer: 0
   m_Name: Held Camera Renderer
   m_TagString: Untagged
@@ -407,3 +422,16 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &6527543799198472330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7215544947316384483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab5d527286926849a0de5bed4b0d275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 0}

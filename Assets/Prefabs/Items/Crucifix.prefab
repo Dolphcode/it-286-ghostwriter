@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4072461741180887591}
   - component: {fileID: 815665828334743294}
   - component: {fileID: 3210643910149377038}
+  - component: {fileID: -2769120848129724317}
   m_Layer: 8
   m_Name: Crucifix
   m_TagString: Untagged
@@ -167,3 +168,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: f98fd3faf43d13c4aa27877ca398b048, type: 2}
   levelManager: {fileID: 0}
+--- !u!114 &-2769120848129724317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4094513679903417089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab5d527286926849a0de5bed4b0d275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 0}
