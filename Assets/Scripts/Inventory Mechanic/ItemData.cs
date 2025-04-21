@@ -26,7 +26,7 @@ public class ItemData : CapturableObject
 
     public override int GetCaptureScore(float rayProp, CaptureData data)
     {
-        return 0;
+        return Behavior.GetScore(rayProp, data);
     }
 
     public override GameObject GetCheckObject()

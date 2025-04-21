@@ -75,6 +75,6 @@ public class FlashlightBehavior : ItemBehavior
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

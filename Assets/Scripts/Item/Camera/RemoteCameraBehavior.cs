@@ -78,7 +78,52 @@ public class RemoteCameraBehavior : ItemBehavior
 
         
     }
+    public void CaptureHeld(CapturableObject o)
+    {
+        //Debug.Log(obj.name);
+        //Debug.Log("Cooldown " + data.cooldowns[0].ToString() + " Cooldown Max " + data.cooldownMaxes[0].ToString());
+        if (data.cooldowns[0] > 0) return;
 
+        Debug.Log("we good with the cooldown");
+        GameObject obj = o.GetCheckObject();
+
+        Vector3 screenpos = camReference.WorldToViewportPoint(obj.transform.position);
+        // First test if it is on screen
+        if (screenpos.x < 1 && screenpos.x > 0 && screenpos.y > 0 && screenpos.y < 1 && screenpos.z >= 0)
+        {
+            //Debug.Log("The thing is on screen");
+            RaycastHit hit;
+
+            if (Physics.Raycast(camReference.transform.position,
+                (obj.transform.position - camReference.transform.position).normalized,
+                out hit, Mathf.Infinity, ~LayerMask.GetMask("BoundingBox")) && hit.collider.gameObject == obj.gameObject)
+            {
+                //Debug.Log("I hit a " + hit.collider.name);
+                //Debug.Log("I HAVE DETECTED SOMETHING! SOMETHING HAS HAPPENED");
+                RenderTexture currentRT = RenderTexture.active;
+                RenderTexture.active = camReference.targetTexture;
+
+                camReference.Render();
+
+                Texture2D image = new Texture2D(camReference.targetTexture.width, camReference.targetTexture.height);
+                image.ReadPixels(new Rect(0, 0, image.width, image.height), 0, 0);
+                image.Apply();
+                RenderTexture.active = currentRT;
+
+                CaptureData data = levelManager.GetCaptureManager().CaptureImage(image, camReference);
+                data.remoteCapture = true;
+
+                // Reset cooldown
+                this.data.cooldowns[0] = this.data.cooldownMaxes[0];
+                /*
+                var bytes = image.EncodeToPNG();
+                File.WriteAllBytes(Application.dataPath + "/Captures/" + data.timestamp.ToShortDateString().Replace("/", "-") + "-" +
+                    data.timestamp.ToLongTimeString().Replace(":", "-").Replace(" ", "-") + ".png", bytes);*/
+            }
+        }
+
+
+    }
     public override void Load(ItemData itemData)
     {
         itemData.Behavior = this;
@@ -89,6 +134,7 @@ public class RemoteCameraBehavior : ItemBehavior
             registered = true;
             Debug.Log("Registering");
             levelManager.GetCaptureManager().RegisterEventListener(Capture);
+            levelManager.GetCaptureManager().RegisterEventListener(CaptureHeld);
         }
     }
 
@@ -142,7 +188,8 @@ public class RemoteCameraBehavior : ItemBehavior
         {
             registered = true;
             Debug.Log("Registering");
-            levelManager.GetCaptureManager().RegisterEventListener(Capture);    
+            levelManager.GetCaptureManager().RegisterEventListener(Capture);
+            levelManager.GetCaptureManager().RegisterEventListener(CaptureHeld);
         }
         if (data.cooldowns[0] > 0f)
         {

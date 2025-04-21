@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GhostType", menuName = "Scriptable Objects/GhostType")]
-public class GhostType : ScriptableObject
+[CreateAssetMenu(fileName = "Unnamed Ghost Type", menuName = "GhostTypeData")]
+public class GhostTypeData : ScriptableObject
 {
     [Header("Ghost Metadata")]
     public string typeName; // the type of the ghost

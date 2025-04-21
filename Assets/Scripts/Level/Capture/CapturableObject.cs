@@ -7,12 +7,12 @@ public abstract class CapturableObject : ScriptableObject
     /// <summary>
     /// A UnityEvent for triggering the capture of a remote camera
     /// </summary>
-    protected UnityEvent<Capturable> m_TriggerCapture;
+    public UnityEvent<CapturableObject> m_TriggerCapture;
     public bool HasTriggerCaptureEvent() { return m_TriggerCapture != null; }
 
-    public void AddTriggerListener(UnityAction<Capturable> callback)
+    public void AddTriggerListener(UnityAction<CapturableObject> callback)
     {
-        Debug.Log("added listener");
+        Debug.Log("added item listener");
         m_TriggerCapture.AddListener(callback);
     }
 

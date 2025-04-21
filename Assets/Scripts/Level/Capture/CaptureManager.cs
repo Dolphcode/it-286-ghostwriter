@@ -152,6 +152,20 @@ public class CaptureManager : MonoBehaviour
         }
     }
 
+    public void RegisterEventListener(UnityAction<CapturableObject> callback)
+    {
+        Debug.Log("registering events " + capturableObjects.Count().ToString());
+        foreach (CapturableObject c in capturableObjects)
+        {
+            Debug.Log(c.name);
+
+            if (c.HasTriggerCaptureEvent())
+            {
+                c.AddTriggerListener(callback);
+            }
+        }
+    }
+
     /// <summary>
     /// Generate a capture data 
     /// </summary>

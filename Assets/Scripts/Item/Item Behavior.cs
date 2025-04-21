@@ -14,6 +14,11 @@ public abstract class ItemBehavior : MonoBehaviour
     public Inventory inventory;
     
 
+    public virtual int GetScore(float rayProp, CaptureData capture)
+    {
+        return 0;
+    }
+
     public abstract void Unload();
     public abstract void Load(ItemData itemData);
 

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// The LevelManager script is responsible for initializing the level, ghost,
@@ -135,7 +136,9 @@ public class LevelManager : MonoBehaviour
         Debug.Log("appended item behavior");
         Debug.Log(behavior.data.name);
         itemsInLevel.Add(behavior.data);
+        behavior.data.m_TriggerCapture = new UnityEvent<CapturableObject>();
         captureManager.AppendCapturableObject(behavior.data);
+        
     }
 
     public void AddGhostToWorld(Ghost ghost)
