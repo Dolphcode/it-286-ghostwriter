@@ -10,7 +10,7 @@ public class LevelComputerManager : MonoBehaviour
     [Header("Status References")]
     [SerializeField] private TextMeshProUGUI fearMeter;
     [SerializeField] private TextMeshProUGUI time;
-    [SerializeField] private Fear fearHandler;
+    [SerializeField] Fear fearHandler;
     [SerializeField] private GameObject confirmButtonObj;
     [SerializeField] private GameObject confirmButtonUI;
     [SerializeField] private GameObject confirmText;
@@ -32,6 +32,10 @@ public class LevelComputerManager : MonoBehaviour
     void Start()
     {
         
+    }
+    private void Awake()
+    {
+        fearHandler = FindAnyObjectByType<Fear>();
     }
 
     // Update is called once per frame
