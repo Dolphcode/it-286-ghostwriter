@@ -76,10 +76,12 @@ public class CamControl : MonoBehaviour
                 {
                     lookingName.text = lookingAt.collider.gameObject.GetComponent<ItemBehavior>().data.Name;
                 }
+
                 else
                 {
-                    lookingName.text = " ";
+                    lookingName.text = null;
                 }
+
                 if (lookingAt.transform.gameObject.CompareTag("Interactable"))
                 {
                     //Set to red for now, add sprite later.

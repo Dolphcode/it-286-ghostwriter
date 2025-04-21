@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6782996537439434792}
   m_Layer: 8
   m_Name: Tripod Camera
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,7 +154,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 48
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &394049890139110995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +169,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: e60ab107004441b48990bc8ef9dfff9f, type: 2}
   levelManager: {fileID: 0}
+  coll: {fileID: 0}
+  rb: {fileID: 0}
+  camControl: {fileID: 0}
+  inventory: {fileID: 0}
   camReference: {fileID: 3084643859791744567}
   renderMesh: {fileID: 1710963023012198504}
 --- !u!114 &6782996537439434792

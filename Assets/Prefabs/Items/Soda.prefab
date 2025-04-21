@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4116475961200854645}
   m_Layer: 8
   m_Name: Soda
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,6 +105,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 4eb6073996365b64ca267932009f9ac8, type: 2}
   levelManager: {fileID: 0}
+  coll: {fileID: 0}
+  rb: {fileID: 0}
+  camControl: {fileID: 0}
+  inventory: {fileID: 0}
 --- !u!114 &476175036872167807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,7 +149,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &4116475961200854645
 CapsuleCollider:
   m_ObjectHideFlags: 0

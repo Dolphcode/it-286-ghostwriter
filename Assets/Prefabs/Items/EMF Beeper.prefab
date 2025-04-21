@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 2551085353609591073}
   m_Layer: 8
   m_Name: EMF Beeper
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -523,7 +523,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &4946792872829545759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,6 +538,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: e122e3341fd393d47a7a3f7da21071aa, type: 2}
   levelManager: {fileID: 0}
+  coll: {fileID: 0}
+  rb: {fileID: 0}
+  camControl: {fileID: 0}
+  inventory: {fileID: 0}
   m_TextMeshProUGUI: {fileID: 823019346758781675}
   emfLvls:
   - {fileID: 9207022641259900352}
@@ -546,7 +550,6 @@ MonoBehaviour:
   - {fileID: 6460302944511212672}
   - {fileID: 2169639486174603290}
   emfOnLight: {fileID: 2771685734275418606}
-  testEMF: 0
 --- !u!23 &7245896924990075344
 MeshRenderer:
   m_ObjectHideFlags: 0
