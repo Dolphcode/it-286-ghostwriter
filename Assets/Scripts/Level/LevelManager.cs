@@ -135,6 +135,7 @@ public class LevelManager : MonoBehaviour
         Debug.Log("appended item behavior");
         Debug.Log(behavior.data.name);
         itemsInLevel.Add(behavior.data);
+        captureManager.AppendCapturableObject(behavior.data);
     }
 
     public void AddGhostToWorld(Ghost ghost)

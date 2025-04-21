@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ItemData", menuName = "Inventory Item for Inventory system")]
-public class ItemData : ScriptableObject
+public class ItemData : CapturableObject
 {
     public int ID;
     public string Name;
@@ -23,4 +23,14 @@ public class ItemData : ScriptableObject
 
     public float[] cooldownMaxes; // Feel free to designate this arbitrarily per item
     public float[] cooldowns;
+
+    public override int GetCaptureScore(float rayProp, CaptureData data)
+    {
+        return 0;
+    }
+
+    public override GameObject GetCheckObject()
+    {
+        return Behavior.gameObject;
+    }
 }
