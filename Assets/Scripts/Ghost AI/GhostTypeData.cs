@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 
 [CreateAssetMenu(fileName = "GhostTypeData", menuName = "Scriptable Objects/GhostTypeData")]
 public class GhostTypeData : ScriptableObject
@@ -14,10 +15,9 @@ public class GhostTypeData : ScriptableObject
     [SerializeField]
     private List<GameObject> ghostPrefabList;
     /// <summary>
-    ///Reference to the female ghost model.
+    ///Reference to the ghost model.
     ///</summary>
-    [SerializeField]
-    private GameObject ghostModel;
+    public GameObject ghostModel;
     /// <summary>
     ///Reference to the Evil Sebastian ghost model.
     ///</summary>
@@ -36,8 +36,7 @@ public class GhostTypeData : ScriptableObject
     /// <summary>
     /// Interactables list
     ///</summary>
-    [SerializeField]
-    private List<GhostInteractable> ghostInteractables;
+    public List<GhostInteractable> ghostInteractables;
     public GhostTypeData(string type, float speed, int aggro, int emf, List<GameObject> modelList, List<GhostInteractable> interactablesList)
     {
         typeName = type;
@@ -60,5 +59,8 @@ public class GhostTypeData : ScriptableObject
         {
             Debug.Log("No ghost model assigned.");
         }
+    }
+    public void IsGhostConstantSpeed(bool isConstant)
+    {
     }
 }
