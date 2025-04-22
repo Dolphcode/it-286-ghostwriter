@@ -17,6 +17,8 @@ public class CaptureManager : MonoBehaviour
     private List<Ghost> ghosts;
     [SerializeField]
     private List<Capturable> capturables;
+    [SerializeField]
+    private List<CapturableObject> capturableObjects; // Scriptable object version
 
     [Header("Debug")]
     [SerializeField]
@@ -131,6 +133,11 @@ public class CaptureManager : MonoBehaviour
         capturables.Add(capturable); 
     }
 
+    public void AppendCapturableObject(CapturableObject capturableObject)
+    {
+        capturableObjects.Add(capturableObject);
+    }
+
     public void RegisterEventListener(UnityAction<Capturable> callback)
     {
         Debug.Log("registering events " + capturables.Count().ToString());
@@ -138,6 +145,20 @@ public class CaptureManager : MonoBehaviour
         {
             Debug.Log(c.name);
             
+            if (c.HasTriggerCaptureEvent())
+            {
+                c.AddTriggerListener(callback);
+            }
+        }
+    }
+
+    public void RegisterEventListener(UnityAction<CapturableObject> callback)
+    {
+        Debug.Log("registering events " + capturableObjects.Count().ToString());
+        foreach (CapturableObject c in capturableObjects)
+        {
+            Debug.Log(c.name);
+
             if (c.HasTriggerCaptureEvent())
             {
                 c.AddTriggerListener(callback);
@@ -159,37 +180,30 @@ public class CaptureManager : MonoBehaviour
         data.capture = image;
         data.timestamp = System.DateTime.Now;
 
-        /*
-        // Compute score and append flags depending on contents of image
-        // First check if the ghost is in view
-        foreach (Ghost ghost in ghosts)
+
+        foreach (Capturable capturable in capturables)
         {
-            Vector3 screenpos = camera.WorldToViewportPoint(ghost.transform.position);
+            Transform t = capturable.GetCheckObject().transform;
+            Vector3 screenpos = camera.WorldToViewportPoint(t.position);
+            Debug.Log(screenpos.ToString());
             // First test if it is on screen
-            if (screenpos.x < 1 && screenpos.x > 0 && screenpos.y > 0 && screenpos.y < 1 &&  screenpos.z >= 0)
+            if (screenpos.x < 1 && screenpos.x > 0 && screenpos.y > 0 && screenpos.y < 1 && screenpos.z >= 0)
             {
-                Debug.Log("ghost in the frustum!");
+                Debug.Log(t.name + " is in the frustum and is object " + t.gameObject.name);
                 // Now fire off a raycast to check for anything blocking
                 // TODO: Find a more accurate way to do this?
                 RaycastHit hit;
-                if (Physics.Raycast(camera.transform.position, 
-                    (ghost.transform.position - camera.transform.position).normalized, 
-                    out hit, Mathf.Infinity, ~LayerMask.GetMask("BoundingBox")) && hit.collider.gameObject == ghost.gameObject)
+                if (Physics.Raycast(camera.transform.position,
+                    (t.position - camera.transform.position).normalized,
+                    out hit, Mathf.Infinity, ~LayerMask.GetMask("BoundingBox")) && hit.collider.gameObject == capturable.GetCheckObject())
                 {
-                    Debug.Log("ghost in view!");
-                    if (ghost.IsGhostHunting())
-                    {
-                        data.score += 5;
-                    }
-                    else
-                    {
-                        data.score += 2; //????
-                    }
+                    Debug.Log(hit.collider.gameObject.name + " was hit");
+                    data.score += capturable.GetCaptureScore(1f, data);
                 }
             }
-        }*/
+        }
 
-        foreach (Capturable capturable in capturables)
+        foreach (CapturableObject capturable in capturableObjects)
         {
             Transform t = capturable.GetCheckObject().transform;
             Vector3 screenpos = camera.WorldToViewportPoint(t.position);

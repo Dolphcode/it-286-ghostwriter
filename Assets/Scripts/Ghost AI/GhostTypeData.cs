@@ -1,66 +1,15 @@
-using UnityEngine;
 using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
+using UnityEngine;
 
-[CreateAssetMenu(fileName = "GhostTypeData", menuName = "Scriptable Objects/GhostTypeData")]
+[CreateAssetMenu(fileName = "Unnamed Ghost Type", menuName = "GhostTypeData")]
 public class GhostTypeData : ScriptableObject
 {
-    public string typeName;
-    public float moveSpeed;
-    public int aggressionMultiplier;
-    public int maxEMF;
-    /// <summary>
-    /// Ghost possible models list
-    ///</summary>
-    [SerializeField]
-    private List<GameObject> ghostPrefabList;
-    /// <summary>
-    ///Reference to the ghost model.
-    ///</summary>
-    public GameObject ghostModel;
-    /// <summary>
-    ///Reference to the Evil Sebastian ghost model.
-    ///</summary>
-    [SerializeField]
-    private GameObject sebModel;
-    /// <summary>
-    ///Reference to the female ghost model.
-    ///</summary>
-    [SerializeField]
-    private GameObject femModel;
-    /// <summary>
-    /// Reference to the male ghost model.
-    ///</summary>
-    [SerializeField]
-    private GameObject mascModel;
-    /// <summary>
-    /// Interactables list
-    ///</summary>
-    public List<GhostInteractable> ghostInteractables;
-    public GhostTypeData(string type, float speed, int aggro, int emf, List<GameObject> modelList, List<GhostInteractable> interactablesList)
-    {
-        typeName = type;
-        moveSpeed = speed;
-        aggressionMultiplier = aggro;
-        maxEMF = emf;
-        ghostPrefabList = modelList;
-        ghostInteractables = interactablesList;
-    }
-    public void AssignGhostModel(GameObject model)
-    {
-        foreach (GameObject m in ghostPrefabList)
-        {
-            if (m == model)
-            {
-                ghostModel = model;
-            }
-        }
-        if (ghostModel == null)
-        {
-            Debug.Log("No ghost model assigned.");
-        }
-    }
-    public void IsGhostConstantSpeed(bool isConstant)
-    {
-    }
+    [Header("Ghost Metadata")]
+    public string typeName; // the type of the ghost
+
+    [Header("Ghost Evidence Config")]
+    [Range(1, 5)] public int maxEMF; // maximum EMF that the ghost can hit
+    public List<GhostInteractableType> interactableTypes; // The list of things a ghost can interact with
+    public float maxSpeed; // The maximum speed of the ghost
+    public bool adjustableSpeed; // Whether the ghost will adjust its speed or not
 }

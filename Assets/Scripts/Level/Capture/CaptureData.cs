@@ -1,10 +1,10 @@
+using System.Collections.Generic;
 using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CaptureData", menuName = "Scriptable Objects/CaptureData")]
 public class CaptureData : ScriptableObject
 {
-
     [Header("Capture Information")]
     public Texture2D capture;
     public DateTime timestamp;
@@ -15,5 +15,7 @@ public class CaptureData : ScriptableObject
     public bool hasExtraEvent;
     public int evidenceCount;
     public bool remoteCapture;
-    
+
+    [Header("Specific Information")]
+    public List<GhostInteractableType> capturedTypes;
 }

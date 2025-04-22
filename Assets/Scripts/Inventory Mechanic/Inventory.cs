@@ -31,6 +31,7 @@ public class Inventory : MonoBehaviour
 
     public UnityAction<InventorySlot> OnInventorySlotChanged;       //Signal
 
+    public bool itemInWall;
     /// <summary>
     /// Used for initializing the inventory when player spawns.
     /// </summary>
@@ -203,10 +204,18 @@ public class Inventory : MonoBehaviour
     /// </summary>
     public void DropItem()
     {
-        int activeSlot = CurrentHoldOut();
-        if (activeSlot < 0) return;
-        inventorySlots[activeSlot].ItemData.Behavior.Drop();
-        inventorySlots[activeSlot].ItemData.inInventory = false;
-        inventorySlots[activeSlot].ClearSlot();
+        if (!itemInWall)
+        {
+            int activeSlot = CurrentHoldOut();
+            if (activeSlot < 0) return;
+            inventorySlots[activeSlot].ItemData.Behavior.Drop();
+            inventorySlots[activeSlot].ItemData.inInventory = false;
+            inventorySlots[activeSlot].ClearSlot();
+        }
+        else
+        {
+            Debug.Log("Not Dropped");
+            return;
+        }
     }
 }

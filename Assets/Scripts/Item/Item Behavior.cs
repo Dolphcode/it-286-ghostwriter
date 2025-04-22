@@ -12,6 +12,12 @@ public abstract class ItemBehavior : MonoBehaviour
     public CamControl camControl;
     [HideInInspector]
     public Inventory inventory;
+    
+
+    public virtual int GetScore(float rayProp, CaptureData capture)
+    {
+        return 0;
+    }
 
     public abstract void Unload();
     public abstract void Load(ItemData itemData);
@@ -53,38 +59,58 @@ public abstract class ItemBehavior : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        
+        if (data.inInventory)
+        {
+            inventory.itemInWall = true;
+            Debug.Log("IN WALL");
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (data.inInventory)
+        {
+            inventory.itemInWall = false;
+            Debug.Log("NOT IN WALL");
+        }
     }
     /// <summary>
     /// Gets rid of the parent and throws the item that is in the parents hand, while re-enabling the gravity and collider.
     /// </summary>
     public virtual void Drop()
     {
-
-        Transform p = transform.parent.parent;
-        transform.SetParent(null);
+    
+            Transform p = transform.parent.parent;
+            transform.SetParent(null);
         
         
 
-        if (rb != null)
-        {
-            rb.isKinematic = false;
-            rb.useGravity = true;
-        }
+            if (rb != null)
+            {
+               rb.isKinematic = false;
+              rb.useGravity = true;
+            }
 
-        rb.AddForce(p.forward * 10f, ForceMode.Impulse);
+            if (coll != null)
+            {
+                coll.isTrigger = false;
+            }
 
-        if (coll != null)
-        {
-            coll.isTrigger = false;
-        }
         
+            rb.AddForce(p.forward * 5f, ForceMode.Impulse);
+        
+
+
     }
+
     public virtual void BreakItem(float time)
     {
-        
+
         inventory.inventorySlots[inventory.CurrentHoldOut()].ClearSlot();
         data.inInventory = false;
-        Destroy(coll.gameObject,time);
+        if (coll.gameObject != null)
+        { 
+        Destroy(coll.gameObject, time);
+        }
     }
+
 }
