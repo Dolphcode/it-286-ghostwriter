@@ -144,14 +144,12 @@ public class Ghost : Capturable
     private void GhostTeleportsAdjacentRoom(float time)
     {
         Room possibleRoom = currentRoom.SelectRandomAdjacentRoom();
-        bool validRoom = false;
         // Checks if room is in hunting zone
         foreach (Room room in huntingZone)
         {
             //Debug.Log("At time " + teleportTimer.ToString() + " Room 1 " + room.name + " Room 2 " + possibleRoom.name + " what ? " + (room == possibleRoom).ToString());
             if (room == possibleRoom)
             {
-                validRoom = true;
                 if (teleportTimer >= time)
                 {
                     currentRoom = possibleRoom;
@@ -160,11 +158,6 @@ public class Ghost : Capturable
                 }
             }
         }
-        /*
-        if (!validRoom)
-        {
-            GhostTeleportsAdjacentRoom(time);
-        }*/
     }
     ///<summary>
     /// Ghost will have a chance (double) to interact in a room every given input time (float)
@@ -224,15 +217,6 @@ public class Ghost : Capturable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
-        ///<summary>
-        /// Contains each GhostType's  typeName, moveSpeed, aggressionMultiplier, maxEMF
-        ///</summary>
-        Dictionary<GhostType, GhostTypeData> ghostTypeMap = new()
-        {
-            { GhostType.PSYCHOLOGICAL, new GhostTypeData("Psychological", Random.Range(1f,2f), Random.Range(15,31), 5, ghostModelsList, ghostTypeInteractables)},
-            { GhostType.BIOLOGICAL, new GhostTypeData("Biological", 1f, 20, 2, ghostModelsList, ghostTypeInteractables)},
-            { GhostType.METAPHYSICAL, new GhostTypeData("Metaphysical", 1.5f, 25, 4, ghostModelsList, ghostTypeInteractables)}
-        };
         // Disables model
         ghostModel.SetActive(false);
         // care the Female_Ghost vs Female Ghost (same w male)
@@ -243,7 +227,7 @@ public class Ghost : Capturable
         // Sets aggression to 0.
         aggression = 0;
         // Sets aggression multiplier.
-        aggressionMultiplier = ghostData.aggressionMultiplier;
+        aggressionMultiplier = 25;
         difficultyLevel = Random.Range(1, 6);
         // Makes aggression threshold in terms of difficulty. Min 25, Max 125. Lower threshold, easier to aggro ghost and considered "harder".
         for (int i = 5; i>2; i--)
@@ -266,7 +250,7 @@ public class Ghost : Capturable
         }
         // Initailzes ghost in passive mode.
         huntingMode = false;
-        agent.speed = ghostData.moveSpeed;
+        agent.speed = ghostData.maxSpeed;
         // Adds Capsule collider for ghost if one doesn't exist.
         if (GetComponent<Collider>() == null)
         {
@@ -350,10 +334,10 @@ public class Ghost : Capturable
                         Debug.Log("Is on navmesh: " + agent.isOnNavMesh.ToString());
                         Debug.Log("Is active and enabled: " + agent.isActiveAndEnabled.ToString());
                         //if (Vector3.Distance(transform.position, player.position) > currentRoom.GetRoomBoundsets().size.x)
-                            agent.speed = ghostData.moveSpeed;
+                            agent.speed = ghostData.maxSpeed;
                         //else
                         {
-                            agent.speed = ghostData.moveSpeed;
+                            agent.speed = ghostData.maxSpeed;
                         }
                         agent.SetDestination(player.transform.position);
                         transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
