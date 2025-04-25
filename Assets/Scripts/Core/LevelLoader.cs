@@ -32,6 +32,9 @@ public static class PerformBootstrap
 
 public class LevelLoader : MonoBehaviour
 {
+    public static readonly int LOBBY_INDEX = 1;
+    public static readonly int MAIN_INDEX = 0;
+
     public static LevelLoader _Instance { get; private set; } = null;
     public int lobbyIndex = 1;
 
@@ -137,6 +140,7 @@ public class LevelLoader : MonoBehaviour
     public void ActivateLevel()
     {
         Time.timeScale = 1f;
+        loadingLevel = false;
         levelLoadingScreen.enabled = false;
         if (levelManager != null) levelManager.levelStarted = true;
     }
