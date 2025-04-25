@@ -42,6 +42,8 @@ public class CamControl : MonoBehaviour
     
     void Update()
     {
+        if (PauseMenuManager._Instance.IsPaused) return;
+
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
 
