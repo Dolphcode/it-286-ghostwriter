@@ -195,10 +195,11 @@ public class LevelLoader : MonoBehaviour
         asyncLoad = SceneManager.LoadSceneAsync(index, LoadSceneMode.Additive);
 
         float load_progress = 0f;
+        float init_progress = 0f;
         float unload_progress = 0f;
         float item_progress = 0f;
         while (!asyncLoad.isDone) {
-            progress = asyncLoad.progress * 0.1f;
+            progress = asyncLoad.progress * 0.15f;
             yield return null;
         }
         load_progress = asyncLoad.progress;
@@ -208,7 +209,7 @@ public class LevelLoader : MonoBehaviour
 
         while (!asyncUnload.isDone)
         {
-            progress = 0.1f * load_progress + 0.1f * unload_progress;
+            progress = 0.15f * load_progress + 0.15f * unload_progress;
             yield return null;
         }
         unload_progress = asyncUnload.progress;
@@ -217,6 +218,13 @@ public class LevelLoader : MonoBehaviour
         levelManager = FindAnyObjectByType<LevelManager>();
 
         // Load the level with level evaluator
+        eval.InitializeInteriorAsync(levelManager.InteriorGameObject, 1);
+        while (!eval.InitDone)
+        {
+            progress = 0.15f * load_progress + 0.15f * unload_progress + eval.InitProgress * 0.5f;
+            yield return null;
+        }
+        init_progress = eval.InitProgress;
         levelManager.InitializeLevel(eval);
 
         // Instantiate the items
@@ -229,7 +237,7 @@ public class LevelLoader : MonoBehaviour
             AsyncInstantiateOperation<GameObject> obj_instantiation = InstantiateAsync(data.Item);
             while (!obj_instantiation.isDone)
             {
-                progress = load_progress * 0.1f + unload_progress * 0.1f + item_progress / itemProgressSegments * 0.7f + obj_instantiation.progress / itemProgressSegments * 0.7f;
+                progress = load_progress * 0.15f + unload_progress * 0.15f + init_progress * 0.5f + item_progress / itemProgressSegments * 0.1f + obj_instantiation.progress / itemProgressSegments * 0.1f;
                 yield return null;
             }
             item_progress += obj_instantiation.progress;
@@ -246,7 +254,7 @@ public class LevelLoader : MonoBehaviour
         AsyncInstantiateOperation<GameObject> ghost_instantiation = InstantiateAsync(LevelDataManager._Instance.ghostPrefab);
         while (!ghost_instantiation.isDone)
         {
-            progress = load_progress * 0.1f + unload_progress * 0.1f + item_progress * 0.7f + ghost_instantiation.progress * 0.1f;
+            progress = load_progress * 0.1f + unload_progress * 0.1f + init_progress * 0.5f + item_progress * 0.1f + ghost_instantiation.progress * 0.1f;
             yield return null;
         }
         levelManager.AddGhostToWorld(ghost_instantiation.Result[0].GetComponent<Ghost>());
