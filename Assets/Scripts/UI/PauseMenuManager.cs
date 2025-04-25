@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PauseMenuManager : MonoBehaviour
 {
@@ -19,13 +21,19 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField] private Slider masterVolSlider;
     [SerializeField] private Slider sfxVolSlider;
 
+    [Header("System Settings")]
+    [SerializeField] private Slider sensitivitySlider;
+    [SerializeField] private float minSens;
+    [SerializeField] private float maxSens;
+
     private bool paused = false;
     public bool IsPaused { get { return paused; } }
+
+    public float sensitivity = 800f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
     }
 
 
@@ -34,6 +42,7 @@ public class PauseMenuManager : MonoBehaviour
     void Update()
     {
         UpdateAudio();
+        sensitivity = (sensitivitySlider.value) * (maxSens - minSens) + minSens;
 
         if (!paused)
         {

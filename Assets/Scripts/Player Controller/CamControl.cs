@@ -44,8 +44,11 @@ public class CamControl : MonoBehaviour
     {
         if (PauseMenuManager._Instance.IsPaused) return;
 
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+        float sensitivity = PauseMenuManager._Instance.sensitivity;
+
+
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensitivity;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensitivity;
 
         yRotation += mouseX;
         xRotation -= mouseY;
