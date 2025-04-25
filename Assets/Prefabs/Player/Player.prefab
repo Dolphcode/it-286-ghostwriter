@@ -246,7 +246,7 @@ MonoBehaviour:
   inventorySystem: {fileID: 0}
   inventorySlotPrefab: {fileID: 439254747478473102, guid: 07b073ded77ae184783473b09074cf06, type: 3}
   uiPrefab: {fileID: 5059425532779138060, guid: 098b33d10e3117c45a0215f79156b5ef, type: 3}
-  inventoryUI: {fileID: 0}
+  inventoryUI: {fileID: 3892425247783863969}
   icons: []
   invNums: []
   itemContainer: {fileID: 0}
@@ -794,6 +794,11 @@ PrefabInstance:
 --- !u!224 &9713709037483168 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4176321566233845510, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
+  m_PrefabInstance: {fileID: 4168016341272013734}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &3892425247783863969 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1140370462059130119, guid: bd3e3f907bfdc52479d3d16214703060, type: 3}
   m_PrefabInstance: {fileID: 4168016341272013734}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &5825919427094371223 stripped
