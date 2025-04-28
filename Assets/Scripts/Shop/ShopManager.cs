@@ -41,8 +41,9 @@ public class ShopManager : MonoBehaviour
     // Column 3: EMF
     // Column 4: Soda
     // Column 5: Crucifix
+    // Column 6: Thermometer
 
-    public int[,] shopItems = new int[6,6];
+    public int[,] shopItems = new int[7,7];
  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -58,6 +59,7 @@ public class ShopManager : MonoBehaviour
            shopItems[1, 3] = 3;
            shopItems[1, 4] = 4;
            shopItems[1, 5] = 5;
+           shopItems[1, 6] = 6;
 
 
         // Item Cost
@@ -67,6 +69,7 @@ public class ShopManager : MonoBehaviour
           shopItems[2, 3] = 400;
           shopItems[2, 4] = 200;
           shopItems[2, 5] = 600;
+          shopItems[2, 6] = 600;
 
         // Quantity
         //Left at 0 for now, should try to make it change to how many the player has currently.
@@ -76,6 +79,7 @@ public class ShopManager : MonoBehaviour
           shopItems[3, 3] = 0;
           shopItems[3, 4] = 0;
           shopItems[3, 5] = 0;
+          shopItems[3, 6] = 0;
 
     }
 
