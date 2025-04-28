@@ -16,6 +16,10 @@ public enum GhostType
 }
 public class Ghost : Capturable
 {
+    /// <summary>
+    /// The Fear Script
+    /// </summary>
+    public Fear fear;
     ///<summary>
     ///Target the ghost is chasing.
     ///</summary>
@@ -198,6 +202,7 @@ public class Ghost : Capturable
             if (interactBool)
             {
                 RandomGhostInteraction();
+                fear.ChangeFearMeter(1);
             }
             interactTimer = 0f;
         }
@@ -244,6 +249,7 @@ public class Ghost : Capturable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
+        fear = FindAnyObjectByType<Fear>();
         // Disables model
         ghostModel.SetActive(false);
         // care the Female_Ghost vs Female Ghost (same w male)
@@ -433,7 +439,7 @@ public class Ghost : Capturable
         else
         {
             Debug.Log("GAME OVER :C");
-            //levelManager1.LoseLevel();
+            levelManager1.LoseLevel();
         }
     }
     /// <summary>
@@ -639,5 +645,10 @@ public class Ghost : Capturable
     public void Awake()
     {
         m_TriggerCapture = new UnityEvent<Capturable>();
+    }
+
+    public int GetAggression()
+    {
+        return aggression;
     }
 }

@@ -542,6 +542,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   camControl: {fileID: 0}
   inventory: {fileID: 0}
+  inventoryHolder: {fileID: 0}
   m_TextMeshProUGUI: {fileID: 823019346758781675}
   emfLvls:
   - {fileID: 9207022641259900352}

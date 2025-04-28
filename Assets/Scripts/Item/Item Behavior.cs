@@ -12,6 +12,8 @@ public abstract class ItemBehavior : MonoBehaviour
     public CamControl camControl;
     [HideInInspector]
     public Inventory inventory;
+    [HideInInspector]
+    public InventoryHolder inventoryHolder;
     
 
     public virtual int GetScore(float rayProp, CaptureData capture)
@@ -30,6 +32,8 @@ public abstract class ItemBehavior : MonoBehaviour
         coll = GetComponent<Collider>();
         camControl = FindAnyObjectByType<CamControl>();
         inventory = FindAnyObjectByType<Inventory>();
+        inventoryHolder = FindAnyObjectByType<InventoryHolder>();
+        levelManager = FindAnyObjectByType<LevelManager>();
     }
 
     /// <summary>
