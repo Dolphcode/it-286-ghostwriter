@@ -1404,6 +1404,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9138617420116658886, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}
+      propertyPath: selectScreen
+      value: 
+      objectReference: {fileID: 1549200747}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7929998641080087077, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}
@@ -6140,6 +6144,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479662688}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1549200747 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2503996482291296035, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}
+  m_PrefabInstance: {fileID: 299655496}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1552611884 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5133329598716106462, guid: bfd99f94bd1debb49a2a642a5b4170a6, type: 3}

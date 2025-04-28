@@ -29,20 +29,50 @@ public class BlogSaveData : ScriptableObject
     /// List of pages.
     /// </summary>
     [SerializeField]
-    private BlogPage[] pages;
+    private List<BlogPage> pages;
+    /// <summary>
+    /// Current blog save number.
+    /// </summary>
+    [SerializeField]
+    private int blogSaveNum;
+    /// <summary>
+    /// List of pages.
+    /// </summary>
+    [SerializeField]
+    private BlogPage blogPage1, blogPage2, blogPage3;
+    /// <summary>
+    /// Current page.
+    /// </summary>
+    [SerializeField]
+    private BlogPage newBlogPage;
     /// <summary>
     /// List of given answers for captions
     /// </summary>
     [SerializeField]
     private int currentScore;
     /// <summary>
-    /// List of tags for blog
+    /// Capture Manager.
     /// </summary>
     [SerializeField]
-    private string[] tags;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private CaptureManager captureManager;
+    /// <summary>
+    /// Blog UI Manager.
+    /// </summary>
+    [SerializeField]
+    private BlogUIManager UIManager;
+    /// <summary>
+    /// Level Loadscreen Data.
+    /// </summary>
+    [SerializeField]
+    private LevelLoadscreenData levelData;
+    /// <summary>
+    /// List of tags for blog.
+    /// </summary>
+    [SerializeField]
+    private List<string> tags;
+    void OnEnable()
     {
+        SetPhotoList();
         for (int i = 0; ghostDataList.Count >= i; i++)
         {
             answers.Add(ghostDataList[i].typeName);
@@ -58,10 +88,41 @@ public class BlogSaveData : ScriptableObject
     // Update is called once per frame
     void Update()
     {
-
     }
-    public BlogPage[] getPages()
+    public List<BlogPage> GetPages()
     {
         return pages;
+    }
+    public BlogPage GetPage()
+    {
+        return newBlogPage;
+    }
+    public int GetPageNum(BlogPage pageInput)
+    {
+        return pageInput.GetPageNum();
+    }
+    public void SetPhotoList()
+    {
+        for (int i = 0; i < captureManager.CaptureCount; i++)
+        {
+            photosList.Add(captureManager.GetCaptureData(i));
+        }
+    }
+    public LevelLoadscreenData GetLevelLoadscreenData()
+    {
+        return levelData;
+    }
+    public void Publish()
+    {
+        // removes blog save from manager's blog save list
+        UIManager.RemoveBlogSave(UIManager.GetBlogSaves()[blogSaveNum]);
+    }
+    public void DisplayPage(BlogPage page)
+    {
+        
+    }
+    public List<string> GetTags()
+    {
+        return tags;
     }
 }

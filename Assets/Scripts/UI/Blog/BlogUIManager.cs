@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,26 +10,34 @@ public class BlogUIManager : MonoBehaviour
     /// Max 3 blog saves, 3 pages each.
     /// </summary>
     [SerializeField]
-    private BlogSaveData[] blogSaves;
+    private BlogSaveData blogSave1, blogSave2, blogSave3;
+    /// <summary>
+    /// Max 3 blog saves, 3 pages each.
+    /// </summary>
+    [SerializeField]
+    private List<BlogSaveData> blogSaves;
+    // <summary>
+    // Dictionary that stores blog save and current page number.
+    // </summary>
+    //[SerializeField]
+    //private System.Collections.Generic.Dictionary<BlogSaveData, int> blogDictionary = new Dictionary<BlogSaveData, int>();
+    [SerializeField]
+    private BlogSaveData newSaveData;
     [SerializeField]
     private Button blogSave1Button, blogSave2Button, blogSave3Button;
     [SerializeField]
     private Button prevButton, nextButton, saveButton;
     [SerializeField]
-    private TextMeshProUGUI blogTextDisplay; 
-    [SerializeField]
     private GameObject blogPanel, selectScreen;
-
     /// <summary>
     /// Indicates which save file the player is on.
     /// </summary>
     private int currentSave = 0;
     /// <summary>
-    /// Indicates which page the player is on of the save file.
+    /// Indicates which page the player is on.
     /// </summary>
     private int currentPage = 0;
-
-    void Start()
+    private void Awake()
     {
         blogSave1Button.onClick.AddListener(() => OpenBlog(0));
         blogSave2Button.onClick.AddListener(() => OpenBlog(1));
@@ -35,31 +45,27 @@ public class BlogUIManager : MonoBehaviour
         prevButton.onClick.AddListener(PrevPage);
         nextButton.onClick.AddListener(NextPage);
         saveButton.onClick.AddListener(CloseBlogPanel);
+    }
+    void Start()
+    {
+        int currentPage = 0;
+        if (blogSaves != null)
+        {
+            currentPage = blogSaves[currentSave-1].GetPage().GetPageNum();
+        }
         OpenBlog(0);
     }
-
     public void OpenBlog(int saveIndex)
     {
+        //blogDictionary.Add(blogSaves[saveIndex], 0);
         currentSave = saveIndex;
         currentPage = 0;
-        UpdatePages();
-    }
-
-    public void UpdatePages()
-    {
-        if (blogSaves[currentSave].getPages().Length > currentPage)
-        {
-            blogTextDisplay.text = blogSaves[currentSave].getPages()[currentPage].GetText();
-        }
-        prevButton.interactable = currentPage > 0;
-        nextButton.interactable = currentPage < blogSaves[currentSave].getPages().Length - 1;
     }
     public void PrevPage()
     {
         if (currentPage > 0)
         {
             currentPage--;
-            UpdatePages();
         }
     }
     public void NextPage()
@@ -67,7 +73,6 @@ public class BlogUIManager : MonoBehaviour
         if (currentPage < 2)
         {
             currentPage++;
-            UpdatePages();
         }
     }
     public void CloseBlogPanel()
@@ -77,15 +82,41 @@ public class BlogUIManager : MonoBehaviour
     public void OpenBlogPanel()
     {
         blogPanel.SetActive(true);
-        Debug.Log("BlogPanel activated!");
+        Debug.Log("BlogPanel on");
 
     }
     public void CloseSelectScreen()
     {
         selectScreen.SetActive(false);
+        Debug.Log("Select off");
     }
     public void OpenSelectScreen()
     {
         selectScreen.SetActive(true);
+    }
+    public void SaveBlogData(int saveNum)
+    {
+        blogSaves.Add(newSaveData);
+    }
+    public void CreateBlogSave(int i)
+    {
+        blogSaves[i] = newSaveData;
+    }
+    public void SetCurrentBlog(int i)
+    {
+        newSaveData = blogSaves[i - 1];
+    }
+    public List<BlogSaveData> GetBlogSaves()
+    {
+        return blogSaves;
+    }
+    public void RemoveBlogSave(BlogSaveData remove)
+    {
+        blogSaves.Remove(remove);
+    }
+    public void Publish()
+    {
+        blogSaves[currentSave] = null;
+        blogSaves.Remove(blogSaves[currentSave]);
     }
 }

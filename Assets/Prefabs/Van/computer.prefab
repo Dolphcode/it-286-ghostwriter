@@ -504,6 +504,7 @@ GameObject:
   - component: {fileID: 4548128549093244408}
   - component: {fileID: 2041183684334848370}
   - component: {fileID: 4961905051337384708}
+  - component: {fileID: 2907934524199602999}
   m_Layer: 0
   m_Name: TitleText
   m_TagString: Untagged
@@ -629,6 +630,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2907934524199602999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838458887209123903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e893ae5a13e0642b1bb18cd6cff293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blog: {fileID: 0}
+  pageNumber: 0
+  image: {fileID: 0}
+  textHeader: 
+  text: 
+  captions: []
 --- !u!1 &901739793063883730
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,16 +964,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c4e6ab748a39b04e80f1b584a25893f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blogSave1: {fileID: 0}
+  blogSave2: {fileID: 0}
+  blogSave3: {fileID: 0}
   blogSaves: []
+  newSaveData: {fileID: 0}
   blogSave1Button: {fileID: 1880617754125630653}
   blogSave2Button: {fileID: 8394984785878527260}
   blogSave3Button: {fileID: 1334484051983164226}
   prevButton: {fileID: 1188184742553479866}
   nextButton: {fileID: 2372621968179684788}
   saveButton: {fileID: 6666158059369305918}
-  blogTextDisplay: {fileID: 0}
   blogPanel: {fileID: 8852631659199989728}
-  selectScreen: {fileID: 0}
+  selectScreen: {fileID: 5083005460076355149}
 --- !u!1 &1226797660400152718
 GameObject:
   m_ObjectHideFlags: 0
