@@ -12,9 +12,11 @@ public class BlogUIManager : MonoBehaviour
     [SerializeField]
     private Button blogSave1Button, blogSave2Button, blogSave3Button;
     [SerializeField]
-    private Button prevButton, nextButton;
+    private Button prevButton, nextButton, saveButton;
     [SerializeField]
-    private TextMeshProUGUI blogTextDisplay;
+    private TextMeshProUGUI blogTextDisplay; 
+    [SerializeField]
+    private GameObject blogPanel, selectScreen;
 
     /// <summary>
     /// Indicates which save file the player is on.
@@ -32,17 +34,18 @@ public class BlogUIManager : MonoBehaviour
         blogSave3Button.onClick.AddListener(() => OpenBlog(2));
         prevButton.onClick.AddListener(PrevPage);
         nextButton.onClick.AddListener(NextPage);
+        saveButton.onClick.AddListener(CloseBlogPanel);
         OpenBlog(0);
     }
 
-    void OpenBlog(int saveIndex)
+    public void OpenBlog(int saveIndex)
     {
         currentSave = saveIndex;
         currentPage = 0;
         UpdatePages();
     }
 
-    void UpdatePages()
+    public void UpdatePages()
     {
         if (blogSaves[currentSave].getPages().Length > currentPage)
         {
@@ -51,7 +54,7 @@ public class BlogUIManager : MonoBehaviour
         prevButton.interactable = currentPage > 0;
         nextButton.interactable = currentPage < blogSaves[currentSave].getPages().Length - 1;
     }
-    void PrevPage()
+    public void PrevPage()
     {
         if (currentPage > 0)
         {
@@ -59,12 +62,30 @@ public class BlogUIManager : MonoBehaviour
             UpdatePages();
         }
     }
-    void NextPage()
+    public void NextPage()
     {
         if (currentPage < 2)
         {
             currentPage++;
             UpdatePages();
         }
+    }
+    public void CloseBlogPanel()
+    {
+        blogPanel.SetActive(false);
+    }
+    public void OpenBlogPanel()
+    {
+        blogPanel.SetActive(true);
+        Debug.Log("BlogPanel activated!");
+
+    }
+    public void CloseSelectScreen()
+    {
+        selectScreen.SetActive(false);
+    }
+    public void OpenSelectScreen()
+    {
+        selectScreen.SetActive(true);
     }
 }
