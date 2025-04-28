@@ -17,11 +17,23 @@ public abstract class LevelEvaluator : ScriptableObject
     public int numGhosts = 1;
     public int difficulty = 1;
 
+    protected bool initialized = false;
+    protected float progress = 0f;
+    public bool InitDone { get { return initialized; } }
+    public float InitProgress { get { return progress; } }
+
     /// <summary>
     /// A list of room references in the evaluator, used primarily by
     /// GetRoomFromPositions.
     /// </summary>
     protected List<Room> rooms;
+
+    /// <summary>
+    /// The hunting zones for access
+    /// </summary>
+    protected List<Room>[] zones;
+    public List<Room>[] HuntingZones { private set { } get { return zones; } }
+
     public List<Room> GetAllRooms()
     {
         return rooms;
@@ -43,6 +55,18 @@ public abstract class LevelEvaluator : ScriptableObject
     /// hierarchy.</param>
     /// <returns>An array of "zones" for support for multiple ghosts</returns>
     public abstract List<Room>[] InitializeInterior(GameObject g, int zones);
+
+    /// <summary>
+    /// Call this function instead
+    /// </summary>
+    /// <param name="g">The root object of the interior in the scene 
+    /// <param name="zones">The number of hunting zones</param>
+    public async virtual void InitializeInteriorAsync(GameObject g, int zones)
+    {
+        this.zones = InitializeInterior(g, zones);
+        initialized = true;
+        progress = 1f;
+    }
 
     /// <summary>
     /// Takes a position and evaluates which room that point is in. By default

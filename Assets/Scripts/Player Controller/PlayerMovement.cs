@@ -42,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (PauseMenuManager._Instance.IsPaused) return;
+
         MyInput();
         SpeedControl();
         rb.linearDamping = groundDrag;

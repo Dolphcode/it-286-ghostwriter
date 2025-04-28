@@ -41,6 +41,7 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     [SerializeField]
     private GameObject interiorBase;
+    public GameObject InteriorGameObject { private set { } get { return interiorBase; } }
 
     /// <summary>
     /// A reference to the player object. Must be assigned in editor
@@ -96,8 +97,11 @@ public class LevelManager : MonoBehaviour
     {
         if (eval == null) eval = levelEvaluator;
         else levelEvaluator = eval;
+        /*
         zones = eval.InitializeInterior(interiorBase, 1); // should relegate this to the level loader really
         Debug.Log(zones[0].Count);
+        */
+        zones = eval.HuntingZones;
         foreach (Room r in eval.GetAllRooms())
         {
             foreach (GhostInteractable i in r.GetAllInteractables())
