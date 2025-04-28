@@ -23,6 +23,8 @@ public class PremadeLevelEvaluator : LevelEvaluator
             // Initialize the room list from the list of rooms in the interior
             // environment
             rooms.Add(room);
+            Debug.Log(room.name);
+            Debug.Log(rooms.Count);
 
             // Build the navmesh
             //room.GetNavMeshSurface().BuildNavMesh();

@@ -1809,6 +1809,7 @@ MonoBehaviour:
   statusLabel: {fileID: 746005551}
   templates:
   - {fileID: 11400000, guid: 01e015f650a997f4db8029ebefae8a3c, type: 2}
+  - {fileID: 11400000, guid: 71b8622fa328e004b83b08fb0443f33d, type: 2}
 --- !u!4 &467197748
 Transform:
   m_ObjectHideFlags: 0
