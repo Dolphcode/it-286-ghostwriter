@@ -21,7 +21,7 @@ public class BlogUIManager : MonoBehaviour
     /// </summary>
     private int currentSave = 0;
     /// <summary>
-    /// Indicates which page the player is on.
+    /// Indicates which page the player is on of the save file.
     /// </summary>
     private int currentPage = 0;
 
