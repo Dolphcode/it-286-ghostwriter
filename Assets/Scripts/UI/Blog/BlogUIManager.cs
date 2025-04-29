@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,11 +14,6 @@ public class BlogUIManager : MonoBehaviour
     /// </summary>
     [SerializeField]
     private List<BlogSaveData> blogSaves;
-    // <summary>
-    // Dictionary that stores blog save and current page number.
-    // </summary>
-    //[SerializeField]
-    //private System.Collections.Generic.Dictionary<BlogSaveData, int> blogDictionary = new Dictionary<BlogSaveData, int>();
     [SerializeField]
     private BlogSaveData newSaveData;
     [SerializeField]
@@ -32,16 +25,16 @@ public class BlogUIManager : MonoBehaviour
     /// <summary>
     /// Indicates which save file the player is on.
     /// </summary>
-    private int currentSave = 0;
+    private int currentSave;
     /// <summary>
     /// Indicates which page the player is on.
     /// </summary>
-    private int currentPage = 0;
+    private int currentPage;
     private void Awake()
     {
-        blogSave1Button.onClick.AddListener(() => OpenBlog(0));
-        blogSave2Button.onClick.AddListener(() => OpenBlog(1));
-        blogSave3Button.onClick.AddListener(() => OpenBlog(2));
+        blogSave1Button.onClick.AddListener(() => LoadSave(1));
+        blogSave2Button.onClick.AddListener(() => LoadSave(2));
+        blogSave3Button.onClick.AddListener(() => LoadSave(3));
         prevButton.onClick.AddListener(PrevPage);
         nextButton.onClick.AddListener(NextPage);
         saveButton.onClick.AddListener(CloseBlogPanel);
@@ -53,13 +46,14 @@ public class BlogUIManager : MonoBehaviour
         {
             currentPage = blogSaves[currentSave-1].GetPage().GetPageNum();
         }
-        OpenBlog(0);
     }
-    public void OpenBlog(int saveIndex)
+    void Update()
     {
-        //blogDictionary.Add(blogSaves[saveIndex], 0);
-        currentSave = saveIndex;
-        currentPage = 0;
+        if (blogSaves != null)
+        {
+            currentPage = 1;
+        }
+        newSaveData.SetPage(currentPage);
     }
     public void PrevPage()
     {
@@ -102,10 +96,6 @@ public class BlogUIManager : MonoBehaviour
     {
         blogSaves[i] = newSaveData;
     }
-    public void SetCurrentBlog(int i)
-    {
-        newSaveData = blogSaves[i - 1];
-    }
     public List<BlogSaveData> GetBlogSaves()
     {
         return blogSaves;
@@ -114,9 +104,67 @@ public class BlogUIManager : MonoBehaviour
     {
         blogSaves.Remove(remove);
     }
-    public void Publish()
+    public void Publish(int i)
+    {
+        int x = i - 1;
+        blogSaves[x] = null;
+        GetScore(blogSaves[x]);
+        blogSaves.Remove(blogSaves[currentSave]);
+    }
+    public void GetScore(int i)
+    {
+    }
+    public void GetScore(BlogSaveData blogSave)
+    {
+    }
+    public void LoadSave(int num)
+    {
+        currentSave = num-1;
+        currentPage = 1;
+        if (blogSaves[currentSave] == null)
+        {
+            CreateBlogSave(currentSave);
+            newSaveData = null;
+            DisplaySave(num);
+        }
+        else
+        {
+            //sets current save
+            newSaveData=blogSaves[currentSave];
+            DisplaySave(num);
+        }
+    }
+    public void DisplaySave(int num)
+    {
+        currentSave = num - 1;
+        currentPage = 1;
+        if (blogSaves[currentSave] == null)
+        {
+            CreateBlogSave(currentSave);
+            newSaveData = null;
+        }
+        else
+        {
+            //sets current save
+            newSaveData = blogSaves[currentSave];
+            newSaveData.SetPage(1);
+        }
+    }
+
+    public void SaveFile(int num)
     {
         blogSaves[currentSave] = null;
         blogSaves.Remove(blogSaves[currentSave]);
+        newSaveData = null;
+    }
+    public void SetButtonActive()
+    {
+        if (currentPage == 0) prevButton.interactable = false; nextButton.interactable = true;
+        if (currentPage == 1) prevButton.interactable = true; nextButton.interactable = true;
+        if (currentPage == 2) prevButton.interactable = true; nextButton.interactable = false;
+    }
+    public void SetBlogSave(int i)
+    {
+        currentSave = i;
     }
 }

@@ -1,8 +1,7 @@
-using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "BlogSaveData", menuName = "ScriptableObjects/BlogSaveData")]
+[CreateAssetMenu(fileName = "BlogSaveData", menuName = "Scriptable Objects/BlogSaveData")]
 public class BlogSaveData : ScriptableObject
 {
     /// <summary>
@@ -44,7 +43,7 @@ public class BlogSaveData : ScriptableObject
     /// Current page.
     /// </summary>
     [SerializeField]
-    private BlogPage newBlogPage;
+    private BlogPage activePage;
     /// <summary>
     /// List of given answers for captions
     /// </summary>
@@ -59,7 +58,7 @@ public class BlogSaveData : ScriptableObject
     /// Blog UI Manager.
     /// </summary>
     [SerializeField]
-    private BlogUIManager UIManager;
+    private GameObject UIManager;
     /// <summary>
     /// Level Loadscreen Data.
     /// </summary>
@@ -88,6 +87,7 @@ public class BlogSaveData : ScriptableObject
     // Update is called once per frame
     void Update()
     {
+        activePage.text;
     }
     public List<BlogPage> GetPages()
     {
@@ -95,7 +95,11 @@ public class BlogSaveData : ScriptableObject
     }
     public BlogPage GetPage()
     {
-        return newBlogPage;
+        return activePage;
+    }
+    public void SetPage(int pageNum)
+    {
+        activePage = pages[pageNum-1];
     }
     public int GetPageNum(BlogPage pageInput)
     {

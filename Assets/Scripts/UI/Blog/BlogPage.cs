@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 public class BlogPage : MonoBehaviour
@@ -19,20 +18,21 @@ public class BlogPage : MonoBehaviour
     private TextMeshProUGUI tags;
     [SerializeField]
     [TextArea(0,1)] 
-    private System.Collections.Generic.Dictionary<CaptureData,string> imageCaptions;
+    private System.Collections.Generic.Dictionary<CaptureData, TextMeshProUGUI> imageCaptions;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (pageNumber == 0)
+        if (pageNumber == 1)
         {
             bodyText.text = blog.GetLevelLoadscreenData().loadingDescription;
             textHeader.text = "Ghost Writer: " + blog.GetLevelLoadscreenData().levelName;
         }
-        else if (pageNumber == 1)
-        {
-        }
         else if (pageNumber == 2)
+        {
+            bodyText.text = blog.GetLevelLoadscreenData().loadingDescription;
+        }
+        else if (pageNumber == 3)
         {
            foreach (string tag in blog.GetTags())
             {
@@ -59,8 +59,5 @@ public class BlogPage : MonoBehaviour
     public int GetPageNum()
     {
         return pageNumber;
-    }
-    public void Display()
-    {
     }
 }
