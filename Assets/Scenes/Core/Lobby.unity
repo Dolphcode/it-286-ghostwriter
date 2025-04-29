@@ -1813,6 +1813,7 @@ MonoBehaviour:
   statusLabel: {fileID: 746005551}
   templates:
   - {fileID: 11400000, guid: 01e015f650a997f4db8029ebefae8a3c, type: 2}
+  - {fileID: 11400000, guid: 71b8622fa328e004b83b08fb0443f33d, type: 2}
 --- !u!4 &467197748
 Transform:
   m_ObjectHideFlags: 0
@@ -4641,8 +4642,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615434ad3a5860c45b0ac2749b488679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shopItemIDs: 00000000010000000200000003000000040000000500000006000000
-  shopItemPrices: 00000000e8030000f401000090010000c80000002c010000dc050000
+  shopItemIDs: 0000000001000000020000000300000004000000050000000600000007000000
+  shopItemPrices: 00000000e8030000f401000090010000c80000002c010000dc05000058020000
   moneyTxt: {fileID: 2032314908}
   itemTxt: {fileID: 891084302}
   priceTxt: {fileID: 1441320088}
