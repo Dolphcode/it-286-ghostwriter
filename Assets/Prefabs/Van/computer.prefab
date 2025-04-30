@@ -1331,6 +1331,7 @@ MonoBehaviour:
   blogPanel: {fileID: 8852631659199989728}
   selectScreen: {fileID: 5083005460076355149}
   scorePanel: {fileID: 424785043950661156}
+  imageSelectPanel: {fileID: 0}
   levelDataManager: {fileID: 0}
   moneyChange: 0
 --- !u!1 &675180618343685449
@@ -1809,6 +1810,7 @@ MonoBehaviour:
   blogPanel: {fileID: 8852631659199989728}
   selectScreen: {fileID: 5083005460076355149}
   scorePanel: {fileID: 0}
+  imageSelectPanel: {fileID: 0}
   levelDataManager: {fileID: 0}
   moneyChange: 0
 --- !u!1 &1170125308357627217
@@ -1840,8 +1842,8 @@ Transform:
   m_GameObject: {fileID: 1170125308357627217}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: -20.4, y: -0, z: -0}
-  m_LocalScale: {x: 13, y: 7.5000014, z: 5}
+  m_LocalPosition: {x: -19.8, y: -4.4, z: -0}
+  m_LocalScale: {x: 30, y: 7.5000014, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4864295376196995438}
@@ -4515,6 +4517,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 8852631659199989728}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &2662141859077866873
 GameObject:
@@ -11892,11 +11906,8 @@ MonoBehaviour:
   tag3: {fileID: 8842002647616646362}
   dropdown1: {fileID: 7665998570549474726}
   dropdown2: {fileID: 5495521861466909149}
-  bodyText1: {fileID: 0}
-  bodyText2: {fileID: 0}
-  textPrefab: {fileID: 0}
-  inputPrefab: {fileID: 0}
-  possibleAnswers: []
+  bodyText1: {fileID: 6809666097067090868}
+  bodyText2: {fileID: 8254018237604078688}
   correctAnswersString: []
   correctSentences: []
   givenSentences: []

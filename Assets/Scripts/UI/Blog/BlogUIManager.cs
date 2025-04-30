@@ -13,7 +13,7 @@ public class BlogUIManager : MonoBehaviour
     /// Max 3 blog saves, 3 pages each.
     /// </summary>
     [SerializeField]
-    private List<BlogSaveData> blogSaves;
+    private BlogSaveData[] blogSaves = new BlogSaveData[3];
     [SerializeField]
     private BlogSaveData newSaveData;
     [SerializeField]
@@ -27,21 +27,22 @@ public class BlogUIManager : MonoBehaviour
     [SerializeField]
     private int moneyChange;
     /// <summary>
-    /// Indicates which save file the player is on.
+    /// Indicates which save file the player is on (actual save number = this number; starts from 1)
     /// </summary>
-    private int currentSave;
+    private int currentSave=0;
     /// <summary>
-    /// Indicates which page the player is on.
+    /// Indicates which page the player is on (actual page number = this number; starts from 1)
     /// </summary>
     private int currentPage=0;
     void Start()
     {
-        blogSave1Button.onClick.AddListener(() => LoadSave(1));
+        //implemented in engine
+        /*blogSave1Button.onClick.AddListener(() => LoadSave(1));
         blogSave2Button.onClick.AddListener(() => LoadSave(2));
         blogSave3Button.onClick.AddListener(() => LoadSave(3));
         prevButton.onClick.AddListener(PrevPage);
         nextButton.onClick.AddListener(NextPage);
-        saveButton.onClick.AddListener(CloseBlogPanel);
+        saveButton.onClick.AddListener(CloseBlogPanel);*/
     }
     void Update()
     {
@@ -52,6 +53,7 @@ public class BlogUIManager : MonoBehaviour
         if (currentPage == 1)
         {
             prevButton.gameObject.SetActive(false);
+            nextButton.gameObject.SetActive(true);
             newSaveData.SetPage(currentPage);
         }
         else if (currentPage == 2)
@@ -63,6 +65,7 @@ public class BlogUIManager : MonoBehaviour
         else if (currentPage == 3)
         {
             nextButton.gameObject.SetActive(false);
+            prevButton.gameObject.SetActive(true);
             newSaveData.SetPage(currentPage);
         }
     }
@@ -110,27 +113,35 @@ public class BlogUIManager : MonoBehaviour
     {
         selectScreen.SetActive(true);
     }
-    public void SaveBlogData(int saveNum)
-    {
-        blogSaves.Add(newSaveData);
-    }
     public void CreateBlogSave(int i)
     {
         blogSaves[i-1]= newSaveData;
     }
-    public List<BlogSaveData> GetBlogSaves()
+    public BlogSaveData[] GetBlogSaves()
     {
         return blogSaves;
     }
     public void RemoveBlogSave(BlogSaveData remove)
     {
-        blogSaves.Remove(remove);
+        for(int i=0;blogSaves.Length>i;i++)
+        {
+            if (blogSaves[i] == remove)
+                blogSaves[i] = null;
+        }
+    }
+    /// <summary>
+    /// param int i is the actual number (not index)
+    /// </summary>
+    /// <param name="i"></param>
+    public void RemoveBlogSave(int i)
+    {
+        blogSaves[i] = null;
     }
     public void Publish(int i)
     {
         int x = i - 1;
         blogSaves[x] = null;
-        blogSaves.Remove(blogSaves[currentSave-1]);
+        RemoveBlogSave(currentSave - 1);
     }
     public void LoadSave(int num)
     {
@@ -165,11 +176,9 @@ public class BlogUIManager : MonoBehaviour
             newSaveData.SetPage(1);
         }
     }
-
     public void SaveFile()
     {
-        blogSaves[currentSave-1] = null;
-        blogSaves.Remove(blogSaves[currentSave-1]);
+        blogSaves[currentSave-1] = newSaveData;
         newSaveData = null;
     }
     public void AdjustMoney()

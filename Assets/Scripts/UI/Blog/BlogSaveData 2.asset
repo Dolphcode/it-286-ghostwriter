@@ -12,17 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d9fcd2493a5ce743bcfa455c31a6d40, type: 3}
   m_Name: BlogSaveData 2
   m_EditorClassIdentifier: 
-  photosList: []
   ghostDataList: []
-  answers: []
-  pages: []
-  blogSaveNum: 0
-  blogPage1: {fileID: 0}
-  blogPage2: {fileID: 0}
-  blogPage3: {fileID: 0}
+  pages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  blogSaveNum: 2
   activePage: {fileID: 0}
-  currentScore: 0
-  captureManager: {fileID: 0}
+  totalImageScore: 0
   UIManager: {fileID: 0}
   levelData: {fileID: 11400000, guid: 36717b9e74bac0b4c9374cd28659e0b2, type: 2}
   tags: []
+  blogDisplayPanel: {fileID: 0}

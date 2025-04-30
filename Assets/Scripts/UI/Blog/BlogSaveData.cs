@@ -28,17 +28,12 @@ public class BlogSaveData : ScriptableObject
     /// List of pages.
     /// </summary>
     [SerializeField]
-    private List<BlogPage> pages;
+    private BlogPage[] pages = new BlogPage[3];
     /// <summary>
     /// Current blog save number.
     /// </summary>
     [SerializeField]
     private int blogSaveNum;
-    /// <summary>
-    /// List of pages.
-    /// </summary>
-    [SerializeField]
-    private BlogPage blogPage1, blogPage2, blogPage3;
     /// <summary>
     /// Current page.
     /// </summary>
@@ -73,7 +68,10 @@ public class BlogSaveData : ScriptableObject
     private BlogPanel blogDisplayPanel;
     void OnEnable()
     {
-       for (int i = 0; ghostDataList.Count > i; i++)
+        pages[0] = (new BlogPage());
+        pages[1] = (new BlogPage());
+        pages[2] = (new BlogPage());
+        for (int i = 0; ghostDataList.Count > i; i++)
         {
             answers.Add(ghostDataList[i].typeName);
             answers.Add(ghostDataList[i].maxEMF);
@@ -92,7 +90,7 @@ public class BlogSaveData : ScriptableObject
     {
         //activePage.text;
     }
-    public List<BlogPage> GetPages()
+    public BlogPage[] GetPages()
     {
         return pages;
     }
