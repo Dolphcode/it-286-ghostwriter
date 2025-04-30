@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,25 +50,50 @@ public class BlogUIManager : MonoBehaviour
         if (blogSaves != null)
         {
             currentPage = 1;
+            if (newSaveData==null)
+            {
+                newSaveData = ScriptableObject.CreateInstance<BlogSaveData>();
+            }    
+            if (newSaveData.GetPages()==null)
+            {
+                newSaveData.SetPages(new List<BlogPage> { ScriptableObject.CreateInstance<BlogPage>(), ScriptableObject.CreateInstance<BlogPage>(), ScriptableObject.CreateInstance<BlogPage>() });
+            }
+            foreach (BlogSaveData blogSave in blogSaves)
+            {
+                if (currentSave==1)
+                {
+                    AssetDatabase.CreateAsset(blogSave, "Assets/Ghostwriter/BlogSaveData1.asset");
+                    AssetDatabase.SaveAssets();
+                }
+                if (currentSave == 2)
+                {
+                    AssetDatabase.CreateAsset(blogSave, "Assets/Ghostwriter/BlogSaveData2.asset");
+                    AssetDatabase.SaveAssets();
+                }
+                if (currentSave == 3)
+                {
+                    AssetDatabase.CreateAsset(blogSave, "Assets/Ghostwriter/BlogSaveData3.asset");
+                    AssetDatabase.SaveAssets();
+                }
+            }
         }
         if (currentPage == 1)
         {
+            Debug.Log(prevButton);
             prevButton.gameObject.SetActive(false);
             nextButton.gameObject.SetActive(true);
-            newSaveData.SetPage(currentPage);
         }
         else if (currentPage == 2)
         {
             prevButton.gameObject.SetActive(true);
             nextButton.gameObject.SetActive(true);
-            newSaveData.SetPage(currentPage);
         }
         else if (currentPage == 3)
         {
             nextButton.gameObject.SetActive(false);
             prevButton.gameObject.SetActive(true);
-            newSaveData.SetPage(currentPage);
         }
+        newSaveData.SetPage(currentPage);
     }
     public void PrevPage()
     {
@@ -115,6 +141,7 @@ public class BlogUIManager : MonoBehaviour
     }
     public void CreateBlogSave(int i)
     {
+        newSaveData = ScriptableObject.CreateInstance<BlogSaveData>();
         blogSaves[i-1]= newSaveData;
     }
     public BlogSaveData[] GetBlogSaves()
@@ -152,28 +179,11 @@ public class BlogUIManager : MonoBehaviour
         {
             CreateBlogSave(saveNum);
             newSaveData = null;
-            DisplaySave(num);
         }
         else
         {
             //sets current save
             newSaveData=blogSaves[saveNum];
-            DisplaySave(num);
-        }
-    }
-    public void DisplaySave(int num)
-    {
-        currentPage = 1;
-        if (blogSaves[currentSave-1] == null)
-        {
-            CreateBlogSave(num-1);
-            newSaveData = null;
-        }
-        else
-        {
-            //sets current save
-            newSaveData = blogSaves[num-1];
-            newSaveData.SetPage(1);
         }
     }
     public void SaveFile()

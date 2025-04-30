@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 [CreateAssetMenu(fileName = "BlogSaveData", menuName = "Scriptable Objects/BlogSaveData")]
 public class BlogSaveData : ScriptableObject
@@ -28,7 +29,7 @@ public class BlogSaveData : ScriptableObject
     /// List of pages.
     /// </summary>
     [SerializeField]
-    private BlogPage[] pages = new BlogPage[3];
+    private List<BlogPage> pages = new List<BlogPage>();
     /// <summary>
     /// Current blog save number.
     /// </summary>
@@ -66,11 +67,14 @@ public class BlogSaveData : ScriptableObject
     private List<string> tags;
     [SerializeField]
     private BlogPanel blogDisplayPanel;
-    void OnEnable()
+    public void OnEnable()
     {
-        pages[0] = (new BlogPage());
-        pages[1] = (new BlogPage());
-        pages[2] = (new BlogPage());
+        if (pages==null)
+        {
+            pages.Add(ScriptableObject.CreateInstance<BlogPage>());
+            pages.Add(ScriptableObject.CreateInstance<BlogPage>());
+            pages.Add(ScriptableObject.CreateInstance<BlogPage>());
+        }
         for (int i = 0; ghostDataList.Count > i; i++)
         {
             answers.Add(ghostDataList[i].typeName);
@@ -90,7 +94,7 @@ public class BlogSaveData : ScriptableObject
     {
         //activePage.text;
     }
-    public BlogPage[] GetPages()
+    public List<BlogPage> GetPages()
     {
         return pages;
     }
@@ -108,7 +112,12 @@ public class BlogSaveData : ScriptableObject
     /// <param name="pageNum"></param>
     public void SetPage(int pageNum)
     {
-        activePage = pages[pageNum-1];
+        if (pageNum>0)
+            activePage = pages[pageNum-1];
+    }
+    public void SetPages(List<BlogPage> x)
+    {
+        pages = x;
     }
     /// <summary>
     /// Save page data.

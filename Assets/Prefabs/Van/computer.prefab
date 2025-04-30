@@ -1656,7 +1656,7 @@ Transform:
   m_GameObject: {fileID: 918043387871481113}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.29997155, y: 22.9, z: 0.7}
+  m_LocalPosition: {x: 0.29997155, y: 22.9, z: -0.4}
   m_LocalScale: {x: 30, y: 7.5, z: 5.299999}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1752,67 +1752,6 @@ MonoBehaviour:
   _OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &1166172219431936169
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5038367419966541841}
-  - component: {fileID: 1938633752153699240}
-  m_Layer: 0
-  m_Name: BlogUIManagerObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5038367419966541841
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1166172219431936169}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.0009565116, y: -0.0012588762, z: 0.0029127346}
-  m_LocalScale: {x: 1, y: 0.99999976, z: 0.99999976}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2901195288150324490}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1938633752153699240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1166172219431936169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c4e6ab748a39b04e80f1b584a25893f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blogSave1: {fileID: 0}
-  blogSave2: {fileID: 0}
-  blogSave3: {fileID: 0}
-  blogSaves: []
-  newSaveData: {fileID: 0}
-  blogSave1Button: {fileID: 1880617754125630653}
-  blogSave2Button: {fileID: 0}
-  blogSave3Button: {fileID: 0}
-  prevButton: {fileID: 0}
-  nextButton: {fileID: 2372621968179684788}
-  saveButton: {fileID: 0}
-  blogPanel: {fileID: 8852631659199989728}
-  selectScreen: {fileID: 5083005460076355149}
-  scorePanel: {fileID: 0}
-  imageSelectPanel: {fileID: 0}
-  levelDataManager: {fileID: 0}
-  moneyChange: 0
 --- !u!1 &1170125308357627217
 GameObject:
   m_ObjectHideFlags: 0
@@ -2270,7 +2209,7 @@ Transform:
   m_GameObject: {fileID: 1440082198756205967}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.3, y: 0.9, z: 0.7}
+  m_LocalPosition: {x: 0.3, y: 0.9, z: 2.7}
   m_LocalScale: {x: 30, y: 7.5000014, z: 5.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4182,7 +4121,6 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1476741203564887180}
-  - {fileID: 5038367419966541841}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &2300431397802982063
@@ -4200,7 +4138,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2524493071900274608}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -6910,7 +6848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &66289194454157967
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7125,7 +7063,7 @@ GameObject:
   - component: {fileID: 868608701404307712}
   - component: {fileID: 9183532620719991282}
   m_Layer: 0
-  m_Name: News_Button_Cube
+  m_Name: Blog_Button_Cube
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8006,7 +7944,7 @@ Transform:
   m_GameObject: {fileID: 6255833110236799035}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.3, y: 11.8, z: 0.7}
+  m_LocalPosition: {x: 0.3, y: 11.8, z: -1.6}
   m_LocalScale: {x: 30, y: 7.5000014, z: 5.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10484,7 +10422,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: -90, y: 90, z: 90}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.00913, y: -0.00682}
+  m_AnchoredPosition: {x: -0.00913, y: -0.01008}
   m_SizeDelta: {x: 320, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5436070357116150051
@@ -11807,7 +11745,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4864295376196995438
 RectTransform:
   m_ObjectHideFlags: 0
