@@ -21,7 +21,11 @@ public class BlogUIManager : MonoBehaviour
     [SerializeField]
     private Button prevButton, nextButton, saveButton;
     [SerializeField]
-    private GameObject blogPanel, selectScreen;
+    private GameObject blogPanel, selectScreen, scorePanel, imageSelectPanel;
+    [SerializeField]
+    private LevelDataManager levelDataManager = LevelDataManager._Instance;
+    [SerializeField]
+    private int moneyChange;
     /// <summary>
     /// Indicates which save file the player is on.
     /// </summary>
@@ -29,8 +33,8 @@ public class BlogUIManager : MonoBehaviour
     /// <summary>
     /// Indicates which page the player is on.
     /// </summary>
-    private int currentPage;
-    private void Awake()
+    private int currentPage=0;
+    void Start()
     {
         blogSave1Button.onClick.AddListener(() => LoadSave(1));
         blogSave2Button.onClick.AddListener(() => LoadSave(2));
@@ -39,21 +43,28 @@ public class BlogUIManager : MonoBehaviour
         nextButton.onClick.AddListener(NextPage);
         saveButton.onClick.AddListener(CloseBlogPanel);
     }
-    void Start()
-    {
-        int currentPage = 0;
-        if (blogSaves != null)
-        {
-            currentPage = blogSaves[currentSave-1].GetPage().GetPageNum();
-        }
-    }
     void Update()
     {
         if (blogSaves != null)
         {
             currentPage = 1;
         }
-        newSaveData.SetPage(currentPage);
+        if (currentPage == 1)
+        {
+            prevButton.gameObject.SetActive(false);
+            newSaveData.SetPage(currentPage);
+        }
+        else if (currentPage == 2)
+        {
+            prevButton.gameObject.SetActive(true);
+            nextButton.gameObject.SetActive(true);
+            newSaveData.SetPage(currentPage);
+        }
+        else if (currentPage == 3)
+        {
+            nextButton.gameObject.SetActive(false);
+            newSaveData.SetPage(currentPage);
+        }
     }
     public void PrevPage()
     {
@@ -69,6 +80,10 @@ public class BlogUIManager : MonoBehaviour
             currentPage++;
         }
     }
+    public int GetPageNum()
+    {
+        return currentPage;
+    }    
     public void CloseBlogPanel()
     {
         blogPanel.SetActive(false);
@@ -76,13 +91,20 @@ public class BlogUIManager : MonoBehaviour
     public void OpenBlogPanel()
     {
         blogPanel.SetActive(true);
-        Debug.Log("BlogPanel on");
+
+    }
+    public void CloseScorePanel()
+    {
+        scorePanel.SetActive(false);
+    }
+    public void OpenScorePanel()
+    {
+        scorePanel.SetActive(true);
 
     }
     public void CloseSelectScreen()
     {
         selectScreen.SetActive(false);
-        Debug.Log("Select off");
     }
     public void OpenSelectScreen()
     {
@@ -94,7 +116,7 @@ public class BlogUIManager : MonoBehaviour
     }
     public void CreateBlogSave(int i)
     {
-        blogSaves[i] = newSaveData;
+        blogSaves[i-1]= newSaveData;
     }
     public List<BlogSaveData> GetBlogSaves()
     {
@@ -108,63 +130,81 @@ public class BlogUIManager : MonoBehaviour
     {
         int x = i - 1;
         blogSaves[x] = null;
-        GetScore(blogSaves[x]);
-        blogSaves.Remove(blogSaves[currentSave]);
-    }
-    public void GetScore(int i)
-    {
-    }
-    public void GetScore(BlogSaveData blogSave)
-    {
+        blogSaves.Remove(blogSaves[currentSave-1]);
     }
     public void LoadSave(int num)
     {
-        currentSave = num-1;
+        currentSave = num;
+        int saveNum = num - 1;
         currentPage = 1;
-        if (blogSaves[currentSave] == null)
+        if (blogSaves[saveNum] == null)
         {
-            CreateBlogSave(currentSave);
+            CreateBlogSave(saveNum);
             newSaveData = null;
             DisplaySave(num);
         }
         else
         {
             //sets current save
-            newSaveData=blogSaves[currentSave];
+            newSaveData=blogSaves[saveNum];
             DisplaySave(num);
         }
     }
     public void DisplaySave(int num)
     {
-        currentSave = num - 1;
         currentPage = 1;
-        if (blogSaves[currentSave] == null)
+        if (blogSaves[currentSave-1] == null)
         {
-            CreateBlogSave(currentSave);
+            CreateBlogSave(num-1);
             newSaveData = null;
         }
         else
         {
             //sets current save
-            newSaveData = blogSaves[currentSave];
+            newSaveData = blogSaves[num-1];
             newSaveData.SetPage(1);
         }
     }
 
-    public void SaveFile(int num)
+    public void SaveFile()
     {
-        blogSaves[currentSave] = null;
-        blogSaves.Remove(blogSaves[currentSave]);
+        blogSaves[currentSave-1] = null;
+        blogSaves.Remove(blogSaves[currentSave-1]);
         newSaveData = null;
     }
-    public void SetButtonActive()
+    public void AdjustMoney()
     {
-        if (currentPage == 0) prevButton.interactable = false; nextButton.interactable = true;
-        if (currentPage == 1) prevButton.interactable = true; nextButton.interactable = true;
-        if (currentPage == 2) prevButton.interactable = true; nextButton.interactable = false;
+        //assuming player averages around 4/10 on each image and gets half of the sentence ques right
+        if (blogSaves[currentSave - 1].GetTotalScore() > 20)
+        {
+            moneyChange = 1000;
+            levelDataManager.AddMoney(moneyChange);
+        }
+        else if (blogSaves[currentSave - 1].GetTotalScore() > 18)
+        {
+            moneyChange = 500;
+        }
+        else if (blogSaves[currentSave - 1].GetTotalScore() >= 15)
+        {
+            moneyChange = 0;
+        }
+        else if (blogSaves[currentSave - 1].GetTotalScore() < 15)
+        {
+            moneyChange = -500;
+            levelDataManager.RemoveMoney(500);
+        }
+        else if (blogSaves[currentSave - 1].GetTotalScore() < 10)
+        {
+            moneyChange = -1000;
+            levelDataManager.RemoveMoney(1000);
+        }
     }
-    public void SetBlogSave(int i)
+    public void AdjustCredibility()
     {
-        currentSave = i;
+        //maybe give shop discount idfk
+    }
+    public int GetMoneyChange()
+    {
+        return moneyChange;
     }
 }

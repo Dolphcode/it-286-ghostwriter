@@ -1,11 +1,6 @@
-using System.Linq;
-using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
-using UnityEngine.Rendering;
-using UnityEngine.UIElements;
 
 ///<summary>
 /// Ghost Types dropdown.

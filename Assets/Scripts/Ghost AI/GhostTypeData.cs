@@ -9,7 +9,7 @@ public class GhostTypeData : ScriptableObject
 
     [Header("Ghost Evidence Config")]
     [Range(1, 5)] public int maxEMF; // maximum EMF that the ghost can hit
-    public List<GhostInteractableType> interactableTypes; // The list of things a ghost can interact with
+    public List<GhostInteractable> interactableTypes; // The list of things a ghost can interact with
     public float maxSpeed; // The maximum speed of the ghost
     public bool adjustableSpeed; // Whether the ghost will adjust its speed or not
 }
