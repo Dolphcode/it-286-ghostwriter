@@ -1,9 +1,10 @@
+using TMPro;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField]
-    private TMPro.TextMeshPro scoreText;
+    private TextMeshProUGUI scoreText;
     [SerializeField]
     private BlogPanel blogPanel;
     [SerializeField]

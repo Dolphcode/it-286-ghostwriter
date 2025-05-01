@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Sentence : MonoBehaviour
+public class Sentence
 {
     [SerializeField]
     private string beforeAns;
@@ -22,6 +22,10 @@ public class Sentence : MonoBehaviour
     public string GetSentence()
     {
         return beforeAns + answer + afterAns;
+    }
+    public string GetBeforeAns()
+    {
+        return beforeAns;
     }
     public string GetAnswer()
     {

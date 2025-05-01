@@ -1,2 +1,16 @@
 fileFormatVersion: 2
 guid: 6d9fcd2493a5ce743bcfa455c31a6d40
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - activePage: {instanceID: 0}
+  - UIManager: {fileID: 2627327771263345420, guid: 1b307794ba9ccfa45a7e039d4b951978, type: 3}
+  - levelData: {instanceID: 0}
+  - blogDisplayPanel: {fileID: 7080396289535567597, guid: f760e5d33800ae54f8dd9f82b2269dca, type: 3}
+  - levelDataManager: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

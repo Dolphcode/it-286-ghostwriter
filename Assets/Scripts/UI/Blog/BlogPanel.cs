@@ -7,6 +7,8 @@ public class BlogPanel : MonoBehaviour
     [SerializeField]
     private BlogSaveData blog;
     [SerializeField]
+    private BlogUIManager blogUI;
+    [SerializeField]
     private int pageNum;
     [SerializeField]
     private CaptureData imageData;
@@ -14,6 +16,8 @@ public class BlogPanel : MonoBehaviour
     private Texture2D displayImage;
     [SerializeField]
     private TMP_InputField displayHeader;
+    [SerializeField]
+    private GhostTypeData ghostData;
     /// <summary>
     /// Cosmetic tags, might add more functionality later on
     /// </summary>
@@ -35,27 +39,27 @@ public class BlogPanel : MonoBehaviour
     /// Answers but in the corresponding string answer form
     /// </summary>
     [SerializeField] 
-    private List<string> correctAnswersString;
+    private List<string> correctAnswersString = new List<string>();
     /// <summary>
     /// Answers but in their original form (bool,string,int,etc)
     /// </summary>
     [SerializeField]
-    private List<object> correctAnswers;
+    private List<object> correctAnswers = new List<object>();
     /// <summary>
     /// Correct Sentences
     /// </summary>
     [SerializeField]
-    private List<Sentence> correctSentences;
+    private List<Sentence> correctSentences = new List<Sentence>();
     /// <summary>
     /// Given sentences from user
     /// </summary>
     [SerializeField]
-    private List<Sentence> givenSentences;
+    private List<Sentence> givenSentences = new List<Sentence>();
     /// <summary>
     /// Score report for sentences in list form
     /// </summary>
     [SerializeField]
-    private List<bool> checkedSentences;
+    private List<bool> checkedSentences = new List<bool>();
     /// <summary>
     /// Number of true (aka correct answer) in checkedSentences
     /// </summary>
@@ -64,13 +68,85 @@ public class BlogPanel : MonoBehaviour
 
     private string interactableAns1;
     private string interactableAns2;
+    private bool sent1 = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        SetCorrectAnswers();
+        pageNum = 1;
         dropdown1.onValueChanged.AddListener(OnDropdownChanged);
         dropdown2.onValueChanged.AddListener(OnDropdownChanged);
-        pageNum = blog.GetPageNum();
-        correctAnswers = blog.GetAnswers();
+        
+    }
+    public void OnDropdownChanged(int answerIndex)
+    {
+        SetPlayerAnswers();
+    }
+    public void SetPlayerAnswers()
+    {
+        for (int i1 = 0; i1 < givenSentences.Count; i1++)
+        {
+            givenSentences[i1] = null;
+        }
+        if (pageNum==1)
+        {
+            if (sent1)
+                givenSentences.Add(new Sentence("The ghost’s behaviors were similar to those of a ", dropdown2.options[dropdown2.value].text + " type ghost."));
+            else
+                givenSentences.Add(new Sentence("From the ghost’s behavior, I identified it to be a ", dropdown2.options[dropdown2.value].text + " ghost."));
+        }
+        if (pageNum == 2)
+        {
+            givenSentences.Add(new Sentence("The ghost’s maximum EMF was ", dropdown1.options[dropdown1.value].text));
+            givenSentences.Add(new Sentence("The ghost was moving ", dropdown2.options[dropdown2.value].text));
+        }
+        if (pageNum == 3)
+        {
+            givenSentences.Add(new Sentence("When I went back to one of the rooms I explored previously, I saw it. ", dropdown1.options[dropdown1.value].text));
+            givenSentences.Add(new Sentence("Then later on, something unusual happened again. ", dropdown2.options[dropdown2.value].text));
+        }
+    }
+    public void SetCorrectAnswers()
+    {
+        //if (blog != null)
+            //correctAnswers = blog.GetAnswers();
+        //else
+        //{
+            /*if (ghostData != null)
+            {
+                correctAnswers.Add(ghostData.typeName);
+                correctAnswers.Add(ghostData.maxEMF);
+                correctAnswers.Add(ghostData.adjustableSpeed);
+                correctAnswers.Add("door");
+                correctAnswers.Add("move");
+            }
+            else*/
+            {
+                correctAnswers.Add("Biological");
+                correctAnswers.Add(3);
+                correctAnswers.Add(false);
+                correctAnswers.Add("door");
+                correctAnswers.Add("move");
+            }
+                
+            //for (int c = 0; ghostData.interactableTypes.Count >= c; c++)
+            {
+                //correctAnswers.Add(ghostData.interactableTypes[c].ToString());
+                //should return game.GhostInteractables.DoorInteractable or DoorInteractable?
+            }
+        //}
+        // Clears sentences
+        if (correctSentences.Count>0)
+        {
+            for (int i1 = 0; i1 < correctSentences.Count; i1++)
+            {
+                correctSentences[i1] = null;
+            }
+        }
+        for (int i1 = 0; i1 < correctAnswersString.Count; i1++)
+        {
+            correctAnswersString[i1] = null;
+        }
         for (int i = 0; i < correctAnswers.Count; i++)
         {
             if (correctAnswers[i] is not string)
@@ -80,32 +156,36 @@ public class BlogPanel : MonoBehaviour
                 {
                     if ((bool)(correctAnswers[i]))
                     {
-                        correctAnswersString[i] = "erratically, as if it couldn’t decide how fast to go.";
+                        correctAnswersString.Add("erratically, as if it couldn’t decide how fast to go.");
                     }
-                    correctAnswersString[i] = "at a constant speed.";
+                    else
+                        correctAnswersString.Add("at a constant speed.");
                 }
                 // EMF
                 if (correctAnswers[i] is int)
                 {
                     if ((int)(correctAnswers[i]) > 4)
-                        correctAnswersString[i] = "very high.";
+                        correctAnswersString.Add("very high.");
                     else if ((int)(correctAnswers[i]) == 3)
-                        correctAnswersString[i] = "relatively normal.";
+                        correctAnswersString.Add("relatively normal.");
                     else if ((int)(correctAnswers[i]) < 3)
-                        correctAnswersString[i] = "somewhat low.";
+                        correctAnswersString.Add("somewhat low.");
                     else
-                        correctAnswersString[i] = "no maxEMF found.";
+                        correctAnswersString.Add("no maxEMF found.");
                 }
             }
-            else correctAnswersString[i] = correctAnswers[i].ToString().Trim().ToLower();
+            else correctAnswersString.Add(correctAnswers[i].ToString().Trim().ToLower());
         }
         //added in order typeName, maxEMF, adjustableSpeed, interactableTypes - sentences randomized
         if (Random.value > 0.5f)
+        {
             correctSentences.Add(new Sentence("The ghost’s behaviors were similar to those of a ", correctAnswersString[0] + " type ghost."));
+            sent1 = true;
+        }
         else
             correctSentences.Add(new Sentence("From the ghost’s behavior, I identified it to be a ", correctAnswersString[0] + " ghost."));
-        correctSentences.Add(new Sentence("The ghost’s maximum EMF was", correctAnswersString[1]));
-        correctSentences.Add(new Sentence("The ghost was moving", correctAnswersString[2]));
+        correctSentences.Add(new Sentence("The ghost’s maximum EMF was ", correctAnswersString[1]));
+        correctSentences.Add(new Sentence("The ghost was moving ", correctAnswersString[2]));
         foreach (string s in correctAnswersString)
         {
             if (interactableAns1 == null)
@@ -125,12 +205,8 @@ public class BlogPanel : MonoBehaviour
                 if (s.Contains("move") && !interactableAns1.Contains("move")) interactableAns2 = "The rocking chair, which I was nowhere near, moved.";
             }
         }
-        correctSentences.Add(new Sentence("When I went back to one of the rooms I explored previously, I saw it.", interactableAns1));
-        correctSentences.Add(new Sentence("Then later on, something unusual happened again.", interactableAns2));
-    }
-    public void OnDropdownChanged(int answerIndex)
-    {
-
+        correctSentences.Add(new Sentence("When I went back to one of the rooms I explored previously, I saw it. ", interactableAns1));
+        correctSentences.Add(new Sentence("Then later on, something unusual happened again. ", interactableAns2));
     }
     public List<bool> CheckCorrectAnswers()
     {
@@ -183,55 +259,57 @@ public class BlogPanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        pageNum = blogUI.GetPageNum();
         // Sets page content by number
-        if (pageNum == 1)
+        if (pageNum == 1 && givenSentences.Count>0)
         {
             displayHeader.gameObject.SetActive(true);
             tag1.gameObject.SetActive(false);
             tag2.gameObject.SetActive(false);
             tag3.gameObject.SetActive(false);
             bodyText1.text = blog.GetLevelLoadscreenData().loadingDescription;
-            bodyText2.text = correctSentences[0].GetSentence();
+            bodyText2.text = givenSentences[0].GetBeforeAns();
             if (displayHeader.text == null)
                 displayHeader.text = "Ghost Writer: " + blog.GetLevelLoadscreenData().levelName;
             else
-                blog.GetPage().title = displayHeader.text;
+                blog.GetPage(1).title = displayHeader.text;
             dropdown1.gameObject.SetActive(false);
             dropdown2.gameObject.SetActive(true);
             DropdownReset(pageNum);
         }
-        else if (pageNum == 2)
+        else if (pageNum == 2 && givenSentences.Count > 0)
         {
             displayHeader.gameObject.SetActive(false);
             tag1.gameObject.SetActive(false);
             tag2.gameObject.SetActive(false);
             tag3.gameObject.SetActive(false);
-            bodyText1.text = correctSentences[1].GetSentence();
-            bodyText2.text = correctSentences[2].GetSentence();
-            blog.GetPage().text1 = bodyText1.text;
-            blog.GetPage().text2 = bodyText2.text;
+            bodyText1.text = givenSentences[1].GetSentence();
+            bodyText2.text = givenSentences[2].GetSentence();
+            blog.GetPage(2).text1 = bodyText1.text;
+            blog.GetPage(2).text2 = bodyText2.text;
             dropdown1.gameObject.SetActive(true);
             dropdown2.gameObject.SetActive(true);
             DropdownReset(pageNum);
         }
-        else if (pageNum == 3)
+        else if (pageNum == 3 && givenSentences.Count > 0)
         {
             displayHeader.gameObject.SetActive(false);
             tag1.gameObject.SetActive(true);
             tag2.gameObject.SetActive(true);
             tag3.gameObject.SetActive(true);
-            bodyText1.text = correctSentences[3].GetSentence();
+            bodyText1.text = givenSentences[3].GetSentence();
+            bodyText1.text = givenSentences[4].GetSentence();
             blog.AddTag(tag1.text);
             blog.AddTag(tag2.text);
             blog.AddTag(tag3.text);
-            foreach (string tag in blog.GetTags())
+            /*foreach (string tag in blog.GetTags())
             {
                 bodyText2.text += "#" + tag + ", ";
-            }
-            blog.GetPage().text1 = bodyText1.text;
-            blog.GetPage().text2 = bodyText2.text;
+            }*/
+            blog.GetPage(3).text1 = bodyText1.text;
+            blog.GetPage(3).text2 = bodyText2.text;
             dropdown1.gameObject.SetActive(true);
-            dropdown2.gameObject.SetActive(false);
+            dropdown2.gameObject.SetActive(true);
             DropdownReset(pageNum);
         }
     }
@@ -275,6 +353,7 @@ public class BlogPanel : MonoBehaviour
             list4.Add("The rocking chair, which I was nowhere near, moved.");
             dropdown1.AddOptions(list4);
         }
+        SetPlayerAnswers();
     }
     public void SetDisplayImage(Texture2D displayImage1)
     {

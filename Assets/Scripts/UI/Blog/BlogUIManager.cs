@@ -22,7 +22,9 @@ public class BlogUIManager : MonoBehaviour
     [SerializeField]
     private Button prevButton, nextButton, saveButton;
     [SerializeField]
-    private GameObject blogPanel, selectScreen, scorePanel, imageSelectPanel;
+    private GameObject selectScreen, scorePanel, imageSelectPanel;
+    [SerializeField]
+    private BlogPanel blogPanel;
     [SerializeField]
     private LevelDataManager levelDataManager = LevelDataManager._Instance;
     [SerializeField]
@@ -30,56 +32,55 @@ public class BlogUIManager : MonoBehaviour
     /// <summary>
     /// Indicates which save file the player is on (actual save number = this number; starts from 1)
     /// </summary>
-    private int currentSave=0;
+    private int currentSave=1;
     /// <summary>
     /// Indicates which page the player is on (actual page number = this number; starts from 1)
     /// </summary>
-    private int currentPage=0;
+    private int currentPage=1;
     void Start()
     {
-        //implemented in engine
-        /*blogSave1Button.onClick.AddListener(() => LoadSave(1));
+        blogSave1Button.onClick.AddListener(() => LoadSave(1));
         blogSave2Button.onClick.AddListener(() => LoadSave(2));
         blogSave3Button.onClick.AddListener(() => LoadSave(3));
         prevButton.onClick.AddListener(PrevPage);
         nextButton.onClick.AddListener(NextPage);
-        saveButton.onClick.AddListener(CloseBlogPanel);*/
+        saveButton.onClick.AddListener(CloseBlogPanel);
     }
     void Update()
     {
+        if (newSaveData!=null)
+            blogPanel.LoadSaveData(newSaveData);
         if (blogSaves != null)
         {
             currentPage = 1;
-            if (newSaveData==null)
-            {
-                newSaveData = ScriptableObject.CreateInstance<BlogSaveData>();
-            }    
-            if (newSaveData.GetPages()==null)
+            /*if (newSaveData.GetPages()==null)
             {
                 newSaveData.SetPages(new List<BlogPage> { ScriptableObject.CreateInstance<BlogPage>(), ScriptableObject.CreateInstance<BlogPage>(), ScriptableObject.CreateInstance<BlogPage>() });
-            }
+            }*/
             foreach (BlogSaveData blogSave in blogSaves)
             {
                 if (currentSave==1)
                 {
-                    AssetDatabase.CreateAsset(blogSave, "Assets/Ghostwriter/BlogSaveData1.asset");
+                    if (!AssetDatabase.Contains(blogSave))
+                        AssetDatabase.CreateAsset(blogSave, "Assets/BlogSaveData1.asset");
                     AssetDatabase.SaveAssets();
                 }
                 if (currentSave == 2)
                 {
-                    AssetDatabase.CreateAsset(blogSave, "Assets/Ghostwriter/BlogSaveData2.asset");
+                    if (!AssetDatabase.Contains(blogSave))
+                        AssetDatabase.CreateAsset(blogSave, "Assets/BlogSaveData2.asset");
                     AssetDatabase.SaveAssets();
                 }
                 if (currentSave == 3)
                 {
-                    AssetDatabase.CreateAsset(blogSave, "Assets/Ghostwriter/BlogSaveData3.asset");
+                    if (!AssetDatabase.Contains(blogSave))
+                        AssetDatabase.CreateAsset(blogSave, "Assets/BlogSaveData3.asset");
                     AssetDatabase.SaveAssets();
                 }
             }
         }
         if (currentPage == 1)
         {
-            Debug.Log(prevButton);
             prevButton.gameObject.SetActive(false);
             nextButton.gameObject.SetActive(true);
         }
@@ -93,7 +94,7 @@ public class BlogUIManager : MonoBehaviour
             nextButton.gameObject.SetActive(false);
             prevButton.gameObject.SetActive(true);
         }
-        newSaveData.SetPage(currentPage);
+        //newSaveData.SetPage(currentPage);
     }
     public void PrevPage()
     {
@@ -115,11 +116,11 @@ public class BlogUIManager : MonoBehaviour
     }    
     public void CloseBlogPanel()
     {
-        blogPanel.SetActive(false);
+        blogPanel.gameObject.SetActive(false);
     }
     public void OpenBlogPanel()
     {
-        blogPanel.SetActive(true);
+        blogPanel.gameObject.SetActive(true);
 
     }
     public void CloseScorePanel()
@@ -162,13 +163,12 @@ public class BlogUIManager : MonoBehaviour
     /// <param name="i"></param>
     public void RemoveBlogSave(int i)
     {
-        blogSaves[i] = null;
+        blogSaves[i-1] = null;
     }
     public void Publish(int i)
     {
-        int x = i - 1;
-        blogSaves[x] = null;
-        RemoveBlogSave(currentSave - 1);
+        //some code to save prev published blogs?
+        RemoveBlogSave(i);
     }
     public void LoadSave(int num)
     {

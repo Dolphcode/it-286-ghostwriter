@@ -13,18 +13,20 @@ public class BlogSaveData : ScriptableObject
     /// <summary>
     /// List of each ghost in level's data
     /// </summary>
+    //[SerializeField]
+    //private List<GhostTypeData> ghostDataList;
     [SerializeField]
     private List<GhostTypeData> ghostDataList;
     /// <summary>
     /// List of correct answers for captions
     /// </summary>
     [SerializeField]
-    private List<object> answers;
+    private List<object> answers = new List<object>();
     /// <summary>
     /// List of given answers for captions
     /// </summary>
     [SerializeField]
-    private List<object> prompts;
+    private List<object> prompts = new List<object>();
     /// <summary>
     /// List of pages.
     /// </summary>
@@ -54,7 +56,7 @@ public class BlogSaveData : ScriptableObject
     /// Blog UI Manager.
     /// </summary>
     [SerializeField]
-    private BlogUIManager UIManager;
+    private GameObject UIManager;
     /// <summary>
     /// Level Loadscreen Data.
     /// </summary>
@@ -66,9 +68,12 @@ public class BlogSaveData : ScriptableObject
     [SerializeField]
     private List<string> tags;
     [SerializeField]
-    private BlogPanel blogDisplayPanel;
-    public void OnEnable()
+    private GameObject blogDisplayPanel;
+    [SerializeField]
+    private LevelDataManager levelDataManager = LevelDataManager._Instance;
+    public void Awake()
     {
+        //ghostDataList.Add(levelDataManager.ghostPrefab.Get); - function to get type from prefab?
         if (pages==null)
         {
             pages.Add(ScriptableObject.CreateInstance<BlogPage>());
@@ -102,6 +107,10 @@ public class BlogSaveData : ScriptableObject
     {
         return activePage;
     }
+    public BlogPage GetPage(int i)
+    {
+        return pages[i-1];
+    }
     public List<object> GetAnswers()
     {
         return answers;
@@ -129,7 +138,7 @@ public class BlogSaveData : ScriptableObject
     }
     public int GetPageNum()
     {
-        return UIManager.GetPageNum();
+        return UIManager.GetComponent<BlogUIManager>().GetPageNum();
     }
     /*public void SetPhotoList()
     {
@@ -149,7 +158,7 @@ public class BlogSaveData : ScriptableObject
     }
     public float GetTotalScore()
     {
-        return blogDisplayPanel.GetSentenceScore()+GetImageScore();
+        return blogDisplayPanel.GetComponent<BlogPanel>().GetSentenceScore() + GetImageScore();
     }
     public int GetImageScore()
     {
@@ -166,5 +175,9 @@ public class BlogSaveData : ScriptableObject
     public void AddTag(string tag)
     {
         tags.Add(tag);
+    }
+    public int GetBlogSaveNum()
+    {
+        return blogSaveNum;
     }
 }
