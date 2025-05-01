@@ -35,12 +35,17 @@ public class LevelComputerManager : MonoBehaviour
     }
     private void Awake()
     {
-        fearHandler = FindAnyObjectByType<Fear>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (fearHandler == null)
+        { 
+            fearHandler = FindAnyObjectByType<Fear>();
+        }
+
         // The status screen
         if (leaving)
         {
