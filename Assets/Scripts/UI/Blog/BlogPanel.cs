@@ -15,18 +15,9 @@ public class BlogPanel : MonoBehaviour
     [SerializeField]
     private Texture2D displayImage;
     [SerializeField]
-    private TMP_InputField displayHeader;
+    private TextMeshProUGUI displayHeader;
     [SerializeField]
     private GhostTypeData ghostData;
-    /// <summary>
-    /// Cosmetic tags, might add more functionality later on
-    /// </summary>
-    [SerializeField]
-    private TMP_InputField tag1;
-    [SerializeField]
-    private TMP_InputField tag2;
-    [SerializeField]
-    private TMP_InputField tag3;
     [SerializeField] 
     private TMP_Dropdown dropdown1;
     [SerializeField]
@@ -84,27 +75,13 @@ public class BlogPanel : MonoBehaviour
     }
     public void SetPlayerAnswers()
     {
+        DropdownReset(1);
         for (int i1 = 0; i1 < givenSentences.Count; i1++)
         {
             givenSentences[i1] = null;
         }
-        if (pageNum==1)
-        {
-            if (sent1)
-                givenSentences.Add(new Sentence("The ghost’s behaviors were similar to those of a ", dropdown2.options[dropdown2.value].text + " type ghost."));
-            else
-                givenSentences.Add(new Sentence("From the ghost’s behavior, I identified it to be a ", dropdown2.options[dropdown2.value].text + " ghost."));
-        }
-        if (pageNum == 2)
-        {
-            givenSentences.Add(new Sentence("The ghost’s maximum EMF was ", dropdown1.options[dropdown1.value].text));
-            givenSentences.Add(new Sentence("The ghost was moving ", dropdown2.options[dropdown2.value].text));
-        }
-        if (pageNum == 3)
-        {
-            givenSentences.Add(new Sentence("When I went back to one of the rooms I explored previously, I saw it. ", dropdown1.options[dropdown1.value].text));
-            givenSentences.Add(new Sentence("Then later on, something unusual happened again. ", dropdown2.options[dropdown2.value].text));
-        }
+        givenSentences.Add(new Sentence("When I went back to one of the rooms I explored previously, I saw it. ", dropdown1.options[dropdown1.value].text));
+        givenSentences.Add(new Sentence("Then later on, something unusual happened again. ", dropdown2.options[dropdown2.value].text));
     }
     public void SetCorrectAnswers()
     {
@@ -259,59 +236,15 @@ public class BlogPanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pageNum = blogUI.GetPageNum();
-        // Sets page content by number
-        if (pageNum == 1 && givenSentences.Count>0)
-        {
-            displayHeader.gameObject.SetActive(true);
-            tag1.gameObject.SetActive(false);
-            tag2.gameObject.SetActive(false);
-            tag3.gameObject.SetActive(false);
-            bodyText1.text = blog.GetLevelLoadscreenData().loadingDescription;
-            bodyText2.text = givenSentences[0].GetBeforeAns();
-            if (displayHeader.text == null)
-                displayHeader.text = "Ghost Writer: " + blog.GetLevelLoadscreenData().levelName;
-            else
-                blog.GetPage(1).title = displayHeader.text;
-            dropdown1.gameObject.SetActive(false);
-            dropdown2.gameObject.SetActive(true);
-            DropdownReset(pageNum);
-        }
-        else if (pageNum == 2 && givenSentences.Count > 0)
-        {
-            displayHeader.gameObject.SetActive(false);
-            tag1.gameObject.SetActive(false);
-            tag2.gameObject.SetActive(false);
-            tag3.gameObject.SetActive(false);
-            bodyText1.text = givenSentences[1].GetSentence();
-            bodyText2.text = givenSentences[2].GetSentence();
-            blog.GetPage(2).text1 = bodyText1.text;
-            blog.GetPage(2).text2 = bodyText2.text;
-            dropdown1.gameObject.SetActive(true);
-            dropdown2.gameObject.SetActive(true);
-            DropdownReset(pageNum);
-        }
-        else if (pageNum == 3 && givenSentences.Count > 0)
-        {
-            displayHeader.gameObject.SetActive(false);
-            tag1.gameObject.SetActive(true);
-            tag2.gameObject.SetActive(true);
-            tag3.gameObject.SetActive(true);
-            bodyText1.text = givenSentences[3].GetSentence();
-            bodyText1.text = givenSentences[4].GetSentence();
-            blog.AddTag(tag1.text);
-            blog.AddTag(tag2.text);
-            blog.AddTag(tag3.text);
-            /*foreach (string tag in blog.GetTags())
-            {
-                bodyText2.text += "#" + tag + ", ";
-            }*/
-            blog.GetPage(3).text1 = bodyText1.text;
-            blog.GetPage(3).text2 = bodyText2.text;
-            dropdown1.gameObject.SetActive(true);
-            dropdown2.gameObject.SetActive(true);
-            DropdownReset(pageNum);
-        }
+        displayHeader.gameObject.SetActive(true);
+        bodyText1.text = blog.GetLevelLoadscreenData().loadingDescription;
+        if (displayHeader.text == null)
+            displayHeader.text = "Ghost Writer: " + blog.GetLevelLoadscreenData().levelName;
+        dropdown1.gameObject.SetActive(true);
+        dropdown2.gameObject.SetActive(true);
+        //blog.GetPage().text1 = bodyText1.text;
+        //blog.GetPage().text2 = bodyText2.text;
+        DropdownReset(1);
     }
     public void DropdownReset(int i)
     {
@@ -321,39 +254,20 @@ public class BlogPanel : MonoBehaviour
         if (i == 1)
         {
             List<string> list1 = new List<string>();
-            list1.Add("Psychological");
-            list1.Add("Biological");
-            list1.Add("Metaphysical");
+            list1.Add("A bright red handprint.");
+            list1.Add("The lights flickered.");
+            list1.Add("A drawer I hadn’t touched before, mysteriously open.");
+            list1.Add("The door creaked open before my eyes.");
+            list1.Add("The chair moved slowly, back and forth.");
             dropdown1.AddOptions(list1);
-        }
-        if (i == 2)
-        { 
             List<string> list2 = new List<string>();
-            list2.Add("1");
-            list2.Add("2");
-            list2.Add("3");
-            list2.Add("4");
-            list2.Add("5");
-            dropdown1.AddOptions(list2);
-            List<string> list3 = new List<string>();
-            list3.Add("A bright red handprint.");
-            list3.Add("The lights flickered.");
-            list3.Add("A drawer I hadn’t touched before, mysteriously open.");
-            list3.Add("The door creaked open before my eyes.");
-            list3.Add("The chair moved slowly, back and forth.");
-            dropdown2.AddOptions(list3);
+            list2.Add("A bright red handprint appeared on the window.");
+            list2.Add("The lights flickered.");
+            list2.Add("A drawer I hadn’t touched before, mysteriously openED.");
+            list2.Add("The door creaked open before my eyes.");
+            list2.Add("The rocking chair, which I was nowhere near, moved.");
+            dropdown2.AddOptions(list2);
         }
-        if (i==3)
-        {
-            List<string> list4 = new List<string>();
-            list4.Add("A bright red handprint appeared on the window.");
-            list4.Add("The lights flickered.");
-            list4.Add("A drawer I hadn’t touched before, mysteriously openED.");
-            list4.Add("The door creaked open before my eyes.");
-            list4.Add("The rocking chair, which I was nowhere near, moved.");
-            dropdown1.AddOptions(list4);
-        }
-        SetPlayerAnswers();
     }
     public void SetDisplayImage(Texture2D displayImage1)
     {

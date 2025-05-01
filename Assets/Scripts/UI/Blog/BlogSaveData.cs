@@ -31,7 +31,7 @@ public class BlogSaveData : ScriptableObject
     /// List of pages.
     /// </summary>
     [SerializeField]
-    private List<BlogPage> pages = new List<BlogPage>();
+    private BlogPage page;
     /// <summary>
     /// Current blog save number.
     /// </summary>
@@ -74,14 +74,9 @@ public class BlogSaveData : ScriptableObject
     public void Awake()
     {
         //ghostDataList.Add(levelDataManager.ghostPrefab.Get); - function to get type from prefab?
-        if (pages==null)
+        if (ghostDataList != null)
         {
-            pages.Add(ScriptableObject.CreateInstance<BlogPage>());
-            pages.Add(ScriptableObject.CreateInstance<BlogPage>());
-            pages.Add(ScriptableObject.CreateInstance<BlogPage>());
-        }
-        for (int i = 0; ghostDataList.Count > i; i++)
-        {
+            int i = 0;
             answers.Add(ghostDataList[i].typeName);
             answers.Add(ghostDataList[i].maxEMF);
             answers.Add(ghostDataList[i].adjustableSpeed);
@@ -91,6 +86,7 @@ public class BlogSaveData : ScriptableObject
                 //should return game.GhostInteractables.DoorInteractable or DoorInteractable?
             }
         }
+        
 
        //need to find a way to access which interactables happened instead of possible interaction types
     }
@@ -99,42 +95,13 @@ public class BlogSaveData : ScriptableObject
     {
         //activePage.text;
     }
-    public List<BlogPage> GetPages()
-    {
-        return pages;
-    }
     public BlogPage GetPage()
     {
-        return activePage;
-    }
-    public BlogPage GetPage(int i)
-    {
-        return pages[i-1];
+        return page;
     }
     public List<object> GetAnswers()
     {
         return answers;
-    }
-    /// <summary>
-    /// Which page is being edited at a time
-    /// </summary>
-    /// <param name="pageNum"></param>
-    public void SetPage(int pageNum)
-    {
-        if (pageNum>0)
-            activePage = pages[pageNum-1];
-    }
-    public void SetPages(List<BlogPage> x)
-    {
-        pages = x;
-    }
-    /// <summary>
-    /// Save page data.
-    /// </summary>
-    /// <param name="pageNum"></param>
-    public void SavePage(int pageNum)
-    {
-        pages[pageNum - 1] = activePage;
     }
     public int GetPageNum()
     {
@@ -162,11 +129,8 @@ public class BlogSaveData : ScriptableObject
     }
     public int GetImageScore()
     {
-        foreach (BlogPage b in pages)
-        {
-            totalImageScore += b.imageData.score;
-        }
-            return totalImageScore;
+        totalImageScore += page.imageData.score;
+        return totalImageScore;
     }
     public List<string> GetTags()
     {

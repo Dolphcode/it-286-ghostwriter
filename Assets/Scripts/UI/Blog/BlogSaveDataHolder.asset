@@ -14,10 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ghostDataList:
   - {fileID: 11400000, guid: 275f063c5edfd01439721f7d6eff0746, type: 2}
-  pages:
-  - {fileID: 11400000, guid: 7e585db17d231f540946af6f30e67211, type: 2}
-  - {fileID: 11400000, guid: a5db4f9aa7ccdec49b59d22cc34341ac, type: 2}
-  - {fileID: 11400000, guid: 59647c37c4d220d46ac4ff37de4d3640, type: 2}
+  page: {fileID: 11400000, guid: 7e585db17d231f540946af6f30e67211, type: 2}
   blogSaveNum: 1
   activePage: {fileID: 11400000, guid: 7e585db17d231f540946af6f30e67211, type: 2}
   totalImageScore: 0

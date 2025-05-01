@@ -20,7 +20,7 @@ public class BlogUIManager : MonoBehaviour
     [SerializeField]
     private Button blogSave1Button, blogSave2Button, blogSave3Button;
     [SerializeField]
-    private Button prevButton, nextButton, saveButton;
+    private Button saveButton;
     [SerializeField]
     private GameObject selectScreen, scorePanel, imageSelectPanel;
     [SerializeField]
@@ -42,8 +42,6 @@ public class BlogUIManager : MonoBehaviour
         blogSave1Button.onClick.AddListener(() => LoadSave(1));
         blogSave2Button.onClick.AddListener(() => LoadSave(2));
         blogSave3Button.onClick.AddListener(() => LoadSave(3));
-        prevButton.onClick.AddListener(PrevPage);
-        nextButton.onClick.AddListener(NextPage);
         saveButton.onClick.AddListener(CloseBlogPanel);
     }
     void Update()
@@ -52,47 +50,6 @@ public class BlogUIManager : MonoBehaviour
             blogPanel.LoadSaveData(newSaveData);
         if (blogSaves != null)
         {
-            currentPage = 1;
-            /*if (newSaveData.GetPages()==null)
-            {
-                newSaveData.SetPages(new List<BlogPage> { ScriptableObject.CreateInstance<BlogPage>(), ScriptableObject.CreateInstance<BlogPage>(), ScriptableObject.CreateInstance<BlogPage>() });
-            }*/
-            foreach (BlogSaveData blogSave in blogSaves)
-            {
-                if (currentSave==1)
-                {
-                    if (!AssetDatabase.Contains(blogSave))
-                        AssetDatabase.CreateAsset(blogSave, "Assets/BlogSaveData1.asset");
-                    AssetDatabase.SaveAssets();
-                }
-                if (currentSave == 2)
-                {
-                    if (!AssetDatabase.Contains(blogSave))
-                        AssetDatabase.CreateAsset(blogSave, "Assets/BlogSaveData2.asset");
-                    AssetDatabase.SaveAssets();
-                }
-                if (currentSave == 3)
-                {
-                    if (!AssetDatabase.Contains(blogSave))
-                        AssetDatabase.CreateAsset(blogSave, "Assets/BlogSaveData3.asset");
-                    AssetDatabase.SaveAssets();
-                }
-            }
-        }
-        if (currentPage == 1)
-        {
-            prevButton.gameObject.SetActive(false);
-            nextButton.gameObject.SetActive(true);
-        }
-        else if (currentPage == 2)
-        {
-            prevButton.gameObject.SetActive(true);
-            nextButton.gameObject.SetActive(true);
-        }
-        else if (currentPage == 3)
-        {
-            nextButton.gameObject.SetActive(false);
-            prevButton.gameObject.SetActive(true);
         }
         //newSaveData.SetPage(currentPage);
     }
@@ -194,25 +151,25 @@ public class BlogUIManager : MonoBehaviour
     public void AdjustMoney()
     {
         //assuming player averages around 4/10 on each image and gets half of the sentence ques right
-        if (blogSaves[currentSave - 1].GetTotalScore() > 20)
+        if (blogSave1.GetTotalScore() > 20)
         {
             moneyChange = 1000;
             levelDataManager.AddMoney(moneyChange);
         }
-        else if (blogSaves[currentSave - 1].GetTotalScore() > 18)
+        else if (blogSave1.GetTotalScore() > 18)
         {
             moneyChange = 500;
         }
-        else if (blogSaves[currentSave - 1].GetTotalScore() >= 15)
+        else if (blogSave1.GetTotalScore() >= 15)
         {
             moneyChange = 0;
         }
-        else if (blogSaves[currentSave - 1].GetTotalScore() < 15)
+        else if (blogSave1.GetTotalScore() < 15)
         {
             moneyChange = -500;
             levelDataManager.RemoveMoney(500);
         }
-        else if (blogSaves[currentSave - 1].GetTotalScore() < 10)
+        else if (blogSave1.GetTotalScore() < 10)
         {
             moneyChange = -1000;
             levelDataManager.RemoveMoney(1000);
