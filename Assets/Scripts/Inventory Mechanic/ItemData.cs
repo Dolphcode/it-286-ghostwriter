@@ -20,6 +20,7 @@ public class ItemData : CapturableObject
     public bool isOn;
     public int durability; // flashlight and the pills but not emf
     public int itemCost;
+    public float lastTemp; // For thermometer only
 
     public float[] cooldownMaxes; // Feel free to designate this arbitrarily per item
     public float[] cooldowns;
