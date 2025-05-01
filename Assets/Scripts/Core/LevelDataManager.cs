@@ -47,6 +47,17 @@ public class LevelDataManager : MonoBehaviour
         asset.renderScale = renderScale;*/
     }
 
+    private void Start()
+    {
+        SaveDataManager._Instance.LoadData(this);
+    }
+
+    public void SaveAndQuit()
+    {
+        SaveDataManager._Instance.SaveData(this);
+        Application.Quit();
+    }
+
     // Update is called once per frame
     void Update()
     {
