@@ -26,13 +26,13 @@ public class HandheldCameraBehavior : ItemBehavior
     }
     public override void Interact()
     {
-        if (camControl.lookingAt.transform.gameObject.CompareTag("Interactable"))
-        {
-            return;
-        }
+       // if (camControl.lookingAt.transform.gameObject.CompareTag("Interactable"))
+      //  {
+      //      return;
+       // }
 
-        else
-        {
+       // else
+     //   {
             RenderTexture currentRT = RenderTexture.active;
             RenderTexture.active = camReference.targetTexture;
 
@@ -50,7 +50,7 @@ public class HandheldCameraBehavior : ItemBehavior
             File.WriteAllBytes(Application.dataPath + "/Captures/" + data.timestamp.ToShortDateString().Replace("/","-") + "-" + 
                 data.timestamp.ToLongTimeString().Replace(":","-").Replace(" ","-") + ".png", bytes);
             */
-        }
+     //   }
     }
 
     public override void Load(ItemData itemData)

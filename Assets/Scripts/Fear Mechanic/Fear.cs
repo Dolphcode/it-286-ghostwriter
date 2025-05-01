@@ -17,10 +17,8 @@ public class Fear : MonoBehaviour
     public bool fearful;
     void Start()
     {
-        if (boo != null)
-        {
-            boo = FindAnyObjectByType<Ghost>();
-        }
+
+        
         levelManager = FindAnyObjectByType<LevelManager>();
         ///<summary>
         /// Starts fear at 0%
@@ -33,7 +31,11 @@ public class Fear : MonoBehaviour
 
     void Update()
     {
-
+        if (boo == null)
+        {
+            boo = FindAnyObjectByType<Ghost>();
+        }
+        
         ///<summary>
         /// Makes the fear tick down at a constant rate
         /// Modifiable by changing <param> fearRate </param> 
@@ -41,6 +43,7 @@ public class Fear : MonoBehaviour
         fearMeter = Mathf.Clamp(fearMeter, minFear, 100);
         if (fearful)
         {
+
             if (fearMeter < 100)
             {
                 fearMeter += Time.deltaTime * fearRate;
