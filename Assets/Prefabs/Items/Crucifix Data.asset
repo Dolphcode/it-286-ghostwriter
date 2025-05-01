@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402f0402b6f74f746b099c9460b5637f, type: 3}
   m_Name: Crucifix Data
   m_EditorClassIdentifier: 
+  m_TriggerCapture:
+    m_PersistentCalls:
+      m_Calls: []
   ID: 5
   Name: Crucifix
   Description: A Holy item said to be capable of deterring ghosts
@@ -20,7 +23,12 @@ MonoBehaviour:
   Behavior: {fileID: 3210643910149377038, guid: b0ac9630c44846347a33fa676242e93a, type: 3}
   heldItemPosition: {x: 0.45, y: -0.31, z: 1.3}
   heldItemRotation: {x: 0, y: 0, z: 0}
+  inInventory: 0
   isEquiped: 0
   isOn: 0
   durability: 3
   itemCost: 600
+  lastTemp: 0
+  slotsUsed: 1
+  cooldownMaxes: []
+  cooldowns: []
