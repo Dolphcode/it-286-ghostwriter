@@ -5,6 +5,7 @@ public class ThermoBehavior : ItemBehavior
 {
     [SerializeField]
     Ghost ghost;
+    [SerializeField]
     float roomTemp;
     float aggressionPercent;
     public TMP_Text text;
@@ -49,13 +50,14 @@ public class ThermoBehavior : ItemBehavior
         if (ghost == null)
         {
             ghost = FindAnyObjectByType<Ghost>();
+
         }
 
         aggressionPercent = ghost.GetAggression() / ghost.GetAggressionThreshold();
 
         if (!data.isOn)
         {
-            text.text = "Off";
+            text.text = "--";
         }
         else
         {
@@ -72,7 +74,7 @@ public class ThermoBehavior : ItemBehavior
     /// </summary>
     void FindRoomTemp()
     {
-        text.text = ((int) roomTemp).ToString();
+        text.text = ((int) roomTemp).ToString() + "°";
         if (levelManager.IsGhostInRoom(transform.position))
         {
             if (ghost.GetGhostType() != "Biological")
@@ -81,6 +83,11 @@ public class ThermoBehavior : ItemBehavior
                 if (roomTemp > aggressionPercent * 20)
                 {
                     roomTemp -= 0.5f * Time.deltaTime;
+                }
+                else if (roomTemp <= 0)
+                {
+                    roomTemp = (int)roomTemp;
+                    data.m_TriggerCapture.Invoke(data);
                 }
                 else
                 {
@@ -98,6 +105,7 @@ public class ThermoBehavior : ItemBehavior
                 else
                 {
                     roomTemp = (int)roomTemp;
+                    
                 }
             }
 
