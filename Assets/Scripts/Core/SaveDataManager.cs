@@ -1,5 +1,6 @@
 using System.IO;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SaveDataManager : MonoBehaviour
 {
@@ -38,7 +39,9 @@ public class SaveDataManager : MonoBehaviour
             }
 
             // Deserialize data
-            data = JsonUtility.FromJson<SaveData>(dataToLoad); 
+            data = JsonUtility.FromJson<SaveData>(dataToLoad);
+
+            InputSystem.actions.LoadBindingOverridesFromJson(data.bindings);
         } else {
             Debug.Log("nonexistent, creating the file");
 
@@ -52,7 +55,8 @@ public class SaveDataManager : MonoBehaviour
                 // Create default data
                 data = new SaveData();
                 data.playerMoney = defaultMoney;
-                data.itemCounts = new int[numItems]; 
+                data.itemCounts = new int[numItems];
+                data.bindings = InputSystem.actions.SaveBindingOverridesAsJson();
 
                 // Create the string for the save data
                 string dataToStore = JsonUtility.ToJson(data, true);
@@ -90,6 +94,7 @@ public class SaveDataManager : MonoBehaviour
         {
             data.itemCounts[i] = levelData.GetOwnedCount(i + 1);
         }
+        data.bindings = InputSystem.actions.SaveBindingOverridesAsJson();
 
         Debug.Log("attempting to save data");
         // Attempt to create the directory for this file
@@ -129,4 +134,5 @@ public class SaveData
 {
     public int     playerMoney;
     public int[]   itemCounts;
+    public string   bindings;
 }
