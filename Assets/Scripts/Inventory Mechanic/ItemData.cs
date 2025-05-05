@@ -22,6 +22,8 @@ public class ItemData : CapturableObject
     public int itemCost;
     public float lastTemp; // For thermometer only
 
+    public int slotsUsed;   // Amount of slots an item uses
+
     public float[] cooldownMaxes; // Feel free to designate this arbitrarily per item
     public float[] cooldowns;
 

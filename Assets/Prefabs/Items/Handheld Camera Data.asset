@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402f0402b6f74f746b099c9460b5637f, type: 3}
   m_Name: Handheld Camera Data
   m_EditorClassIdentifier: 
+  m_TriggerCapture:
+    m_PersistentCalls:
+      m_Calls: []
   ID: 1
   Name: Handheld Camera
   Description: A standard grade reporter's camera
@@ -25,5 +28,7 @@ MonoBehaviour:
   isOn: 0
   durability: 9999
   itemCost: 1000
+  lastTemp: 0
+  slotsUsed: 1
   cooldownMaxes: []
   cooldowns: []

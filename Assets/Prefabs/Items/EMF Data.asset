@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 402f0402b6f74f746b099c9460b5637f, type: 3}
   m_Name: EMF Data
   m_EditorClassIdentifier: 
+  m_TriggerCapture:
+    m_PersistentCalls:
+      m_Calls: []
   ID: 3
   Name: EMF Reader
   Description: Measures and detects fluctuations in background EMF
@@ -20,7 +23,12 @@ MonoBehaviour:
   Behavior: {fileID: 4946792872829545759, guid: cef0cff88427a2840bc5f2d5fc29143a, type: 3}
   heldItemPosition: {x: 0.22, y: -0.3, z: 0.52}
   heldItemRotation: {x: -60.26, y: 14.46, z: -178.52}
+  inInventory: 0
   isEquiped: 0
   isOn: 0
   durability: 9999
   itemCost: 400
+  lastTemp: 0
+  slotsUsed: 1
+  cooldownMaxes: []
+  cooldowns: []
