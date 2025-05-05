@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 /// <summary>
 /// Allows the player to control the camera using their mouse
 /// </summary>
@@ -36,14 +37,19 @@ public class CamControl : MonoBehaviour
         Cursor.visible = false;
         crosshair.color = Color.white;
         camera = GetComponent<Camera>();
-        
+
+        InputSystem.actions.FindAction("Interact").performed += InteractWorld;
+        InputSystem.actions.FindAction("PickUp").started += InteractPickup;
     }
 
     
     void Update()
     {
         if (PauseMenuManager._Instance.IsPaused) return;
-
+        if (InputSystem.actions.FindAction("PickUp").IsPressed())
+        {
+            Debug.Log("pickup key presse");
+        }
         float sensitivity = PauseMenuManager._Instance.sensitivity;
 
 
@@ -64,19 +70,13 @@ public class CamControl : MonoBehaviour
         // Always be checking raycast
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
-        
+        InputAction compInteract = InputSystem.actions.FindAction("ComputerInteract");
 
         if (Physics.Raycast(ray, out lookingAt, 10f, ~LayerMask.GetMask("BoundingBox")))
         {
             // Check for pickups
             if (lookingAt.collider != null)
             {
-                if (lookingAt.collider.GetComponent<ItemBehavior>() != null && Input.GetKeyDown(KeyCode.E))
-                {
-                    inventory.InventorySystem.PickUpItem(lookingAt.collider.GetComponent<ItemBehavior>(), inventory.itemContainer);
-                    Debug.Log("Picking up item");
-                }
-
                 if (lookingAt.collider.GetComponent<ItemBehavior>() != null)
                 {
                     lookingName.text = lookingAt.collider.gameObject.GetComponent<ItemBehavior>().data.Name;
@@ -101,12 +101,8 @@ public class CamControl : MonoBehaviour
             // Check for player interactable
             if (lookingAt.collider.gameObject.GetComponent<PlayerInteractable>() != null)
             {
-                // Check if we're clicking a button
-                if (Input.GetKeyDown(KeyCode.Mouse0)) lookingAt.collider.gameObject.GetComponent<PlayerInteractable>().interact();
-                
                 // Show zoom in screen
-                
-                if (Input.GetKey(KeyCode.Mouse1) && lookingAt.collider.tag == "Computer")
+                if (compInteract.IsPressed() && lookingAt.collider.tag == "Computer")
                 {
                     computerInfoCanvas.gameObject.SetActive(true);
                 }
@@ -117,7 +113,7 @@ public class CamControl : MonoBehaviour
             } else if (lookingAt.collider.tag == "Computer")
             {
                 // Show zoom in screen
-                if (Input.GetKey(KeyCode.Mouse1))
+                if (compInteract.IsPressed())
                 {
                     computerInfoCanvas.gameObject.SetActive(true);
                 }
@@ -134,14 +130,49 @@ public class CamControl : MonoBehaviour
             computerInfoCanvas.gameObject.SetActive(false);
         }
 
-        // Left Mouse Click
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+    }
+
+    private void InteractWorld(InputAction.CallbackContext action)
+    {
+        if (PauseMenuManager._Instance.IsPaused) return;
+        RaycastHit lookingAt;
+        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out lookingAt, 10f, ~LayerMask.GetMask("BoundingBox")))
         {
-            if (inventory != null && inventory.GetHeldItem() != null)
+            if (lookingAt.collider != null)
             {
-                
-                inventory.GetHeldItem().GetComponent<ItemBehavior>().Interact();
+                if (lookingAt.collider.gameObject.GetComponent<PlayerInteractable>() != null)
+                {
+                    // Check if we're clicking a button
+                    lookingAt.collider.gameObject.GetComponent<PlayerInteractable>().interact();
+                }
             }
+
+        }
+
+        if (inventory != null && inventory.GetHeldItem() != null)
+        {
+            inventory.GetHeldItem().GetComponent<ItemBehavior>().Interact();
+        }
+    }
+
+    private void InteractPickup(InputAction.CallbackContext action)
+    {
+        Debug.Log("pickup!!!");
+        if (PauseMenuManager._Instance.IsPaused) return;
+        
+        RaycastHit lookingAt;
+        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out lookingAt, 10f, ~LayerMask.GetMask("BoundingBox")))
+        {
+            if (lookingAt.collider != null)
+            {
+                if (lookingAt.collider.GetComponent<ItemBehavior>() != null)
+                {
+                    inventory.InventorySystem.PickUpItem(lookingAt.collider.GetComponent<ItemBehavior>(), inventory.itemContainer);
+                }
+            }
+
         }
 
     }

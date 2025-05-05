@@ -33,7 +33,7 @@ public class Fear : MonoBehaviour
 
     void Update()
     {
-
+        if (PauseMenuManager._Instance.IsPaused || !levelManager || !levelManager.levelStarted) return;
         ///<summary>
         /// Makes the fear tick down at a constant rate
         /// Modifiable by changing <param> fearRate </param> 

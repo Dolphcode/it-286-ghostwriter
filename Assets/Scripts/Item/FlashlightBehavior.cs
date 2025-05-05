@@ -19,13 +19,12 @@ public class FlashlightBehavior : ItemBehavior
     }
     public override void Interact()
     {
+        /*
         if (camControl.lookingAt.transform.gameObject.CompareTag("Interactable"))
         {
             return;
-        }
+        }*/
 
-        else
-        {
             if (!data.isOn)
             {
                 data.isOn = true;
@@ -48,7 +47,6 @@ public class FlashlightBehavior : ItemBehavior
                 lightManager.SetFlashlightState(false);
                 Debug.Log("Flashlight Off");
             }
-        }
     }
     
    
