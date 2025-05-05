@@ -35,7 +35,15 @@ public class Fear : MonoBehaviour
         {
             boo = FindAnyObjectByType<Ghost>();
         }
-        
+
+        if (levelManager == null || levelManager.GetRoomFromPosition(transform.position) == null)
+        {
+            fearful = false;
+        }
+        else
+        {
+            fearful = true;
+        }
         ///<summary>
         /// Makes the fear tick down at a constant rate
         /// Modifiable by changing <param> fearRate </param> 

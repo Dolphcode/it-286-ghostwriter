@@ -28,7 +28,7 @@ MonoBehaviour:
   isOn: 0
   durability: 999999
   itemCost: 600
-  lastTemp: 0
+  lastTemp: 20
   slotsUsed: 1
   cooldownMaxes: []
   cooldowns: []

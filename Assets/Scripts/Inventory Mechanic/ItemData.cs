@@ -16,7 +16,7 @@ public class ItemData : CapturableObject
     public Vector3 heldItemRotation;
 
     public bool inInventory = false;
-    public bool isEquiped;
+    public bool isEquipped;
     public bool isOn;
     public int durability; // flashlight and the pills but not emf
     public int itemCost;
