@@ -93,7 +93,7 @@ public class Ghost : Capturable
     ///<summary>
     /// EMF Player has to track (highest EMF)
     ///</summary>
-    private int maxEMF;
+    private int maxEMF = 1;
     ///<summary>
     ///Room the ghost is currently in. Initialized during start to be random room.
     ///</summary>
