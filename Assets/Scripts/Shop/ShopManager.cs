@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -83,7 +84,17 @@ public class ShopManager : MonoBehaviour
 
     }
 
-
+    /// <summary>
+    /// Provides a discount to all items.
+    /// </summary>
+    /// <param name="discount"> takes off <paramref name="discount"/> amount of dollars from all items </param>
+    public void DiscountShop(int discount)
+    {
+        for (int i = 0; i < 5 ;i++)
+        {
+            shopItems[2, i] = shopItems[2, i] - discount;
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -105,6 +116,7 @@ public class ShopManager : MonoBehaviour
             purchaseBtn.enabled = false;
         }
     }
+
     /// <summary>
     /// Add Item to ItemCount and change all the text in the UI.
     /// Tests if money would be 0 after buying and buys if it will not be.

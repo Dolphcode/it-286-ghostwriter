@@ -75,4 +75,4 @@ crashlytics-build.properties
 
 # Ignore captures but keep the captures folder
 /[Aa]ssets/[Cc]aptures/*
-/[Aa]ssets/[Ss]ave/*
+/[Ss]ave/*

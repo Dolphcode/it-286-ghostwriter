@@ -3,6 +3,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// The LevelManager script is responsible for initializing the level, ghost,
@@ -322,6 +323,10 @@ public class LevelManager : MonoBehaviour
 
     public void LoseLevel()
     {
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            if (SceneManager.GetSceneAt(i).name == "Lobby") return;
+        }
         levelStarted = false;
         LevelLoader._Instance.LoadLobby();
     }

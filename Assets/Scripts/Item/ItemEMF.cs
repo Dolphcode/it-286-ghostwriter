@@ -14,13 +14,14 @@ public class EMFBehavior : ItemBehavior
     [SerializeField]
     public override void Interact()
     {
-        if (camControl.lookingAt.transform.gameObject.CompareTag("Interactable"))
-        {
-            return;
-        }
 
-        else
-        {
+      //  if (camControl.lookingAt.transform.gameObject.CompareTag("Interactable"))
+      //  {
+       //     return;
+       // }
+
+       // else
+      //  {
 
             if (!data.isOn)
             {
@@ -35,7 +36,7 @@ public class EMFBehavior : ItemBehavior
             }
 
             Debug.Log("Interacting with EMF " + data.isOn);
-        }
+      //  }
     }
 
     public override void Load(ItemData itemData)

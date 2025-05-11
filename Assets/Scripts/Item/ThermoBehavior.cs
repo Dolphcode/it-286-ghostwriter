@@ -3,7 +3,9 @@ using TMPro;
 
 public class ThermoBehavior : ItemBehavior
 {
+    [SerializeField]
     Ghost ghost;
+    [SerializeField]
     float roomTemp;
     float aggressionPercent;
     public TMP_Text text;
@@ -14,7 +16,7 @@ public class ThermoBehavior : ItemBehavior
         {
             ghost = FindAnyObjectByType<Ghost>();
         }
-        roomTemp = 20;
+
     }
 
     public override void Interact()
@@ -36,18 +38,26 @@ public class ThermoBehavior : ItemBehavior
     {
         itemData.Behavior = this;
         data = itemData;
+        roomTemp = data.lastTemp;
     }
     public override void Unload()
     {
-
+        data.lastTemp = roomTemp;
     }
 
     void Update()
     {
+        if (ghost == null)
+        {
+            ghost = FindAnyObjectByType<Ghost>();
+
+        }
+
         aggressionPercent = ghost.GetAggression() / ghost.GetAggressionThreshold();
+
         if (!data.isOn)
         {
-            text.text = "off";
+            text.text = "--";
         }
         else
         {
@@ -64,14 +74,20 @@ public class ThermoBehavior : ItemBehavior
     /// </summary>
     void FindRoomTemp()
     {
-
+        text.text = ((int) roomTemp).ToString() + "°";
         if (levelManager.IsGhostInRoom(transform.position))
         {
-            if (ghost.GetGhostType() == "Psychological" | ghost.GetGhostType() == "Metaphysical")
+            if (ghost.GetGhostType() != "Biological")
             {
+                Debug.Log("NOT BIO GHOST");
                 if (roomTemp > aggressionPercent * 20)
                 {
                     roomTemp -= 0.5f * Time.deltaTime;
+                }
+                else if (roomTemp <= 0)
+                {
+                    roomTemp = (int)roomTemp;
+                    data.m_TriggerCapture.Invoke(data);
                 }
                 else
                 {
@@ -81,13 +97,15 @@ public class ThermoBehavior : ItemBehavior
 
             else
             {
+                Debug.Log("BIO GHOST");
                 if (roomTemp > 5)
                 {
                     roomTemp -= 0.5f * Time.deltaTime;
                 }
                 else
                 {
-                    roomTemp = 5;
+                    roomTemp = (int)roomTemp;
+                    
                 }
             }
 
@@ -100,10 +118,10 @@ public class ThermoBehavior : ItemBehavior
             }
             else
             {
-                roomTemp = 20;
+                roomTemp = (int)roomTemp;
             }
         }
 
-        text.text = ((int) roomTemp).ToString();
+        
     }
 }

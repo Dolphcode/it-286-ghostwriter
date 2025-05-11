@@ -77,7 +77,7 @@ public class CamControl : MonoBehaviour
                     Debug.Log("Picking up item");
                 }
 
-                if (lookingAt.collider.GetComponent<ItemBehavior>() != null)
+                if (lookingAt.collider.GetComponent<ItemBehavior>() != null && !lookingAt.collider.GetComponent<ItemBehavior>().data.inInventory)
                 {
                     lookingName.text = lookingAt.collider.gameObject.GetComponent<ItemBehavior>().data.Name;
                 }
@@ -89,8 +89,17 @@ public class CamControl : MonoBehaviour
 
                 if (lookingAt.transform.gameObject.CompareTag("Interactable"))
                 {
-                    //Set to red for now, add sprite later.
-                    crosshair.color = Color.red;
+                    if (lookingAt.collider.GetComponent<ItemBehavior>() != null && lookingAt.collider.GetComponent<ItemBehavior>().data.inInventory)
+                    {
+                        crosshair.color = Color.white;
+                    }
+                    else
+                    {
+                        //Set to red for now, add sprite later if needed.
+                        crosshair.color = Color.red;
+                    }
+                    
+                    
                 }
                 else
                 {
@@ -114,24 +123,33 @@ public class CamControl : MonoBehaviour
                 {
                     computerInfoCanvas.gameObject.SetActive(false);
                 }
-            } else if (lookingAt.collider.tag == "Computer")
+            } 
+
+            else if (lookingAt.collider.tag == "Computer")
             {
                 // Show zoom in screen
                 if (Input.GetKey(KeyCode.Mouse1))
                 {
                     computerInfoCanvas.gameObject.SetActive(true);
                 }
+
                 else
                 {
                     computerInfoCanvas.gameObject.SetActive(false);
                 }
-            } else
+            }
+            
+            else
             {
                 computerInfoCanvas.gameObject.SetActive(false);
             }
-        } else
+        } 
+        
+        else
         {
             computerInfoCanvas.gameObject.SetActive(false);
+            lookingName.text = null;
+            crosshair.color = Color.white;
         }
 
         // Left Mouse Click

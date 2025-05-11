@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
@@ -39,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
         stamina = maxStamina;
     }
-
+    private bool justSprinting = false;
     private void Update()
     {
         if (PauseMenuManager._Instance.IsPaused) return;
@@ -49,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         rb.linearDamping = groundDrag;
 
         //Left Shift
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (InputSystem.actions.FindAction("Sprint").IsPressed())
         {
 
             if (recharging != null) StopCoroutine(recharging);
@@ -68,8 +70,9 @@ public class PlayerMovement : MonoBehaviour
 
             }
             staminaBar.fillAmount = stamina / maxStamina;
+            justSprinting = true;
         } 
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        else if (justSprinting)
         {
             Walk();
 
@@ -79,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             recharging = StartCoroutine(RechargeStamina());
-
+            justSprinting = false;
         }
 
 
@@ -120,8 +123,12 @@ public class PlayerMovement : MonoBehaviour
         ///<summary>
         /// Reads the players Input and assigns it to a variable
         /// </summary>
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        horizontalInput = 0f;
+        horizontalInput += (InputSystem.actions.FindAction("Right").IsPressed()) ? 1f : 0f;
+        horizontalInput += (InputSystem.actions.FindAction("Left").IsPressed()) ? -1f : 0f;
+        verticalInput = 0f;
+        verticalInput += (InputSystem.actions.FindAction("Up").IsPressed()) ? 1f : 0f;
+        verticalInput += (InputSystem.actions.FindAction("Down").IsPressed()) ? -1f : 0f;
 
     }
     private void Sprint()
