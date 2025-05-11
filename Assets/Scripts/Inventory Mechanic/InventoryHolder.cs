@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 /*
@@ -60,6 +61,8 @@ public class InventoryHolder : MonoBehaviour
             invNums.Add(label);
             slot.transform.SetParent(inventoryUI);
         }
+
+        InputSystem.actions.FindAction("Drop").started += InteractDrop;
     }
 
     public ItemBehavior GetHeldItem()
@@ -78,34 +81,8 @@ public class InventoryHolder : MonoBehaviour
 
     public void Update()
     {
-        /* moved this to camcontrol
-        // Interact Button
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Physics.Raycast(cameraHolder.position, cameraHolder.forward, out lookingAt, 5f);
-            if (lookingAt.collider != null)
-            {
-                if (lookingAt.collider.GetComponent<ItemBehavior>() != null)
-                {
-                    inventorySystem.PickUpItem(lookingAt.collider.GetComponent<ItemBehavior>(),itemContainer);
-                    Debug.Log("Picking up item");
-                }
-                // Van interact
-                else if (lookingAt.collider.GetComponent<InventoryVan>() != null) 
-                {
-                    
-                    Debug.Log("Storage open");
-                }
-            }
-        }*/ 
         
 
-        // Throw item
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            //itemContainer.GetChild(0).GetComponent<ItemBehavior>().Drop();
-            inventorySystem.DropItem();
-        }
         // Key 1
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -154,5 +131,12 @@ public class InventoryHolder : MonoBehaviour
             }
         }
 
+    }
+
+
+
+    private void InteractDrop(InputAction.CallbackContext action)
+    {
+        inventorySystem.DropItem();
     }
 }

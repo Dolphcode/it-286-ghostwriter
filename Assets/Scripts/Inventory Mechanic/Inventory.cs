@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
 using JetBrains.Annotations;
+using NUnit.Framework.Interfaces;
 
 [System.Serializable]
 public class Inventory : MonoBehaviour
@@ -76,6 +77,39 @@ public class Inventory : MonoBehaviour
     }
 
     /// <summary>
+    /// Used for getting the total amount of empty inventory slots
+    /// </summary>
+    /// <returns>-1 if there are no empty slots, or total amount of empty slots</returns>
+    public int TotalEmptySlots()
+    {
+        int count = 0;
+
+        // Check and count all slots that have an item
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            if (inventorySlots[i].ItemData == null) count++;
+        }
+        if (count == 0) { Debug.Log(count); return -1; }
+        else return count;
+    }
+
+    /// <summary>
+    /// Used for getting the total amount of inventory remaining with 
+    /// </summary>
+    /// <returns> <=0 if the player cannot carry any more items, or total amount of slot points remaining</returns>
+    public int TotalInvPointsRemain()
+    {
+        int count = 5;
+
+        // Get the amount of slots an item used in each inventory slot
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            if (inventorySlots[i].ItemData != null) count -= inventorySlots[i].ItemData.slotsUsed;
+        }
+        return count;
+    }
+
+    /// <summary>
     /// Used for getting the current active slot
     /// </summary>
     /// <returns>-1 if there is an inventory error, or the active slot</returns>
@@ -99,11 +133,13 @@ public class Inventory : MonoBehaviour
     {
         int slot = CheckSlots();
 
+        // Checks if the player can fit an item into inventory
         if (slot == -1)
         {
             Debug.Log("No more avaiables slots");
             return;
         }
+        // Add item to inventory slot
         else
         {
             inventorySlots[slot].AddItem(itemData.data);
@@ -178,9 +214,17 @@ public class Inventory : MonoBehaviour
     public void PickUpItem(ItemBehavior item, Transform itemHolder)
     {
         int emptySlot = CheckSlots();
+        int invpoints = TotalInvPointsRemain();
 
         if (emptySlot == -1)
         {
+            Debug.Log("Inventory full!");
+            return;
+        }
+        else if (invpoints - item.data.slotsUsed <= -1)
+        {
+            Debug.Log("Cannot fit item into inventory");
+            Debug.Log(invpoints + " - " + item.data.slotsUsed + " = " + (invpoints - item.data.slotsUsed));
             return;
         }
 
@@ -197,6 +241,7 @@ public class Inventory : MonoBehaviour
             Destroy(inventorySlots[emptySlot].ItemData.Behavior.gameObject);
             inventorySlots[emptySlot].ItemData.Behavior = null;   
         }
+        Debug.Log("Added item to inventory slot.\nTotal amount of inventory remaining: " + TotalInvPointsRemain());
     }
 
     /// <summary>

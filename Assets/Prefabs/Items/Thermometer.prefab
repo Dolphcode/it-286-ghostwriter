@@ -146,6 +146,8 @@ MonoBehaviour:
   camControl: {fileID: 0}
   inventory: {fileID: 0}
   inventoryHolder: {fileID: 0}
+  ghost: {fileID: 0}
+  roomTemp: 20
   text: {fileID: 2135946053885652337}
 --- !u!54 &-5350659843179058185
 Rigidbody:
