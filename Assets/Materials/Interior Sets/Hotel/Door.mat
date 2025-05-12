@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Table
+  m_Name: Door
   m_Shader: {fileID: -6465566751694194690, guid: 3c7ac4d930f19154db0a7f9e4bd48753, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Base_Texture:
-        m_Texture: {fileID: 2800000, guid: f3c0e07dacd07e945a283ff88ac8dc43, type: 3}
+        m_Texture: {fileID: 2800000, guid: 19d31ece4b810ff409ec36d82ea62f42, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:

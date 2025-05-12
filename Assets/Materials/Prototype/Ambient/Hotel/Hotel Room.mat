@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Table
+  m_Name: Hotel Room
   m_Shader: {fileID: -6465566751694194690, guid: 3c7ac4d930f19154db0a7f9e4bd48753, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Base_Texture:
-        m_Texture: {fileID: 2800000, guid: f3c0e07dacd07e945a283ff88ac8dc43, type: 3}
+        m_Texture: {fileID: 2800000, guid: 19d31ece4b810ff409ec36d82ea62f42, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -107,17 +107,8 @@ Material:
     - _Attenuation_Const: 1
     - _Attenuation_Exp: 0.3
     - _Attenuation_Linear: 0.05
-    - _BUILTIN_AlphaClip: 0
-    - _BUILTIN_Blend: 0
-    - _BUILTIN_CullMode: 2
-    - _BUILTIN_DstBlend: 0
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _BUILTIN_SrcBlend: 1
-    - _BUILTIN_Surface: 1
-    - _BUILTIN_ZTest: 4
-    - _BUILTIN_ZWrite: 0
-    - _BUILTIN_ZWriteControl: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -136,8 +127,8 @@ Material:
     - _EnvironmentReflections: 1
     - _FlashlightOn: 0
     - _Flashlight_On: 1
-    - _Fog_Max: 5
-    - _Fog_Min: 2
+    - _Fog_Max: 20
+    - _Fog_Min: 5
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -163,12 +154,12 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _Ambient_Color: {r: 0.18039216, g: 0.18039216, b: 0.3529412, a: 0}
+    - _Ambient_Color: {r: 0.14716971, g: 0.02304732, b: 0.112871446, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Base_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_Color: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Fog_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Fog_Color: {r: 0.039337777, g: 0.04994355, b: 0.08176088, a: 0}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
     - _Light_Color: {r: 1, g: 0, b: 0.13725519, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

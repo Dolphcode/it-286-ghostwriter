@@ -381,11 +381,11 @@ public class HotelLevelEvaluator : LevelEvaluator
                 }
                 else if (pickedSize == 2)
                 {
-                    op = InstantiateAsync<GameObject>(tileWidth1Prefabs[0], g.transform);
+                    op = InstantiateAsync<GameObject>(tileWidth2Prefabs[0], g.transform);
                 }
                 else
                 {
-                    op = InstantiateAsync<GameObject>(tileWidth1Prefabs[0], g.transform);
+                    op = InstantiateAsync<GameObject>(tileWidth3Prefabs[0], g.transform);
                 }
                 await op;
                 progress += interval * pickedSize;
@@ -422,11 +422,11 @@ public class HotelLevelEvaluator : LevelEvaluator
                 }
                 else if (pickedSize == 2)
                 {
-                    op = InstantiateAsync<GameObject>(tileWidth1Prefabs[0], g.transform);
+                    op = InstantiateAsync<GameObject>(tileWidth2Prefabs[0], g.transform);
                 }
                 else
                 {
-                    op = InstantiateAsync<GameObject>(tileWidth1Prefabs[0], g.transform);
+                    op = InstantiateAsync<GameObject>(tileWidth3Prefabs[0], g.transform);
                 }
                 await op;
                 progress += interval * pickedSize;
@@ -502,11 +502,11 @@ public class HotelLevelEvaluator : LevelEvaluator
                 }
                 else if (pickedSize == 2)
                 {
-                    op = InstantiateAsync<GameObject>(tileWidth1Prefabs[0], g.transform);
+                    op = InstantiateAsync<GameObject>(tileWidth2Prefabs[0], g.transform);
                 }
                 else
                 {
-                    op = InstantiateAsync<GameObject>(tileWidth1Prefabs[0], g.transform);
+                    op = InstantiateAsync<GameObject>(tileWidth3Prefabs[0], g.transform);
                 }
                 await op;
                 progress += interval * pickedSize;
@@ -543,11 +543,11 @@ public class HotelLevelEvaluator : LevelEvaluator
                 }
                 else if (pickedSize == 2)
                 {
-                    op = InstantiateAsync<GameObject>(tileWidth1Prefabs[0], g.transform);
+                    op = InstantiateAsync<GameObject>(tileWidth2Prefabs[0], g.transform);
                 }
                 else
                 {
-                    op = InstantiateAsync<GameObject>(tileWidth1Prefabs[0], g.transform);
+                    op = InstantiateAsync<GameObject>(tileWidth3Prefabs[0], g.transform);
                 }
                 await op;
                 progress += interval * pickedSize;
