@@ -23,8 +23,13 @@ MonoBehaviour:
   roomUnitSize: 12
   floorVerticalDistance: 8
   corridorHeight: 7
+  entryCorrs:
+  - {fileID: 919132149155446097, guid: 194d99e6041f8e6458d2d118a498b329, type: 3}
+  - {fileID: 919132149155446097, guid: 575293531adaf5f43b6712fa2c73797a, type: 3}
+  - {fileID: 919132149155446097, guid: 258d037b1a020274abc37a643443cf61, type: 3}
+  - {fileID: 919132149155446097, guid: 381b0dcc06598d4428aa75ef2791ca91, type: 3}
   tileWidth1Prefabs:
-  - {fileID: 3345693749737063068, guid: e4d1a907f93dca041bd75af7673c2cb1, type: 3}
+  - {fileID: 3345693749737063068, guid: a6f45d8165d463f4c9a260e3c2b1ed90, type: 3}
   tileWidth2Prefabs:
   - {fileID: 3345693749737063068, guid: 521629e7e8357df42b7fefc528c94771, type: 3}
   tileWidth3Prefabs:
