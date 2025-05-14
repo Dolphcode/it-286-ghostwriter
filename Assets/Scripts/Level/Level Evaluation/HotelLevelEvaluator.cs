@@ -31,6 +31,10 @@ public class HotelLevelEvaluator : LevelEvaluator
     [Header("Corridor References")]
     [SerializeField]
     private List<GameObject> entryCorrs;
+    [SerializeField]
+    private List<GameObject> endCorrs;
+    [SerializeField]
+    private List<GameObject> midCorrs;
 
     [Header("Hotel References")]
     [SerializeField]
@@ -106,8 +110,10 @@ public class HotelLevelEvaluator : LevelEvaluator
                 surfaces.Add(r.GetComponentInChildren<NavMeshSurface>());
             }
             GameObject stairwell = Instantiate(stairwellBase, g.transform);
-            stairwell.transform.localPosition = new Vector3(roomUnitSize * corridorSize + (roomUnitSize * 0.5f), 0, 0);
+            Room stairwellRoom = stairwell.GetComponent<Room>();
+            stairwell.transform.localPosition = new Vector3(roomUnitSize * corridorSize + (centralAreaWidth * 0.5f), 0, 0);
             Room.SetRoomAdjacency(corrRoom, centerObject);
+            Room.SetRoomAdjacency(stairwellRoom, corrRoom);
 
             // Generate the left north side
             List<int> roomSizes = new List<int>();
@@ -208,7 +214,7 @@ public class HotelLevelEvaluator : LevelEvaluator
             }
             stairwell = Instantiate(stairwellBase, g.transform);
             stairwell.transform.Rotate(new Vector3(0, 180, 0));
-            stairwell.transform.localPosition = new Vector3(-roomUnitSize * corridorSize - (roomUnitSize * 0.5f), 0, 0);
+            stairwell.transform.localPosition = new Vector3(-roomUnitSize * corridorSize - (centralAreaWidth * 0.5f), 0, 0);
             Room.SetRoomAdjacency(corrRoom, centerObject);
 
             // Generate the left north side
@@ -359,7 +365,7 @@ public class HotelLevelEvaluator : LevelEvaluator
             await asyncInst;
             progress += interval;
             GameObject corr = asyncInst.Result[0];
-            corr.transform.localPosition = new Vector3(centralAreaWidth, y_val, 0);
+            corr.transform.localPosition = new Vector3(centralAreaWidth * 0.5f + roomUnitSize * 0.5f, y_val, 0);
 
             BoxCollider coll = corr.GetComponent<BoxCollider>();
             coll.center = new Vector3(roomUnitSize * 0.5f * (corridorSize - 1), corridorHeight * 0.5f, 0);
@@ -373,7 +379,19 @@ public class HotelLevelEvaluator : LevelEvaluator
 
             for (int i = 0; i < corridorSize; ++i)
             {
-                List<GameObject> chosenList = entryCorrs;
+                List<GameObject> chosenList;
+                if (i == 0)
+                {
+                    chosenList = entryCorrs;
+                }
+                else if (i == corridorSize - 1)
+                {
+                    chosenList = endCorrs;
+                }
+                else
+                {
+                    chosenList = midCorrs;
+                }
                 asyncInst = InstantiateAsync<GameObject>(chosenList[corr_side_indexes[i]], corr.transform);
                 await asyncInst;
                 progress += interval;
@@ -386,15 +404,29 @@ public class HotelLevelEvaluator : LevelEvaluator
                 }
                 surfaces.Add(r.GetComponentInChildren<NavMeshSurface>());
             }
-            asyncInst = InstantiateAsync<GameObject>(stairwellBase, g.transform);
+            GameObject stairwellChoice;
+            if (j == 0)
+            {
+                stairwellChoice = stairwellBase;
+            }
+            else if (j == floorCount)
+            {
+                stairwellChoice = stairwellBlocked;
+            }
+            else
+            {
+                stairwellChoice = stairwellMid;
+            }
+            asyncInst = InstantiateAsync(stairwellChoice, g.transform);
             await asyncInst;
             progress += interval;
             GameObject stairwell = asyncInst.Result[0];
-            stairwell.transform.localPosition = new Vector3(roomUnitSize * corridorSize + (roomUnitSize * 0.5f), 0, 0);
+            stairwell.transform.localPosition = new Vector3(roomUnitSize * corridorSize + centralAreaWidth * 0.5f, y_val, 0);
             Room.SetRoomAdjacency(corrRoom, centerObject);
+            Room.SetRoomAdjacency(stairwell.GetComponent<Room>(), corrRoom);
 
             // Generate the left north side
-            Vector3 offset = new Vector3(centralAreaWidth, y_val, corridorWidth * 0.5f + roomUnitSize * 0.5f);
+            Vector3 offset = new Vector3(centralAreaWidth * 0.5f + roomUnitSize * 0.5f, y_val, corridorWidth * 0.5f + roomUnitSize * 0.5f);
             int k = 0;
             foreach (int pickedSize in l_roomSizes)
             {
@@ -426,7 +458,7 @@ public class HotelLevelEvaluator : LevelEvaluator
             }
 
             // Generate the left south side
-            offset = new Vector3(centralAreaWidth, y_val, -corridorWidth * 0.5f - roomUnitSize * 0.5f);
+            offset = new Vector3(centralAreaWidth * 0.5f + roomUnitSize * 0.5f, y_val, -corridorWidth * 0.5f - roomUnitSize * 0.5f);
             k = 0;
             foreach (int pickedSize in r_roomSizes)
             {
@@ -485,7 +517,7 @@ public class HotelLevelEvaluator : LevelEvaluator
             await asyncInst;
             progress += interval;
             corr = asyncInst.Result[0];
-            corr.transform.localPosition = new Vector3(-centralAreaWidth, y_val, 0);
+            corr.transform.localPosition = new Vector3(-centralAreaWidth * 0.5f - roomUnitSize * 0.5f, y_val, 0);
 
             coll = corr.GetComponent<BoxCollider>();
             coll.center = new Vector3(-roomUnitSize * 0.5f * (corridorSize - 1), corridorHeight * 0.5f, 0);
@@ -499,12 +531,27 @@ public class HotelLevelEvaluator : LevelEvaluator
 
             for (int i = 0; i < corridorSize; ++i)
             {
-                List<GameObject> chosenList = entryCorrs;
+                List<GameObject> chosenList;
+                if (i == 0)
+                {
+                    chosenList = entryCorrs;
+                }
+                else if (i == corridorSize - 1)
+                {
+                    chosenList = endCorrs;
+                }
+                else
+                {
+                    chosenList = midCorrs;
+                }
                 asyncInst = InstantiateAsync<GameObject>(chosenList[corr_side_indexes[i]], corr.transform);
                 await asyncInst;
                 progress += interval;
                 GameObject r = asyncInst.Result[0];
                 r.transform.localPosition = new Vector3(-roomUnitSize * i, 0, 0);
+                Vector3 s = r.transform.localScale;
+                s.x *= -1;
+                r.transform.localScale = s;
 
                 foreach (MeshRenderer m in r.GetComponentsInChildren<MeshRenderer>())
                 {
@@ -512,16 +559,27 @@ public class HotelLevelEvaluator : LevelEvaluator
                 }
                 surfaces.Add(r.GetComponentInChildren<NavMeshSurface>());
             }
-            asyncInst = InstantiateAsync(stairwellBase, g.transform);
+            if (j == 0)
+            {
+                stairwellChoice = stairwellBase;
+            } else if (j == floorCount)
+            {
+                stairwellChoice = stairwellBlocked;
+            } else
+            {
+                stairwellChoice = stairwellMid;
+            }
+            asyncInst = InstantiateAsync(stairwellChoice, g.transform);
             await asyncInst;
             progress += interval;
             stairwell = asyncInst.Result[0];
             stairwell.transform.Rotate(new Vector3(0, 180, 0));
-            stairwell.transform.localPosition = new Vector3(-roomUnitSize * corridorSize - (roomUnitSize * 0.5f), 0, 0);
+            stairwell.transform.localPosition = new Vector3(-roomUnitSize * corridorSize + -centralAreaWidth * 0.5f, y_val, 0);
             Room.SetRoomAdjacency(corrRoom, centerObject);
+            Room.SetRoomAdjacency(stairwell.GetComponent<Room>(), corrRoom);
 
             // Generate the left north side
-            offset = new Vector3(-centralAreaWidth, y_val, corridorWidth * 0.5f + roomUnitSize * 0.5f);
+            offset = new Vector3(-centralAreaWidth * 0.5f + -roomUnitSize * 0.5f, y_val, corridorWidth * 0.5f + roomUnitSize * 0.5f);
             k = 0;
             foreach (int pickedSize in l_roomSizes)
             {
@@ -553,7 +611,7 @@ public class HotelLevelEvaluator : LevelEvaluator
             }
 
             // Generate the left south side
-            offset = new Vector3(-centralAreaWidth, y_val, -corridorWidth * 0.5f - roomUnitSize * 0.5f);
+            offset = new Vector3(-centralAreaWidth * 0.5f + -roomUnitSize * 0.5f, y_val, -corridorWidth * 0.5f - roomUnitSize * 0.5f);
             k = 0;
             foreach (int pickedSize in r_roomSizes)
             {
@@ -587,6 +645,7 @@ public class HotelLevelEvaluator : LevelEvaluator
         }
 
         surfaces[0].BuildNavMesh();
+        //surfaces[0].BuildNavMesh();
 
         // TODO: List<Room>[] zones = new List<Room>[zones];
         this.zones = zoneArr;

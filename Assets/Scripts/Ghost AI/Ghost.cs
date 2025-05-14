@@ -167,7 +167,7 @@ public class Ghost : Capturable
     ///</summary>
     private void GhostTeleportsAdjacentRoom(float time)
     {
-        Room possibleRoom = currentRoom.SelectRandomAdjacentRoom();
+        Room possibleRoom = currentRoom.SelectRandomAdjacentRoom(); 
         bool validRoom = false;
         // Checks if room is in hunting zone
         foreach (Room room in huntingZone)
