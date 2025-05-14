@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 464711178436423530}
   - component: {fileID: 4919077508612665188}
   - component: {fileID: 501185439430677314}
+  - component: {fileID: 4147698355023598779}
   m_Layer: 0
   m_Name: Door
   m_TagString: Interactable
@@ -137,6 +138,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4147698355023598779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266753478665016264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab5d527286926849a0de5bed4b0d275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 464711178436423530}
 --- !u!1 &7222383061183167202
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,6 +164,7 @@ GameObject:
   - component: {fileID: 6849879675733489484}
   - component: {fileID: 7278985531271834203}
   - component: {fileID: 430743256611060451}
+  - component: {fileID: 5478433558218315411}
   m_Layer: 0
   m_Name: Swinging Door
   m_TagString: Untagged
@@ -339,3 +354,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5478433558218315411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7222383061183167202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab5d527286926849a0de5bed4b0d275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 6849879675733489484}

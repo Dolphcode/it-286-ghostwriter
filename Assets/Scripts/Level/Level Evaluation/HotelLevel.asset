@@ -18,20 +18,35 @@ MonoBehaviour:
   difficulty: 1
   floorCount: 1
   corridorSize: 7
-  centralAreaWidth: 10
-  corridorWidth: 6
-  roomUnitSize: 10
-  floorVerticalDistance: 8
-  corridorHeight: 6
+  centralAreaWidth: 26.5
+  corridorWidth: 7
+  roomUnitSize: 12
+  floorVerticalDistance: 19.25
+  corridorHeight: 7
+  entryCorrs:
+  - {fileID: 3345693749737063068, guid: 95d8bdbe61f7cd047a9dd54079eb5516, type: 3}
+  - {fileID: 3345693749737063068, guid: 557d99d32591da6498c5e280058b6911, type: 3}
+  - {fileID: 3345693749737063068, guid: f90b1258c92b113488c94ad31fa7895d, type: 3}
+  - {fileID: 3345693749737063068, guid: 40889175b92b36f47b7b01cdab9ae5f2, type: 3}
+  endCorrs:
+  - {fileID: 3345693749737063068, guid: d07e07a55320566448780c03496d7258, type: 3}
+  - {fileID: 3345693749737063068, guid: 4456d0cabb2173d439352e682f9d7115, type: 3}
+  - {fileID: 3345693749737063068, guid: ab7d28c6a0562a54fba84e100eb8a40e, type: 3}
+  - {fileID: 3345693749737063068, guid: 37fd7d00d53769e448e211a512b62195, type: 3}
+  midCorrs:
+  - {fileID: 3345693749737063068, guid: 903c41b207292484582a2150650f7619, type: 3}
+  - {fileID: 3345693749737063068, guid: cf6b6888b2f59b741a11d40caafbcef9, type: 3}
+  - {fileID: 3345693749737063068, guid: 091f3883262c94b43805a8d1c9c31da3, type: 3}
+  - {fileID: 3345693749737063068, guid: 62f16374e92a5f044a7cc32fcdc4ec74, type: 3}
   tileWidth1Prefabs:
-  - {fileID: 5840150343080833524, guid: 05d5d724eb8e5e34b89d34064afbb9f7, type: 3}
+  - {fileID: 3345693749737063068, guid: a6f45d8165d463f4c9a260e3c2b1ed90, type: 3}
   tileWidth2Prefabs:
-  - {fileID: 5840150343080833524, guid: e986f63a9260e6147840baa6d3985054, type: 3}
+  - {fileID: 3345693749737063068, guid: 521629e7e8357df42b7fefc528c94771, type: 3}
   tileWidth3Prefabs:
-  - {fileID: 5840150343080833524, guid: 345bbc53eaf8919468193941a07255ae, type: 3}
-  stairwellBase: {fileID: 5354760294184352756, guid: cc5118e5994f3f340977a199c9462b8b, type: 3}
-  stairwellMid: {fileID: 0}
-  stairwellBlocked: {fileID: 0}
-  corridorPiece: {fileID: 5332153228439162159, guid: ffd4731a7cf20cc49b913473d858944d, type: 3}
+  - {fileID: 3345693749737063068, guid: 99364cbdc11634e4db4dc2418a439a85, type: 3}
+  stairwellBase: {fileID: 3345693749737063068, guid: 8aaa0e44f6d9d004e87b9f285567a017, type: 3}
+  stairwellMid: {fileID: 3345693749737063068, guid: 5818657278b402646ad02ec5529ba328, type: 3}
+  stairwellBlocked: {fileID: 3345693749737063068, guid: 5818657278b402646ad02ec5529ba328, type: 3}
+  corridorPiece: {fileID: 919132149155446097, guid: 2c94c25234455e34bbfc1c9385289963, type: 3}
   corridorPrefab: {fileID: 5840150343080833524, guid: b8786b0247a577947a17db8e3acde116, type: 3}
-  centerPrefab: {fileID: 5840150343080833524, guid: 8251068055c70764f973226ac8a28913, type: 3}
+  centerPrefab: {fileID: 3345693749737063068, guid: 5e95206266167d4408b5cc0a21097917, type: 3}

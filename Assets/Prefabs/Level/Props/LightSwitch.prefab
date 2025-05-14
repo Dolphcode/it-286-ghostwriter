@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2938110946239865690}
   - component: {fileID: 4165038360381656711}
   - component: {fileID: 2912838249209901860}
+  - component: {fileID: 7494593939631417555}
   m_Layer: 0
   m_Name: LightSwitch
   m_TagString: Interactable
@@ -126,6 +127,19 @@ MonoBehaviour:
   _OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7494593939631417555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3075888706248214630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab5d527286926849a0de5bed4b0d275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 2938110946239865690}
 --- !u!1001 &5805869344426976403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -190,6 +204,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8428780765837454149}
   m_SourcePrefab: {fileID: 100100000, guid: abcd8eda630c55c4ab32a864c3dbd9c1, type: 3}
+--- !u!23 &5139454665230186519 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: abcd8eda630c55c4ab32a864c3dbd9c1, type: 3}
+  m_PrefabInstance: {fileID: 5805869344426976403}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6275816748744377208 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: abcd8eda630c55c4ab32a864c3dbd9c1, type: 3}
@@ -212,4 +231,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fab5d527286926849a0de5bed4b0d275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshRenderer: {fileID: 0}
+  meshRenderer: {fileID: 5139454665230186519}

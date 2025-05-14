@@ -256,18 +256,18 @@ public class Ghost : Capturable
         aggressionMultiplier = 25;
         // Default move speed for Level 1 Ghost is 1f; increases by 0.25f for each increase in level.
         moveSpeed = 2f;
-        if (difficultyLevel>1)
+        if (difficultyLevel > 1)
         {
-            moveSpeed += difficultyLevel*0.25f;
+            moveSpeed += difficultyLevel * 0.25f;
         }
         else if (difficultyLevel == 0)
         {
             difficultyLevel = Random.Range(1, 6);
         }
         // Makes aggression threshold in terms of difficulty. Min 25, Max 125. Lower threshold, easier to aggro ghost and considered "harder".
-        for (int i = 5; i>2; i--)
+        for (int i = 5; i > 2; i--)
         {
-            aggressionThreshold += Mathf.RoundToInt(difficultyLevel*0.5f*aggressionMultiplier);
+            aggressionThreshold += Mathf.RoundToInt(difficultyLevel * 0.5f * aggressionMultiplier);
         }
         thresholdChange = aggressionThreshold / maxEMF;
         if (type == GhostType.PSYCHOLOGICAL)
@@ -365,7 +365,7 @@ public class Ghost : Capturable
                 {
                     foreach (Room room in huntingZone)
                     {
-                        if (room==currentRoom)
+                        if (room == currentRoom)
                         {
                             validRoom = true;
                         }
@@ -552,11 +552,11 @@ public class Ghost : Capturable
     public void IncreaseAggression(int increase, int timeOften, int timeEnd)
     {
         functionTimer = 0f;
-        while (functionTimer<timeEnd)
+        while (functionTimer < timeEnd)
         {
             aggression += increase;
             new WaitForSeconds(timeOften);
-            functionTimer+=timeOften;
+            functionTimer += timeOften;
         }
     }
     /// <summary>
@@ -571,7 +571,7 @@ public class Ghost : Capturable
     /// </summary>
     public void SetAggressionThreshold(int newThreshold)
     {
-        aggressionThreshold = newThreshold; 
+        aggressionThreshold = newThreshold;
     }
     /// <summary>
     /// Lowers aggresion threshold based on input number.
