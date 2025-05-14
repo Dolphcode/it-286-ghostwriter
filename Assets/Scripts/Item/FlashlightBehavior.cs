@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FlashlightBehavior : ItemBehavior
 {
-    
+    [SerializeField] private AudioSource sound;
     LightManager lightManager;
     public override void Drop()
     {
@@ -49,6 +49,7 @@ public class FlashlightBehavior : ItemBehavior
                 lightManager.SetFlashlightState(false);
                 Debug.Log("Flashlight Off");
             }
+        sound.Play();
        // }
     }
     

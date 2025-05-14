@@ -8,10 +8,9 @@ public class RemoteCameraBehavior : ItemBehavior
     Camera camReference;
     [SerializeField]
     MeshRenderer renderMesh;
-
     Collider collider;
     Rigidbody rbody;
-
+    [SerializeField] private AudioSource sound;
     private bool registered = false;
 
     public void Awake()
@@ -56,7 +55,7 @@ public class RemoteCameraBehavior : ItemBehavior
                 //Debug.Log("I HAVE DETECTED SOMETHING! SOMETHING HAS HAPPENED");
                 RenderTexture currentRT = RenderTexture.active;
                 RenderTexture.active = camReference.targetTexture;
-
+                sound.Play();
                 camReference.Render();
 
                 Texture2D image = new Texture2D(camReference.targetTexture.width, camReference.targetTexture.height);

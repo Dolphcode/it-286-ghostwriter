@@ -229,4 +229,8 @@ public class CaptureManager : MonoBehaviour
         captures.Add(data);
         return data;
     }
+    public List<CaptureData> GetCaptures()
+    {
+        return captures;
+    }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SodaBehavior : ItemBehavior
 {
-
+    [SerializeField] private AudioSource sound;
     public override void Interact()
     {
         //if (camControl.lookingAt.transform.gameObject.CompareTag("Interactable"))
@@ -25,7 +25,8 @@ public class SodaBehavior : ItemBehavior
                 BreakItem(0.001f);
                 Debug.Log("No More Durability");
             }
-      //  }
+            sound.Play();
+        //  }
     }
 
     public override void Load(ItemData itemData)

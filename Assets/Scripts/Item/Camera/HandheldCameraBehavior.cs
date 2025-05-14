@@ -9,7 +9,7 @@ public class HandheldCameraBehavior : ItemBehavior
     Camera camReference;
     [SerializeField]
     MeshRenderer renderMesh;
-
+    [SerializeField] private AudioSource sound;
     public void Awake()
     {
         base.Awake();
@@ -44,7 +44,7 @@ public class HandheldCameraBehavior : ItemBehavior
             RenderTexture.active = currentRT;
 
             CaptureData data = levelManager.GetCaptureManager().CaptureImage(image, camReference);
-
+            sound.Play();
             /*
             var bytes = image.EncodeToPNG();
             File.WriteAllBytes(Application.dataPath + "/Captures/" + data.timestamp.ToShortDateString().Replace("/","-") + "-" + 

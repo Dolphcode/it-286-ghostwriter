@@ -5,6 +5,7 @@ public class CrucifixBehavior : ItemBehavior
 {
     Ghost ghost;
     Coroutine compel;
+    [SerializeField] private AudioSource sound;
     void Start()
     {
         ghost = FindAnyObjectByType<Ghost>();
@@ -25,6 +26,7 @@ public class CrucifixBehavior : ItemBehavior
             compel = StartCoroutine(Compel(6));
         }
        // }
+       sound.Play();
     }
     public override void Load(ItemData itemData)
     {

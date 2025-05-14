@@ -1,18 +1,9 @@
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class BlogUIManager : MonoBehaviour
 {
-    /// <summary>
-    /// Max 3 blog saves, 3 pages each.
-    /// </summary>
-    [SerializeField]
-    private BlogSaveData blogSave1, blogSave2, blogSave3;
-    /// <summary>
-    /// Max 3 blog saves, 3 pages each.
-    /// </summary>
     [SerializeField]
     private BlogSaveData[] blogSaves = new BlogSaveData[3];
     [SerializeField]
@@ -20,86 +11,58 @@ public class BlogUIManager : MonoBehaviour
     [SerializeField]
     private Button blogSave1Button, blogSave2Button, blogSave3Button;
     [SerializeField]
-    private Button saveButton;
+    private Button saveButton, publishButton;
     [SerializeField]
-    private GameObject selectScreen, scorePanel, imageSelectPanel;
+    private GameObject selectScreen, scorePanel;
     [SerializeField]
     private BlogPanel blogPanel;
     [SerializeField]
     private LevelDataManager levelDataManager = LevelDataManager._Instance;
     [SerializeField]
     private int moneyChange;
+    [SerializeField]
+    private ShopManager shopManager;
+    [SerializeField]
+    private List<Ghost> ghostList;
     /// <summary>
     /// Indicates which save file the player is on (actual save number = this number; starts from 1)
     /// </summary>
+    [SerializeField]
     private int currentSave=1;
-    /// <summary>
-    /// Indicates which page the player is on (actual page number = this number; starts from 1)
-    /// </summary>
-    private int currentPage=1;
+    [SerializeField]
+    private LevelManager levelManager;
     void Start()
     {
+        if (FindAnyObjectByType<LevelManager>() != null)
+            levelManager = FindAnyObjectByType<LevelManager>();
         blogSave1Button.onClick.AddListener(() => LoadSave(1));
         blogSave2Button.onClick.AddListener(() => LoadSave(2));
         blogSave3Button.onClick.AddListener(() => LoadSave(3));
-        saveButton.onClick.AddListener(CloseBlogPanel);
     }
     void Update()
     {
-        if (newSaveData!=null)
+        if (newSaveData!=null&& blogPanel!=null)
             blogPanel.LoadSaveData(newSaveData);
-        if (blogSaves != null)
+        if (FindAnyObjectByType<LevelManager>() != null)
+            levelManager = FindAnyObjectByType<LevelManager>();
+        if (FindAnyObjectByType<LevelManager>() != null&&levelManager.GetGhostList() != null)
         {
-        }
-        //newSaveData.SetPage(currentPage);
-    }
-    public void PrevPage()
-    {
-        if (currentPage > 0)
-        {
-            currentPage--;
+            ghostList = levelManager.GetGhostList();
         }
     }
-    public void NextPage()
-    {
-        if (currentPage < 2)
-        {
-            currentPage++;
-        }
-    }
-    public int GetPageNum()
-    {
-        return currentPage;
-    }    
     public void CloseBlogPanel()
     {
         blogPanel.gameObject.SetActive(false);
     }
-    public void OpenBlogPanel()
-    {
-        blogPanel.gameObject.SetActive(true);
-
-    }
-    public void CloseScorePanel()
-    {
-        scorePanel.SetActive(false);
-    }
-    public void OpenScorePanel()
-    {
-        scorePanel.SetActive(true);
-
-    }
-    public void CloseSelectScreen()
-    {
-        selectScreen.SetActive(false);
-    }
-    public void OpenSelectScreen()
-    {
-        selectScreen.SetActive(true);
-    }
-    public void CreateBlogSave(int i)
+    /// <summary>
+    /// Given blog save number i and GhostTypeData type, creates a save.
+    /// </summary>
+    /// <param name="i"></param>
+    /// <param name="type"></param>
+    public void CreateBlogSave(int i, GhostTypeData type)
     {
         newSaveData = ScriptableObject.CreateInstance<BlogSaveData>();
+        newSaveData.SetGhostData(type);
         blogSaves[i-1]= newSaveData;
     }
     public BlogSaveData[] GetBlogSaves()
@@ -114,33 +77,22 @@ public class BlogUIManager : MonoBehaviour
                 blogSaves[i] = null;
         }
     }
-    /// <summary>
-    /// param int i is the actual number (not index)
-    /// </summary>
-    /// <param name="i"></param>
-    public void RemoveBlogSave(int i)
-    {
-        blogSaves[i-1] = null;
-    }
     public void Publish(int i)
     {
-        //some code to save prev published blogs?
-        RemoveBlogSave(i);
+        blogSaves[i - 1] = null;
     }
     public void LoadSave(int num)
     {
+
         currentSave = num;
         int saveNum = num - 1;
-        currentPage = 1;
         if (blogSaves[saveNum] == null)
         {
-            CreateBlogSave(saveNum);
-            newSaveData = null;
+            CreateBlogSave(num, levelManager.GetGhostList()[0].GetGhostTypeData());
         }
         else
         {
-            //sets current save
-            newSaveData=blogSaves[saveNum];
+            newSaveData = blogSaves[saveNum];
         }
     }
     public void SaveFile()
@@ -148,36 +100,34 @@ public class BlogUIManager : MonoBehaviour
         blogSaves[currentSave-1] = newSaveData;
         newSaveData = null;
     }
-    public void AdjustMoney()
+    public void AdjustMoney(int score)
     {
-        //assuming player averages around 4/10 on each image and gets half of the sentence ques right
-        if (blogSave1.GetTotalScore() > 20)
+        if (score > 18)
         {
             moneyChange = 1000;
             levelDataManager.AddMoney(moneyChange);
+            shopManager.DiscountShop(100);
         }
-        else if (blogSave1.GetTotalScore() > 18)
+        else if (score > 15)
         {
-            moneyChange = 500;
+            moneyChange = 700;
+            levelDataManager.AddMoney(moneyChange);
+            shopManager.DiscountShop(50);
         }
-        else if (blogSave1.GetTotalScore() >= 15)
+        else if (score >= 8)
         {
             moneyChange = 0;
         }
-        else if (blogSave1.GetTotalScore() < 15)
+        else if (score < 8)
         {
             moneyChange = -500;
-            levelDataManager.RemoveMoney(500);
+            levelDataManager.RemoveMoney(-1 * moneyChange);
         }
-        else if (blogSave1.GetTotalScore() < 10)
+        else if (score < 6)
         {
             moneyChange = -1000;
-            levelDataManager.RemoveMoney(1000);
+            levelDataManager.RemoveMoney(-1 * moneyChange);
         }
-    }
-    public void AdjustCredibility()
-    {
-        //maybe give shop discount idfk
     }
     public int GetMoneyChange()
     {

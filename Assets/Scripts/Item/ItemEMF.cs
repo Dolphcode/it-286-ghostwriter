@@ -11,7 +11,7 @@ public class EMFBehavior : ItemBehavior
     Ghost ghosty;
     public List<GameObject> emfLvls;
     public GameObject emfOnLight;
-    [SerializeField]
+    [SerializeField] private AudioSource sound;
     public override void Interact()
     {
 
@@ -34,7 +34,7 @@ public class EMFBehavior : ItemBehavior
                 data.isOn = false;
 
             }
-
+            sound.Play();
             Debug.Log("Interacting with EMF " + data.isOn);
       //  }
     }

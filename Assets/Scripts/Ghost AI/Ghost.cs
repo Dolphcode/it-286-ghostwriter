@@ -76,6 +76,8 @@ public class Ghost : Capturable
     /// </summary>
     [SerializeField]
     private GhostType type;
+    [SerializeField]
+    private GhostTypeData dataType;
     ///<summary>
     ///String containting name of ghost type.
     ///</summary>
@@ -117,7 +119,6 @@ public class Ghost : Capturable
     ///<summary>
     ///Level manager.
     ///</summary>
-    [SerializeField]
     public LevelManager levelManager1;
     private float aggroTimer = 0f;
     private float interactTimer = 0f;
@@ -163,14 +164,12 @@ public class Ghost : Capturable
     private void GhostTeleportsAdjacentRoom(float time)
     {
         Room possibleRoom = currentRoom.SelectRandomAdjacentRoom();
-        bool validRoom = false;
         // Checks if room is in hunting zone
         foreach (Room room in huntingZone)
         {
             //Debug.Log("At time " + teleportTimer.ToString() + " Room 1 " + room.name + " Room 2 " + possibleRoom.name + " what ? " + (room == possibleRoom).ToString());
             if (room == possibleRoom)
             {
-                validRoom = true;
                 if (teleportTimer >= time)
                 {
                     currentRoom = possibleRoom;
@@ -179,11 +178,6 @@ public class Ghost : Capturable
                 }
             }
         }
-        /*
-        if (!validRoom)
-        {
-            GhostTeleportsAdjacentRoom(time);
-        }*/
     }
     ///<summary>
     /// Ghost will have a chance (double) to interact in a room every given input time (float)
@@ -645,5 +639,9 @@ public class Ghost : Capturable
     public int GetAggression()
     {
         return aggression;
+    }
+    public GhostTypeData GetGhostTypeData()
+    {
+        return dataType;
     }
 }

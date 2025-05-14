@@ -9,6 +9,7 @@ public class ThermoBehavior : ItemBehavior
     float roomTemp;
     float aggressionPercent;
     public TMP_Text text;
+    [SerializeField] private AudioSource sound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,6 +33,7 @@ public class ThermoBehavior : ItemBehavior
             data.isOn = false;
 
         }
+        sound.Play();
     }
 
     public override void Load(ItemData itemData)
