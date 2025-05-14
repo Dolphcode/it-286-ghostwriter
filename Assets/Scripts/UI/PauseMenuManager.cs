@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
@@ -26,14 +27,21 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField] private float minSens;
     [SerializeField] private float maxSens;
 
+    public float sensitivity = 800f;
+
+    [Header("Rebind Screen")]
+    [SerializeField] private GameObject rebindScreenRoot;
+
     private bool paused = false;
     public bool IsPaused { get { return paused; } }
 
-    public float sensitivity = 800f;
+   
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        rebindScreenRoot.SetActive(false);
+        InputSystem.actions.FindAction("Pause").started += OnPausePress;
     }
 
 
@@ -67,8 +75,9 @@ public class PauseMenuManager : MonoBehaviour
             pauseCanvas.enabled = false;
             Time.timeScale = 1f;
         }
-        else if (Input.GetKeyDown(KeyCode.P))
+        else if (pauseButtonPressed)
         {
+            pauseButtonPressed = false;
             if (paused)
             {
                 paused = false;
@@ -79,9 +88,20 @@ public class PauseMenuManager : MonoBehaviour
         }
     }
 
+    private bool pauseButtonPressed = false;
+    private void OnPausePress(InputAction.CallbackContext context)
+    {
+        pauseButtonPressed = true;
+    }
+
     private void UpdateAudio()
     {
         mixerAsset.SetFloat("Volume_Master", 20 * Mathf.Log10(masterVolSlider.value));
         mixerAsset.SetFloat("Volume_SFX", 20 * Mathf.Log10(sfxVolSlider.value));
+    }
+
+    public void ToggleRebindScreen()
+    {
+        rebindScreenRoot.SetActive(!rebindScreenRoot.activeSelf);
     }
 }

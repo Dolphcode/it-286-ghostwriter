@@ -17,6 +17,8 @@ public class DrawerInteractable : GhostInteractable
     [SerializeField] private float closedY;
     [SerializeField] private float openY;
 
+    private AudioSource source;
+
     private bool topOpen = false, middleOpen = false, bottomOpen = false;
     public override void interact()
     {
@@ -36,7 +38,7 @@ public class DrawerInteractable : GhostInteractable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        source = GetComponent<AudioSource>();
     }
 
     public void ToggleTop()
@@ -44,6 +46,7 @@ public class DrawerInteractable : GhostInteractable
         if (!topOpen) topDrawer.transform.DOLocalMoveZ(openY, 1f).SetEase(easeCurve);
         else topDrawer.transform.DOLocalMoveZ(closedY, 1f).SetEase(easeCurve);
         topOpen = !topOpen;
+        source.Play();
     }
 
     public void ToggleMiddle()
@@ -51,13 +54,15 @@ public class DrawerInteractable : GhostInteractable
         if (!middleOpen) middleDrawer.transform.DOLocalMoveZ(openY, 1f).SetEase(easeCurve);
         else middleDrawer.transform.DOLocalMoveZ(closedY, 1f).SetEase(easeCurve);
         middleOpen = !middleOpen;
+        source.Play();
     }
 
     public void ToggleBottom()
     {
-        if (!bottomOpen) bottomDrawer.transform.DOLocalMoveZ(openY, 3f).SetEase(easeCurve);
+        if (!bottomOpen) bottomDrawer.transform.DOLocalMoveZ(openY, 1f).SetEase(easeCurve);
         else bottomDrawer.transform.DOLocalMoveZ(closedY, 1f).SetEase(easeCurve);
         bottomOpen = !bottomOpen;
+        source.Play();
     }
 
     // Update is called once per frame
